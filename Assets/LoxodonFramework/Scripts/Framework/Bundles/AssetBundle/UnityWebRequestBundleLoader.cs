@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 using Loxodon.Framework.Asynchronous;
-using Loxodon.Log;
+//using Loxodon.Log;
 
 namespace Loxodon.Framework.Bundles
 {
@@ -25,7 +25,7 @@ namespace Loxodon.Framework.Bundles
 
     public class UnityWebRequestBundleLoader : BundleLoader
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(UnityWebRequestBundleLoader));
+        //private static readonly ILog log = LogManager.GetLogger(typeof(UnityWebRequestBundleLoader));
 
         private bool useCache;
         public UnityWebRequestBundleLoader(System.Uri uri, BundleInfo bundleInfo, BundleLoader[] dependencies, BundleManager manager, bool useCache = true) : base(uri, bundleInfo, dependencies, manager)

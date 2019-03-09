@@ -1,5 +1,5 @@
 ﻿Loxodon Framework Bundle
-Version: 1.8.7
+Version: 1.8.10
 © 2016, Clark Yang
 =======================================
 
@@ -13,6 +13,9 @@ Please email yangpc.china@gmail.com for any help or issues.
 
 UPDATE NOTES
 ----------------------------------------
+version 1.8.10
+	Fixed a bug on Unity2018.
+
 version 1.8.6
 	Recommended to use FileAsyncBundleLoader and UnityWebRequestBundleLoader. The WWWBundleLoader in examples is replaced with the above two loaders.
 

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Loxodon.Framework.Asynchronous;
 using Loxodon.Framework.Execution;
-using Loxodon.Log;
+//using Loxodon.Log;
 
 namespace Loxodon.Framework.Bundles
 {
     public abstract class BundleLoader : IBundle
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(BundleLoader));
+        //private static readonly ILog log = LogManager.GetLogger(typeof(BundleLoader));
 
         private const string ASSETS = "Assets/";
         private const float TIME_PROGRESS_WEIGHT = 0.2f;
