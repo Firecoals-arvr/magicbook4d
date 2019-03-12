@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: VuforiaConfiguration
   m_EditorClassIdentifier: 
   vuforia:
-    vuforiaLicenseKey: 
-    ufoLicenseKey: QVptcjUxai8vLy8vQUFBQUtPY2QzVGZLT1U4eWs1UXNnM1h0UWIxNk80b3V1UitnN3h0amt4SGI0aUFkWkIvbmxSWkVDUUdPeXptdGs0cmFSMUJWL3EybnpqTFF6MWhLUGRPWnZpZ0U4QXpybElSTElkM05FS1Y5TmIvWlFzWnpxM2FiZlQxaFFsNlZwdlBiTWtSU2pWTEk0eUl5R1dYY2UyWi80b0RGUTF4VEVFYlBiU3k4cWk0N3hUdDZnZ1NBSGl6ekxod3V4Q2JPRXJXUDlzT0ovZEVwdUtXc1pHMUd3SkVXQStQTHlPQ2pLaVBVa0JxY0dHaUJmeWpjQjd0SWF3UUhFUlZlQzV6eXdIeUNpYlJheXYzNmllc3A1UWV2Q0g3WEYxT3l3UnptaTNKRFhCQ2JhN2E1YnBRUmJGM1JrcUtUVVVBUHVidHdHVGpzMHNXYm5zdHVWMytoWTJnUjdTd1l0eUpJS0ovajRqWnlEaVVTcXZJS3BXM2s=
+    vuforiaLicenseKey: ATpofcn/////AAAAGSByoeOW10V9l80kV90scFI2At3bvCp0zj0pcirjhYIovwCcB8btZjK8vuMQ9ODRRWl8RcYsEAcytcp+Ieic37MPQE6FHJL6bwDFHJswRRFijVIMTMQ5nG6PfEla3somPSqp3fcaq/P7KG/4+fnwES+Qw1wb5oLxY+rtqUR1ykA/CgJ711al31K0Ekoj53+V3PI6jI5i8kKuBVJgLsFfHkhEmegHjS80SJZdFg7kryjEG3PfV099dfIc7qI1iBZ8fYHw4snitqPbz9l2wKRJn/RT3Dhuhmujq+Eg1k5kJRrNo4V1TAC0tLex8BIwctO20HRLqmhOiHubXg7cXKWqzA+bFGAopos6tAICSqPYQDhi
+    ufoLicenseKey: QVhiM0Y1Ly8vLy8vQUFBQUtPbnFIeHJFSGs1N3VrMlg4U050eVBzK2pkOFZxMDhrazlwYjBsYS9aZUIxQlV1ckZWcWt0ZllSQWpnT2tIRlY2VzdOMDRTRjNYRUhmbTF5L1BnYlB4eWdHWEF6RUNheXowc3dyNVNYa2ozdERuRjhka1FpOHRscHdkMDcrcEJEY1FjTjNJcUM1bEgwOTYzQkdZdjRsQStRb0hSQU9nRGthelp5TlY0WHVwWU9EaE05NWw5bXAzbnBDMjM5MWZBWXBFdEdiL2loTDNab3N4b25ZblhjK1JtSS9wLzRoTDIwVGhmTXR6WFJNYkpUTXZLZzJoQ0N0TEJXNEptZ0pSOUtSdStzQWM3QjVNOWFFMGVHQ1dUT1VRSUUweEpiZC9ZL2cvS29iNDhBRXdQOGFwbWR5NmRWU0FHU2psVzRZY2FEU2Zud3J1ZHhucVNmSUZiajNTUnIzM0lKVlFIaW1rL0oyOGNFeDdyekcySXg=
     delayedInitialization: 0
     cameraDeviceModeSetting: -1
     maxSimultaneousImageTargets: 1
@@ -23,7 +23,7 @@ MonoBehaviour:
     cameraDirection: 0
     mirrorVideoBackground: 0
     version: 8.0.10
-    eulaAcceptedVersions: '{"Values":["7.1","7.5","8.0","7.2","7.7","8.1","0.0"]}'
+    eulaAcceptedVersions: '{"Values":["7.5","8.0","7.1","7.2","7.7","8.1","0.0"]}'
   digitalEyewear:
     cameraOffset: 0.06
     distortionRenderingLayer: 31
@@ -48,12 +48,13 @@ MonoBehaviour:
   videoBackground:
     clippingMode: 0
     numDivisions: 2
-    videoBackgroundShader: {fileID: 0}
-    matteShader: {fileID: 0}
+    videoBackgroundShader: {fileID: 4800000, guid: f40623b353e2f1943b1b3ba42975db7a,
+      type: 3}
+    matteShader: {fileID: 4800000, guid: 66d0d78a3000021448b598bb54a3bfdf, type: 3}
     videoBackgroundEnabled: 1
   deviceTracker:
-    autoInitTracker: 0
-    autoStartTracker: 0
+    autoInitTracker: 1
+    autoStartTracker: 1
     trackingMode: 1
     posePrediction: 0
     modelCorrectionMode: 0
@@ -63,7 +64,7 @@ MonoBehaviour:
     autoInitTracker: 0
     autoStartTracker: 0
   webcam:
-    deviceNameSetInEditor: 
+    deviceNameSetInEditor: Logitech HD Webcam C270
     flipHorizontally: 0
     turnOffWebCam: 0
     renderTextureLayer: 30
