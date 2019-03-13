@@ -103,6 +103,7 @@ namespace Loxodon.Framework.Bundles.Archives
                 if (asset != null)
                     return asset.GetObjectInfo(pathId);
 
+                UnityEngine.Debug.LogWarningFormat("Object not found,AssetName:{0} ID:{1}", assetName,pathId);
                 return new MissingObjectInfo(null, pathId, TypeID.UnknownType);
             }
         }

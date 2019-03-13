@@ -1,7 +1,6 @@
 ﻿#if UNITY_EDITOR
 using System;
 using System.Collections.Generic;
-using System.IO;
 using UnityEditor;
 
 namespace Loxodon.Framework.Bundles.Archives
@@ -36,8 +35,11 @@ namespace Loxodon.Framework.Bundles.Archives
         public virtual IObjectInfo GetObjectInfo(long pathId)
         {
             BuiltinObjectInfo info = null;
-            objects.TryGetValue(pathId, out info);
-            return info;
+            if (objects.TryGetValue(pathId, out info))
+                return info;
+
+            UnityEngine.Debug.LogWarningFormat("Object not found,AssetName:{0} ID:{1}", this.Name, pathId);
+            return new MissingObjectInfo(this, pathId, TypeID.UnknownType);
         }
     }
 }

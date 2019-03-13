@@ -16,37 +16,41 @@ namespace Loxodon.Framework.Bundles
         private static string manifestFilename;
         private static string bundleRoot;
 
-        static BundleSetting()
+        //static BundleSetting()
+        //{
+        //    TextAsset textAsset = Resources.Load<TextAsset>("BundleSetting");
+        //    if (textAsset == null)
+        //        return;
+
+        //    using (StringReader reader = new StringReader(textAsset.text))
+        //    {
+        //        string line = null;
+        //        while ((line = reader.ReadLine()) != null)
+        //        {
+        //            line = line.Replace(" ", "");
+        //            Match m = Regex.Match(line, @"^([a-zA-Z0-9]+)=([a-zA-Z0-9/_.]+)$", RegexOptions.IgnorePatternWhitespace);
+        //            if (!m.Success)
+        //                continue;
+
+        //            string key = m.Groups[1].Value;
+        //            string value = m.Groups[2].Value;
+        //            switch (key)
+        //            {
+        //                case "manifestFilename":
+        //                    ManifestFilename = value;
+        //                    break;
+        //                case "bundleRoot":
+        //                    BundleRoot = value;
+        //                    break;
+        //            }
+        //        }
+        //    }
+        //}
+        public BundleSetting(string bundleRoot, string manifestFileName = MANIFEST_FILENAME)
         {
-            TextAsset textAsset = Resources.Load<TextAsset>("BundleSetting");
-            if (textAsset == null)
-                return;
-
-            using (StringReader reader = new StringReader(textAsset.text))
-            {
-                string line = null;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    line = line.Replace(" ", "");
-                    Match m = Regex.Match(line, @"^([a-zA-Z0-9]+)=([a-zA-Z0-9/_.]+)$", RegexOptions.IgnorePatternWhitespace);
-                    if (!m.Success)
-                        continue;
-
-                    string key = m.Groups[1].Value;
-                    string value = m.Groups[2].Value;
-                    switch (key)
-                    {
-                        case "manifestFilename":
-                            ManifestFilename = value;
-                            break;
-                        case "bundleRoot":
-                            BundleRoot = value;
-                            break;
-                    }
-                }
-            }
+            ManifestFilename = manifestFileName;
+            BundleRoot = bundleRoot;
         }
-
         /// <summary>
         /// Manifest's filename.
         /// </summary>

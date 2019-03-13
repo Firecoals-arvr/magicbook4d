@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.SceneManagement;
+using UnityEditor.SceneManagement;
 
 namespace Loxodon.Framework.Bundles
 {
@@ -14,11 +15,11 @@ namespace Loxodon.Framework.Bundles
         {
         }
 
-        public SimulationResources(IPathInfoParser pathInfoParser) : base(pathInfoParser, new SimulationBundleManager(),false)
+        public SimulationResources(IPathInfoParser pathInfoParser) : base(pathInfoParser, new SimulationBundleManager(), false)
         {
         }
 
-        public SimulationResources(IPathInfoParser pathInfoParser, IBundleManager manager) : base(pathInfoParser, manager,false)
+        public SimulationResources(IPathInfoParser pathInfoParser, IBundleManager manager) : base(pathInfoParser, manager, false)
         {
         }
 
@@ -33,7 +34,11 @@ namespace Loxodon.Framework.Bundles
             }
 
             var name = string.Format("{0}{1}", ASSETS, pathInfo.AssetName);
+#if UNITY_2018_3_OR_NEWER
+            AsyncOperation operation = EditorSceneManager.LoadSceneAsyncInPlayMode(name, new LoadSceneParameters(mode));
+#else
             AsyncOperation operation = LoadSceneMode.Additive.Equals(mode) ? EditorApplication.LoadLevelAdditiveAsyncInPlayMode(name) : EditorApplication.LoadLevelAsyncInPlayMode(name);
+#endif
             if (operation == null)
             {
                 promise.SetException(string.Format("Not found the scene '{0}'.", path));
