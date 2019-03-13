@@ -133,6 +133,7 @@ namespace Firecoals.AssetBundles
 
                     GameObject.Instantiate(r.Result, new Vector3(Random.Range(-1,1), Random.Range(-1, 1)), Quaternion.identity);
 
+
                 }
                 catch (Exception e)
                 {
