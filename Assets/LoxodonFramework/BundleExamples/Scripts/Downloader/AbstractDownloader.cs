@@ -129,7 +129,7 @@ namespace Loxodon.Framework.Examples.Bundle
                 data = www.downloadHandler.data;
             }
 #else
-            using (WWW www = new WWW(this.GetAbsoluteUri(relativePath)))
+            using (WWW www = new WWW(path))
             {
                 while (!www.isDone)
                 {

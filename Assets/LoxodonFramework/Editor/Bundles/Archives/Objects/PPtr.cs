@@ -18,7 +18,7 @@ namespace Loxodon.Framework.Bundles.Objects
             {
                 try
                 {
-                    return (TypeID)Enum.Parse(typeof(TypeID), Name);
+                    return (TypeID)Enum.Parse(typeof(TypeID), TypeName);
                 }
                 catch (Exception)
                 {
