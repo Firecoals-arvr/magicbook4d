@@ -2,42 +2,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Vuforia;
 
 public class LocalizedAudioSource : MonoBehaviour
 {
-    public LeanLocalization Target;
+	public LeanLocalization Target;
 
-    public AudioSource audioSource;
+	public AudioSource audioSource;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	// Start is called before the first frame update
+	void Start()
+	{
+		//TargetEventHandler.
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	// Update is called once per frame
+	void Update()
+	{
 
-    public void CreateNewPhrase(string languageName, string phraseName)
-    {
-        var target = Target;
+	}
 
-        if (target == null && LeanLocalization.AllLocalizations.Count > 0)
-        {
-            target = LeanLocalization.AllLocalizations[0];
-        }
+	public void CreateNewPhrase(string languageName, string phraseName)
+	{
+		var target = Target;
 
-        // Create a new LeanLocalization?
-        if (target == null)
-        {
-            target = new GameObject("LeanLocalization").AddComponent<LeanLocalization>();
-        }
+		if (target == null && LeanLocalization.AllLocalizations.Count > 0)
+		{
+			target = LeanLocalization.AllLocalizations[0];
+		}
 
-        bool updateLanguage = false;
+		// Create a new LeanLocalization?
+		if (target == null)
+		{
+			target = new GameObject("LeanLocalization").AddComponent<LeanLocalization>();
+		}
 
-        var translation = target.AddTranslation(languageName, phraseName);
-    }
+		bool updateLanguage = false;
+
+		var translation = target.AddTranslation(languageName, phraseName);
+	}
+
+	private void OnTrackingFoundEvent(int index)
+	{
+
+	}
+
+	private void OnTrackingLostEvent()
+	{
+
+	}
 }
