@@ -17,7 +17,6 @@ using Vuforia;
 /// </summary>
 public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandler
 {
-    public UnityEngine.Video.VideoPlayer video;
     #region PROTECTED_MEMBER_VARIABLES
 
     protected TrackableBehaviour mTrackableBehaviour;
@@ -84,10 +83,6 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
 
     protected virtual void OnTrackingFound()
     {
-        if (mTrackableBehaviour.name == "Bigbang")
-        {
-            video.Play();
-        }
         var rendererComponents = GetComponentsInChildren<Renderer>(true);
         var colliderComponents = GetComponentsInChildren<Collider>(true);
         var canvasComponents = GetComponentsInChildren<Canvas>(true);
@@ -98,27 +93,24 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
 
         // Enable colliders:
         foreach (var component in colliderComponents)
-        {
-            
             component.enabled = true;
-            if(component.name == "CheckLunarOrEclipse")
-            {
-                component.enabled = false;
-            }
-        }
 
         // Enable canvas':
         foreach (var component in canvasComponents)
             component.enabled = true;
-    }
 
+        //if (this.gameObject.transform.GetChild(0).GetComponent<Animation>() != null)
+        //{
+        //    transform.GetChild(0).GetComponent<Animation>().Play("intro");
+        //}
+        //else
+        //{
+        //    Debug.LogWarning("Object hasn't animation in child(0).");
+        //}
+    }
 
     protected virtual void OnTrackingLost()
     {
-        if (mTrackableBehaviour.name == "Bigbang")
-        {
-            video.Stop();
-        }
         var rendererComponents = GetComponentsInChildren<Renderer>(true);
         var colliderComponents = GetComponentsInChildren<Collider>(true);
         var canvasComponents = GetComponentsInChildren<Canvas>(true);
