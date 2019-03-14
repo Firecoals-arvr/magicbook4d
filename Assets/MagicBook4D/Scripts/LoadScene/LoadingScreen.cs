@@ -23,7 +23,7 @@ public class LoadingScreen : MonoBehaviour
     #region MONOBEHAVIOUR_METHODS
     void Start()
     {
-        m_SpinnerImage = GetComponentInChildren<UI2DSprite>();
+		m_SpinnerImage = GetComponentInChildren<UI2DSprite>();
         Application.backgroundLoadingPriority = ThreadPriority.Low;
         StartCoroutine(LoadNextSceneAsync());
     }
