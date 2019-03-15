@@ -8,18 +8,30 @@ public class SpilitPlanet : DefaultTrackableEventHandler
     private GameObject[] planet;
     private GameObject[] _parentPlanet;
     bool check = false;
+
+    string nameCheck;
     // Start is called before the first frame update
     protected override void Start()
     {
         planet = GameObject.FindGameObjectsWithTag("childplanet");
         _parentPlanet = GameObject.FindGameObjectsWithTag("Planet");
         check = true;
+        spilitButton.isEnabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         AutoClick();
+    }
+
+    private bool CheckIfObjectIsPlanet()
+    {
+        for (int i = 0; i > planet.Length; i++)
+        {
+
+        }
+        return true;
     }
 
     protected override void OnTrackingFound()
