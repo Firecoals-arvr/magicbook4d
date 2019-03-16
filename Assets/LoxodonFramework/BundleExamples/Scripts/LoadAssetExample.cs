@@ -18,7 +18,7 @@ namespace Loxodon.Framework.Examples.Bundle
             ApplicationContext context = Context.GetApplicationContext();
             this.resources = context.GetService<IResources>();
 
-            this.Load(new string[] { "LoxodonFramework/BundleExamples/Models/Red/Red.prefab", "LoxodonFramework/BundleExamples/Models/Green/Green.prefab", "Animal/GetPreFab/Tiger.prefab" });
+            this.Load(new string[] { "LoxodonFramework/BundleExamples/Models/Red/Red.prefab", "LoxodonFramework/BundleExamples/Models/Green/Green.prefab" });
             this.StartCoroutine(Load2("LoxodonFramework/BundleExamples/Models/Plane/Plane.prefab"));
         }
 

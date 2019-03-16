@@ -3,16 +3,39 @@ using Firecoals.AssetBundles;
 using System.IO;
 using System;
 using Loxodon.Framework.Bundles;
+using System.Collections;
+using Loxodon.Framework.Contexts;
+using Loxodon.Framework.Asynchronous;
+using System.Collections.Generic;
 
 public class Spawn : MonoBehaviour
 {
     private DownLoadAssetBundles downLoad;
-
-
-    void Start()
+    private AudioSource audioSource;
+    IEnumerator Start()
     {
-        BundleSetting bundleSetting = new BundleSetting("Animal/bundles");
-        downLoad = new DownLoadAssetBundles(DownLoadAssetBundles.GetDataUrl("Animal"));
+        downLoad = new DownLoadAssetBundles("Animal", "Animal/bundles");
+        audioSource = GetComponent<AudioSource>();
+        LoadAssetBundles assetBundles = new LoadAssetBundles();
+        
+        /* Preload AssetBundle */
+        yield return assetBundles.Preload(new string[] { "animals/model/dog", "animals/model/cat", "animals/model/tiger", "animals/model/giraffe", "animals/model/rabbit", "animals/noise" }, 1);
+        var startTime = DateTime.Now;
+        ///* Use IBundle,loads plane */
+        IBundle bundle = assetBundles.bundles["animals/model/tiger"];
+        GameObject goTemplate = bundle.LoadAsset<GameObject>("Animal/GetPreFab/Tiger.prefab"); //OK
+        GameObject.Instantiate(goTemplate);
+        IBundle bundleAudioClip = assetBundles.bundles["animals/noise"];
+        AudioClip audioClip = bundleAudioClip.LoadAsset<AudioClip>("Assets/Animal/Sound/animal sounds/5.ogg");
+        audioSource.clip = audioClip;
+        audioSource.Play();
+        ///* Green and Red */
+        //GameObject[] goTemplates = assetBundles.FindResource().LoadAssets<GameObject>("Animal/GetPreFab/Frog.prefab", "Assets/Animal/GetPreFab/Rabbit.prefab");
+        //foreach (GameObject template in goTemplates)
+        //{
+        //    GameObject.Instantiate(template);
+        //}
+        UnityEngine.Debug.Log("MeasureByDateTime: " + (DateTime.Now - startTime).Milliseconds);
     }
 
     public void Download()
@@ -33,10 +56,10 @@ public class Spawn : MonoBehaviour
 
         //UnityEngine.Debug.Log("MeasureByEnvironmentTickCount: " + stopwatch.ElapsedMilliseconds);
 
+
+
         var startTime = DateTime.Now;
-        downLoad.LoadAsset("Animal/GetPreFab/Elephant.prefab");
-        downLoad.LoadAsset("Animal/GetPreFab/Tiger.prefab");
-        downLoad.LoadAsset("Animal/GetPreFab/Cat.prefab");
+
         UnityEngine.Debug.Log("MeasureByDateTime: " + (DateTime.Now - startTime).Milliseconds);
     }
     /// <summary>
@@ -48,4 +71,5 @@ public class Spawn : MonoBehaviour
         DirectoryInfo directoryInfo = new DirectoryInfo(Application.persistentDataPath + "/" + bookName + "/bundles");
         directoryInfo.Delete();
     }
+
 }
