@@ -7,6 +7,7 @@ using System.Collections;
 using Loxodon.Framework.Contexts;
 using Loxodon.Framework.Asynchronous;
 using System.Collections.Generic;
+using Firecoals.AssetBundles.Sound;
 
 public class Spawn : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class Spawn : MonoBehaviour
     {
         downLoad = new DownLoadAssetBundles("Animal", "Animal/bundles");
         audioSource = GetComponent<AudioSource>();
-        LoadAssetBundles assetBundles = new LoadAssetBundles();
+        AssetBundlesLoader assetBundles = new AssetBundlesLoader();
         
         /* Preload AssetBundle */
         yield return assetBundles.Preload(new string[] { "animals/model/dog", "animals/model/cat", "animals/model/tiger", "animals/model/giraffe", "animals/model/rabbit", "animals/noise" }, 1);
@@ -36,7 +37,17 @@ public class Spawn : MonoBehaviour
         //    GameObject.Instantiate(template);
         //}
         UnityEngine.Debug.Log("MeasureByDateTime: " + (DateTime.Now - startTime).Milliseconds);
+
+        ISoundManifestLoader soundManifestLoader = new SoundManifestLoader();
+
+        var soundManifest = soundManifestLoader.LoadSync(Application.streamingAssetsPath+ "/AnimalAudioClip.json");
+        Debug.LogError(soundManifest.soundInfos[0].PathBundle);
+
+        UnityEngine.Debug.Log("MeasureByDateTime: " + (DateTime.Now - startTime).Milliseconds);
     }
+
+
+
 
     public void Download()
     {

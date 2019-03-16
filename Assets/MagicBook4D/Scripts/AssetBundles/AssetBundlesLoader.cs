@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace Firecoals.AssetBundles
 {
-    public class LoadAssetBundles : MyBundleResources
+    public class AssetBundlesLoader : MyBundleResources
     {
 
         public Dictionary<string, IBundle> bundles = new Dictionary<string, IBundle>();
@@ -37,8 +37,6 @@ namespace Firecoals.AssetBundles
                         throw r.Exception;
 
                     GameObject.Instantiate(r.Result, new Vector3(Random.Range(-1, 1), Random.Range(-1, 1)), Quaternion.identity);
-
-
                 }
                 catch (Exception e)
                 {

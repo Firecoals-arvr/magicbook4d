@@ -1,28 +1,22 @@
-﻿using System;
+﻿using Loxodon.Framework.Asynchronous;
+using Loxodon.Framework.Execution;
+using Loxodon.Log;
+using System;
 using System.Collections;
-using UnityEngine;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
-
-using Loxodon.Log;
-using Loxodon.Framework.Execution;
-using Loxodon.Framework.Asynchronous;
-#if UNITY_2017_1_OR_NEWER
+using UnityEngine;
 using UnityEngine.Networking;
-#endif
-#if UNITY_ANDROID && !UNITY_EDITOR
-using System.Text.RegularExpressions;
-using Ionic.Zip;
-#endif
 
-namespace Loxodon.Framework.Bundles
+namespace Firecoals.AssetBundles.Sound
 {
-#pragma warning disable 0414, 0219
-    public class BundleManifestLoader : IBundleManifestLoader
+    public class SoundManifestLoader : ISoundManifestLoader
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(BundleManifestLoader));
 
-#if UNITY_ANDROID  && !UNITY_EDITOR
+        private static readonly ILog log = LogManager.GetLogger(typeof(SoundManifestLoader));
+
+#if UNITY_ANDROID && !UNITY_EDITOR
         public string GetCompressedFileName(string url)
         {
             url = Regex.Replace(url, @"^jar:file:///", "");
@@ -34,7 +28,7 @@ namespace Loxodon.Framework.Bundles
             return url.Substring(url.LastIndexOf("!") + 1);
         }
 #endif
-        public virtual BundleManifest Load(string path)
+        public virtual SoundManifest LoadSync(string path)
         {
 #if UNITY_ANDROID && !UNITY_EDITOR
             if (Regex.IsMatch(path, @"(jar:file:///)|(\.jar)|(\.apk)|(\.obb)|(\.zip)", RegexOptions.IgnoreCase))
@@ -45,7 +39,7 @@ namespace Loxodon.Framework.Bundles
                     if (!zip.ContainsEntry(entryName))
                     {
                         if(log.IsErrorEnabled)
-                            log.ErrorFormat("Not found the BundleManifest '{0}'.", path);
+                            log.ErrorFormat("Not found the SoundManifest '{0}'.", path);
                         return null;
                     }
 
@@ -55,26 +49,23 @@ namespace Loxodon.Framework.Bundles
                     {
                         input.Read(buffer, 0, buffer.Length);
                     }
-                    return BundleManifest.Parse(Encoding.UTF8.GetString(buffer));
+                    return SoundManifest.Parse(Encoding.UTF8.GetString(buffer));
                 }
             }
-            return BundleManifest.Parse(File.ReadAllText(path, Encoding.UTF8));
+            return SoundManifest.Parse(File.ReadAllText(path, Encoding.UTF8));
 #elif UNITY_WEBGL && !UNITY_EDITOR
             throw new NotSupportedException("Because WebGL is single-threaded, this method is not supported,please use LoadAsync instead.");
 #else
-            
-            return BundleManifest.Parse(File.ReadAllText(path, Encoding.UTF8));
+            return SoundManifest.Parse(File.ReadAllText(path, Encoding.UTF8));
 #endif
         }
-
-        public virtual IAsyncResult<BundleManifest> LoadAsync(string path)
+        public virtual IAsyncResult<SoundManifest> LoadAsync(string path)
         {
-            AsyncResult<BundleManifest> result = new AsyncResult<BundleManifest>();
+            AsyncResult<SoundManifest> result = new AsyncResult<SoundManifest>();
             Executors.RunOnCoroutine(DoLoadAsync(result, path), result);
             return result;
         }
-
-        protected virtual IEnumerator DoLoadAsync(IPromise<BundleManifest> promise, string path)
+        protected virtual IEnumerator DoLoadAsync(IPromise<SoundManifest> promise, string path)
         {
             string absoluteUri = "";
             try
@@ -104,14 +95,14 @@ namespace Loxodon.Framework.Bundles
 
                 if (!string.IsNullOrEmpty(www.error))
                 {
-                    promise.SetException(new Exception(string.Format("Failed to load the Manifest.dat at the address '{0}'.Error:{1}", absoluteUri, www.error)));
+                    promise.SetException(new Exception(string.Format("Failed to load the Sound Manifest at the address '{0}'.Error:{1}", absoluteUri, www.error)));
                     yield break;
                 }
 
                 try
                 {
                     string json = www.downloadHandler.text;
-                    BundleManifest manifest = BundleManifest.Parse(json);
+                    SoundManifest manifest = SoundManifest.Parse(json);
                     promise.SetResult(manifest);
                 }
                 catch (Exception e)
@@ -126,14 +117,14 @@ namespace Loxodon.Framework.Bundles
 
                 if (!string.IsNullOrEmpty(www.error))
                 {
-                    promise.SetException(new Exception(string.Format("Failed to load the Manifest.dat at the address '{0}'.Error:{1}", absoluteUri, www.error)));
+                    promise.SetException(new Exception(string.Format("Failed to load the Sound Manifest at the address '{0}'.Error:{1}", absoluteUri, www.error)));
                     yield break;
                 }
 
                 try
                 {
                     string json = www.text;
-                    BundleManifest manifest = BundleManifest.Parse(json);
+                    SoundManifest manifest = SoundManifest.Parse(json);
                     promise.SetResult(manifest);
                 }
                 catch (Exception e)
@@ -145,3 +136,4 @@ namespace Loxodon.Framework.Bundles
         }
     }
 }
+
