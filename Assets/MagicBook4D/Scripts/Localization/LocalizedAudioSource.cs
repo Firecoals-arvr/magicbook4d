@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class LocalizedAudioSource : MonoBehaviour
 {
 	public LeanLocalization Target;
+	public LeanLocalizedAudioSource leanAudio;
 	public AudioSource audioSource;
 	public Button vn, en; 
 
@@ -19,15 +20,14 @@ public class LocalizedAudioSource : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		BundleSetting bundleSetting = new BundleSetting("Audio/bundles");
-		downLoad = new DownLoadAssetBundles(DownLoadAssetBundles.GetDataUrl("Audio"));
-		Download();
+		BundleSetting bundleSetting = new BundleSetting("Color/bundles");
+		downLoad = new DownLoadAssetBundles(DownLoadAssetBundles.GetDataUrl("Color"));
 	}
 
-	public void Download()
-	{
-		StartCoroutine(downLoad.Download());
-	}
+	//public void Download()
+	//{
+	//	StartCoroutine(downLoad.Download());
+	//}
 
 	public void CreateNewPhrase(string languageName, string phraseName)
 	{
@@ -44,22 +44,23 @@ public class LocalizedAudioSource : MonoBehaviour
 			target = new GameObject("LeanLocalization").AddComponent<LeanLocalization>();
 		}
 
-		bool updateLanguage = false;
+		//bool updateLanguage = false;
 
 		var translation = target.AddTranslation(languageName, phraseName);
 		string url = CheckForLoadAsset(languageName);
 		Object bear = downLoad.LoadAssetObject(url);
 		translation.Object = bear;
+		leanAudio.UpdateTranslation(translation);
 
-		if (LeanLocalization.CurrentLanguage == languageName)
-		{
-			updateLanguage = true;
-		}
+		//if (LeanLocalization.CurrentLanguage == languageName)
+		//{
+		//	updateLanguage = true;
+		//}
 
-		if (updateLanguage == true)
-		{
-			LeanLocalization.UpdateTranslations();
-		}
+		//if (updateLanguage == true)
+		//{
+		//	LeanLocalization.UpdateTranslations();
+		//}
 	}
 
 	public string CheckForLoadAsset(string languageName)

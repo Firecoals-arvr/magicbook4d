@@ -151,6 +151,7 @@ namespace Firecoals.AssetBundles
             var resources = this.GetResources();
             IProgressResult<float, UnityEngine.Object> result = resources.LoadAssetAsync<UnityEngine.Object>(name);
             UnityEngine.Object @object = null;
+			
             result.Callbackable().OnCallback((r) =>
             {
                 try
@@ -166,7 +167,7 @@ namespace Firecoals.AssetBundles
                     Debug.LogErrorFormat("Load failure.Error:{0}", e);
                 }
             });
-            return @object;
+			return @object;
         }
         /// <summary>
         /// Load all Objects of a assetbundle name
