@@ -112,6 +112,10 @@ namespace Firecoals.AssetBundles
         {
             var resources = GetResources();
             IProgressResult<float, IBundle[]> result = resources.LoadBundle(bundleNames, priority);
+            result.Callbackable().OnProgressCallback(p =>
+            {
+                Debug.LogFormat("Loading {0:F1}", p.ToString());
+            });
             yield return result.WaitForDone();
 
             if (result.Exception != null)
