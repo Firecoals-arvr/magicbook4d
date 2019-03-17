@@ -8,7 +8,10 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
-
+#if UNITY_ANDROID && !UNITY_EDITOR
+using System.Text.RegularExpressions;
+using Ionic.Zip;
+#endif
 namespace Firecoals.AssetBundles.Sound
 {
     public class SoundManifestLoader : ISoundManifestLoader

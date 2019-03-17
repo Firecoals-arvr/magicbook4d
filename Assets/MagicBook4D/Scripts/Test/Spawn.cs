@@ -27,9 +27,13 @@ public class Spawn : MonoBehaviour
         GameObject goTemplate = bundle.LoadAsset<GameObject>("Animal/GetPreFab/Tiger.prefab"); //OK
         GameObject.Instantiate(goTemplate);
         IBundle bundleAudioClip = assetBundles.bundles["animals/noise"];
-        AudioClip audioClip = bundleAudioClip.LoadAsset<AudioClip>("Assets/Animal/Sound/animal sounds/5.ogg");
+        ISoundManifestLoader soundManifestLoader = new SoundManifestLoader();
+        var soundManifest = soundManifestLoader.LoadSync(Application.streamingAssetsPath + "/AnimalAudioClip.json");
+        var myBundlePath = soundManifest.soundInfos[5].PathBundle;
+        AudioClip audioClip = bundleAudioClip.LoadAsset<AudioClip>(soundManifest.soundInfos[5].PathBundle);
         audioSource.clip = audioClip;
         audioSource.Play();
+
         ///* Green and Red */
         //GameObject[] goTemplates = assetBundles.FindResource().LoadAssets<GameObject>("Animal/GetPreFab/Frog.prefab", "Assets/Animal/GetPreFab/Rabbit.prefab");
         //foreach (GameObject template in goTemplates)
@@ -38,14 +42,11 @@ public class Spawn : MonoBehaviour
         //}
         UnityEngine.Debug.Log("MeasureByDateTime: " + (DateTime.Now - startTime).Milliseconds);
 
-        ISoundManifestLoader soundManifestLoader = new SoundManifestLoader();
 
-        var soundManifest = soundManifestLoader.LoadSync(Application.streamingAssetsPath+ "/AnimalAudioClip.json");
         Debug.LogError(soundManifest.soundInfos[0].PathBundle);
 
         UnityEngine.Debug.Log("MeasureByDateTime: " + (DateTime.Now - startTime).Milliseconds);
     }
-
 
 
 
