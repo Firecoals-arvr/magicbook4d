@@ -112,7 +112,7 @@ namespace Firecoals.AssetBundles
             IProgressResult<float, IBundle[]> result = resources.LoadBundle(bundleNames, priority);
             result.Callbackable().OnProgressCallback(p =>
             {
-                Debug.LogFormat("Loading {0:F1}", p.ToString());
+                Debug.LogFormat("PreLoading {0:F1}%", (p*100).ToString());
             });
             yield return result.WaitForDone();
 
