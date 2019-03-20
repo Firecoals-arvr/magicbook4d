@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coppyrotationatgameobject : MonoBehaviour
+namespace FireCoals.Space
 {
-
-    // Use this for initialization
-    void Start()
+    public class Coppyrotationatgameobject : MonoBehaviour
     {
 
-    }
-    public GameObject target;
-    // Update is called once per frame
-    void Update()
-    {
-        transform.localEulerAngles = target.transform.localEulerAngles;
+        // Use this for initialization
+        void Start()
+        {
+
+        }
+        public GameObject target;
+        // Update is called once per frame
+        void Update()
+        {
+            transform.localEulerAngles = target.transform.localEulerAngles;
+        }
     }
 }
