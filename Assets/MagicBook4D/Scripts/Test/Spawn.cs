@@ -84,4 +84,8 @@ public class Spawn : MonoBehaviour
         directoryInfo.Delete();
     }
 
+    public void OnDoubleTap()
+    {
+        Debug.LogError("Double tap");
+    }
 }

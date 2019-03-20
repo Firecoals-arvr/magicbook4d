@@ -8,11 +8,12 @@ namespace Firecoals.AssetBundles.Sound
 {
     /// <summary>
     /// Static class responsible for playing and managing audio and sounds.
+    /// Copy Class from EazySoundManager
     /// </summary>
     public class FirecoalsSoundManager : MonoBehaviour
     {
         /// <summary>
-        /// The gameobject that the sound manager is attached to
+        /// The game object that the sound manager is attached to
         /// </summary>
         public static GameObject Gameobject { get { return Instance.gameObject; } }
 
