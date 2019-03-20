@@ -3,42 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class ShowInformationPanel : MonoBehaviour
+namespace FireCoals.Space
 {
-    public GameObject mainPanel;
-
-    // Start is called before the first frame update
-    void Start()
+    public class ShowInformationPanel : MonoBehaviour
     {
+        public GameObject mainPanel;
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        HideObjectInfo();
-    }
-
-    public void ShowObjectInfo()
-    {
-        mainPanel.GetComponent<Transform>().DOLocalMove(new Vector3(0f, 344f, 0f), 1f);
-    }
-
-    private void HideObjectInfo()
-    {
-        if (Input.GetMouseButtonDown(0))
+        // Start is called before the first frame update
+        void Start()
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            HideObjectInfo();
+        }
+
+        public void ShowObjectInfo()
+        {
+            mainPanel.GetComponent<Transform>().DOLocalMove(new Vector3(0f, 344f, 0f), 1f);
+        }
+
+        private void HideObjectInfo()
+        {
+            if (Input.GetMouseButtonDown(0))
             {
-                if (hit.collider.tag == "panelifnorNGUI")
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out RaycastHit hit))
                 {
-                    Debug.LogError("Some information...");
+                    if (hit.transform.tag == "panelifnorNGUI")
+                    {
+                        Debug.LogError("Some information...");
+                    }
                 }
-            }
-            else
-            {
-                mainPanel.GetComponent<Transform>().DOLocalMove(new Vector3(0f, 1445f, 0f), 1f);
+                else
+                {
+                    mainPanel.GetComponent<Transform>().DOLocalMove(new Vector3(0f, 1445f, 0f), 1f);
+                }
             }
         }
     }

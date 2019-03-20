@@ -2,38 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Isscontroller : MonoBehaviour
+namespace FireCoals.Space
 {
-    // Use this for initialization
-
-    void Start()
+    public class Isscontroller : MonoBehaviour
     {
-        anima = GetComponent<Animation>();
-    }
-    Animation anima;
+        // Use this for initialization
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
+        void Start()
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            anima = GetComponent<Animation>();
+        }
+        Animation anima;
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (Input.GetMouseButtonDown(0))
             {
-                if (hit.transform.tag == "Emu")
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out RaycastHit hit))
                 {
-                    anima.Play("openemu");
-                }
-                else if (hit.transform.tag == "Iss")
-                {
-                    anima.Play("openiss");
+                    if (hit.transform.tag == "Emu")
+                    {
+                        anima.Play("openemu");
+                    }
+                    else if (hit.transform.tag == "Iss")
+                    {
+                        anima.Play("openiss");
+                    }
                 }
             }
-        }
 
-    }
-    public void Returnmain()
-    {
-        anima.Play("intro");
+        }
+        public void Returnmain()
+        {
+            anima.Play("intro");
+        }
     }
 }

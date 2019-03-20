@@ -2,64 +2,66 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoublesclickDead : MonoBehaviour
+namespace FireCoals.Space
 {
-
-    float clicked = 0;
-    float clicktime = 0;
-    float clickdelay = 0.5f;
-    bool DoubleClick()
+    public class DoublesclickDead : MonoBehaviour
     {
-        if (Input.GetMouseButtonDown(0))
+
+        float clicked = 0;
+        float clicktime = 0;
+        float clickdelay = 0.5f;
+        bool DoubleClick()
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            if (Input.GetMouseButtonDown(0))
             {
-                if (hit.transform.tag == "Alien")
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
                 {
-                    clicked++;
-                    if (clicked == 1) clicktime = Time.time;
+                    if (hit.transform.tag == "Alien")
+                    {
+                        clicked++;
+                        if (clicked == 1) clicktime = Time.time;
+                    }
                 }
-
             }
-        }
-        if (clicked > 1 && Time.time - clicktime < clickdelay)
-        {
-            clicked = 0;
-            clicktime = 0;
-            return true;
-        }
-        else if (clicked > 2 || Time.time - clicktime > 1) clicked = 0;
-        return false;
-    }
-    [SerializeField]
-    private GameObject AlienMain;
-    private void Start()
-    {
-        anima = GetComponent<Animation>();
-    }
-    private void Update()
-    {
-        if (AlienMain != null)
-        {
-            //if (AlienMain.GetComponent<Animation>().IsPlaying("Dance"))
-            //{
-            //    anima.Play("Dance");
-            //}
-            //else
-            //{
-            if (!anima.IsPlaying("Idle1"))
+            if (clicked > 1 && Time.time - clicktime < clickdelay)
             {
-                anima.Play("Idle1");
+                clicked = 0;
+                clicktime = 0;
+                return true;
             }
-            //}
+            else if (clicked > 2 || Time.time - clicktime > 1) clicked = 0;
+            return false;
         }
-
-        if (DoubleClick())
+        //[SerializeField]
+        //private GameObject AlienMain;
+        private void Start()
         {
-            anima.Play("Dead");
+            anima = GetComponent<Animation>();
         }
+        private void Update()
+        {
+            //if (AlienMain != null)
+            //{
+            //    //if (AlienMain.GetComponent<Animation>().IsPlaying("Dance"))
+            //    //{
+            //    //    anima.Play("Dance");
+            //    //}
+            //    //else
+            //    //{
+            //    if (!anima.IsPlaying("Idle1"))
+            //    {
+            //        anima.Play("Idle1");
+            //    }
+            //    //}
+            //}
+
+            if (DoubleClick())
+            {
+                anima.Play("Dead");
+            }
+        }
+        private Animation anima;
     }
-    private Animation anima;
 }

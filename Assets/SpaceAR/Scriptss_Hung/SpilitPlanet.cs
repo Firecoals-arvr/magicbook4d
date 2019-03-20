@@ -2,82 +2,114 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpilitPlanet : DefaultTrackableEventHandler
+namespace FireCoals.Space
 {
-    [SerializeField] UIButton spilitButton;
-    private GameObject[] planet;
-    private GameObject[] _parentPlanet;
-    bool check = false;
-
-    string nameCheck;
-    // Start is called before the first frame update
-    protected override void Start()
+    public class SpilitPlanet : DefaultTrackableEventHandler
     {
-        planet = GameObject.FindGameObjectsWithTag("childplanet");
-        _parentPlanet = GameObject.FindGameObjectsWithTag("Planet");
-        check = true;
-        spilitButton.isEnabled = false;
-    }
+        [SerializeField] GameObject spilitButton;
+        private GameObject[] planet;
+        private GameObject[] _parentPlanet;
+        bool check = false;
 
-    // Update is called once per frame
-    void Update()
-    {
-        AutoClick();
-    }
-
-    private bool CheckIfObjectIsPlanet()
-    {
-        for (int i = 0; i > planet.Length; i++)
+        // Start is called before the first frame update
+        protected override void Start()
         {
-
+            planet = GameObject.FindGameObjectsWithTag("childplanet");
+            _parentPlanet = GameObject.FindGameObjectsWithTag("Planet");
+            check = true;
+            NGUITools.SetActive(spilitButton, false);
         }
-        return true;
-    }
 
-    protected override void OnTrackingFound()
-    {
-        base.OnTrackingFound();
-        check = false;
-    }
-
-    protected override void OnTrackingLost()
-    {
-        base.OnTrackingLost();
-        check = true;
-    }
-
-    void RunAnimationOpenPlanet()
-    {
-        if (check == true)
+        // Update is called once per frame
+        void Update()
         {
+            AutoClick();
+            if (CheckIfObjectIsPlanet() == false)
+            {
+                NGUITools.SetActive(spilitButton, true);
+            }
+            else
+            {
+                NGUITools.SetActive(spilitButton, false);
+            }
+        }
+
+        //check object on scene is planet, spilitbutton must be deactive
+        private bool CheckIfObjectIsPlanet()
+        {
+            //foreach (var objectInactive in planet)
+            //{
+            //    if (objectInactive.activeInHierarchy == true)
+            //    {
+            //        return false;
+            //    }
+            //    else
+            //        return true;
+            //}
+
             for (int i = 0; i < planet.Length; i++)
             {
-                if (planet[i].gameObject.transform.parent.name == _parentPlanet[i].name)
+                if (_parentPlanet[i].activeInHierarchy == true)
                 {
-                    planet[i].GetComponent<Animation>().Play("Open");
-                    check = false;
+                    return false;
+                }
+                //return true;
+            }
+            return true;
+        }
+
+        protected override void OnTrackingFound()
+        {
+            //base.OnTrackingFound();
+            //if (CheckIfObjectIsPlanet() == false)
+            //{
+            //    NGUITools.SetActive(spilitButton, true);
+            //}
+            //else
+            //{
+            //    NGUITools.SetActive(spilitButton, false);
+            //}
+            check = false;
+        }
+
+        protected override void OnTrackingLost()
+        {
+            base.OnTrackingLost();
+            check = true;
+        }
+
+        void RunAnimationOpenPlanet()
+        {
+            if (check == true)
+            {
+                for (int i = 0; i < planet.Length; i++)
+                {
+                    if (planet[i].gameObject.transform.parent.name == _parentPlanet[i].name)
+                    {
+                        planet[i].GetComponent<Animation>().Play("Open");
+                        check = false;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < planet.Length; i++)
+                {
+                    if (planet[i].gameObject.transform.parent.name == _parentPlanet[i].name)
+                    {
+                        planet[i].GetComponent<Animation>().Play("Close");
+                        check = true;
+                    }
                 }
             }
         }
-        else
+
+        public void AutoClick()
         {
-            for (int i = 0; i < planet.Length; i++)
-            {
-                if (planet[i].gameObject.transform.parent.name == _parentPlanet[i].name)
-                {
-                    planet[i].GetComponent<Animation>().Play("Close");
-                    check = true;
-                }
-            }
+            spilitButton.GetComponent<UIButton>().onClick.Clear();
+            EventDelegate eventdel = new EventDelegate(this, "RunAnimationOpenPlanet");
+            EventDelegate.Set(spilitButton.GetComponent<UIButton>().onClick, eventdel);
+            //EventDelegate.Add(spilitButton.onClick, eventdel);
         }
     }
-
-    public void AutoClick()
-    {
-        spilitButton.onClick.Clear();
-        EventDelegate eventdel = new EventDelegate(this, "RunAnimationOpenPlanet");
-        EventDelegate.Set(spilitButton.onClick, eventdel);
-        //EventDelegate.Add(spilitButton.onClick, eventdel);
-    }
-
 }
