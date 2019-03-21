@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-namespace FireCoals.Space
+namespace Firecoals.Space
 {
     public class SelectLanguage : MonoBehaviour
     {
@@ -15,11 +15,7 @@ namespace FireCoals.Space
 
         public void ClickToChangeLanguage()
         {
-            //NGUITools.SetActive(_vnflag, true);
-            //NGUITools.SetActive(_engflag, true);
 
-            _vnflag.transform.DOLocalMove(new Vector3(165f, 188f, 0f), 1f);
-            _engflag.transform.DOLocalMove(new Vector3(260f, 0f, 0f), 1f);
         }
 
         public void ClickVNFlag()
@@ -44,11 +40,6 @@ namespace FireCoals.Space
 
         void LanguageHasSelected()
         {
-            _vnflag.transform.DOLocalMove(Vector3.zero, 1f);
-            _engflag.transform.DOLocalMove(Vector3.zero, 1f);
-
-            //NGUITools.SetActive(_vnflag, false);
-            //NGUITools.SetActive(_engflag, false);
         }
     }
 }

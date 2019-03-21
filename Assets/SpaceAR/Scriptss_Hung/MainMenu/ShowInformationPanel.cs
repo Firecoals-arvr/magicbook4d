@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-namespace FireCoals.Space
+namespace Firecoals.Space
 {
     public class ShowInformationPanel : MonoBehaviour
     {

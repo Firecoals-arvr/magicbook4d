@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FireCoals.Space
+namespace Firecoals.Space
 {
     /// <summary>
     /// class này dùng để xoay vật thể

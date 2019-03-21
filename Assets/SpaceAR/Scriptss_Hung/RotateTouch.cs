@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FireCoals.Space
+namespace Firecoals.Space
 {
     public class RotateTouch : MonoBehaviour
     {
