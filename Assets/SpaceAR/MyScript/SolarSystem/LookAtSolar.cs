@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MagicBook_FireCoals
+namespace FireCoals.Space 
 {
     public class LookAtSolar : MonoBehaviour
     {

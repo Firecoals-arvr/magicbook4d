@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotateAround : MonoBehaviour
+namespace FireCoals.Space
 {
-    float rotSpeed = 3f;
-    bool stt = false;
-    
-
-    void OnMouseDrag()
+    public class RotateAround : MonoBehaviour
     {
-        
-        float rotX = Input.GetAxis("Mouse X") * rotSpeed * Mathf.Deg2Rad;
-        transform.Rotate(Autorun.defaultvt3, -rotX);
-        
+        float rotSpeed = 3f;
+        bool stt = false;
+
+
+        void OnMouseDrag()
+        {
+
+            float rotX = Input.GetAxis("Mouse X") * rotSpeed * Mathf.Deg2Rad;
+            transform.Rotate(Autorun.defaultvt3, -rotX);
+
+        }
     }
 }
