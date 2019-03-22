@@ -7,18 +7,18 @@ using Vuforia;
 namespace Firecoals.Augmentation
 {
     /// <summary>
-    /// Đây là tiếng việt có dấu ễ ố ồ í
+    /// 
     /// </summary>
     public class AssetHandler
     {
         #region PRIVATE_VARIABLE
 
         //private TargetContent content;
-        private Dictionary<string, GameObject> spawnedObject;
+
         #endregion
         #region PUBLIC_VARIABLE
         public static AssetBundlesLoader assetBundlesLoader;
-
+        public Dictionary<string, GameObject> spawnedObject;
         #endregion
         public TargetContent Content { get; }
         #region PUBLIC_VARIABLE
@@ -68,7 +68,7 @@ namespace Firecoals.Augmentation
                 {
                     //var clone = Instantiate(goTemplate, content.parent) as GameObject;
 
-                    Content.Create(goTemplate, TargetContent.ContentType.UNIQUE);
+                    Content.Create(goTemplate, TargetContent.ContentType.Unique);
                     spawnedObject.Add(bundlePath, goTemplate);
                     Debug.LogWarning("unique object created");
                     return goTemplate;
@@ -100,7 +100,7 @@ namespace Firecoals.Augmentation
             {
                 IBundle bundle = assetBundlesLoader.bundles[bundleName];
                 goTemplate = bundle.LoadAsset<GameObject>(bundlePath);
-                var clone = Content.Create(goTemplate, TargetContent.ContentType.CLONE);
+                var clone = Content.Create(goTemplate, TargetContent.ContentType.Clone);
                 spawnedObject.Add(bundlePath, goTemplate);
                 Debug.LogWarning("unique object created");
                 return goTemplate;
@@ -112,6 +112,10 @@ namespace Firecoals.Augmentation
             }
         }
 
+        public void ClearAll()
+        {
+            spawnedObject?.Clear();
+        }
         #endregion
     }
 
