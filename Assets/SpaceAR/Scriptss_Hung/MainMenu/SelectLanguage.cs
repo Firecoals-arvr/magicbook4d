@@ -23,32 +23,6 @@ namespace Firecoals.Space
         /// </summary>
         public GameObject _engflag;
 
-        TweenPosition tw1, tw2;
-        private void Start()
-        {
-            tw1 = _vnflag.GetComponent<TweenPosition>();
-            tw2 = _engflag.GetComponent<TweenPosition>();
-        }
-
-        /// <summary>
-        /// chọn ngôn ngữ
-        /// </summary>
-        public void ClickToChangeLanguage()
-        {
-            Vietnamese();
-            English();
-        }
-
-        private void Vietnamese()
-        {
-            tw1.from = _vnflag.transform.position;
-            tw1.to = _vnflag.transform.position + new Vector3(300f, 0f, 0f);
-            tw1.style = UITweener.Style.Once;
-            tw1.method = UITweener.Method.EaseIn;
-        }
-
-        private void English() { }
-
         /// <summary>
         /// đổi sang cờ VN
         /// </summary>

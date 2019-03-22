@@ -17,7 +17,7 @@ public class Spawn : MonoBehaviour
         downLoad = new DownLoadAssetBundles("Animal", "Animal/bundles");
         audioSource = GetComponent<AudioSource>();
         AssetBundlesLoader assetBundles = new AssetBundlesLoader();
-        
+
         /* Preload AssetBundle */
         yield return assetBundles.Preload(new string[] { "animals/model/dog", "animals/model/cat", "animals/model/tiger", "animals/model/giraffe", "animals/model/rabbit", "animals/noise" }, 1);
         var startTime = DateTime.Now;
