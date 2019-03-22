@@ -7,7 +7,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 /// <summary>
-/// Very simple sprite animation. Attach to a sprite and specify a common prefix such as "idle" and it will cycle through them.
+/// Very simple sprite anim. Attach to a sprite and specify a common prefix such as "idle" and it will cycle through them.
 /// </summary>
 
 [ExecuteInEditMode]
@@ -16,7 +16,7 @@ using System.Collections.Generic;
 public class UISpriteAnimation : MonoBehaviour
 {
 	/// <summary>
-	/// Index of the current frame in the sprite animation.
+	/// Index of the current frame in the sprite anim.
 	/// </summary>
 
 	public int frameIndex = 0;
@@ -32,7 +32,7 @@ public class UISpriteAnimation : MonoBehaviour
 	protected List<string> mSpriteNames = new List<string>();
 
 	/// <summary>
-	/// Number of frames in the animation.
+	/// Number of frames in the anim.
 	/// </summary>
 
 	public int frames { get { return mSpriteNames.Count; } }
@@ -50,13 +50,13 @@ public class UISpriteAnimation : MonoBehaviour
 	public string namePrefix { get { return mPrefix; } set { if (mPrefix != value) { mPrefix = value; RebuildSpriteList(); } } }
 
 	/// <summary>
-	/// Set the animation to be looping or not
+	/// Set the anim to be looping or not
 	/// </summary>
 
 	public bool loop { get { return mLoop; } set { mLoop = value; } }
 
 	/// <summary>
-	/// Returns is the animation is still playing or not
+	/// Returns is the anim is still playing or not
 	/// </summary>
 
 	public bool isPlaying { get { return mActive; } }
@@ -68,7 +68,7 @@ public class UISpriteAnimation : MonoBehaviour
 	protected virtual void Start () { RebuildSpriteList(); }
 
 	/// <summary>
-	/// Advance the sprite animation process.
+	/// Advance the sprite anim process.
 	/// </summary>
 
 	protected virtual void Update ()
@@ -125,19 +125,19 @@ public class UISpriteAnimation : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Reset the animation to the beginning.
+	/// Reset the anim to the beginning.
 	/// </summary>
 
 	public void Play () { mActive = true; }
 
 	/// <summary>
-	/// Pause the animation.
+	/// Pause the anim.
 	/// </summary>
 
 	public void Pause () { mActive = false; }
 
 	/// <summary>
-	/// Reset the animation to frame 0 and activate it.
+	/// Reset the anim to frame 0 and activate it.
 	/// </summary>
 
 	public void ResetToBeginning ()
