@@ -6,11 +6,11 @@ using UnityEngine.Experimental.PlayerLoop;
 
 namespace Firecoals.Animal
 {
-    [RequireComponent(typeof(Animation))]
+
     public class AnimalController : AnimalAnimation
     {
         //TODO Specify when jump anim or walk anim should be play
-        private void FixedUpdate()
+        protected void FixedUpdate()
         {
             if (Input.touchCount > 0 && Input.touchCount < 2)
             {
@@ -37,15 +37,7 @@ namespace Firecoals.Animal
                     }
                 }
             }
-        }
-
-        private void Update()
-        {
-            if (CanMove)
-            {
-                SmoothMove(TouchPosition);
-            }
-        }
+        }  
     }
 
 }

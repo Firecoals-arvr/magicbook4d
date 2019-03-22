@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.PlayerLoop;
@@ -9,7 +10,8 @@ namespace Firecoals.Animal
     {
         public delegate void OnMoveStarted(string movingAnimationClip);
 
-        public delegate void OnMoveStopped();
+        public delegate void OnMoveStopped(string stopAnimationClip);
+
 
         public event OnMoveStarted MoveEventStarted;
         public event OnMoveStopped MoveEventStopped;
@@ -42,7 +44,7 @@ namespace Firecoals.Animal
         /// </summary>
         public bool CanMove { get; set; }
 
-        private bool _isRotating;
+        protected bool IsRotating;
         public GameObject Item { get; set; }
         protected void Start()
         {
@@ -83,21 +85,22 @@ namespace Firecoals.Animal
 
         protected virtual void OnMoveEventStarted(string movingAnimationClip)
         {
+            Debug.Log("on moving");
             PlayWalkOrRun(movingAnimationClip);
             MoveEventStarted?.Invoke(movingAnimationClip);
         }
 
-        protected virtual void OnMoveEventStopped()
+        protected virtual void OnMoveEventStopped(string stopAnimationClip)
         {
-            PlayNow(anim.clip.name);
+            PlayNow(stopAnimationClip);
             Debug.Log("on stop");
-            MoveEventStopped?.Invoke();
+            MoveEventStopped?.Invoke(stopAnimationClip);
         }
 
-        //If the distance from animal to target 
-        protected void SmoothMove(Vector3 target)
+
+        protected void SmoothMove(Vector3 target, string moveAnimClipName,string stopAnimClipName)
         {
-            _isRotating = false;
+            IsRotating = false;
 
             var targetDir = target - this.transform.position;
             var angle = Quaternion.LookRotation(targetDir);
@@ -106,26 +109,27 @@ namespace Firecoals.Animal
                 Item.transform.rotation = angle;
             }
 
-            if (_isRotating == false)
+            if (IsRotating == false)
             {
                 transform.rotation = Quaternion.Lerp(transform.rotation, angle, Time.deltaTime * 100.0f);
             }
 
             //Debug.DrawLine(transform.position, target, Color.red, 30, false);
 
-           
+
             if (Quaternion.Angle(angle, transform.rotation) < 5)
             {
                 if (Vector3.Distance(transform.position, target) > StopDistance)
                 {
                     transform.position = Vector3.MoveTowards(transform.position, target, MoveSpeed * Time.deltaTime);
-                    OnMoveEventStarted("Run");
-                    _isRotating = false;
+                    OnMoveEventStarted(moveAnimClipName);
+                    
+                    IsRotating = false;
                 }
             }
             else
             {
-                _isRotating = true;
+                IsRotating = true;
             }
             if (Vector3.Distance(transform.position, target) < StopDistance)
             {
@@ -134,7 +138,8 @@ namespace Firecoals.Animal
                     IsMoving = false;
                     CanMove = false;
                     anim.Stop("Run");
-                    OnMoveEventStopped();
+                    OnMoveEventStopped(stopAnimClipName);
+
                 }
             }
             else
@@ -144,8 +149,6 @@ namespace Firecoals.Animal
             }
 
         }
-
-
     }
 
 }
