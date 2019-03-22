@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayAnimBlackHole : MonoBehaviour
+namespace FireCoals.Space
 {
-    public Animator anim;
-    public void PlayAnim()
+    public class PlayAnimBlackHole : MonoBehaviour
     {
-        anim.GetComponent<Animator>().Play("BlackHoleEat");
+        public Animator anim;
+        public void PlayAnim()
+        {
+            anim.GetComponent<Animator>().Play("BlackHoleEat");
+        }
     }
 }

@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoonRotateAroundEarth : MonoBehaviour
+namespace FireCoals.Space
 {
-    public float speed = 10f;
-    public GameObject earth;
-
-    // Update is called once per frame
-    void LateUpdate()
+    public class MoonRotateAroundEarth : MonoBehaviour
     {
-       
-        transform.RotateAround(earth.transform.position, Vector3.up, speed *10f * Time.deltaTime );
+        public float speed = 10f;
+        public GameObject earth;
+
+        // Update is called once per frame
+        void LateUpdate()
+        {
+
+            transform.RotateAround(earth.transform.position, Vector3.up, speed * 10f * Time.deltaTime);
+        }
     }
 }

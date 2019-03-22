@@ -4,32 +4,35 @@ using UnityEngine;
 using Vuforia;
 using UnityEngine.UI;
 
-public class ChangeAnim : MonoBehaviour
+namespace FireCoals.Space
 {
-    public GameObject open,close;
-    public Animator anim;
-    //public Button bt;
-    void Start()
+    public class ChangeAnim : MonoBehaviour
     {
-        
-        anim.GetComponent<Animator>();
+        public GameObject open, close;
+        public Animator anim;
+        //public Button bt;
+        void Start()
+        {
+
+            anim.GetComponent<Animator>();
+
+        }
+
+
+
+        public void OpenAnim()
+        {
+            NGUITools.SetActive(open, false);
+            NGUITools.SetActive(close, true);
+
+            anim.Play("Open");
+        }
+        public void CloseAnim()
+        {
+            NGUITools.SetActive(open, true);
+            NGUITools.SetActive(close, false);
+            anim.Play("Close");
+        }
 
     }
-
-    
-    
-    public void OpenAnim()
-    {
-        NGUITools.SetActive(open, false);
-        NGUITools.SetActive(close, true);
-
-        anim.Play("Open");
-    }
-    public void CloseAnim()
-    {
-        NGUITools.SetActive(open, true);
-        NGUITools.SetActive(close, false);
-        anim.Play("Close");
-    }
-    
 }
