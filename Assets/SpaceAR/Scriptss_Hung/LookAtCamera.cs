@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Firecoals.Space
 {
+    /// <summary>
+    /// bảng tên của thành phần trong hành tinh hướng về phía camera
+    /// </summary>
     public class LookAtCamera : MonoBehaviour
     {
         // Start is called before the first frame update
