@@ -24,7 +24,7 @@ namespace Firecoals.Animal
         /// <summary>
         /// The distance where the animal stop near by the item
         /// </summary>
-        public float StopDistance;
+        public float StopDistance;  
         /// <summary>
         /// The animation attached to the object
         /// </summary>
@@ -97,7 +97,12 @@ namespace Firecoals.Animal
             MoveEventStopped?.Invoke(stopAnimationClip);
         }
 
-
+        /// <summary>
+        /// Move The Animal
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="moveAnimClipName">name of the animation clip which is needed when move the animal</param>
+        /// <param name="stopAnimClipName">name of the animation clip when the animal has stopped</param>
         protected void SmoothMove(Vector3 target, string moveAnimClipName,string stopAnimClipName)
         {
             IsRotating = false;

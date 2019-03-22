@@ -1,12 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Firecoals.Animal;
 using UnityEngine;
-
 namespace Firecoals.Animal
 {
     [RequireComponent(typeof(Animation))]
-    public class BearController : AnimalController
+    public class DefaultController : AnimalController
     {
         public string movingAnimName;
         public string stopAnimName;
@@ -18,5 +16,6 @@ namespace Firecoals.Animal
                 SmoothMove(TouchPosition, movingAnimName, stopAnimName);
             }
         }
+
     }
 }
