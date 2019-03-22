@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Firecoals.Space
 {
+    /// <summary>
+    /// class dùng thay cho DefaultTrackableEventHandler
+    /// </summary>
     public class IntroScripts : DefaultTrackableEventHandler
     {
         protected override void Start()

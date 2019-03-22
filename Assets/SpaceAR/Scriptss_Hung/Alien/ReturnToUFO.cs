@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Firecoals.Space
 {
+    /// <summary>
+    /// chạy animation đĩa bay đón alien
+    /// </summary>
     public class ReturnToUFO : MonoBehaviour
     {
         public void CallUFO()

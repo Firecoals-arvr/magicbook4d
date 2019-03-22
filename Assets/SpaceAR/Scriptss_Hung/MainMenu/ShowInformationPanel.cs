@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
+
 
 namespace Firecoals.Space
 {
@@ -23,7 +23,7 @@ namespace Firecoals.Space
 
         public void ShowObjectInfo()
         {
-            mainPanel.GetComponent<Transform>().DOLocalMove(new Vector3(0f, 344f, 0f), 1f);
+
         }
 
         private void HideObjectInfo()
@@ -40,7 +40,7 @@ namespace Firecoals.Space
                 }
                 else
                 {
-                    mainPanel.GetComponent<Transform>().DOLocalMove(new Vector3(0f, 1445f, 0f), 1f);
+
                 }
             }
         }
