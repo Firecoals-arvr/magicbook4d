@@ -16,6 +16,7 @@ namespace Firecoals.Animal
         public event OnMoveStarted MoveEventStarted;
         public event OnMoveStopped MoveEventStopped;
 
+        public float movingAnimationSpeed;
         /// <summary>
         /// The animal walking speed or running speed
         /// </summary>
@@ -34,7 +35,8 @@ namespace Firecoals.Animal
         /// <summary>
         /// The position on floor that touched
         /// </summary>
-        public Vector3 TouchPosition { get; set; }
+        public Vector3 DestinationPosition { get; set; }
+
         /// <summary>
         /// If the animal is moving
         /// </summary>
@@ -77,7 +79,7 @@ namespace Firecoals.Animal
         /// <param name="animationClip"></param>
         protected void PlayWalkOrRun(string animationClip)
         {
-            anim[animationClip].speed = MoveSpeed;
+            anim[animationClip].speed = movingAnimationSpeed;
             anim.CrossFade(animationClip);
             anim.Play(animationClip);
 
@@ -109,21 +111,21 @@ namespace Firecoals.Animal
 
             var targetDir = target - this.transform.position;
             var angle = Quaternion.LookRotation(targetDir);
-            if (Item != null)
-            {
-                Item.transform.rotation = angle;
-            }
+            //if (Item != null)
+            //{
+            //    Item.transform.rotation = angle;
+            //}
 
             if (IsRotating == false)
             {
-                transform.rotation = Quaternion.Lerp(transform.rotation, angle, Time.deltaTime * 100.0f);
+                //transform.rotation = Quaternion.Lerp(transform.rotation, angle, Time.deltaTime * 100.0f);
             }
 
             //Debug.DrawLine(transform.position, target, Color.red, 30, false);
 
 
-            if (Quaternion.Angle(angle, transform.rotation) < 5)
-            {
+            //if (Quaternion.Angle(angle, transform.rotation) < 5)
+            //{
                 if (Vector3.Distance(transform.position, target) > StopDistance)
                 {
                     transform.position = Vector3.MoveTowards(transform.position, target, MoveSpeed * Time.deltaTime);
@@ -131,11 +133,11 @@ namespace Firecoals.Animal
                     
                     IsRotating = false;
                 }
-            }
-            else
-            {
-                IsRotating = true;
-            }
+            // }
+            //else
+            //{
+            //    IsRotating = true;
+            //}
             if (Vector3.Distance(transform.position, target) < StopDistance)
             {
                 if (IsMoving)
@@ -153,6 +155,47 @@ namespace Firecoals.Animal
                 CanMove = true;
             }
 
+        }
+        public void DoMoveTowards(string moveAnimClipName, string stopAnimClipName)
+        {
+            if (IsMoving)
+            {
+                var destinationDistance = Vector3.Distance(DestinationPosition, transform.position);
+
+                if (destinationDistance > .5f)
+                {
+                    IsMoving = true;
+
+                }
+                else
+                {
+                    IsMoving = false;
+                    return;
+                }
+
+                Vector3 vec = new Vector3(DestinationPosition.x, 0, DestinationPosition.z);
+                PlayWalkOrRun(moveAnimClipName);
+
+                transform.position = Vector3.MoveTowards(transform.position,
+                    DestinationPosition, MoveSpeed * Time.deltaTime);
+
+                Vector3 rot = DestinationPosition - transform.position;
+                rot.y = 0;
+                Debug.Log("Looking at: "+rot);
+                DoRotation(rot);
+
+            }
+        }
+
+        public void DoRotation(Vector3 directionVector3)
+        {
+            if (directionVector3 != Vector3.zero)
+            {
+                var desiredRotation = Quaternion.LookRotation(directionVector3);
+                transform.localRotation =
+                    Quaternion.Slerp(transform.localRotation, desiredRotation, Time.deltaTime * 100f);
+
+            }
         }
     }
 

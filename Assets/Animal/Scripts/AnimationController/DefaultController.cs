@@ -13,7 +13,7 @@ namespace Firecoals.Animal
         {
             if (CanMove)
             {
-                SmoothMove(TouchPosition, movingAnimName, stopAnimName);
+                SmoothMove(DestinationPosition, movingAnimName, stopAnimName);
             }
         }
 
