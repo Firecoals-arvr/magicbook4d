@@ -2012,10 +2012,8 @@ public class Reporter : MonoBehaviour
         }
 
         if (Application.platform != GetOSXWebPlayer() && Application.platform != GetWindowsWebPlayer())
-        {
             if (!url.Contains("://"))
                 url = "file://" + url;
-        }
 
 
         // float startTime = Time.realtimeSinceStartup;
