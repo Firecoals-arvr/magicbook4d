@@ -10,13 +10,21 @@ namespace Firecoals.Space
     /// </summary>
     public class IntroScripts : DefaultTrackableEventHandler
     {
+        /// <summary>
+        /// tên object trong asset bundles
+        /// </summary>
         public string objName;
+
+        /// <summary>
+        /// đường dẫn của object trong thư mục
+        /// </summary>
         public string path;
+
         private AssetHandler assethandler;
-        
+
         protected override void Start()
         {
-            
+
             base.Start();
             assethandler = new AssetHandler(mTrackableBehaviour.transform);
         }
@@ -28,19 +36,19 @@ namespace Firecoals.Space
 
         protected override void OnTrackingFound()
         {
-            //if (this.gameObject.transform.GetChild(0).GetComponent<Animation>() != null)
-            //{
-            //    this.gameObject.transform.GetChild(0).GetComponent<Animation>().Play("intro");
-            //}
-            //else
-            //{
-            //    Debug.LogWarning("This object hasn't intro animation.");
-            //}
+            if (this.gameObject.transform.GetChild(0).GetComponent<Animation>() != null)
+            {
+                this.gameObject.transform.GetChild(0).GetComponent<Animation>().Play("intro");
+            }
+            else
+            {
+                Debug.LogWarning("This object hasn't intro animation.");
+            }
 
             var go = assethandler.CreateUnique(objName, path);
             if (go != null)
             {
-                Instantiate(go,mTrackableBehaviour.transform);
+                Instantiate(go, mTrackableBehaviour.transform);
             }
             base.OnTrackingFound();
         }
@@ -49,7 +57,6 @@ namespace Firecoals.Space
         {
             // Destroy(go);
             base.OnTrackingLost();
-            
         }
     }
 }

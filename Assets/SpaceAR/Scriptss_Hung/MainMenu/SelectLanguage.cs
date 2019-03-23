@@ -33,7 +33,6 @@ namespace Firecoals.Space
             buttonSelect.GetComponent<UIButton>().hoverSprite2D = _vnflag.GetComponent<UIButton>().hoverSprite2D;
             buttonSelect.GetComponent<UIButton>().pressedSprite2D = _vnflag.GetComponent<UIButton>().pressedSprite2D;
             buttonSelect.GetComponent<UIButton>().disabledSprite2D = _vnflag.GetComponent<UIButton>().disabledSprite2D;
-            LanguageHasSelected();
         }
 
         /// <summary>
@@ -46,14 +45,6 @@ namespace Firecoals.Space
             buttonSelect.GetComponent<UIButton>().hoverSprite2D = _engflag.GetComponent<UIButton>().hoverSprite2D;
             buttonSelect.GetComponent<UIButton>().pressedSprite2D = _engflag.GetComponent<UIButton>().pressedSprite2D;
             buttonSelect.GetComponent<UIButton>().disabledSprite2D = _engflag.GetComponent<UIButton>().disabledSprite2D;
-            LanguageHasSelected();
-        }
-
-        /// <summary>
-        /// chọn ngôn ngữ xong thì ẩn đi
-        /// </summary>
-        void LanguageHasSelected()
-        {
         }
     }
 }
