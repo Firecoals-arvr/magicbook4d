@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 /// <summary>
 /// Attach this script to any object that has idle animations.
-/// It's expected that the main idle loop animation is called "idle", and idle
+/// It's expected that the main idle loop anim is called "idle", and idle
 /// break animations all begin with "idle" (ex: idleStretch, idleYawn, etc).
-/// The script will place the idle loop animation on layer 0, and breaks on layer 1.
+/// The script will place the idle loop anim on layer 0, and breaks on layer 1.
 /// </summary>
 
 [AddComponentMenu("NGUI/Examples/Play Idle Animations")]
@@ -53,7 +53,7 @@ public class PlayIdleAnimations : MonoBehaviour
 	}
 
 	/// <summary>
-	/// If it's time to play a new idle break animation, do so.
+	/// If it's time to play a new idle break anim, do so.
 	/// </summary>
 
 	void Update ()
@@ -62,7 +62,7 @@ public class PlayIdleAnimations : MonoBehaviour
 		{
 			if (mBreaks.Count == 1)
 			{
-				// Only one break animation
+				// Only one break anim
 				AnimationClip clip = mBreaks[0];
 				mNextBreak = Time.time + clip.length + Random.Range(5f, 15f);
 				mAnim.CrossFade(clip.name);
@@ -71,7 +71,7 @@ public class PlayIdleAnimations : MonoBehaviour
 			{
 				int index = Random.Range(0, mBreaks.Count - 1);
 				
-				// Never choose the same animation twice in a row
+				// Never choose the same anim twice in a row
 				if (mLastIndex == index)
 				{
 					++index;

@@ -11,7 +11,7 @@ namespace Firecoals.Augmentation
         /// </summary>
         public Dictionary<ContentType, List<string>> groupList { get; }
 
-        private Transform parent;
+        public Transform parent;
 
         public TargetContent(Transform target)
         {
@@ -24,7 +24,7 @@ namespace Firecoals.Augmentation
         /// </summary>
         public enum ContentType
         {
-            UNIQUE, CLONE
+            Unique, Clone
         }
 
         /// <summary>
@@ -32,22 +32,19 @@ namespace Firecoals.Augmentation
         /// </summary>
         public void ClearAll()
         {
-            foreach (Transform child in parent)
-            {
-                GameObject.Destroy(child.gameObject);
-            }
             groupList.Clear();
         }
+
         /// <summary>
         /// Create game object as child of target
         /// </summary>
-        /// <param name="gameObject"></param>
+        /// <param name="clone"></param>
+        /// <param name="type"></param>
         public GameObject Create(GameObject clone, ContentType type)
         {
             clone.transform.localPosition = parent.transform.position;
             clone.name = System.Guid.NewGuid().ToString();
-            List<string> goNames;
-            if (groupList.TryGetValue(type, out goNames))
+            if (groupList.TryGetValue(type, out var goNames))
             {
                 goNames.Add(clone.name);
             }
@@ -61,30 +58,14 @@ namespace Firecoals.Augmentation
         /// </summary>
         public void ClearClone()
         {
-            foreach (Transform child in parent)
-            {
-                foreach (string goName in groupList[ContentType.CLONE])
-                {
-                    if (child.gameObject.name == goName)
-                        GameObject.Destroy(child.gameObject);
-                }
-            }
-            groupList.Remove(ContentType.CLONE);
+            groupList.Remove(ContentType.Clone);
         }
         /// <summary>
         /// Destroy all unique game object
         /// </summary>
         public void ClearUnique()
         {
-            foreach (Transform child in parent)
-            {
-                foreach (string goName in groupList[ContentType.UNIQUE])
-                {
-                    if (child.gameObject.name == goName)
-                        GameObject.Destroy(child.gameObject);
-                }
-            }
-            groupList.Remove(ContentType.UNIQUE);
+            groupList.Remove(ContentType.Unique);
         }
         /// <summary>
         /// Return true if game object name existed name in the UNIQUE List
@@ -93,8 +74,8 @@ namespace Firecoals.Augmentation
         /// <returns></returns>
         public bool IsChildExistsInUniqueList(string childName)
         {
-            bool isChildAlive = false;
-            foreach (string goName in groupList[ContentType.UNIQUE])
+            const bool isChildAlive = false;
+            foreach (var goName in groupList[ContentType.Unique])
             {
                 if (goName.Equals(childName))
                 {
@@ -110,8 +91,8 @@ namespace Firecoals.Augmentation
         /// <returns></returns>
         public bool IsChildExistsInCLoneList(string childName)
         {
-            bool isChildAlive = false;
-            foreach (string goName in groupList[ContentType.UNIQUE])
+            const bool isChildAlive = false;
+            foreach (var goName in groupList[ContentType.Unique])
             {
                 if (goName.Equals(childName))
                 {
@@ -126,7 +107,7 @@ namespace Firecoals.Augmentation
         /// <returns></returns>
         public bool UniqueListIsNull()
         {
-            return groupList[ContentType.UNIQUE].Count <= 0;
+            return groupList[ContentType.Unique] == null;
 
         }
         /// <summary>
@@ -135,7 +116,7 @@ namespace Firecoals.Augmentation
         /// <returns></returns>
         public bool CloneListIsNull()
         {
-            return groupList[ContentType.CLONE].Count <= 0;
+            return groupList[ContentType.Clone] == null;
         }
     }
 

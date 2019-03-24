@@ -72,7 +72,7 @@ public class UIPlayTween : MonoBehaviour
 	public bool includeChildren = false;
 
 	/// <summary>
-	/// Event delegates called when the animation finishes.
+	/// Event delegates called when the anim finishes.
 	/// </summary>
 
 	public List<EventDelegate> onFinished = new List<EventDelegate>();

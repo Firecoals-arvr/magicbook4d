@@ -55,7 +55,12 @@ namespace Firecoals.Space
 
         protected override void OnTrackingLost()
         {
-            // Destroy(go);
+            assethandler?.ClearAll();
+            assethandler?.Content.ClearAll();
+            foreach (Transform go in mTrackableBehaviour.transform)
+            {
+                Destroy(go.gameObject);
+            }
             base.OnTrackingLost();
         }
     }

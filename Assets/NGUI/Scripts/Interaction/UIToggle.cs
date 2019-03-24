@@ -287,7 +287,7 @@ public class UIToggle : UIWidgetContainer
 				current = tog;
 			}
 
-			// Play the checkmark animation
+			// Play the checkmark anim
 			if (animator != null)
 			{
 				ActiveAnimation aa = ActiveAnimation.Play(animator, null,
