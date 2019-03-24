@@ -17,7 +17,7 @@ namespace Lean.Touch
             
 			get
 			{
-                Debug.Log("1");
+                
 				// Hide IsSelected?
 				if (HideWithFinger == true && isSelected == true && SelectingFinger != null)
 				{
@@ -51,13 +51,13 @@ namespace Lean.Touch
 		[ContextMenu("Select")]
 		public void Select()
 		{
-            Debug.Log("2");
+            
 			Select(null);
 		}
 
 		public void Select(LeanFinger finger)
 		{
-            Debug.Log("3");
+            
 			isSelected      = true;
 			SelectingFinger = finger;
 
@@ -67,7 +67,7 @@ namespace Lean.Touch
 		[ContextMenu("Deselect")]
 		public void Deselect()
 		{
-            Debug.Log("4");
+            
 			if (SelectingFinger != null)
 			{
 				OnSelectUp.Invoke(SelectingFinger);
@@ -82,14 +82,14 @@ namespace Lean.Touch
 
 		protected virtual void OnEnable()
 		{
-            Debug.Log("5");
+            
 			// Hook events
 			LeanTouch.OnFingerUp += OnFingerUp;
 		}
 
 		protected virtual void OnDisable()
 		{
-            Debug.Log("6");
+            
 			// Unhook events
 			LeanTouch.OnFingerUp -= OnFingerUp;
 
@@ -101,7 +101,7 @@ namespace Lean.Touch
 
 		private void OnFingerUp(LeanFinger finger)
 		{
-            Debug.Log("7");
+            
 			// If the finger went up, it's no longer selecting anything
 			if (finger == SelectingFinger)
 			{
