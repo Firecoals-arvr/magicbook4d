@@ -24,7 +24,6 @@ namespace Firecoals.Space
 
         protected override void Start()
         {
-
             base.Start();
             assethandler = new AssetHandler(mTrackableBehaviour.transform);
         }
@@ -36,6 +35,29 @@ namespace Firecoals.Space
 
         protected override void OnTrackingFound()
         {
+            var go = assethandler.CreateUnique(objName, path);
+            if (go != null)
+            {
+                Instantiate(go, mTrackableBehaviour.transform);
+            }
+            RunAnimationIntro();
+            base.OnTrackingFound();
+        }
+
+        protected override void OnTrackingLost()
+        {
+            assethandler?.ClearAll();
+            assethandler?.Content.ClearAll();
+
+            foreach (Transform go in mTrackableBehaviour.transform)
+            {
+                Destroy(go.gameObject);
+            }
+            base.OnTrackingLost();
+        }
+
+        private void RunAnimationIntro()
+        {
             if (this.gameObject.transform.GetChild(0).GetComponent<Animation>() != null)
             {
                 this.gameObject.transform.GetChild(0).GetComponent<Animation>().Play("intro");
@@ -44,24 +66,6 @@ namespace Firecoals.Space
             {
                 Debug.LogWarning("This object hasn't intro animation.");
             }
-
-            var go = assethandler.CreateUnique(objName, path);
-            if (go != null)
-            {
-                Instantiate(go, mTrackableBehaviour.transform);
-            }
-            base.OnTrackingFound();
-        }
-
-        protected override void OnTrackingLost()
-        {
-            assethandler?.ClearAll();
-            assethandler?.Content.ClearAll();
-            foreach (Transform go in mTrackableBehaviour.transform)
-            {
-                Destroy(go.gameObject);
-            }
-            base.OnTrackingLost();
         }
     }
 }
