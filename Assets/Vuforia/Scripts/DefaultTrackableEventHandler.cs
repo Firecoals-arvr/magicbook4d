@@ -99,14 +99,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
         foreach (var component in canvasComponents)
             component.enabled = true;
 
-        //if (this.gameObject.transform.GetChild(0).GetComponent<Animation>() != null)
-        //{
-        //    transform.GetChild(0).GetComponent<Animation>().Play("intro");
-        //}
-        //else
-        //{
-        //    Debug.LogWarning("Object hasn't animation in child(0).");
-        //}
+        
     }
 
     protected virtual void OnTrackingLost()
