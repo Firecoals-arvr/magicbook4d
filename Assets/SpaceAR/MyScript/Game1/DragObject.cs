@@ -65,7 +65,15 @@ namespace Firecoals.Space
                 }
                 else
                 {
-                    touchObject = false;
+                    
+                    var temp = other.transform.GetChild(0);
+                    temp.transform.GetChild(0).transform.parent = gameObject.transform.parent.gameObject.transform;
+                    temp.transform.localPosition = Vector3.zero;
+                    temp.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                    transform.position = other.transform.position;
+                    transform.parent = other.gameObject.transform;
+                    
+                    //touchObject = false;
                 }
                 
             }
