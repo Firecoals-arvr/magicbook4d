@@ -12,48 +12,62 @@ namespace Firecoals.Space
         private void Start()
         {
             leanSelect = gameObject.GetComponent<LeanSelectable>();
-            leanSelect.OnSelect.AddListener((p) => ScaleObject());
-            leanSelect.OnDeselect.AddListener(() => DeScaleObject());
-            leanSelect.OnSelectUp.AddListener((a) => DeSelectUp());
-        }
+            leanSelect.OnSelect.AddListener((p) => SelectObject());
+            leanSelect.OnDeselect.AddListener(() => DeSelectObject());
+            leanSelect.OnSelectUp.AddListener((a) => SelectUp());
 
-        void ScaleObject()
+        }
+        
+
+        public void SelectObject()
         {
+            
             transform.localScale += new Vector3(0.05f, 0.05f, 0.05f);
+            
+            transform.localPosition = new Vector3(transform.localPosition.x, 0f, transform.localPosition.z);
             
 
         }
-        void DeScaleObject()
+        public void DeSelectObject()
         {
             transform.localScale -= new Vector3(0.05f, 0.05f, 0.05f);
-            //if (touchObject == true)
-            //{
-
-            //}
-            //else
-            //{
-            //    Debug.Log("this is ");
-            //    this.gameObject.transform.localPosition = new Vector3(0, 0, 0);
-            //}
+            
         }
-        void DeSelectUp()
+        public void SelectUp()
         {
-            transform.localScale -= new Vector3(0.05f, 0.05f, 0.05f);
+            
+            
             if (touchObject == true)
             {
-
+                
             }
             else
             {
-                Debug.Log("asjhfkaf");
+                
                 this.gameObject.transform.localPosition = new Vector3(0, 0, 0);
             }
         }
         private void OnTriggerEnter(Collider other)
         {
-            if(other.name == "Saturn")
+            Debug.LogError("other = " + other.name);
+            if (other.tag == "planetcontainer")
             {
-                touchObject = true;
+                
+                if (other.transform.childCount == 0)
+                {
+                    touchObject = true;
+
+                    transform.position = other.transform.position;
+                    transform.parent = other.gameObject.transform;
+
+                    gameObject.transform.localScale = new Vector3(2f, 2f, 2f);
+                    
+                }
+                else
+                {
+                    touchObject = false;
+                }
+                
             }
         }
 
