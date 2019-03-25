@@ -19,19 +19,17 @@ namespace Loxodon.Framework.Examples.Bundle
 #if UNITY_WEBGL && !UNITY_EDITOR
             Uri baseUri = new Uri(BundleUtil.GetReadOnlyDirectory());
 #else
-            //DirectoryInfo dir = new DirectoryInfo("./AssetBundles/StandaloneWindows/1.0.0/");
-            
-            //if (!dir.Exists)
-            //{
-            //    Debug.LogFormat("Directory '{0}' does not exist.", dir.FullName);
-            //    return;
-            //}
+            DirectoryInfo dir = new DirectoryInfo("./AssetBundles/StandaloneWindows/1.0.0/");
 
-            Uri baseUri = new Uri("https://s3-ap-southeast-1.amazonaws.com/magicbook4d/1.0/Android/Animal/bundles/");//dir.FullName
-            Debug.Log("base uri: " + baseUri);
+            if (!dir.Exists)
+            {
+                Debug.LogFormat("Directory '{0}' does not exist.", dir.FullName);
+                return;
+            }
+
+            Uri baseUri = new Uri(dir.FullName);
 #endif
             this.downloader = new WWWDownloader(baseUri, false);
-            
         }
 
         void OnGUI()

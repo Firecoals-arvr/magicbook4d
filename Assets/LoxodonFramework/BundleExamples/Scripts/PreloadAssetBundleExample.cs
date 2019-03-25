@@ -5,7 +5,6 @@ using UnityEngine;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Asynchronous;
 using Loxodon.Framework.Contexts;
-using System.Diagnostics;
 
 namespace Loxodon.Framework.Examples.Bundle
 {
@@ -20,65 +19,22 @@ namespace Loxodon.Framework.Examples.Bundle
             this.resources = context.GetService<IResources>();
 
             /* Preload AssetBundle */
-            yield return Preload(new string[] {
-                "models/red",
-                "models/green",
-                "models/plane",
-                "animals/bear",
-                "animals/buffalo",
-                "animals/cat",
-                "animals/chameleon",
-                "animals/cow",
-                "animals/crocodile",
-                "animals/dog",
-                "animals/dolphin",
-                "animals/eagle",
-                "animals/elephant",
-                "animals/frog",
-                "animals/giraffe",
-                "animals/gorilla",
-                "animals/horse",
-                "animals/kangaroo",
-                "animals/lion",
-                "animals/oschich",
-                "animals/owl",
-                "animals/parrot",
-                "animals/peacock",
-                "animals/pengiun",
-                "animals/pig",
-                "animals/rabbit",
-                "animals/rhino",
-                "animals/rooster",
-                "animals/sheep",
-                "animals/squirrel",
-                "animals/tiger",
-                "animals/turle",
-                "animals/wolf", }, 1);
-
+            yield return Preload(new string[] { "models/red", "models/green", "models/plane" }, 1);
 
             /* Use IBundle,loads plane */
             IBundle bundle = this.bundles["models/plane"];          
             //GameObject goTemplate = bundle.LoadAsset<GameObject>("Plane.prefab"); //OK
             GameObject goTemplate = bundle.LoadAsset<GameObject>("LoxodonFramework/BundleExamples/Models/Plane/Plane.prefab"); //OK
-
-            Instantiate(goTemplate);
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
-            Spawn();
-            stopwatch.Stop();
-
-            UnityEngine.Debug.LogWarning("Measure By Environment Tick Count: " + stopwatch.ElapsedMilliseconds);
-        }
-
-        private void Spawn()
-        {
+            GameObject.Instantiate(goTemplate);
+            
             /* Green and Red */
-            GameObject[] goTemplates = this.resources.LoadAssets<GameObject>("LoxodonFramework/BundleExamples/Models/Green/Green.prefab", "LoxodonFramework/BundleExamples/Models/Red/Red.prefab", "Animal/GetPreFab/Tiger.prefab", "Animal/GetPreFab/Cat.prefab");
-            foreach (GameObject template in goTemplates)
+            GameObject[] goTemplates = this.resources.LoadAssets<GameObject>("LoxodonFramework/BundleExamples/Models/Green/Green.prefab", "LoxodonFramework/BundleExamples/Models/Red/Red.prefab");
+            foreach(GameObject template in goTemplates)
             {
-                Instantiate(template);
+                GameObject.Instantiate(template);
             }
         }
+
         /// <summary>
         /// Preloads AssetBundle.
         /// </summary>
@@ -92,7 +48,7 @@ namespace Loxodon.Framework.Examples.Bundle
 
             if (result.Exception != null)
             {
-                UnityEngine.Debug.LogWarningFormat("Loads failure.Error:{0}", result.Exception);
+                Debug.LogWarningFormat("Loads failure.Error:{0}", result.Exception);
                 yield break;
             }
 
@@ -109,7 +65,7 @@ namespace Loxodon.Framework.Examples.Bundle
 
             foreach (IBundle bundle in bundles.Values)
                 bundle.Dispose();
-
+            
             this.bundles = null;
         }
 

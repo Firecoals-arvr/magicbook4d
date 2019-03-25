@@ -16,13 +16,13 @@ using System.Collections.Generic;
 public class ActiveAnimation : MonoBehaviour
 {
 	/// <summary>
-	/// Active animation that resulted in the event notification.
+	/// Active anim that resulted in the event notification.
 	/// </summary>
 
 	static public ActiveAnimation current;
 
 	/// <summary>
-	/// Event delegates called when the animation finishes.
+	/// Event delegates called when the anim finishes.
 	/// </summary>
 
 	public List<EventDelegate> onFinished = new List<EventDelegate>();
@@ -49,7 +49,7 @@ public class ActiveAnimation : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Whether the animation is currently playing.
+	/// Whether the anim is currently playing.
 	/// </summary>
 
 	public bool isPlaying
@@ -89,7 +89,7 @@ public class ActiveAnimation : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Immediately finish playing the animation.
+	/// Immediately finish playing the anim.
 	/// </summary>
 
 	public void Finish ()
@@ -110,7 +110,7 @@ public class ActiveAnimation : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Manually reset the active animation to the beginning.
+	/// Manually reset the active anim to the beginning.
 	/// </summary>
 
 	public void Reset ()
@@ -143,7 +143,7 @@ public class ActiveAnimation : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Notify the target when the animation finishes playing.
+	/// Notify the target when the anim finishes playing.
 	/// </summary>
 
 	void Update ()
@@ -211,7 +211,7 @@ public class ActiveAnimation : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Play the specified animation.
+	/// Play the specified anim.
 	/// </summary>
 
 	void Play (string clipName, Direction playDirection)
@@ -222,13 +222,13 @@ public class ActiveAnimation : MonoBehaviour
 
 		if (mAnim != null)
 		{
-			// We will sample the animation manually so that it works when the time is paused
+			// We will sample the anim manually so that it works when the time is paused
 			enabled = true;
 			mAnim.enabled = false;
 
 			bool noName = string.IsNullOrEmpty(clipName);
 
-			// Play the animation if it's not playing already
+			// Play the anim if it's not playing already
 			if (noName)
 			{
 				if (!mAnim.isPlaying) mAnim.Play();
@@ -238,7 +238,7 @@ public class ActiveAnimation : MonoBehaviour
 				mAnim.Play(clipName);
 			}
 
-			// Update the animation speed based on direction -- forward or back
+			// Update the anim speed based on direction -- forward or back
 			foreach (AnimationState state in mAnim)
 			{
 				if (string.IsNullOrEmpty(clipName) || state.name == clipName)
@@ -246,7 +246,7 @@ public class ActiveAnimation : MonoBehaviour
 					float speed = Mathf.Abs(state.speed);
 					state.speed = speed * (int)playDirection;
 
-					// Automatically start the animation from the end if it's playing in reverse
+					// Automatically start the anim from the end if it's playing in reverse
 					if (playDirection == Direction.Reverse && state.time == 0f) state.time = state.length;
 					else if (playDirection == Direction.Forward && state.time == state.length) state.time = 0f;
 				}
@@ -280,7 +280,7 @@ public class ActiveAnimation : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Play the specified animation on the specified object.
+	/// Play the specified anim on the specified object.
 	/// </summary>
 
 	static public ActiveAnimation Play (Animation anim, string clipName, Direction playDirection,
@@ -312,7 +312,7 @@ public class ActiveAnimation : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Play the specified animation.
+	/// Play the specified anim.
 	/// </summary>
 
 	static public ActiveAnimation Play (Animation anim, string clipName, Direction playDirection)
@@ -321,7 +321,7 @@ public class ActiveAnimation : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Play the specified animation.
+	/// Play the specified anim.
 	/// </summary>
 
 	static public ActiveAnimation Play (Animation anim, Direction playDirection)
@@ -330,7 +330,7 @@ public class ActiveAnimation : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Play the specified animation on the specified object.
+	/// Play the specified anim on the specified object.
 	/// </summary>
 
 	static public ActiveAnimation Play (Animator anim, string clipName, Direction playDirection,

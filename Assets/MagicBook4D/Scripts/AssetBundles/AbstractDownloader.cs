@@ -221,5 +221,7 @@ namespace Firecoals.AssetBundles
         }
 
         protected abstract IEnumerator DoDownloadBundles(IProgressPromise<Progress, bool> promise, List<BundleInfo> bundles);
+
+        
     }
 }

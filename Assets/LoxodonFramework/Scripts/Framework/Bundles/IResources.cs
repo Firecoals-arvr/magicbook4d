@@ -116,7 +116,7 @@ namespace Loxodon.Framework.Bundles
         /// <returns></returns>
         IProgressResult<float, Object[]> LoadAssetsAsync(params string[] paths);
 
-#if SUPPORT_LOADALL
+//#if SUPPORT_LOADALL
         /// <summary>
         /// Synchronously loads all of the assets for the given bundle's name.The related AssetBundle must already be loaded, otherwise returns null.
         /// </summary>
@@ -162,7 +162,7 @@ namespace Loxodon.Framework.Bundles
         /// <param name="bundleName"></param>
         /// <returns></returns>
         IProgressResult<float, Object[]> LoadAllAssetsAsync(string bundleName);
-#endif
+//#endif
         /// <summary>
         /// Asynchronously loads a scene for the given scene's name.If the Assetbundle isn't loaded, automatic loading the Assetbundle.
         /// </summary>
