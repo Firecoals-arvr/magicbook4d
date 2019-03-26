@@ -3,55 +3,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dispatcher : MonoBehaviour
+namespace Firecoals.Augmentation
 {
-    private static Dispatcher instance;
-
-    private readonly List<Action> _pending = new List<Action>();
-
-    public static Dispatcher Instance
+    public class Dispatcher : MonoBehaviour
     {
-        get
-        {
-            return instance;
-        }
-    }
+        private static Dispatcher _instance;
 
-    public void Invoke(Action fn)
-    {
-        lock (this._pending)
+        private readonly List<Action> _pending = new List<Action>();
+        private void Awake()
         {
-            this._pending.Add(fn);
-        }
-    }
-
-    private void InvokePending()
-    {
-        lock (this._pending)
-        {
-            foreach (Action action in this._pending)
+            if (_instance != null && _instance != this)
             {
-                action();
+                Destroy(this.gameObject);
             }
-
-            this._pending.Clear();
+            else
+            {
+                _instance = this;
+            }
         }
-    }
-
-    private void Awake()
-    {
-        if (instance != null && instance != this)
+        public static Dispatcher Instance
         {
-            Destroy(this.gameObject);
+            get { return _instance; }
         }
-        else
-        {
-            instance = this;
-        }
-    }
 
-    private void Update()
-    {
-        this.InvokePending();
+        public void Invoke(Action fn)
+        {
+            lock (this._pending)
+            {
+                this._pending.Add(fn);
+            }
+        }
+
+        private void InvokePending()
+        {
+            lock (this._pending)
+            {
+                foreach (Action action in this._pending)
+                {
+                    action();
+                }
+
+                this._pending.Clear();
+            }
+        }
+
+        private void Update()
+        {
+            this.InvokePending();
+        }
     }
 }
