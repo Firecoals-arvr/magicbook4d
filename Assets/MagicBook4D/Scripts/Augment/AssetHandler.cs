@@ -111,7 +111,7 @@ namespace Firecoals.Augmentation
             }
         }
         /// <summary>
-        /// Create random a GameObject in a list bundle paths
+        /// Create random a GameObject in a list bundle paths as clone
         /// </summary>
         /// <param name="bundleName"></param>
         /// <param name="bundlePaths"></param>
@@ -124,7 +124,7 @@ namespace Firecoals.Augmentation
                 var bundle = assetBundlesLoader.bundles[bundleName];
                 var goTemplate = bundle.LoadAsset<GameObject>(bundlePath);
                 var clone = Content.Create(goTemplate, TargetContent.ContentType.Clone);
-                spawnedObject.Add(bundlePath, goTemplate);
+                //spawnedObject.Add(bundlePath, goTemplate);
                 Debug.LogWarning("<color=green>clone random object created</color>");
                 return goTemplate;
             }
@@ -137,6 +137,7 @@ namespace Firecoals.Augmentation
         public void ClearAll()
         {
             spawnedObject?.Clear();
+            
         }
         #endregion
     }

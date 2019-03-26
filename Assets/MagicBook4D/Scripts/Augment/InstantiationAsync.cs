@@ -108,14 +108,15 @@ namespace Firecoals.Augmentation
                 });
             });
 
-        }/// <summary>
-         /// Clones a GameObject
-         /// </summary>
-         /// <param name="original"></param>
-         /// <param name="position"></param>
-         /// <param name="quaternion"></param>
-         /// <param name="parent"></param>
-         /// <param name="delayTimeInMillisecond"></param>
+        }
+        /// <summary>
+        /// Clones a GameObject
+        /// </summary>
+        /// <param name="original"></param>
+        /// <param name="position"></param>
+        /// <param name="quaternion"></param>
+        /// <param name="parent"></param>
+        /// <param name="delayTimeInMillisecond"></param>
         public void InstantiateAsync(GameObject original, Vector3 position, Quaternion quaternion, Transform parent, int delayTimeInMillisecond)
         {
 
