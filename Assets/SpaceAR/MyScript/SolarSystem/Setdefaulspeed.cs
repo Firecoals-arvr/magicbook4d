@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace FireCoals.Space
+namespace Firecoals.Space
 {
     public class Setdefaulspeed : MonoBehaviour
     {
