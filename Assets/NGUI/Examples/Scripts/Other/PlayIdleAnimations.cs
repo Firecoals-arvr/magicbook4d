@@ -46,7 +46,6 @@ public class PlayIdleAnimations : MonoBehaviour
 					mBreaks.Add(state.clip);
 				}
 			}
-		
 			// No idle breaks found -- this script is unnecessary
 			if (mBreaks.Count == 0) Destroy(this);
 		}
