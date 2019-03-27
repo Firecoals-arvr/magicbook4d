@@ -2,33 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spilitplanet : MonoBehaviour
+namespace Firecoals.Space
 {
-
-    // Use this for initialization
-    void Start()
+    public class Spilitplanet : MonoBehaviour
     {
 
-        temp = true;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-    public static bool temp;
-    public void Spilit()
-    {
-        if (temp == true)
+        // Use this for initialization
+        void Start()
         {
-            GetComponent<Animation>().Play("Open");
-            temp = false;
-        }
-        else
-        {
-            GetComponent<Animation>().Play("Close");
+
             temp = true;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+        public static bool temp;
+        public void Spilit()
+        {
+            if (temp == true)
+            {
+                GetComponent<Animation>().Play("Open");
+                temp = false;
+            }
+            else
+            {
+                GetComponent<Animation>().Play("Close");
+                temp = true;
+            }
         }
     }
 }

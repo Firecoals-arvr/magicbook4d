@@ -24,7 +24,7 @@ namespace Firecoals.Space
 
         private AssetHandler assethandler;
         private InstantiationAsync asyncObj;
-        private AssetBundlesLoader loader;
+        //private AssetBundlesLoader loader;
         protected override void Start()
         {
             base.Start();
@@ -45,9 +45,9 @@ namespace Firecoals.Space
             if (go != null)
             {
                 var startTime = DateTime.Now;
-                //Instantiate(go, mTrackableBehaviour.transform);
-                asyncObj.InstantiateAsync(go, mTrackableBehaviour.transform, 50);
-                loader.LoadAsset("Assets/SpaceAR/MyPrefabs/AllPlanet/solarSystem.prefab", mTrackableBehaviour.transform);
+                Instantiate(go, mTrackableBehaviour.transform);
+                //asyncObj.InstantiateAsync(go, mTrackableBehaviour.transform, 50);
+                //loader.LoadAsset("Assets/SpaceAR/MyPrefabs/AllPlanet/solarSystem.prefab", mTrackableBehaviour.transform);
                 Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
 
                 //asyncObj.InstantiateAsync(go, mTrackableBehaviour.transform, delayTimeInMillisecond: 1);
