@@ -25,7 +25,7 @@ namespace Firecoals.AssetBundles
         /// Load GameObject
         /// </summary>
         /// <param name="name"></param>
-        public void LoadAsset(string name)
+        public void LoadAsset(string name, Transform parent )
         {
             var resources = this.GetResources();
             IProgressResult<float, GameObject> result = resources.LoadAssetAsync<GameObject>(name);
@@ -36,7 +36,7 @@ namespace Firecoals.AssetBundles
                     if (r.Exception != null)
                         throw r.Exception;
 
-                    GameObject.Instantiate(r.Result, new Vector3(Random.Range(-1, 1), Random.Range(-1, 1)), Quaternion.identity);
+                    GameObject.Instantiate(r.Result, parent);
                 }
                 catch (Exception e)
                 {
