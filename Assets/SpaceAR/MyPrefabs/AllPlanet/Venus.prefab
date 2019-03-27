@@ -253,11 +253,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 180603096}
@@ -345,6 +345,7 @@ GameObject:
   - component: {fileID: 682583886}
   - component: {fileID: 3572314598806955998}
   - component: {fileID: 498829167824349766}
+  - component: {fileID: 1366066299}
   m_Layer: 0
   m_Name: Info
   m_TagString: Untagged
@@ -433,6 +434,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1366066299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682583885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c73c1ab94e28d244827af556dca1ed2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoreStartedOverGui: 1
+  IgnoreIsOverGui: 0
+  RequiredFingerCount: 0
+  RequiredSelectable: {fileID: 0}
+  Camera: {fileID: 0}
+  WheelSensitivity: 0
+  Relative: 0
+  ScaleClamp: 0
+  ScaleMin: {x: 0, y: 0, z: 0}
+  ScaleMax: {x: 0, y: 0, z: 0}
 --- !u!1 &725930126
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,11 +707,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1117859582}
@@ -924,11 +947,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1594417775}
@@ -1088,7 +1111,7 @@ GameObject:
   - component: {fileID: 427055767904761287}
   - component: {fileID: 1289903951352281893}
   - component: {fileID: 5917565651323153810}
-  - component: {fileID: 5958002034698152619}
+  - component: {fileID: 3861926541340020951}
   m_Layer: 0
   m_Name: 2D Sprite (1)
   m_TagString: Untagged
@@ -1208,7 +1231,7 @@ MonoBehaviour:
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
   onClick: []
---- !u!114 &5958002034698152619
+--- !u!114 &3861926541340020951
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1217,7 +1240,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 439173069441293849}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1cd57f82704cc94c9f0bb2b2be8ee1f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e9c021a760127e48b205da15c2a0241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &602927808136916161
@@ -1540,7 +1563,7 @@ GameObject:
   - component: {fileID: 3101973046327682079}
   - component: {fileID: 665413306382584835}
   - component: {fileID: 2586440005750270788}
-  - component: {fileID: 2801437233732617241}
+  - component: {fileID: 6407933208474174654}
   m_Layer: 0
   m_Name: 2D Sprite
   m_TagString: Untagged
@@ -1660,7 +1683,7 @@ MonoBehaviour:
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
   onClick: []
---- !u!114 &2801437233732617241
+--- !u!114 &6407933208474174654
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1669,7 +1692,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2104878108877699411}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1cd57f82704cc94c9f0bb2b2be8ee1f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e9c021a760127e48b205da15c2a0241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3423803661481882270
@@ -1773,6 +1796,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3336534407813498425}
   - component: {fileID: 187973781101797229}
+  - component: {fileID: 526566800}
   m_Layer: 0
   m_Name: System
   m_TagString: Untagged
@@ -1812,6 +1836,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+--- !u!114 &526566800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4165101100904714648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c73c1ab94e28d244827af556dca1ed2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoreStartedOverGui: 1
+  IgnoreIsOverGui: 0
+  RequiredFingerCount: 0
+  RequiredSelectable: {fileID: 0}
+  Camera: {fileID: 0}
+  WheelSensitivity: 0
+  Relative: 0
+  ScaleClamp: 0
+  ScaleMin: {x: 0, y: 0, z: 0}
+  ScaleMax: {x: 0, y: 0, z: 0}
 --- !u!1 &4586585514693157069
 GameObject:
   m_ObjectHideFlags: 0
@@ -2250,7 +2296,7 @@ GameObject:
   - component: {fileID: 6648657553991646707}
   - component: {fileID: 9154395109889832718}
   - component: {fileID: 5225967498690391302}
-  - component: {fileID: 5116613656741082346}
+  - component: {fileID: 7605165627951476195}
   m_Layer: 0
   m_Name: 2D Sprite (1)
   m_TagString: Untagged
@@ -2370,7 +2416,7 @@ MonoBehaviour:
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
   onClick: []
---- !u!114 &5116613656741082346
+--- !u!114 &7605165627951476195
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2379,7 +2425,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6936758418863417755}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1cd57f82704cc94c9f0bb2b2be8ee1f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e9c021a760127e48b205da15c2a0241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7942277616278621404

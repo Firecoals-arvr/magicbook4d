@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FireCoals.Space
+namespace Firecoals.Space
 {
     public class ShowPanelUI : DefaultTrackableEventHandler
     {
@@ -18,6 +18,7 @@ namespace FireCoals.Space
         {
             base.OnTrackingFound();
             NGUITools.SetActive(gameObject.transform.GetChild(0).transform.GetChild(1).gameObject, true);
+            
         }
         protected override void OnTrackingLost()
         {
