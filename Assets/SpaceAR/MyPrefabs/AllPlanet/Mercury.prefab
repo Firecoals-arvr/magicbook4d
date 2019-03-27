@@ -207,7 +207,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3011
+  startingRenderQueue: 3000
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -252,7 +252,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2112702435
 Transform:
   m_ObjectHideFlags: 0
@@ -480,6 +480,7 @@ GameObject:
   - component: {fileID: 1470839912802461345}
   - component: {fileID: 4074703889155872461}
   - component: {fileID: 6444452647029116666}
+  - component: {fileID: 785199158}
   m_Layer: 0
   m_Name: Info
   m_TagString: Untagged
@@ -541,7 +542,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3011
+  startingRenderQueue: 3000
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -568,6 +569,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &785199158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546594907600585824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c73c1ab94e28d244827af556dca1ed2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoreStartedOverGui: 1
+  IgnoreIsOverGui: 0
+  RequiredFingerCount: 0
+  RequiredSelectable: {fileID: 0}
+  Camera: {fileID: 0}
+  WheelSensitivity: 0
+  Relative: 0
+  ScaleClamp: 0
+  ScaleMin: {x: 0, y: 0, z: 0}
+  ScaleMax: {x: 0, y: 0, z: 0}
 --- !u!1 &1601154308264001136
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,7 +795,7 @@ GameObject:
   - component: {fileID: 5055028643367258335}
   - component: {fileID: 7277509965219880015}
   - component: {fileID: 1773372012129102287}
-  - component: {fileID: 6596579886174157214}
+  - component: {fileID: 8657831615545711001}
   m_Layer: 0
   m_Name: 2D Sprite
   m_TagString: Untagged
@@ -892,7 +915,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 35, y: 10, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6596579886174157214
+--- !u!114 &8657831615545711001
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -901,7 +924,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1667772591456259522}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1cd57f82704cc94c9f0bb2b2be8ee1f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e9c021a760127e48b205da15c2a0241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3866373138594886498
@@ -1259,11 +1282,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 575867527595432692}
@@ -1289,7 +1312,7 @@ GameObject:
   - component: {fileID: 5737141546547341062}
   - component: {fileID: 4198343986332303030}
   - component: {fileID: 2506251496410715132}
-  - component: {fileID: 5570478357931368713}
+  - component: {fileID: 7536877369471923181}
   m_Layer: 0
   m_Name: 2D Sprite (1)
   m_TagString: Untagged
@@ -1409,7 +1432,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 35, y: 10, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5570478357931368713
+--- !u!114 &7536877369471923181
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1418,7 +1441,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5696500158208177908}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1cd57f82704cc94c9f0bb2b2be8ee1f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e9c021a760127e48b205da15c2a0241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5944152269849896088
@@ -1433,7 +1456,7 @@ GameObject:
   - component: {fileID: 8051849801877359408}
   - component: {fileID: 1260827797356409106}
   - component: {fileID: 1780391423002954301}
-  - component: {fileID: 873076207851584379}
+  - component: {fileID: 6753881447419126299}
   m_Layer: 0
   m_Name: 2D Sprite (1)
   m_TagString: Untagged
@@ -1553,7 +1576,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 35, y: 10, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &873076207851584379
+--- !u!114 &6753881447419126299
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1562,7 +1585,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5944152269849896088}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1cd57f82704cc94c9f0bb2b2be8ee1f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e9c021a760127e48b205da15c2a0241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6259776453135495395
@@ -1785,11 +1808,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 8523553554824573660}
@@ -2341,7 +2364,7 @@ Transform:
   m_GameObject: {fileID: 7908422358354463862}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 322023714408070554}
   - {fileID: 1982734672}
@@ -2604,11 +2627,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 8618100492710777374}
@@ -2695,7 +2718,7 @@ GameObject:
   m_Component:
   - component: {fileID: 322023714408070554}
   - component: {fileID: 6193167871892805103}
-  - component: {fileID: 2340153749974596432}
+  - component: {fileID: 7532796232170362244}
   m_Layer: 0
   m_Name: System
   m_TagString: Untagged
@@ -2735,7 +2758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
---- !u!114 &2340153749974596432
+--- !u!114 &7532796232170362244
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
