@@ -4,7 +4,7 @@ using UnityEngine;
 using Vuforia;
 using UnityEngine.UI;
 
-namespace FireCoals.Space
+namespace Firecoals.Space
 {
     public class ChangeAnim : MonoBehaviour
     {

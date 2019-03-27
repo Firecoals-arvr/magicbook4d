@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FireCoals.Space
+namespace Firecoals.Space
 {
     public class RotateAround : MonoBehaviour
     {
@@ -15,7 +15,6 @@ namespace FireCoals.Space
 
             float rotX = Input.GetAxis("Mouse X") * rotSpeed * Mathf.Deg2Rad;
             transform.Rotate(Autorun.defaultvt3, -rotX);
-
         }
     }
 }
