@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Firecoals.Space
 {
-    public class SpilitPlanet : MonoBehaviour
+    public class SpilitPlanet : DefaultTrackableEventHandler
     {
         /// <summary>
         /// nút tách hành tinh
@@ -13,12 +13,16 @@ namespace Firecoals.Space
 
         private GameObject[] planet;
         private GameObject[] _parentPlanet;
-        bool check = false;
+
+        /// <summary>
+        /// check trạng thái đóng/mở của hành tinh
+        /// </summary>
+        static bool isOpen;
 
         // Start is called before the first frame update
-        private void Start()
+        protected override void Start()
         {
-            check = true;
+            isOpen = false;
             NGUITools.SetActive(spilitButton, false);
         }
 
@@ -33,7 +37,7 @@ namespace Firecoals.Space
 
         private void SetActiveSpilitButton()
         {
-            if (CheckIfObjectIsPlanet() == true)
+            if (IsOpenIfObjectIsPlanet() == true)
             {
                 NGUITools.SetActive(spilitButton, true);
             }
@@ -43,8 +47,8 @@ namespace Firecoals.Space
             }
         }
 
-        //check object on scene is planet, spilitbutton must be deactive
-        private bool CheckIfObjectIsPlanet()
+        //isOpen object on scene is planet, spilitbutton must be deactive
+        private bool IsOpenIfObjectIsPlanet()
         {
             for (int i = 0; i < planet.Length; i++)
             {
@@ -57,31 +61,19 @@ namespace Firecoals.Space
             return false;
         }
 
-        //protected override void OnTrackingFound()
-        //{
-        //    base.OnTrackingFound();
-        //    check = false;
-        //}
-
-        //protected override void OnTrackingLost()
-        //{
-        //    base.OnTrackingLost();
-        //    check = true;
-        //}
-
         /// <summary>
         /// mở/đóng hành tinh
         /// </summary>
         void RunAnimationOpenPlanet()
         {
-            if (check == true)
+            if (isOpen == false)
             {
                 for (int i = 0; i < planet.Length; i++)
                 {
                     if (planet[i].gameObject.transform.parent.name == _parentPlanet[i].name)
                     {
                         planet[i].GetComponent<Animation>().Play("Open");
-                        check = false;
+                        isOpen = true;
                     }
                 }
             }
@@ -92,7 +84,7 @@ namespace Firecoals.Space
                     if (planet[i].gameObject.transform.parent.name == _parentPlanet[i].name)
                     {
                         planet[i].GetComponent<Animation>().Play("Close");
-                        check = true;
+                        isOpen = false;
                     }
                 }
             }

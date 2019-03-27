@@ -13,12 +13,8 @@ namespace Firecoals.Space
         //public Button bt;
         void Start()
         {
-
             anim.GetComponent<Animator>();
-
         }
-
-
 
         public void OpenAnim()
         {
