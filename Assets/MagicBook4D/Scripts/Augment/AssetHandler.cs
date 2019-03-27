@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Firecoals.AssetBundles;
@@ -70,7 +71,7 @@ namespace Firecoals.Augmentation
 
                     Content.Create(goTemplate, TargetContent.ContentType.Unique);
                     spawnedObject.Add(bundlePath, goTemplate);
-                    Debug.LogWarning("unique object created");
+                    Debug.LogWarning("<color=green>unique object created</color>");
                     return goTemplate;
                 }
                 else
@@ -94,15 +95,13 @@ namespace Firecoals.Augmentation
         /// <returns></returns>
         public GameObject CreateClone(string bundleName, string bundlePath)
         {
-            Debug.LogWarning("prepare Create unique game object");
-            GameObject goTemplate;
             if (assetBundlesLoader.bundles.ContainsKey(bundleName))
             {
-                IBundle bundle = assetBundlesLoader.bundles[bundleName];
-                goTemplate = bundle.LoadAsset<GameObject>(bundlePath);
+                var bundle = assetBundlesLoader.bundles[bundleName];
+                var goTemplate = bundle.LoadAsset<GameObject>(bundlePath);
                 var clone = Content.Create(goTemplate, TargetContent.ContentType.Clone);
                 spawnedObject.Add(bundlePath, goTemplate);
-                Debug.LogWarning("unique object created");
+                Debug.LogWarning("<color=green>clone object created</color>");
                 return goTemplate;
             }
             else
@@ -111,10 +110,34 @@ namespace Firecoals.Augmentation
                 return null;
             }
         }
-
+        /// <summary>
+        /// Create random a GameObject in a list bundle paths as clone
+        /// </summary>
+        /// <param name="bundleName"></param>
+        /// <param name="bundlePaths"></param>
+        /// <returns></returns>
+        public GameObject CreateRandom(string bundleName, string[] bundlePaths)
+        {
+            var bundlePath = bundlePaths[new System.Random().Next(0, bundlePaths.Length)];
+            if (assetBundlesLoader.bundles.ContainsKey(bundleName))
+            {
+                var bundle = assetBundlesLoader.bundles[bundleName];
+                var goTemplate = bundle.LoadAsset<GameObject>(bundlePath);
+                var clone = Content.Create(goTemplate, TargetContent.ContentType.Clone);
+                //spawnedObject.Add(bundlePath, goTemplate);
+                Debug.LogWarning("<color=green>clone random object created</color>");
+                return goTemplate;
+            }
+            else
+            {
+                Debug.LogError("Can not create null game object, Please wait for load asset bundle is done!");
+                return null;
+            }
+        }
         public void ClearAll()
         {
             spawnedObject?.Clear();
+            
         }
         #endregion
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 using Vuforia;
 using UnityEngine.UI;
 
-namespace FireCoals.Space
+namespace Firecoals.Space
 {
     public class ChangeAnim : MonoBehaviour
     {
@@ -13,12 +13,8 @@ namespace FireCoals.Space
         //public Button bt;
         void Start()
         {
-
             anim.GetComponent<Animator>();
-
         }
-
-
 
         public void OpenAnim()
         {

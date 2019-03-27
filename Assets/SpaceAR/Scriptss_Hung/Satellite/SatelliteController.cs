@@ -2,53 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SatelliteController : MonoBehaviour
+namespace Firecoals.Space
 {
-    private Animation anim;
-    private bool stt = false;
-
-    // Use this for initialization
-    void Start()
+    public class SatelliteController : MonoBehaviour
     {
-        anim = GetComponent<Animation>();
-    }
+        private Animation anim;
+        private bool stt = false;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
+        // Use this for initialization
+        void Start()
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            anim = GetComponent<Animation>();
+        }
 
-            if (Physics.Raycast(ray, out RaycastHit hit))
+        // Update is called once per frame
+        void Update()
+        {
+            if (Input.GetMouseButtonDown(0))
             {
-                // Debug.Log(hit.transform.name);
-                if (hit.transform.tag == "vetinh")
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out RaycastHit hit))
                 {
-                    anim.Play("open");
+                    // Debug.Log(hit.transform.name);
+                    if (hit.transform.tag == "vetinh")
+                    {
+                        anim.Play("open");
+                    }
                 }
             }
         }
-    }
 
-    public void Armode()
-    {
-        anim.Play("close");
-        stt = false;
-    }
-
-    public void Spilit()
-    {
-        if (stt == false)
+        public void Armode()
         {
-            anim.Play("spilit");
-            stt = true;
-        }
-        else
-        {
-            anim.Play("closespilit");
+            anim.Play("close");
             stt = false;
         }
 
+        public void Spilit()
+        {
+            if (stt == false)
+            {
+                anim.Play("spilit");
+                stt = true;
+            }
+            else
+            {
+                anim.Play("closespilit");
+                stt = false;
+            }
+
+        }
     }
 }

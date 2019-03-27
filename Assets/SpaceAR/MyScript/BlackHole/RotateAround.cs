@@ -15,7 +15,6 @@ namespace Firecoals.Space
 
             float rotX = Input.GetAxis("Mouse X") * rotSpeed * Mathf.Deg2Rad;
             transform.Rotate(Autorun.defaultvt3, -rotX);
-
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FireCoals.Space
+namespace Firecoals.Space
 {
     public class Clickzoomplanet : MonoBehaviour
     {
@@ -16,9 +16,8 @@ namespace FireCoals.Space
         public GameObject Venusinfor;
         public GameObject Uranusinfor;
         public GameObject Mecuryinfor;
-        public GameObject Suninfor;
-        [SerializeField]
-        private GameObject DialogAligment;
+        //public GameObject //Suninfor;
+
         void Start()
         {
 
@@ -64,7 +63,7 @@ namespace FireCoals.Space
                             Venusinfor.SetActive(false);
                             Uranusinfor.SetActive(false);
                             Mecuryinfor.SetActive(false);
-                            Suninfor.SetActive(false);
+                            //Suninfor.SetActive(false);
                             break;
                         case "Jupiter":
                             Jupiterinfor.SetActive(true);
@@ -75,7 +74,7 @@ namespace FireCoals.Space
                             Venusinfor.SetActive(false);
                             Uranusinfor.SetActive(false);
                             Mecuryinfor.SetActive(false);
-                            Suninfor.SetActive(false);
+                            //Suninfor.SetActive(false);
                             break;
                         case "Neptune":
                             Neptuneinfor.SetActive(true);
@@ -86,7 +85,7 @@ namespace FireCoals.Space
                             Venusinfor.SetActive(false);
                             Uranusinfor.SetActive(false);
                             Mecuryinfor.SetActive(false);
-                            Suninfor.SetActive(false);
+                            //Suninfor.SetActive(false);
                             break;
                         case "Saturn":
                             Saturninfor.SetActive(true);
@@ -97,7 +96,7 @@ namespace FireCoals.Space
                             Venusinfor.SetActive(false);
                             Uranusinfor.SetActive(false);
                             Mecuryinfor.SetActive(false);
-                            Suninfor.SetActive(false);
+                            //Suninfor.SetActive(false);
                             break;
                         case "Mars":
                             Marsinfor.SetActive(true);
@@ -108,7 +107,7 @@ namespace FireCoals.Space
                             Venusinfor.SetActive(false);
                             Uranusinfor.SetActive(false);
                             Mecuryinfor.SetActive(false);
-                            Suninfor.SetActive(false);
+                            //Suninfor.SetActive(false);
                             break;
                         case "Venus":
                             Venusinfor.SetActive(true);
@@ -119,7 +118,7 @@ namespace FireCoals.Space
                             Marsinfor.SetActive(false);
                             Uranusinfor.SetActive(false);
                             Mecuryinfor.SetActive(false);
-                            Suninfor.SetActive(false);
+                            //Suninfor.SetActive(false);
                             break;
                         case "Mercury":
                             Mecuryinfor.SetActive(true);
@@ -130,7 +129,7 @@ namespace FireCoals.Space
                             Marsinfor.SetActive(false);
                             Venusinfor.SetActive(false);
                             Uranusinfor.SetActive(false);
-                            Suninfor.SetActive(false);
+                            //Suninfor.SetActive(false);
                             break;
                         case "Uranus":
                             Uranusinfor.SetActive(true);
@@ -141,10 +140,10 @@ namespace FireCoals.Space
                             Marsinfor.SetActive(false);
                             Venusinfor.SetActive(false);
                             Mecuryinfor.SetActive(false);
-                            Suninfor.SetActive(false);
+                            //Suninfor.SetActive(false);
                             break;
                         case "Sun":
-                            Suninfor.SetActive(true);
+                            //Suninfor.SetActive(true);
                             Uranusinfor.SetActive(false);
                             Earthinfor.SetActive(false);
                             Jupiterinfor.SetActive(false);
@@ -174,7 +173,7 @@ namespace FireCoals.Space
                     Venusinfor.SetActive(false);
                     Uranusinfor.SetActive(false);
                     Mecuryinfor.SetActive(false);
-                    Suninfor.SetActive(false);
+                    //Suninfor.SetActive(false);
                     if (temp != null)
                     {
                         temp.transform.localScale -= new Vector3(0.04f, 0.04f, 0.04f);
@@ -198,9 +197,9 @@ namespace FireCoals.Space
                 Venusinfor.SetActive(true);
                 Uranusinfor.SetActive(true);
                 Mecuryinfor.SetActive(true);
-                Suninfor.SetActive(true);
+                //Suninfor.SetActive(true);
                 statusaligment = true;
-                DialogAligment.SetActive(true);
+                //DialogAligment.SetActive(true);
             }
             else
             {
@@ -212,9 +211,9 @@ namespace FireCoals.Space
                 Venusinfor.SetActive(false);
                 Uranusinfor.SetActive(false);
                 Mecuryinfor.SetActive(false);
-                Suninfor.SetActive(false);
+                //Suninfor.SetActive(false);
                 statusaligment = false;
-                DialogAligment.SetActive(false);
+                //DialogAligment.SetActive(false);
             }
         }
 

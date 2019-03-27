@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Firecoals.Augmentation
 {
     public class TargetContent
-    {
+    {   //TODO
         /// <summary>
         /// List of content under a image target
         /// There are 2 list: CLONE & UNIQUE

@@ -2,29 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FireCoals.Space
+namespace Firecoals.Space
 {
     public class SpilitPlanet : DefaultTrackableEventHandler
     {
+        /// <summary>
+        /// nút tách hành tinh
+        /// </summary>
         [SerializeField] GameObject spilitButton;
+
         private GameObject[] planet;
         private GameObject[] _parentPlanet;
-        bool check = false;
+
+        /// <summary>
+        /// check trạng thái đóng/mở của hành tinh
+        /// </summary>
+        static bool isOpen;
 
         // Start is called before the first frame update
         protected override void Start()
         {
-            planet = GameObject.FindGameObjectsWithTag("childplanet");
-            _parentPlanet = GameObject.FindGameObjectsWithTag("Planet");
-            check = true;
+            isOpen = false;
             NGUITools.SetActive(spilitButton, false);
         }
 
         // Update is called once per frame
         void Update()
         {
+            planet = GameObject.FindGameObjectsWithTag("childplanet");
+            _parentPlanet = GameObject.FindGameObjectsWithTag("Planet");
             AutoClick();
-            if (CheckIfObjectIsPlanet() == false)
+            SetActiveSpilitButton();
+        }
+
+        private void SetActiveSpilitButton()
+        {
+            if (IsOpenIfObjectIsPlanet() == true)
             {
                 NGUITools.SetActive(spilitButton, true);
             }
@@ -34,60 +47,33 @@ namespace FireCoals.Space
             }
         }
 
-        //check object on scene is planet, spilitbutton must be deactive
-        private bool CheckIfObjectIsPlanet()
+        //isOpen object on scene is planet, spilitbutton must be deactive
+        private bool IsOpenIfObjectIsPlanet()
         {
-            //foreach (var objectInactive in planet)
-            //{
-            //    if (objectInactive.activeInHierarchy == true)
-            //    {
-            //        return false;
-            //    }
-            //    else
-            //        return true;
-            //}
-
             for (int i = 0; i < planet.Length; i++)
             {
                 if (_parentPlanet[i].activeInHierarchy == true)
                 {
-                    return false;
+                    return true;
                 }
                 //return true;
             }
-            return true;
+            return false;
         }
 
-        protected override void OnTrackingFound()
-        {
-            //base.OnTrackingFound();
-            //if (CheckIfObjectIsPlanet() == false)
-            //{
-            //    NGUITools.SetActive(spilitButton, true);
-            //}
-            //else
-            //{
-            //    NGUITools.SetActive(spilitButton, false);
-            //}
-            check = false;
-        }
-
-        protected override void OnTrackingLost()
-        {
-            base.OnTrackingLost();
-            check = true;
-        }
-
+        /// <summary>
+        /// mở/đóng hành tinh
+        /// </summary>
         void RunAnimationOpenPlanet()
         {
-            if (check == true)
+            if (isOpen == false)
             {
                 for (int i = 0; i < planet.Length; i++)
                 {
                     if (planet[i].gameObject.transform.parent.name == _parentPlanet[i].name)
                     {
                         planet[i].GetComponent<Animation>().Play("Open");
-                        check = false;
+                        isOpen = true;
                     }
                 }
             }
@@ -98,7 +84,7 @@ namespace FireCoals.Space
                     if (planet[i].gameObject.transform.parent.name == _parentPlanet[i].name)
                     {
                         planet[i].GetComponent<Animation>().Play("Close");
-                        check = true;
+                        isOpen = false;
                     }
                 }
             }
