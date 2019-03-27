@@ -22,11 +22,7 @@ namespace Firecoals.Space
             NGUITools.SetActive(gameObject.transform.GetChild(0).transform.GetChild(1).gameObject, true);
 
             
-            if (gameObject.transform.childCount > 0)
-            {
-                gameObject.transform.GetChild(0).GetChild(0).GetChild(5).GetComponent<BoxCollider>().enabled = false;
-                gameObject.transform.GetChild(0).GetChild(0).GetChild(1).GetChild(0).GetChild(0).GetComponent<BoxCollider>().enabled = false;
-            }
+            
         }
         protected override void OnTrackingLost()
         {
