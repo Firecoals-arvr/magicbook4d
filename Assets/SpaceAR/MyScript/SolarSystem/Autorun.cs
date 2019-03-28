@@ -13,6 +13,8 @@ namespace Firecoals.Space
         void Start()
         {
             //defaultvt3 = new Vector3(0, 1, 0);
+            Debug.Log("center + " +center.name + center.transform.position);
+            Debug.Log("this + " + gameObject.name + transform.position);
         }
 
         // Update is called once per frame
@@ -20,7 +22,7 @@ namespace Firecoals.Space
         {
             //transform.Rotate(center.transform.position);
             transform.RotateAround(center.transform.position, Vector3.up, speed * 10 * Time.deltaTime);
-
+            //transform.RotateAround(Vector3.zero, Vector3.up, speed * 10 * Time.deltaTime);
         }
     }
 }

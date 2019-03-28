@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FireCoals.Space
+namespace Firecoals.Space
 {
     public class Game2Controller : MonoBehaviour
     {
@@ -76,6 +76,7 @@ namespace FireCoals.Space
         {
             if (questionNumber < 10)
             {
+                Debug.LogError("gameO = " + gameO.name);
                 if (gameO.transform.childCount == 0)
                 {
                     questionNumber++;
