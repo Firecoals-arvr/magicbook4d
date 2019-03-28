@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace FireCoals.Space
+namespace Firecoals.Space
 {
     public class PlayerExample : MonoBehaviour
     {

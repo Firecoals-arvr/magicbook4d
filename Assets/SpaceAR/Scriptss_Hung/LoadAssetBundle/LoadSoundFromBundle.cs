@@ -20,11 +20,10 @@ namespace Firecoals.Space
             IBundle audioBundle = assetLoader.bundles["space/sound/name/en"];
             AudioSource audiosrc = GetComponent<AudioSource>();
             ISoundManifestLoader soundLoader = new SoundManifestLoader();
-            var soundManifest = soundLoader.LoadSync(Application.streamingAssetsPath + "/AnimalAudioClip.json");
+            var soundManifest = soundLoader.LoadSync(Application.streamingAssetsPath + "/MagicAudioSpace.json");
             var bundlePath = soundManifest.soundInfos[1].PathBundle;
-            AudioClip audioclip = audioBundle.LoadAsset<AudioClip>(soundManifest.soundInfos[1].PathBundle);
-            audiosrc.clip = audioclip;
-            audiosrc.Play();
+            AudioClip audioClip = audioBundle.LoadAsset<AudioClip>(soundManifest.soundInfos[1].PathBundle);
+            FirecoalsSoundManager.PlayMusic(audioClip);
         }
 
         // Update is called once per frame

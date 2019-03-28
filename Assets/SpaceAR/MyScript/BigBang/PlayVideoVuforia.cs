@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace FireCoals.Space
+namespace Firecoals.Space
 {
     public class PlayVideoVuforia : DefaultTrackableEventHandler
     {

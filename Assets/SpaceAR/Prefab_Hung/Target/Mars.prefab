@@ -75,8 +75,6 @@ GameObject:
   - component: {fileID: 1186590737}
   - component: {fileID: 1186590740}
   - component: {fileID: 1186590739}
-  - component: {fileID: 1186590741}
-  - component: {fileID: 1186590742}
   - component: {fileID: 7915444126761222723}
   m_Layer: 0
   m_Name: Phobos
@@ -144,33 +142,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &1186590741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186590736}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f86465692539a2649a022898d692ac1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 7
---- !u!114 &1186590742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186590736}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7decf5ee2ef3f5d4aa04ee2697d61d93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentPlanet: {fileID: 7984261363502689429}
-  speed: 20
 --- !u!135 &7915444126761222723
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -195,8 +166,6 @@ GameObject:
   - component: {fileID: 1802625018}
   - component: {fileID: 1802625021}
   - component: {fileID: 1802625020}
-  - component: {fileID: 1802625022}
-  - component: {fileID: 1802625023}
   - component: {fileID: 996629112474337615}
   m_Layer: 0
   m_Name: Deimos
@@ -264,33 +233,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &1802625022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1802625017}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f86465692539a2649a022898d692ac1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 7
---- !u!114 &1802625023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1802625017}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7decf5ee2ef3f5d4aa04ee2697d61d93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentPlanet: {fileID: 7984261363502689429}
-  speed: 15
 --- !u!135 &996629112474337615
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3412,7 +3354,7 @@ Transform:
   - {fileID: 7406144750935962932}
   - {fileID: 902074656726353565}
   m_Father: {fileID: 2520959540273206986}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 99.93201, z: 0}
 --- !u!111 &5052677821130244116
 Animation:
@@ -3648,6 +3590,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.181, z: 0}
   m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
   m_Children:
+  - {fileID: 6303416441101879584}
   - {fileID: 2638600683770997243}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -4514,13 +4457,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6129049043837376022}
-  m_LocalRotation: {x: 5.688518e-11, y: 2.4844477e-21, z: 4.367478e-11, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -1.4132825e-31, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 372547807453305536}
-  m_Father: {fileID: 7406144750935962932}
-  m_RootOrder: 7
+  m_Father: {fileID: 2520959540273206986}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1197048409627942476
 MonoBehaviour:
@@ -4561,7 +4504,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3001
+  startingRenderQueue: 3000
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -5336,7 +5279,6 @@ Transform:
   - {fileID: 1092358859}
   - {fileID: 628132334}
   - {fileID: 245120198744226405}
-  - {fileID: 6303416441101879584}
   m_Father: {fileID: 2638600683770997243}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5713,7 +5655,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3002
+  startingRenderQueue: 3000
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
