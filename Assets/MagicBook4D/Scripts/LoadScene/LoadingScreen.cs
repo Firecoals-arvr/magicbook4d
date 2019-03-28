@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 public class LoadingScreen : MonoBehaviour
 {
     #region PRIVATE_MEMBER_VARIABLES
-    UI2DSprite m_SpinnerImage;
-    AsyncOperation m_AsyncOperation;
-    bool m_SceneReadyToActivate;
+
+    private UI2DSprite m_SpinnerImage;
+    private AsyncOperation m_AsyncOperation;
+    private bool m_SceneReadyToActivate;
     #endregion // PRIVATE_MEMBER_VARIABLES
 
     #region PUBLIC_MEMBER_VARIABLES
@@ -21,14 +22,15 @@ public class LoadingScreen : MonoBehaviour
     }
 
     #region MONOBEHAVIOUR_METHODS
-    void Start()
+
+    private void Start()
     {
 		m_SpinnerImage = GetComponentInChildren<UI2DSprite>();
         Application.backgroundLoadingPriority = ThreadPriority.Low;
         StartCoroutine(LoadNextSceneAsync());
     }
 
-    void Update()
+    private void Update()
     {
         if (m_SpinnerImage)
         {
@@ -59,7 +61,8 @@ public class LoadingScreen : MonoBehaviour
 
 
     #region PRIVATE_METHODS
-    IEnumerator LoadNextSceneAsync()
+
+    private IEnumerator LoadNextSceneAsync()
     {
         //int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
 

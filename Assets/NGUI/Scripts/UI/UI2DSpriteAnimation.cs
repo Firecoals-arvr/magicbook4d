@@ -12,31 +12,31 @@ using UnityEngine;
 public class UI2DSpriteAnimation : MonoBehaviour
 {
 	/// <summary>
-	/// Index of the current frame in the sprite animation.
+	/// Index of the current frame in the sprite anim.
 	/// </summary>
 
 	public int frameIndex = 0;
 
 	/// <summary>
-	/// How many frames there are in the animation per second.
+	/// How many frames there are in the anim per second.
 	/// </summary>
 
 	[SerializeField] protected int framerate = 20;
 
 	/// <summary>
-	/// Should this animation be affected by time scale?
+	/// Should this anim be affected by time scale?
 	/// </summary>
 
 	public bool ignoreTimeScale = true;
 
 	/// <summary>
-	/// Should this animation be looped?
+	/// Should this anim be looped?
 	/// </summary>
 
 	public bool loop = true;
 
 	/// <summary>
-	/// Actual sprites used for the animation.
+	/// Actual sprites used for the anim.
 	/// </summary>
 
 	public UnityEngine.Sprite[] frames;
@@ -46,7 +46,7 @@ public class UI2DSpriteAnimation : MonoBehaviour
 	float mUpdate = 0f;
 
 	/// <summary>
-	/// Returns is the animation is still playing or not
+	/// Returns is the anim is still playing or not
 	/// </summary>
 
 	public bool isPlaying { get { return enabled; } }
@@ -58,7 +58,7 @@ public class UI2DSpriteAnimation : MonoBehaviour
 	public int framesPerSecond { get { return framerate; } set { framerate = value; } }
 
 	/// <summary>
-	/// Continue playing the animation. If the animation has reached the end, it will restart from beginning
+	/// Continue playing the anim. If the anim has reached the end, it will restart from beginning
 	/// </summary>
 
 	public void Play ()
@@ -78,13 +78,13 @@ public class UI2DSpriteAnimation : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Pause the animation.
+	/// Pause the anim.
 	/// </summary>
 
 	public void Pause () { enabled = false; }
 
 	/// <summary>
-	/// Reset the animation to the beginning.
+	/// Reset the anim to the beginning.
 	/// </summary>
 
 	public void ResetToBeginning ()
@@ -94,13 +94,13 @@ public class UI2DSpriteAnimation : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Start playing the animation right away.
+	/// Start playing the anim right away.
 	/// </summary>
 
 	void Start () { Play(); }
 
 	/// <summary>
-	/// Advance the animation as necessary.
+	/// Advance the anim as necessary.
 	/// </summary>
 
 	void Update ()

@@ -1,0 +1,77 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Firecoals.Augmentation;
+
+namespace Firecoals.Color
+{
+	public class TestTrackHandler : DefaultTrackableEventHandler
+	{
+		AssetHandler handler;
+		public string[] cloudBundlePaths;
+		public GameObject renderCam;
+		private InstantiationAsync instantiation;
+		protected override void Start()
+		{
+			base.Start();
+			handler = new AssetHandler(mTrackableBehaviour.transform);
+			//instantiation = GameObject.FindObjectOfType<InstantiationAsync>();
+		}
+
+		protected override void OnDestroy()
+		{
+			base.OnDestroy();
+		}
+
+
+		protected override void OnTrackingFound()
+		{
+			GameObject go = handler.CreateUnique("color/model/maybay", "Assets/ColorAR/Prefabs/MayBay_Group.prefab");
+			if (go)
+			{
+				GameObject maybay = Instantiate(go, mTrackableBehaviour.transform);
+				CreateCloud(maybay.transform);
+				List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
+				maybay.GetComponentsInChildren<RC_Get_Texture>(true, lst);
+				foreach (var child in lst)
+				{
+					child.RenderCamera = renderCam.GetComponent<Camera>();
+				}
+			}
+			base.OnTrackingFound();
+		}
+		protected override void OnTrackingLost()
+		{
+			handler?.ClearAll();
+			handler?.Content.ClearAll();
+			foreach (Transform trans in mTrackableBehaviour.transform)
+			{
+				Destroy(trans.gameObject);
+			}
+			base.OnTrackingLost();
+		}
+
+		public void Checking()
+		{
+			//handler.Content
+		}
+
+		public void CreateCloud(Transform parent)
+		{
+			//for(int i = 0; i < cloudNumbers; i++)
+			//{
+			//	GameObject cloud = handler.CreateRandom("color/model/cloud/maybay", cloudBundlePaths);
+			//	Instantiate(cloud, parent.transform.GetChild(1));
+			//}
+
+			GameObject cloud_1 = handler.CreateUnique("color/model/cloud/maybay", "Assets/ColorAR/Prefabs/Cloud/Maybay/c1.prefab");
+			Instantiate(cloud_1, parent.transform.GetChild(1));
+			GameObject cloud_2 = handler.CreateUnique("color/model/cloud/maybay", "Assets/ColorAR/Prefabs/Cloud/Maybay/c2.prefab");
+			Instantiate(cloud_2, parent.transform.GetChild(1));
+			GameObject cloud_3 = handler.CreateUnique("color/model/cloud/maybay", "Assets/ColorAR/Prefabs/Cloud/Maybay/c3.prefab");
+			Instantiate(cloud_3, parent.transform.GetChild(1));
+			GameObject cloud_4 = handler.CreateUnique("color/model/cloud/maybay", "Assets/ColorAR/Prefabs/Cloud/Maybay/c4.prefab");
+			Instantiate(cloud_4, parent.transform.GetChild(1));
+		}
+	}
+}

@@ -96,7 +96,7 @@ public abstract class UITweener : MonoBehaviour
 	public bool useFixedUpdate = false;
 
 	/// <summary>
-	/// Event delegates called when the animation finishes.
+	/// Event delegates called when the anim finishes.
 	/// </summary>
 
 	[HideInInspector]
@@ -107,7 +107,7 @@ public abstract class UITweener : MonoBehaviour
 	[HideInInspector] public string callWhenFinished;
 
 	/// <summary>
-	/// Custom time scale for this tween, if desired. Can be used to slow down or speed up the animation.
+	/// Custom time scale for this tween, if desired. Can be used to slow down or speed up the anim.
 	/// </summary>
 
 	[System.NonSerialized] public float timeScale = 1f;
@@ -297,7 +297,7 @@ public abstract class UITweener : MonoBehaviour
 	void OnDisable () { mStarted = false; }
 
 	/// <summary>
-	/// Immediately finish the tween animation, if it's active.
+	/// Immediately finish the tween anim, if it's active.
 	/// </summary>
 
 	public void Finish ()

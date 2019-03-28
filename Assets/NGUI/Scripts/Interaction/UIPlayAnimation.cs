@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using AnimationOrTween;
 
 /// <summary>
-/// Play the specified animation on click.
+/// Play the specified anim on click.
 /// </summary>
 
 [ExecuteInEditMode]
@@ -18,7 +18,7 @@ public class UIPlayAnimation : MonoBehaviour
 	static public UIPlayAnimation current = null;
 
 	/// <summary>
-	/// Target animation to activate.
+	/// Target anim to activate.
 	/// </summary>
 
 	public Animation target;
@@ -30,13 +30,13 @@ public class UIPlayAnimation : MonoBehaviour
 	public Animator animator;
 
 	/// <summary>
-	/// Optional clip name, if the animation has more than one clip.
+	/// Optional clip name, if the anim has more than one clip.
 	/// </summary>
 
 	public string clipName;
 
 	/// <summary>
-	/// Which event will trigger the animation.
+	/// Which event will trigger the anim.
 	/// </summary>
 
 	public Trigger trigger = Trigger.OnClick;
@@ -48,13 +48,13 @@ public class UIPlayAnimation : MonoBehaviour
 	public Direction playDirection = Direction.Forward;
 
 	/// <summary>
-	/// Whether the animation's position will be reset on play or will continue from where it left off.
+	/// Whether the anim's position will be reset on play or will continue from where it left off.
 	/// </summary>
 
 	public bool resetOnPlay = false;
 
 	/// <summary>
-	/// Whether the selected object (this button) will be cleared when the animation gets activated.
+	/// Whether the selected object (this button) will be cleared when the anim gets activated.
 	/// </summary>
 
 	public bool clearSelection = false;
@@ -66,13 +66,13 @@ public class UIPlayAnimation : MonoBehaviour
 	public EnableCondition ifDisabledOnPlay = EnableCondition.DoNothing;
 
 	/// <summary>
-	/// What to do with the target when the animation finishes.
+	/// What to do with the target when the anim finishes.
 	/// </summary>
 
 	public DisableCondition disableWhenFinished = DisableCondition.DoNotDisable;
 
 	/// <summary>
-	/// Event delegates called when the animation finishes.
+	/// Event delegates called when the anim finishes.
 	/// </summary>
 
 	public List<EventDelegate> onFinished = new List<EventDelegate>();
@@ -241,13 +241,13 @@ public class UIPlayAnimation : MonoBehaviour
 	}
 	
 	/// <summary>
-	/// Start playing the animation.
+	/// Start playing the anim.
 	/// </summary>
 
 	public void Play (bool forward) { Play(forward, true); }
 
 	/// <summary>
-	/// Start playing the animation.
+	/// Start playing the anim.
 	/// </summary>
 
 	public void Play (bool forward, bool onlyIfDifferent)

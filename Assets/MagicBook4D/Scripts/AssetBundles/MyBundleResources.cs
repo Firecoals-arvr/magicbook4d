@@ -1,11 +1,8 @@
 ﻿using Loxodon.Framework.Bundles;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 namespace Firecoals.AssetBundles
 {
-    public abstract class MyBundleResources: MonoBehaviour
+    public abstract class MyBundleResources
     {
         protected IResources resources;
         protected virtual IResources GetResources()

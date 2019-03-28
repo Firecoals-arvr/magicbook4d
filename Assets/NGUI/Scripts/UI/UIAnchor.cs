@@ -77,7 +77,7 @@ public class UIAnchor : MonoBehaviour
 	{
 		mTrans = transform;
 #if UNITY_4_3 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7
-		mAnim = animation;
+		mAnim = anim;
 #else
 		mAnim = GetComponent<Animation>();
 #endif

@@ -244,10 +244,10 @@ public class TweenLetters : UITweener
 			float lengthPerLetter = duration / letterCount;
 			float flippedOverlap = 1f - mCurrent.overlap;
 
-			// Figure out how long the animation will be taking into account overlapping letters.
+			// Figure out how long the anim will be taking into account overlapping letters.
 			float totalDuration = lengthPerLetter * letterCount * flippedOverlap;
 
-			// Scale the smaller total running time back up to the requested animation time.
+			// Scale the smaller total running time back up to the requested anim time.
 			float letterDuration = ScaleRange(lengthPerLetter, totalDuration + lengthPerLetter * mCurrent.overlap, duration);
 
 			float offset = 0;
