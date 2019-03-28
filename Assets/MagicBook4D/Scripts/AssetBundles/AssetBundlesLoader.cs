@@ -21,11 +21,13 @@ namespace Firecoals.AssetBundles
         {
             return base.GetResources();
         }
+
         /// <summary>
         /// Load GameObject
         /// </summary>
         /// <param name="name"></param>
-        public void LoadAsset(string name)
+        /// <param name="parent"></param>
+        public void LoadAsset(string name, Transform parent)
         {
             var resources = this.GetResources();
             IProgressResult<float, GameObject> result = resources.LoadAssetAsync<GameObject>(name);
@@ -36,7 +38,7 @@ namespace Firecoals.AssetBundles
                     if (r.Exception != null)
                         throw r.Exception;
 
-                    GameObject.Instantiate(r.Result, new Vector3(Random.Range(-1, 1), Random.Range(-1, 1)), Quaternion.identity);
+                    GameObject.Instantiate(r.Result, parent);
                 }
                 catch (Exception e)
                 {
@@ -112,7 +114,7 @@ namespace Firecoals.AssetBundles
             IProgressResult<float, IBundle[]> result = resources.LoadBundle(bundleNames, priority);
             result.Callbackable().OnProgressCallback(p =>
             {
-                Debug.LogFormat("PreLoading {0:F1}%", (p*100).ToString());
+                Debug.LogFormat("PreLoading {0:F1}%", (p * 100).ToString());
             });
             yield return result.WaitForDone();
 
