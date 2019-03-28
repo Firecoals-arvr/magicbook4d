@@ -76,6 +76,7 @@ namespace Firecoals.Space
         {
             if (questionNumber < 10)
             {
+                Debug.LogError("gameO = " + gameO.name);
                 if (gameO.transform.childCount == 0)
                 {
                     questionNumber++;

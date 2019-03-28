@@ -18,7 +18,6 @@ namespace Firecoals.Space
             AssetBundlesLoader assetLoader = new AssetBundlesLoader();
 
             IBundle audioBundle = assetLoader.bundles["space/sound/name/en"];
-            AudioSource audiosrc = GetComponent<AudioSource>();
             ISoundManifestLoader soundLoader = new SoundManifestLoader();
             var soundManifest = soundLoader.LoadSync(Application.streamingAssetsPath + "/MagicAudioSpace.json");
             var bundlePath = soundManifest.soundInfos[1].PathBundle;

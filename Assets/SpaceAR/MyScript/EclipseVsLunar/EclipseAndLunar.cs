@@ -9,53 +9,78 @@ namespace Firecoals.Space
         public Animator anim;
         bool isLunar, isEclipse;
         public GameObject moon;
-
+        public GameObject earth;
         private void Start()
         {
-            isEclipse = true;
-            isLunar = true;
-        }
+            anim.GetComponent<Animator>().enabled = false;
 
-        public void Eclise()
-        {
-            if(isEclipse == true)
-            {
-                isLunar = false;
-                anim.SetTrigger("SetEclipse");
-            }else
-            {
-                anim.SetTrigger("EclipseClose");
-            }
-            isEclipse = !isEclipse;
+            isLunar = true;
+            isEclipse = true;
         }
-        public void Lunar()
+        public void Eclipse()
         {
+
+            anim.GetComponent<Animator>().enabled = true;
             if (isEclipse == true)
             {
+                earth.transform.localRotation = Quaternion.identity;
+                moon.GetComponent<Autorun>().enabled = false;
+                moon.GetComponent<SelfRotate>().enabled = false;
+                earth.GetComponent<Autorun>().enabled = false;
+                earth.GetComponent<SelfRotate>().enabled = false;
                 
                 anim.SetTrigger("SetEclipse");
+                StartCoroutine(WaitASecond("EclipseOpen", new Quaternion(0, 0, 0,0),9f));
+
             }
             else
             {
                 anim.SetTrigger("EclipseClose");
+                StartCoroutine(WaitForEndAnim());
+                moon.GetComponent<Autorun>().enabled = true;
+                moon.GetComponent<SelfRotate>().enabled = true;
+                earth.GetComponent<Autorun>().enabled = true;
+                earth.GetComponent<SelfRotate>().enabled = true;
             }
             isEclipse = !isEclipse;
-
         }
-        //private void OnTriggerEnter(Collider other)
-        //{
-        //    Debug.Log("other = " + other.name);
-        //    if (other.tag == "Player")
-        //    {
-        //        other.GetComponent<Autorun>().enabled = false;
-        //        other.GetComponent<SelfRotate>().enabled = false;
-        //        moon.GetComponent<BoxCollider>().enabled = true;
-        //    }
-        //    if (other.name == "Planet")
-        //    {
-        //        moon.GetComponent<Autorun>().enabled = false;
-        //    }
-        //}
+
+        public void Lunar()
+        {
+            anim.GetComponent<Animator>().enabled = true;
+            if (isLunar == true)
+            {
+                earth.transform.localRotation = Quaternion.identity;
+                moon.GetComponent<Autorun>().enabled = false;
+                moon.GetComponent<SelfRotate>().enabled = false;
+                earth.GetComponent<Autorun>().enabled = false;
+                earth.GetComponent<SelfRotate>().enabled = false;
+                anim.SetTrigger("SetLunar");
+                StartCoroutine(WaitASecond("LunarOpen", new Quaternion(0, 180, 0,0),9.2f));
+
+            }
+            else
+            {
+                anim.SetTrigger("LunarClose");
+                StartCoroutine(WaitForEndAnim());
+                moon.GetComponent<Autorun>().enabled = true;
+                moon.GetComponent<SelfRotate>().enabled = true;
+                earth.GetComponent<Autorun>().enabled = true;
+                earth.GetComponent<SelfRotate>().enabled = true;
+            }
+            isLunar = !isLunar;
+        }
+        IEnumerator WaitASecond(string name, Quaternion a,float time)
+        {
+            yield return new WaitForSeconds(time);
+            earth.transform.localRotation = a;
+            anim.SetTrigger(name);
+        }
+        IEnumerator WaitForEndAnim()
+        {
+            yield return new WaitForSeconds(1f);
+            anim.GetComponent<Animator>().enabled = false;
+        }
 
     }
 }

@@ -7,10 +7,14 @@ namespace Firecoals.Space
 {
     public class PlayVideoVuforia : DefaultTrackableEventHandler
     {
-        public UnityEngine.Video.VideoPlayer video;
+        UnityEngine.Video.VideoPlayer video;
         protected override void Start()
         {
             base.Start();
+            if (transform.childCount > 0)
+            {
+                video =  gameObject.transform.GetChild(1).GetComponent<UnityEngine.Video.VideoPlayer>();
+            }
         }
         protected override void OnDestroy()
         {
