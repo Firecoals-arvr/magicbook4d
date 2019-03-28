@@ -21,10 +21,12 @@ namespace Firecoals.AssetBundles
         {
             return base.GetResources();
         }
+
         /// <summary>
         /// Load GameObject
         /// </summary>
         /// <param name="name"></param>
+        /// <param name="parent"></param>
         public void LoadAsset(string name, Transform parent )
         {
             var resources = this.GetResources();
