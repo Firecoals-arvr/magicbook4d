@@ -2,9 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using Firecoals.Augmentation;
 using Loxodon.Framework.Asynchronous;
 using Loxodon.Framework.Bundles;
 using UnityEngine;
+using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace Firecoals.AssetBundles
@@ -102,7 +104,7 @@ namespace Firecoals.AssetBundles
         /// <returns></returns>
         public IEnumerator Preload(string[] bundleNames, int priority)
         {
-            var myResources = GetResources();
+            var myResources = GameObject.FindObjectOfType<AssetLoader>().Resources;//= GetResources();
             IProgressResult<float, IBundle[]> result = myResources.LoadBundle(bundleNames, priority);
             result.Callbackable().OnProgressCallback(p =>
             {
