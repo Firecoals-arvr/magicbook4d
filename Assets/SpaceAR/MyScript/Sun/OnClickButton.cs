@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Vuforia;
 
-namespace FireCoals.Space
+namespace Firecoals.Space
 {
     public class OnClickButton : IVirtualButtonEventHandler
     {

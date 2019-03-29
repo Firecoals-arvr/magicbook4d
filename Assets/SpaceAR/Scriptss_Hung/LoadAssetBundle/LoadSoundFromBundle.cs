@@ -12,14 +12,17 @@ namespace Firecoals.Space
     /// </summary>
     public class LoadSoundFromBundle : MonoBehaviour
     {
+        public string[] bundleName;
+
         // Start is called before the first frame update
-        void Start()
+        IEnumerator Start()
         {
             AssetBundlesLoader assetLoader = new AssetBundlesLoader();
+            yield return assetLoader.Preload(bundleName, 1);
 
             IBundle audioBundle = assetLoader.bundles["space/sound/name/en"];
             ISoundManifestLoader soundLoader = new SoundManifestLoader();
-            var soundManifest = soundLoader.LoadSync(Application.streamingAssetsPath + "/AnimalAudioClip.json");
+            var soundManifest = soundLoader.LoadSync(Application.streamingAssetsPath + "/MagicAudioSpace.json");
             var bundlePath = soundManifest.soundInfos[1].PathBundle;
             AudioClip audioClip = audioBundle.LoadAsset<AudioClip>(soundManifest.soundInfos[1].PathBundle);
             FirecoalsSoundManager.PlayMusic(audioClip);

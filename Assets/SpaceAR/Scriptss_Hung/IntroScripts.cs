@@ -4,6 +4,9 @@ using UnityEngine;
 using Firecoals.Augmentation;
 using System;
 using Firecoals.AssetBundles;
+using Loxodon.Framework.Bundles;
+using Loxodon.Framework.Contexts;
+using Firecoals.AssetBundles.Sound;
 
 namespace Firecoals.Space
 {
@@ -22,14 +25,21 @@ namespace Firecoals.Space
         /// </summary>
         public string path;
 
+        /// <summary>
+        /// đường dẫn sound
+        /// </summary>
+
         private AssetHandler assethandler;
         //private InstantiationAsync asyncObj;
+        //private IResources resources;
         //private AssetBundlesLoader loader;
         protected override void Start()
         {
             base.Start();
             //asyncObj = GameObject.FindObjectOfType<InstantiationAsync>();
             assethandler = new AssetHandler(mTrackableBehaviour.transform);
+            //ApplicationContext context = Context.GetApplicationContext();
+            //resources = context.GetService<IResources>();
         }
 
         protected override void OnDestroy()
@@ -41,6 +51,7 @@ namespace Firecoals.Space
         {
             var statTime = DateTime.Now;
             var go = assethandler.CreateUnique(objName, path);
+            //GameObject goTemplate = resources.LoadAsset<GameObject>("Assets/SpaceAR/MyPrefabs/AllPlanet/solarSystem.prefab");
             Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
             if (go != null)
             {

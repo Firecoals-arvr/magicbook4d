@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 
-namespace FireCoals.Space
+namespace Firecoals.Space
 {
+    /// <summary>
+    /// chạy các animation của alien
+    /// </summary>
     public class PlayerExample : MonoBehaviour
     {
-
         public float moveSpeed;
-        public GameObject AlienChild;
+        public GameObject alienChild;
         public Joystick joystick;
         Animation anima;
         AudioSource Audio;
@@ -15,7 +17,7 @@ namespace FireCoals.Space
         void Start()
         {
             Audio = GetComponent<AudioSource>();
-            anima = AlienChild.GetComponent<Animation>();
+            anima = alienChild.GetComponent<Animation>();
         }
 
         void Update()
@@ -24,9 +26,9 @@ namespace FireCoals.Space
             transform.Translate(moveVector * moveSpeed * Time.deltaTime * transform.localScale.x);
             if (moveVector != Vector3.zero)
             {
-                AlienChild.transform.rotation = Quaternion.LookRotation(moveVector * moveSpeed * Time.deltaTime);
+                alienChild.transform.rotation = Quaternion.LookRotation(moveVector * moveSpeed * Time.deltaTime);
                 anima.Play("Walking");
-                AlienChild.GetComponent<AudioSource>().Stop();
+                alienChild.GetComponent<AudioSource>().Stop();
             }
             else
             {
@@ -34,6 +36,8 @@ namespace FireCoals.Space
                     anima.Stop();
                 if (anima.isPlaying == false)
                     anima.Play("Idle");
+                if (anima.IsPlaying("Dance"))
+                    anima.Stop();
             }
             if (stt == true)
             {
@@ -42,26 +46,28 @@ namespace FireCoals.Space
             }
         }
 
-        // trang thai xuat hien
+        /// <summary>
+        /// check trạng thái xuất hiện
+        /// </summary>
         public bool stt = false;
 
         public void AlienTalk()
         {
             anima.Play("Talking");
             Audio.Play();
-            AlienChild.GetComponent<AudioSource>().Stop();
+            alienChild.GetComponent<AudioSource>().Stop();
         }
 
         public void AlienDance()
         {
             anima.Play("Dance");
-            AlienChild.GetComponent<AudioSource>().Play();
+            alienChild.GetComponent<AudioSource>().Play();
         }
 
         public void AlienIntro()
         {
             anima.Play("Jump");
-            AlienChild.GetComponent<AudioSource>().Stop();
+            alienChild.GetComponent<AudioSource>().Stop();
         }
     }
 }
