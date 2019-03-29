@@ -2,10 +2,10 @@
 using System;
 namespace Firecoals.AssetBundles
 {
-    public abstract class MyBundleResources
+    public class MyBundleResources : IBundleResource
     {
         protected IResources resources;
-        protected virtual IResources GetResources()
+        public virtual IResources GetResources()
         {
             if (this.resources != null)
                 return this.resources;
