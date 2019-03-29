@@ -25,7 +25,7 @@ namespace Firecoals.AssetBundles
             IPathInfoParser pathInfoParser = new AutoMappingPathInfoParser(manifest);
 
             /* Use a custom BundleLoaderBuilder */
-            ILoaderBuilder builder = new CustomBundleLoaderBuilder(new Uri(BundleUtil.GetReadOnlyDirectory()), false);
+            ILoaderBuilder builder = new CustomBundleLoaderBuilder(new Uri(BundleUtil.GetStorableDirectory()), false);
 
             /* Create a BundleManager */
             IBundleManager manager = new BundleManager(manifest, builder);

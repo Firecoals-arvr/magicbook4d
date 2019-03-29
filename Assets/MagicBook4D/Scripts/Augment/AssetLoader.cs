@@ -73,7 +73,7 @@ namespace  Firecoals.Augmentation
                 //RijndaelCryptograph rijndaelCryptograph = new RijndaelCryptograph(128, Encoding.ASCII.GetBytes(this.key), Encoding.ASCII.GetBytes(this.iv));
 
                 /* Use a custom BundleLoaderBuilder */
-                ILoaderBuilder builder = new CustomBundleLoaderBuilder(new Uri(BundleUtil.GetReadOnlyDirectory()), false);
+                ILoaderBuilder builder = new CustomBundleLoaderBuilder(new Uri(BundleUtil.GetStorableDirectory()), false);
 
                 /* Create a BundleManager */
                 IBundleManager manager = new BundleManager(manifest, builder);

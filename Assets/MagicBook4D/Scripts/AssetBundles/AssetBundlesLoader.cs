@@ -15,7 +15,6 @@ namespace Firecoals.AssetBundles
     {
 
         public Dictionary<string, IBundle> bundles = new Dictionary<string, IBundle>();
-
         /// <summary>
         /// Load GameObject
         /// </summary>
@@ -23,6 +22,7 @@ namespace Firecoals.AssetBundles
         /// <param name="parent"></param>
         public void LoadAsset(string name, Transform parent )
         {
+            //TODO Get Resource from AssetLoader
             var myResources = this.GetResources();
             IProgressResult<float, GameObject> result = myResources.LoadAssetAsync<GameObject>(name);
             result.Callbackable().OnCallback((r) =>
@@ -47,6 +47,7 @@ namespace Firecoals.AssetBundles
         /// <returns></returns>
         public UnityEngine.Object LoadAssetObject(string name)
         {
+            //TODO Get Resource from AssetLoader
             var myResources = this.GetResources();
             IProgressResult<float, UnityEngine.Object> result = myResources.LoadAssetAsync<UnityEngine.Object>(name);
             UnityEngine.Object @object = null;
@@ -69,12 +70,13 @@ namespace Firecoals.AssetBundles
             return @object;
         }
         /// <summary>
-        /// Load all Objects of a assetbundle name
+        /// Load all Objects of a asset bundle name
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
         public UnityEngine.Object[] LoadAssetObjects(string name)
         {
+            //TODO Get Resource from AssetLoader
             var myResources = this.GetResources();
             IProgressResult<float, UnityEngine.Object[]> result = myResources.LoadAllAssetsAsync<UnityEngine.Object>(name);
             UnityEngine.Object[] @object = null;
