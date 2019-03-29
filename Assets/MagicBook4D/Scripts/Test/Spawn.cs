@@ -47,6 +47,7 @@ public class Spawn : MonoBehaviour
         //Debug.LogError(soundManifest.soundInfos[0].PathBundle);
 
         UnityEngine.Debug.Log("MeasureByDateTime: " + (DateTime.Now - startTime).Milliseconds);
+
     }
 
 

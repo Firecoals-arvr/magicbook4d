@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Firecoals.AssetBundles.Sound;
+using UnityEngine;
 
 namespace Firecoals.UI
 {
@@ -42,6 +43,7 @@ namespace Firecoals.UI
             model.transform.localScale =new Vector3(x,x,x);
         }
         #endregion
+
     }
 }
 
