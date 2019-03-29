@@ -12,9 +12,7 @@ namespace Firecoals.Space
         // Use this for initialization
         void Start()
         {
-            //defaultvt3 = new Vector3(0, 1, 0);
-            Debug.Log("center + " +center.name + center.transform.position);
-            Debug.Log("this + " + gameObject.name + transform.position);
+            
         }
 
         // Update is called once per frame

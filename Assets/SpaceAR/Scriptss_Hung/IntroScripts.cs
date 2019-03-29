@@ -23,12 +23,12 @@ namespace Firecoals.Space
         public string path;
 
         private AssetHandler assethandler;
-        private InstantiationAsync asyncObj;
+        //private InstantiationAsync asyncObj;
         //private AssetBundlesLoader loader;
         protected override void Start()
         {
             base.Start();
-            asyncObj = GameObject.FindObjectOfType<InstantiationAsync>();
+            //asyncObj = GameObject.FindObjectOfType<InstantiationAsync>();
             assethandler = new AssetHandler(mTrackableBehaviour.transform);
         }
 

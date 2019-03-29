@@ -11,10 +11,7 @@ namespace Firecoals.Space
         protected override void Start()
         {
             base.Start();
-            if (transform.childCount > 0)
-            {
-                video =  gameObject.transform.GetChild(1).GetComponent<UnityEngine.Video.VideoPlayer>();
-            }
+
         }
         protected override void OnDestroy()
         {
@@ -23,12 +20,22 @@ namespace Firecoals.Space
         protected override void OnTrackingFound()
         {
             base.OnTrackingFound();
-            video.Play();
+            if (transform.childCount > 0)
+            {
+                video = gameObject.transform.GetChild(1).GetComponent<UnityEngine.Video.VideoPlayer>();
+                video.Play();
+            }
+            else
+            {
+
+            }
+
         }
         protected override void OnTrackingLost()
         {
             base.OnTrackingLost();
-            video.Stop();
+            if (video != null)
+                video.Stop();
         }
     }
 }
