@@ -19,8 +19,9 @@ namespace Firecoals.Space
 
         public void CallUFO()
         {
-            if (alAnim.IsPlaying("Dancing"))
+            if (alAnim.IsPlaying("Dance"))
             {
+                alAnim.Stop("Dance");
                 this.gameObject.GetComponent<Animation>().Play("AlienReturnToUFO");
             }
             else

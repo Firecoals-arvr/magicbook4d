@@ -12,10 +12,13 @@ namespace Firecoals.Space
     /// </summary>
     public class LoadSoundFromBundle : MonoBehaviour
     {
+        public string[] bundleName;
+
         // Start is called before the first frame update
-        void Start()
+        IEnumerator Start()
         {
             AssetBundlesLoader assetLoader = new AssetBundlesLoader();
+            yield return assetLoader.Preload(bundleName, 1);
 
             IBundle audioBundle = assetLoader.bundles["space/sound/name/en"];
             ISoundManifestLoader soundLoader = new SoundManifestLoader();
