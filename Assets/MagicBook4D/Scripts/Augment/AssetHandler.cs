@@ -39,17 +39,6 @@ namespace Firecoals.Augmentation
         public AssetHandler() { }
 
         #endregion
-        #region PRIVATE_METHOD
-        public static IEnumerator PreLoad(string bundleRoot, string[] bundleNames)
-        {
-            BundleSetting bundleSettings = new BundleSetting(bundleRoot);
-            assetBundlesLoader = new AssetBundlesLoader();
-            /*Preload asset bundle*/
-
-            yield return assetBundlesLoader.Preload(bundleNames, 1);
-        }
-
-        #endregion
         #region PUBLIC_METHOD
 
         /// <summary>
