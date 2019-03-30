@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Firecoals.Space
 {
+    /// <summary>
+    /// class này để chạy video 
+    /// </summary>
     public class PlayVideoVuforia : DefaultTrackableEventHandler
     {
         UnityEngine.Video.VideoPlayer video;
@@ -20,6 +23,7 @@ namespace Firecoals.Space
         protected override void OnTrackingFound()
         {
             base.OnTrackingFound();
+            // nếu chưa lật đến trang bigbang thì ko cho chạy video
             if (transform.childCount > 0)
             {
                 video = gameObject.transform.GetChild(1).GetComponent<UnityEngine.Video.VideoPlayer>();

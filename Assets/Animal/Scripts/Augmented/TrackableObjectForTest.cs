@@ -32,7 +32,7 @@ public class TrackableObjectForTest : DefaultTrackableEventHandler
         //GameObject go = assetHandler.CreateUnique("animals/model/bear", "Assets/Animal/GetPreFab/Bear.prefab");
         // sinh game object 
         // note : bỏ assets/ nếu ko sẽ bị lỗi 
-        GameObject go = _resources.LoadAsset<GameObject>("Assets/Animal/GetPreFab/Bear.prefab") as GameObject;
+        GameObject go = _resources.LoadAsset<GameObject>("Animal/GetPreFab/Bear.prefab") as GameObject;
         if(go)
             GameObject.Instantiate(go, mTrackableBehaviour.transform);
     }

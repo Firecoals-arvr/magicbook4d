@@ -30,16 +30,11 @@ namespace Firecoals.Space
         /// </summary>
 
         private AssetHandler assethandler;
-        //private InstantiationAsync asyncObj;
-        //private IResources resources;
-        //private AssetBundlesLoader loader;
+
         protected override void Start()
         {
             base.Start();
-            //asyncObj = GameObject.FindObjectOfType<InstantiationAsync>();
             assethandler = new AssetHandler(mTrackableBehaviour.transform);
-            //ApplicationContext context = Context.GetApplicationContext();
-            //resources = context.GetService<IResources>();
         }
 
         protected override void OnDestroy()
@@ -51,18 +46,14 @@ namespace Firecoals.Space
         {
             var statTime = DateTime.Now;
             var go = assethandler.CreateUnique(objName, path);
-            //GameObject goTemplate = resources.LoadAsset<GameObject>("Assets/SpaceAR/MyPrefabs/AllPlanet/solarSystem.prefab");
             Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
             if (go != null)
             {
                 var startTime = DateTime.Now;
                 Instantiate(go, mTrackableBehaviour.transform);
-                //asyncObj.InstantiateAsync(go, mTrackableBehaviour.transform, 50);
-                //loader.LoadAsset("Assets/SpaceAR/MyPrefabs/AllPlanet/solarSystem.prefab", mTrackableBehaviour.transform);
                 Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
-
-                //asyncObj.InstantiateAsync(go, mTrackableBehaviour.transform, delayTimeInMillisecond: 1);
             }
+
             //RunAnimationIntro();
             base.OnTrackingFound();
         }
@@ -74,7 +65,6 @@ namespace Firecoals.Space
 
             foreach (Transform go in mTrackableBehaviour.transform)
             {
-                //asyncObj.DestroyAfterSpawnInSecond(go.gameObject, 0.5f);
                 Destroy(go.gameObject);
             }
             base.OnTrackingLost();

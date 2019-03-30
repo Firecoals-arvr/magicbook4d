@@ -5,6 +5,10 @@ using Lean.Touch;
 
 namespace Firecoals.Space
 {
+    /// <summary>
+    /// class này dùng để kéo các hành tinh trong solar system
+    /// sử dụng lean scale để drag multiple planet
+    /// </summary>
     public class DragObject : MonoBehaviour
     {
         LeanSelectable leanSelect;
@@ -13,6 +17,7 @@ namespace Firecoals.Space
         private void Start()
         {
             leanSelect = gameObject.GetComponent<LeanSelectable>();
+            // truyền sự kiện khi chạm, bỏ chạm hoặc chạm vào hành tinh khác 
             leanSelect.OnSelect.AddListener((p) => SelectObject());
             leanSelect.OnDeselect.AddListener(() => DeSelectObject());
             leanSelect.OnSelectUp.AddListener((a) => SelectUp());
@@ -23,20 +28,7 @@ namespace Firecoals.Space
         void Update()
         {
             
-            //if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved)
-            //{
-            //    // create ray from the camera and passing through the touch position:
-            //    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-            //    // create a logical plane at this object's position
-            //    // and perpendicular to world Y:
-            //    Plane plane = new Plane(Vector3.up, transform.position);
-            //    float distance = 0; // this will return the distance from the camera
-            //    if (plane.Raycast(ray, out distance))
-            //    { // if plane hit...
-            //        Vector3 pos = ray.GetPoint(distance); // get the point
-            //        transform.position = pos; // pos has the position in the plane you've touched
-            //    }
-            //}
+            
 
         }
 
@@ -44,30 +36,47 @@ namespace Firecoals.Space
         public void SelectObject()
         {
             Debug.Log("<color=red>dragable object: " + gameObject.name + transform.position + "</color>");
+            // khi chạm vào hành tinh thì cho to nó lên
             transform.localScale += new Vector3(0.05f, 0.05f, 0.05f);
+            // khóa trục y khi chạm vào hành tinh
             transform.localPosition = new Vector3(0, 0, transform.localPosition.z);
         }
         public void DeSelectObject()
         {
+            //khi chạm vào hành tinh khác thì cho hành tinh đó nhỏ xuống
             transform.localScale -= new Vector3(0.05f, 0.05f, 0.05f);
         }
+        /// <summary>
+        /// khi bỏ tay ra khỏi hành tinh có 2 trường hợp
+        /// th1 là khi đưa hành tinh vào hành tinh "?"
+        /// th2 là khi đag kéo mà bỏ tay ra khi chưa kéo hành tinh vào trong hành tinh "?"
+        /// </summary>
         public void SelectUp()
         {
+            
+            //th1
             if (touchObject == true)
             {
                 touchObject = false;
             }
+            //th2 
             else
             {
                 this.gameObject.transform.localPosition = new Vector3(0, 0, 0);
             }
         }
+        /// <summary>
+        /// check va chạm 
+        /// </summary>
+        /// <param name="other"></param>
         private void OnTriggerEnter(Collider other)
         {
 
             Debug.Log("<color=green>other object: " + other.name + other.transform.position + "</color>");
+            // nếu chạm vào các hành tinh "?"
             if (other.tag == "planetcontainer")
             {
+                // nếu hành tinh "?" chưa có thằng nào ở trong
                 if (other.transform.childCount == 0)
                 {
                     touchObject = true;
@@ -75,6 +84,7 @@ namespace Firecoals.Space
                     transform.parent = other.gameObject.transform;
                     gameObject.transform.localScale = new Vector3(2f, 2f, 2f);
                 }
+                // ngược lại
                 else
                 {
                     var temp = other.transform.GetChild(0);

@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Firecoals.Space
 {
+    /// <summary>
+    /// class này để check điểm
+    /// </summary>
     public class Game1Controller : MonoBehaviour
     {
         public GameObject game1, playBT, panelFail, panelTotal;

@@ -34,8 +34,7 @@ public class Spawn : MonoBehaviour
         AudioClip audioClip = bundleAudioClip.LoadAsset<AudioClip>(soundManifest.soundInfos[5].PathBundle);
         audioSource.clip = audioClip;
         audioSource.Play();
-        // play music để play nhạc background còn play sound để play nhạc đọc info hoặc name
-        //FirecoalsSoundManager.PlayMusic(audioClip);
+        
 
         ///* Green and Red */
         //GameObject[] goTemplates = assetBundles.FindResource().LoadAssets<GameObject>("Animal/GetPreFab/Frog.prefab", "Assets/Animal/GetPreFab/Rabbit.prefab");
