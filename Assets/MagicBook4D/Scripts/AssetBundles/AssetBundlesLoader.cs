@@ -11,9 +11,8 @@ using Random = UnityEngine.Random;
 
 namespace Firecoals.AssetBundles
 {
-    public class AssetBundlesLoader : MyBundleResources
+    public class AssetBundlesLoader : MonoBehaviour
     {
-
         public Dictionary<string, IBundle> bundles = new Dictionary<string, IBundle>();
 
         /// <summary>
@@ -21,9 +20,10 @@ namespace Firecoals.AssetBundles
         /// </summary>
         /// <param name="name"></param>
         /// <param name="parent"></param>
-        public void LoadAsset(string name, Transform parent )
+        public void LoadAsset(string name, Transform parent)
         {
-            var myResources = this.GetResources();
+            var myResources = GameObject.FindObjectOfType<AssetLoader>().Resources;//this.GetResources();
+
             IProgressResult<float, GameObject> result = myResources.LoadAssetAsync<GameObject>(name);
             result.Callbackable().OnCallback((r) =>
             {
@@ -47,7 +47,8 @@ namespace Firecoals.AssetBundles
         /// <returns></returns>
         public UnityEngine.Object LoadAssetObject(string name)
         {
-            var myResources = this.GetResources();
+            //var myResources = this.GetResources();
+            var myResources = GameObject.FindObjectOfType<AssetLoader>().Resources;
             IProgressResult<float, UnityEngine.Object> result = myResources.LoadAssetAsync<UnityEngine.Object>(name);
             UnityEngine.Object @object = null;
 
@@ -75,7 +76,7 @@ namespace Firecoals.AssetBundles
         /// <returns></returns>
         public UnityEngine.Object[] LoadAssetObjects(string name)
         {
-            var myResources = this.GetResources();
+            var myResources = GameObject.FindObjectOfType<AssetLoader>().Resources;//this.GetResources();
             IProgressResult<float, UnityEngine.Object[]> result = myResources.LoadAllAssetsAsync<UnityEngine.Object>(name);
             UnityEngine.Object[] @object = null;
             result.Callbackable().OnCallback((r) =>
@@ -108,7 +109,7 @@ namespace Firecoals.AssetBundles
             IProgressResult<float, IBundle[]> result = myResources.LoadBundle(bundleNames, priority);
             result.Callbackable().OnProgressCallback(p =>
             {
-                Debug.LogFormat("PreLoading {0:F1}%", (p*100).ToString(CultureInfo.InvariantCulture));
+                Debug.LogFormat("PreLoading {0:F1}%", (p * 100).ToString(CultureInfo.InvariantCulture));
             });
             yield return result.WaitForDone();
 

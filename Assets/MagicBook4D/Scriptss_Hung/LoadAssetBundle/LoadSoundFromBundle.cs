@@ -10,28 +10,22 @@ namespace Firecoals.Space
     /// <summary>
     /// load âm thanh từ bundles
     /// </summary>
-    public class LoadSoundFromBundle : MonoBehaviour
+    public class LoadSoundFromBundle : AssetBundlesLoader
     {
-        public string[] bundleName;
+        SoundManifest soundManifest;
 
-        // Start is called before the first frame update
-        IEnumerator Start()
+        public void LoadJson()
         {
-            AssetBundlesLoader assetLoader = new AssetBundlesLoader();
-            yield return assetLoader.Preload(bundleName, 1);
-
-            IBundle audioBundle = assetLoader.bundles["space/sound/name/en"];
+            IBundle audioBundle = this.bundles["space/sound/name/en"];
             ISoundManifestLoader soundLoader = new SoundManifestLoader();
-            var soundManifest = soundLoader.LoadSync(Application.streamingAssetsPath + "/MagicAudioSpace.json");
+            soundManifest = soundLoader.LoadSync(Application.streamingAssetsPath + "/MagicAudioSpace.json");
             var bundlePath = soundManifest.soundInfos[1].PathBundle;
-            AudioClip audioClip = audioBundle.LoadAsset<AudioClip>(soundManifest.soundInfos[1].PathBundle);
-            FirecoalsSoundManager.PlayMusic(audioClip);
+            Debug.Log("jsonfile loaded");
         }
-
-        // Update is called once per frame
-        void Update()
+        public void PLayX()
         {
-
+            AudioClip audioClip = this.LoadAssetObject(soundManifest.soundInfos[1].PathBundle) as AudioClip;
+            FirecoalsSoundManager.PlayMusic(audioClip);
         }
     }
 }

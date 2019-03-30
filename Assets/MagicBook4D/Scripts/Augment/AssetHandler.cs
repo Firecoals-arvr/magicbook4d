@@ -137,7 +137,7 @@ namespace Firecoals.Augmentation
         public void ClearAll()
         {
             spawnedObject?.Clear();
-            
+
         }
         #endregion
     }
