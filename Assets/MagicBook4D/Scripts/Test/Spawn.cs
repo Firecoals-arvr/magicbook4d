@@ -34,6 +34,7 @@ public class Spawn : MonoBehaviour
         AudioClip audioClip = bundleAudioClip.LoadAsset<AudioClip>(soundManifest.soundInfos[5].PathBundle);
         audioSource.clip = audioClip;
         audioSource.Play();
+        
 
         ///* Green and Red */
         //GameObject[] goTemplates = assetBundles.FindResource().LoadAssets<GameObject>("Animal/GetPreFab/Frog.prefab", "Assets/Animal/GetPreFab/Rabbit.prefab");

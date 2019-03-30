@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Firecoals.Space
 {
+    /// <summary>
+    /// class này để chạy animation của blackhole
+    /// </summary>
     public class PlayAnimBlackHole : MonoBehaviour
     {
         public Animator anim;

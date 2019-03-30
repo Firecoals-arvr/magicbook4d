@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FireCoals.Space
+namespace Firecoals.Space
 {
-    public class LookAtCamera : MonoBehaviour
+    public class LookAtCamera_C : MonoBehaviour
     {
         Quaternion qua;
         // Start is called before the first frame update
