@@ -47,8 +47,8 @@ namespace Firecoals.AssetBundles
         /// <returns></returns>
         public UnityEngine.Object LoadAssetObject(string name)
         {
-            //TODO Get Resource from AssetLoader
-            var myResources = this.GetResources();
+
+            var myResources = GameObject.FindObjectOfType<AssetLoader>().Resources;// this.GetResources();
             IProgressResult<float, UnityEngine.Object> result = myResources.LoadAssetAsync<UnityEngine.Object>(name);
             UnityEngine.Object @object = null;
 
@@ -124,6 +124,7 @@ namespace Firecoals.AssetBundles
             {
                 bundles.Add(bundle.Name, bundle);
             }
+
         }
 
         void OnDestroy()
@@ -135,7 +136,9 @@ namespace Firecoals.AssetBundles
                 bundle.Dispose();
 
             this.bundles = null;
+
         }
+
     }
 }
 
