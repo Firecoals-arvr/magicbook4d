@@ -2,6 +2,9 @@
 
 namespace Loxodon.Framework.Services
 {
+    /// <summary>
+    /// Service for Register instead of Find Object of Type
+    /// </summary>
     public interface IServiceRegistry
     {
         void Register(Type type, object target);

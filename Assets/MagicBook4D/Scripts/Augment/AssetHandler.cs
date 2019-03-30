@@ -12,19 +12,11 @@ namespace Firecoals.Augmentation
     /// </summary>
     public class AssetHandler
     {
-        #region PRIVATE_VARIABLE
-
-        //private TargetContent content;
-
-        #endregion
         #region PUBLIC_VARIABLE
         public static AssetBundlesLoader assetBundlesLoader;
         public Dictionary<string, GameObject> spawnedObject;
         #endregion
         public TargetContent Content { get; }
-        #region PUBLIC_VARIABLE
-
-        #endregion
         #region PUBLIC_CONSTRUCTOR
         /// <summary>
         /// Asset contents under a image target

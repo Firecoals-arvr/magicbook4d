@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Firecoals.AssetBundles;
+using Loxodon.Framework.Asynchronous;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
 using UnityEngine;
@@ -91,6 +92,38 @@ namespace  Firecoals.Augmentation
             }
             return resources;
         }
+
+        /// <summary>
+        /// Load GameObject Asynchronous
+        /// Return an GameObject
+        /// Return null if fail
+        /// </summary>
+        /// <param name="name"></param>
+        public GameObject LoadGameObjectAsync(string name)
+        {
+            IProgressResult<float, GameObject> result = Resources.LoadAssetAsync<GameObject>(name);
+            GameObject tempGameObject = null;
+            result.Callbackable().OnProgressCallback(p =>
+            {
+                Debug.LogFormat(name+"is loading with result :{0}%", p * 100);
+            });
+            result.Callbackable().OnCallback((r) =>
+            {
+                try
+                {
+                    if (r.Exception != null)
+                        throw r.Exception;
+
+                    tempGameObject = r.Result;
+                }
+                catch (Exception e)
+                {
+                    Debug.LogErrorFormat("Load failure.Error:{0}", e);
+                }
+            });
+            return tempGameObject;
+        }
+
     }
 
 }
