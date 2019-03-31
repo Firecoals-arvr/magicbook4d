@@ -72,35 +72,6 @@ namespace Firecoals.AssetBundles
             });
             return @object;
         }
-        /// <summary>
-        /// Load all Objects of a asset bundle name
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public UnityEngine.Object[] LoadAssetObjects(string name)
-        {
-            //TODO Get Resource from AssetLoader DONE
-            //var myResources = GetResources();
-            var myResources = GameObject.FindObjectOfType<AssetLoader>().Resources;
-            IProgressResult<float, UnityEngine.Object[]> result = myResources.LoadAllAssetsAsync<UnityEngine.Object>(name);
-            UnityEngine.Object[] @object = null;
-            result.Callbackable().OnCallback((r) =>
-            {
-                try
-                {
-                    if (r.Exception != null)
-                        throw r.Exception;
-
-                    @object = r.Result;
-
-                }
-                catch (Exception e)
-                {
-                    Debug.LogErrorFormat("Load failure.Error:{0}", e);
-                }
-            });
-            return @object;
-        }
 
         /// <summary>
         /// Preloaded AssetBundle.

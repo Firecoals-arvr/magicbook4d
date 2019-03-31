@@ -29,8 +29,6 @@ namespace Loxodon.Framework.Examples.Bundle
             
             /* Green and Red */
             GameObject[] goTemplates = this.resources.LoadAssets<GameObject>("LoxodonFramework/BundleExamples/Models/Green/Green.prefab", "LoxodonFramework/BundleExamples/Models/Red/Red.prefab");
-            GameObject go =
-                this.resources.LoadAsset<GameObject>("LoxodonFramework/BundleExamples/Models/Green/Green.prefab");
             foreach(GameObject template in goTemplates)
             {
                 GameObject.Instantiate(template);
@@ -67,7 +65,7 @@ namespace Loxodon.Framework.Examples.Bundle
 
             foreach (IBundle bundle in bundles.Values)
                 bundle.Dispose();
-            
+
             this.bundles = null;
         }
 
