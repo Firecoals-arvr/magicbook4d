@@ -18,7 +18,7 @@ namespace Firecoals.Space
         /// <summary>
         /// tên object trong asset bundles
         /// </summary>
-        public string objName;
+        //public string objName;
 
         /// <summary>
         /// đường dẫn của object trong thư mục
@@ -28,12 +28,20 @@ namespace Firecoals.Space
         /// <summary>
         /// đường dẫn sound
         /// </summary>
-
-        private AssetHandler assethandler;
+        private AssetHandler _assethandler;
+        private TestLoadSoundbundles _loadSoundBundles;
+        public int soundNumber;
+        
+        private IResources _resources;
         protected override void Start()
         {
             base.Start();
-            assethandler = new AssetHandler(mTrackableBehaviour.transform);
+            _assethandler = new AssetHandler(mTrackableBehaviour.transform);
+            _loadSoundBundles = GameObject.FindObjectOfType<TestLoadSoundbundles>();
+            ApplicationContext context = Context.GetApplicationContext();
+            this._resources = context.GetService<IResources>();
+
+
         }
 
         protected override void OnDestroy()
@@ -44,23 +52,23 @@ namespace Firecoals.Space
         protected override void OnTrackingFound()
         {
             var statTime = DateTime.Now;
-
-            var go = assethandler.CreateUnique(objName, path);
+            GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;              
             Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
             if (go != null)
             {
                 var startTime = DateTime.Now;
-                Instantiate(go, mTrackableBehaviour.transform);
+                //Instantiate(go, mTrackableBehaviour.transform);
+                GameObject.Instantiate(go, mTrackableBehaviour.transform);
                 Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
             }
-            //RunAnimationIntro();
+            _loadSoundBundles.PlayNameSound(soundNumber);
             base.OnTrackingFound();
         }
 
         protected override void OnTrackingLost()
         {
-            assethandler?.ClearAll();
-            assethandler?.Content.ClearAll();
+            _assethandler?.ClearAll();
+            _assethandler?.Content.ClearAll();
 
             foreach (Transform go in mTrackableBehaviour.transform)
             {
@@ -80,5 +88,6 @@ namespace Firecoals.Space
                 Debug.LogWarning("This object hasn't intro animation.");
             }
         }
+        
     }
 }

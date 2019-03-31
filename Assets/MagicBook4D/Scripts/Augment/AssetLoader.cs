@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Text;
+using System.Collections;
 using Firecoals.AssetBundles;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
@@ -13,7 +13,7 @@ namespace Firecoals.Augmentation
 
         // Start is called before the first frame update
         public string bundleRoot;
-
+        public AssetBundlesLoader assetBundlesLoader = new AssetBundlesLoader();
         public IResources Resources { private set; get; }
         //private string iv = "5Hh2390dQlVh0AqC";
         //private string key = "E4YZgiGQ0aqe5LEJ";
@@ -29,7 +29,15 @@ namespace Firecoals.Augmentation
 
         private void Start()
         {
-            StartCoroutine(AssetHandler.PreLoad(bundleRoot, bundleNames));
+            StartCoroutine(PreLoad());
+        }
+
+        private IEnumerator PreLoad()
+        {
+            BundleSetting bundleSettings = new BundleSetting(bundleRoot);
+            /*Preload asset bundle*/
+
+            yield return assetBundlesLoader.Preload(bundleNames, 1);
         }
         private IResources CreateResources()
         {
@@ -72,7 +80,7 @@ namespace Firecoals.Augmentation
                 //RijndaelCryptograph rijndaelCryptograph = new RijndaelCryptograph(128, Encoding.ASCII.GetBytes(this.key), Encoding.ASCII.GetBytes(this.iv));
 
                 /* Use a custom BundleLoaderBuilder */
-                ILoaderBuilder builder = new CustomBundleLoaderBuilder(new Uri(BundleUtil.GetReadOnlyDirectory()), false);
+                ILoaderBuilder builder = new CustomBundleLoaderBuilder(new Uri(BundleUtil.GetStorableDirectory()), false);
 
                 /* Create a BundleManager */
                 IBundleManager manager = new BundleManager(manifest, builder);

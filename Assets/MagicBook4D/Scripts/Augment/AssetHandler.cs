@@ -18,13 +18,9 @@ namespace Firecoals.Augmentation
 
         #endregion
         #region PUBLIC_VARIABLE
-        public static AssetBundlesLoader assetBundlesLoader;
         public Dictionary<string, GameObject> spawnedObject;
         #endregion
         public TargetContent Content { get; }
-        #region PUBLIC_VARIABLE
-
-        #endregion
         #region PUBLIC_CONSTRUCTOR
         /// <summary>
         /// Asset contents under a image target
@@ -39,17 +35,6 @@ namespace Firecoals.Augmentation
         public AssetHandler() { }
 
         #endregion
-        #region PRIVATE_METHOD
-        public static IEnumerator PreLoad(string bundleRoot, string[] bundleNames)
-        {
-            BundleSetting bundleSettings = new BundleSetting(bundleRoot);
-            assetBundlesLoader = new AssetBundlesLoader();
-            /*Preload asset bundle*/
-
-            yield return assetBundlesLoader.Preload(bundleNames, 1);
-        }
-
-        #endregion
         #region PUBLIC_METHOD
 
         /// <summary>
@@ -59,11 +44,12 @@ namespace Firecoals.Augmentation
         /// <param name="bundlePath"></param>
         public GameObject CreateUnique(string bundleName, string bundlePath)
         {
+            AssetLoader assetLoader = GameObject.FindObjectOfType<AssetLoader>();
             Debug.LogWarning("prepare Create unique game object");
             GameObject goTemplate;
-            if (assetBundlesLoader.bundles.ContainsKey(bundleName))
+            if (assetLoader.assetBundlesLoader.bundles.ContainsKey(bundleName))
             {
-                IBundle bundle = assetBundlesLoader.bundles[bundleName];
+                IBundle bundle = assetLoader.assetBundlesLoader.bundles[bundleName];
                 goTemplate = bundle.LoadAsset<GameObject>(bundlePath);
                 if (!spawnedObject.ContainsKey(bundlePath))
                 {
@@ -95,9 +81,10 @@ namespace Firecoals.Augmentation
         /// <returns></returns>
         public GameObject CreateClone(string bundleName, string bundlePath)
         {
-            if (assetBundlesLoader.bundles.ContainsKey(bundleName))
+            AssetLoader assetLoader = GameObject.FindObjectOfType<AssetLoader>();
+            if (assetLoader.assetBundlesLoader.bundles.ContainsKey(bundleName))
             {
-                var bundle = assetBundlesLoader.bundles[bundleName];
+                var bundle = assetLoader.assetBundlesLoader.bundles[bundleName];
                 var goTemplate = bundle.LoadAsset<GameObject>(bundlePath);
                 var clone = Content.Create(goTemplate, TargetContent.ContentType.Clone);
                 spawnedObject.Add(bundlePath, goTemplate);
@@ -118,10 +105,11 @@ namespace Firecoals.Augmentation
         /// <returns></returns>
         public GameObject CreateRandom(string bundleName, string[] bundlePaths)
         {
+            AssetLoader assetLoader = GameObject.FindObjectOfType<AssetLoader>();
             var bundlePath = bundlePaths[new System.Random().Next(0, bundlePaths.Length)];
-            if (assetBundlesLoader.bundles.ContainsKey(bundleName))
+            if (assetLoader.assetBundlesLoader.bundles.ContainsKey(bundleName))
             {
-                var bundle = assetBundlesLoader.bundles[bundleName];
+                var bundle = assetLoader.assetBundlesLoader.bundles[bundleName];
                 var goTemplate = bundle.LoadAsset<GameObject>(bundlePath);
                 var clone = Content.Create(goTemplate, TargetContent.ContentType.Clone);
                 //spawnedObject.Add(bundlePath, goTemplate);
