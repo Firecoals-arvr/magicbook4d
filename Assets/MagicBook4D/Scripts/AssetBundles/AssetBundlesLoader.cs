@@ -22,8 +22,9 @@ namespace Firecoals.AssetBundles
         /// <param name="parent"></param>
         public GameObject LoadAsset(string name, Transform parent)
         {
-            //TODO Get Resource from AssetLoader
-            var myResources = GetResources();
+            //TODO Get Resource from AssetLoader DONE
+            //var myResources = GetResources();
+            var myResources = GameObject.FindObjectOfType<AssetLoader>().Resources;
             IProgressResult<float, GameObject> result = myResources.LoadAssetAsync<GameObject>(name);
             GameObject tempGameObject = null;
             result.Callbackable().OnCallback((r) =>
@@ -78,8 +79,9 @@ namespace Firecoals.AssetBundles
         /// <returns></returns>
         public UnityEngine.Object[] LoadAssetObjects(string name)
         {
-            //TODO Get Resource from AssetLoader
-            var myResources = GetResources();
+            //TODO Get Resource from AssetLoader DONE
+            //var myResources = GetResources();
+            var myResources = GameObject.FindObjectOfType<AssetLoader>().Resources;
             IProgressResult<float, UnityEngine.Object[]> result = myResources.LoadAllAssetsAsync<UnityEngine.Object>(name);
             UnityEngine.Object[] @object = null;
             result.Callbackable().OnCallback((r) =>
