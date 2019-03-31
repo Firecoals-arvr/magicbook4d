@@ -65,7 +65,7 @@ namespace Loxodon.Framework.Examples.Bundle
 
             foreach (IBundle bundle in bundles.Values)
                 bundle.Dispose();
-            
+
             this.bundles = null;
         }
 

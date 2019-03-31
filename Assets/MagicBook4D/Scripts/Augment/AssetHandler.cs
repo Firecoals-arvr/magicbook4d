@@ -12,19 +12,11 @@ namespace Firecoals.Augmentation
     /// </summary>
     public class AssetHandler
     {
-        #region PRIVATE_VARIABLE
-
-        //private TargetContent content;
-
-        #endregion
         #region PUBLIC_VARIABLE
         public static AssetBundlesLoader assetBundlesLoader;
         public Dictionary<string, GameObject> spawnedObject;
         #endregion
         public TargetContent Content { get; }
-        #region PUBLIC_VARIABLE
-
-        #endregion
         #region PUBLIC_CONSTRUCTOR
         /// <summary>
         /// Asset contents under a image target
@@ -37,17 +29,6 @@ namespace Firecoals.Augmentation
         }
 
         public AssetHandler() { }
-
-        #endregion
-        #region PRIVATE_METHOD
-        public static IEnumerator PreLoad(string bundleRoot, string[] bundleNames)
-        {
-            BundleSetting bundleSettings = new BundleSetting(bundleRoot);
-            assetBundlesLoader = new AssetBundlesLoader();
-            /*Preload asset bundle*/
-
-            yield return assetBundlesLoader.Preload(bundleNames, 1);
-        }
 
         #endregion
         #region PUBLIC_METHOD
@@ -124,7 +105,7 @@ namespace Firecoals.Augmentation
                 var bundle = assetBundlesLoader.bundles[bundleName];
                 var goTemplate = bundle.LoadAsset<GameObject>(bundlePath);
                 var clone = Content.Create(goTemplate, TargetContent.ContentType.Clone);
-                spawnedObject.Add(bundlePath, goTemplate);
+                //spawnedObject.Add(bundlePath, goTemplate);
                 Debug.LogWarning("<color=green>clone random object created</color>");
                 return goTemplate;
             }
@@ -137,6 +118,7 @@ namespace Firecoals.Augmentation
         public void ClearAll()
         {
             spawnedObject?.Clear();
+            
         }
         #endregion
     }
