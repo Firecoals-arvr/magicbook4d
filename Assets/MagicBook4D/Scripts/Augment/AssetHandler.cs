@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Firecoals.AssetBundles;
@@ -11,19 +12,11 @@ namespace Firecoals.Augmentation
     /// </summary>
     public class AssetHandler
     {
-        #region PRIVATE_VARIABLE
-
-        //private TargetContent content;
-
-        #endregion
         #region PUBLIC_VARIABLE
         public static AssetBundlesLoader assetBundlesLoader;
         public Dictionary<string, GameObject> spawnedObject;
         #endregion
         public TargetContent Content { get; }
-        #region PUBLIC_VARIABLE
-
-        #endregion
         #region PUBLIC_CONSTRUCTOR
         /// <summary>
         /// Asset contents under a image target
@@ -36,17 +29,6 @@ namespace Firecoals.Augmentation
         }
 
         public AssetHandler() { }
-
-        #endregion
-        #region PRIVATE_METHOD
-        public static IEnumerator PreLoad(string bundleRoot, string[] bundleNames)
-        {
-            BundleSetting bundleSettings = new BundleSetting(bundleRoot);
-            assetBundlesLoader = new AssetBundlesLoader();
-            /*Preload asset bundle*/
-
-            yield return assetBundlesLoader.Preload(bundleNames, 1);
-        }
 
         #endregion
         #region PUBLIC_METHOD
@@ -70,7 +52,7 @@ namespace Firecoals.Augmentation
 
                     Content.Create(goTemplate, TargetContent.ContentType.Unique);
                     spawnedObject.Add(bundlePath, goTemplate);
-                    Debug.LogWarning("unique object created");
+                    Debug.LogWarning("<color=green>unique object created</color>");
                     return goTemplate;
                 }
                 else
@@ -94,14 +76,13 @@ namespace Firecoals.Augmentation
         /// <returns></returns>
         public GameObject CreateClone(string bundleName, string bundlePath)
         {
-            Debug.LogWarning("prepare Create unique game object");
             if (assetBundlesLoader.bundles.ContainsKey(bundleName))
             {
                 var bundle = assetBundlesLoader.bundles[bundleName];
                 var goTemplate = bundle.LoadAsset<GameObject>(bundlePath);
                 var clone = Content.Create(goTemplate, TargetContent.ContentType.Clone);
                 spawnedObject.Add(bundlePath, goTemplate);
-                Debug.LogWarning("unique object created");
+                Debug.LogWarning("<color=green>clone object created</color>");
                 return goTemplate;
             }
             else
@@ -110,10 +91,34 @@ namespace Firecoals.Augmentation
                 return null;
             }
         }
-
+        /// <summary>
+        /// Create random a GameObject in a list bundle paths as clone
+        /// </summary>
+        /// <param name="bundleName"></param>
+        /// <param name="bundlePaths"></param>
+        /// <returns></returns>
+        public GameObject CreateRandom(string bundleName, string[] bundlePaths)
+        {
+            var bundlePath = bundlePaths[new System.Random().Next(0, bundlePaths.Length)];
+            if (assetBundlesLoader.bundles.ContainsKey(bundleName))
+            {
+                var bundle = assetBundlesLoader.bundles[bundleName];
+                var goTemplate = bundle.LoadAsset<GameObject>(bundlePath);
+                var clone = Content.Create(goTemplate, TargetContent.ContentType.Clone);
+                //spawnedObject.Add(bundlePath, goTemplate);
+                Debug.LogWarning("<color=green>clone random object created</color>");
+                return goTemplate;
+            }
+            else
+            {
+                Debug.LogError("Can not create null game object, Please wait for load asset bundle is done!");
+                return null;
+            }
+        }
         public void ClearAll()
         {
             spawnedObject?.Clear();
+            
         }
         #endregion
     }

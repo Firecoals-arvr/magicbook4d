@@ -50,7 +50,7 @@ namespace Firecoals.Space
         protected override void OnTrackingFound()
         {
             var statTime = DateTime.Now;
-            //  GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;
+             GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;
             Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
             if (go != null)
             {
