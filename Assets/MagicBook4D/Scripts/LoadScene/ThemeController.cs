@@ -25,6 +25,7 @@ public class ThemeController : MonoBehaviour
     {
         Theme = themeName;
         Debug.Log(Theme);
+        LoadingScreen.Run();
     }
     private void AddThemeEvent()
     {

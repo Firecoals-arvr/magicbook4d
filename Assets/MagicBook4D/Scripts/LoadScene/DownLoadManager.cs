@@ -8,6 +8,6 @@ public class DownLoadManager : MonoBehaviour
     private void Start()
     {
         _theme = FindObjectOfType<ThemeController>();
-        Debug.LogWarning();
+        Debug.LogWarning("You're in theme: "+_theme.Theme);
     }
 }
