@@ -30,7 +30,9 @@ namespace Firecoals.Space
         /// </summary>
         private AssetHandler _assethandler;
         private TestLoadSoundbundles _loadSoundBundles;
-        public int soundNumber;
+        //public int soundNumber;
+
+        private LoadSoundFromBundle _soundFromBundles;
 
         private AssetLoader assetloader;
 
@@ -41,6 +43,7 @@ namespace Firecoals.Space
             assetloader = GameObject.FindObjectOfType<AssetLoader>();
             _assethandler = new AssetHandler(mTrackableBehaviour.transform);
             _loadSoundBundles = GameObject.FindObjectOfType<TestLoadSoundbundles>();
+            _soundFromBundles = GameObject.FindObjectOfType<LoadSoundFromBundle>();
             ApplicationContext context = Context.GetApplicationContext();
             this._resources = context.GetService<IResources>();
         }
@@ -53,17 +56,18 @@ namespace Firecoals.Space
         protected override void OnTrackingFound()
         {
             var statTime = DateTime.Now;
-            assetloader.LoadGameObjectAsync(path);
-            GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;
+            GameObject go1 = assetloader.LoadGameObjectAsync(path);
+            //GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;
             Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
-            if (go != null)
+            if (go1 != null)
             {
                 var startTime = DateTime.Now;
                 //Instantiate(go, mTrackableBehaviour.transform);
-                GameObject.Instantiate(go, mTrackableBehaviour.transform);
+                GameObject.Instantiate(go1, mTrackableBehaviour.transform);
                 Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
             }
-            _loadSoundBundles.PlayNameSound(soundNumber);
+            //_loadSoundBundles.PlayNameSound(soundNumber);
+            //_soundFromBundles.PlayObjectSound();
             base.OnTrackingFound();
         }
 

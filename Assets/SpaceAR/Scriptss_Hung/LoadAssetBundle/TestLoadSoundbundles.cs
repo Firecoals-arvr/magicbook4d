@@ -12,7 +12,7 @@ namespace Firecoals.Space
 {
     public class TestLoadSoundbundles : MonoBehaviour
     {
-        
+
         private ISoundManifestLoader _soundManifest;
         private IBundle _bundleAudioClip;
         private AssetLoader _assetLoader;
@@ -33,16 +33,14 @@ namespace Firecoals.Space
             var soundManifest = _soundManifest.LoadSync(Application.streamingAssetsPath + "/MagicAudioSpace.json");
             AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(soundManifest.soundInfos[num].PathBundle);
             FirecoalsSoundManager.PlaySound(audioClip);
-            
         }
         public void PlayInfoSound()
         {
-            
+
         }
         public void ReplayNameSound()
         {
-            
-            PlayNameSound(_intro.soundNumber);
+            //PlayNameSound(_intro.soundNumber);
         }
         private bool isTrackingMarker(string imageTargetName)
         {
