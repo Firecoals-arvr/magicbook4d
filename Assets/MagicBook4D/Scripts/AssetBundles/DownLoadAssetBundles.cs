@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Firecoals.AssetBundles
 {
-    public class DownLoadAssetBundles : MyBundleResources, IBundleResource
+    public class DownLoadAssetBundles : MyBundleResources
     {
         private IDownloader _downloader;
         private bool downloading = false;
