@@ -8,8 +8,8 @@ namespace Firecoals.Color
 	{
 		Transform beginTrans;
 
-		Vector3 center = new Vector3(0, 0.1f, 0);
-		Vector3 size = new Vector3(0.4f, 0.2f, 0.4f);
+		public Vector3 center = new Vector3(0, 0.1f, 0);
+		public Vector3 size = new Vector3(0.4f, 0.2f, 0.4f);
 
 		private void Start()
 		{

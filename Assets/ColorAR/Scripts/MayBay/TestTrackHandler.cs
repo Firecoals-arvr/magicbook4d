@@ -8,14 +8,11 @@ namespace Firecoals.Color
 	public class TestTrackHandler : DefaultTrackableEventHandler
 	{
 		AssetHandler handler;
-		public string[] cloudBundlePaths;
 		public GameObject renderCam;
-		private InstantiationAsync instantiation;
 		protected override void Start()
 		{
 			base.Start();
 			handler = new AssetHandler(mTrackableBehaviour.transform);
-			//instantiation = GameObject.FindObjectOfType<InstantiationAsync>();
 		}
 
 		protected override void OnDestroy()
@@ -58,12 +55,6 @@ namespace Firecoals.Color
 
 		public void CreateCloud(Transform parent)
 		{
-			//for(int i = 0; i < cloudNumbers; i++)
-			//{
-			//	GameObject cloud = handler.CreateRandom("color/model/cloud/maybay", cloudBundlePaths);
-			//	Instantiate(cloud, parent.transform.GetChild(1));
-			//}
-
 			GameObject cloud_1 = handler.CreateUnique("color/model/cloud/maybay", "Assets/ColorAR/Prefabs/Cloud/Maybay/c1.prefab");
 			Instantiate(cloud_1, parent.transform.GetChild(1));
 			GameObject cloud_2 = handler.CreateUnique("color/model/cloud/maybay", "Assets/ColorAR/Prefabs/Cloud/Maybay/c2.prefab");
