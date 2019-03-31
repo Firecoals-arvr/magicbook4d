@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
-using UnityEngine.Experimental.UIElements;
 
 public class ThemeController : MonoBehaviour
 {
     [Tooltip("The grid contain UIButton theme")]
     public UIGrid gridGameObject;
     public string Theme { get; set; }
+    public static ThemeController instance = null;
+
 
     private ThemeController(string themeName)
     {
@@ -17,6 +18,14 @@ public class ThemeController : MonoBehaviour
 
     private void Start()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
         DontDestroyOnLoad(this);
         AddThemeEvent();
     }

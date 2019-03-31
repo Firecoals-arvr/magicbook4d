@@ -12,6 +12,8 @@ namespace Firecoals.AssetBundles
         private bool downloading = false;
         private static string _platformName;
         private Dictionary<string, IBundle> bundles = new Dictionary<string, IBundle>();
+
+        public UISlider slider { get;set; }
         //private string bundleUrl;
         //private void Start()
         //{
@@ -80,7 +82,10 @@ namespace Firecoals.AssetBundles
                 downloadResult.Callbackable().OnProgressCallback(p =>
                 {
                     Debug.LogFormat("Downloading {0:F2}KB/{1:F2}KB {2:F3}KB/S", p.GetCompletedSize(UNIT.KB), p.GetTotalSize(UNIT.KB), p.GetSpeed(UNIT.KB));
-                    
+                    var percent = p.GetCompletedSize(UNIT.KB) / p.GetTotalSize(UNIT.KB);
+                    slider.value = percent;
+                   var label =  slider.transform.Find("displaytext").gameObject.GetComponent<UILabel>();
+                    label.text = p.GetCompletedSize(UNIT.KB).ToString()+"/"+ p.GetTotalSize(UNIT.KB).ToString();
                 });
 
                 yield return downloadResult.WaitForDone();

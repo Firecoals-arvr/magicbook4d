@@ -1,13 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Firecoals.AssetBundles;
 using UnityEngine;
 
 public class DownLoadManager : MonoBehaviour
 {
-    private ThemeController _theme;
+    public UISlider loadingBar;
+
+    private DownLoadAssetBundles dlAssets;
     private void Start()
     {
-        _theme = FindObjectOfType<ThemeController>();
-        Debug.LogWarning("You're in theme: "+_theme.Theme);
+        var themeName = ThemeController.instance.Theme;
+        dlAssets = new DownLoadAssetBundles(themeName,themeName+"/bundles" );
+        dlAssets.slider = loadingBar;
+        Debug.LogWarning("You're in theme: " + ThemeController.instance.Theme);
+        StartCoroutine(dlAssets.Download());
     }
 }
