@@ -389,6 +389,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: onClick.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
       propertyPath: hover.r
       value: 1
       objectReference: {fileID: 0}
@@ -411,6 +415,14 @@ PrefabInstance:
     - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
       propertyPath: pressed.b
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: onClick.Array.data[0].mTarget
+      value: 
+      objectReference: {fileID: 468613989}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: onClick.Array.data[0].mMethodName
+      value: MoveBackPhonePage
       objectReference: {fileID: 0}
     - target: {fileID: 6500000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
       propertyPath: m_Size.y
@@ -480,7 +492,7 @@ GameObject:
   - component: {fileID: 374614157}
   - component: {fileID: 374614158}
   m_Layer: 8
-  m_Name: Panel-Enter Phonenumber
+  m_Name: Phone Page
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -683,6 +695,7 @@ GameObject:
   - component: {fileID: 468613987}
   - component: {fileID: 468613986}
   - component: {fileID: 468613985}
+  - component: {fileID: 468613989}
   m_Layer: 8
   m_Name: UI Root
   m_TagString: Untagged
@@ -794,6 +807,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &468613989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468613984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11c3bc818b7fe84fa57f8a5d6a0bbd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phonePage: {fileID: 374614156}
+  codePage: {fileID: 539281703}
 --- !u!1 &539281703
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,7 +832,7 @@ GameObject:
   - component: {fileID: 539281704}
   - component: {fileID: 539281705}
   m_Layer: 8
-  m_Name: Panel-Enter Phonenumber (1)
+  m_Name: Code Page
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1167,6 +1194,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: onClick.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
       propertyPath: hover.r
       value: 1
       objectReference: {fileID: 0}
@@ -1189,6 +1220,14 @@ PrefabInstance:
     - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
       propertyPath: pressed.b
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: onClick.Array.data[0].mTarget
+      value: 
+      objectReference: {fileID: 468613989}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: onClick.Array.data[0].mMethodName
+      value: MoveNextCodePage
       objectReference: {fileID: 0}
     - target: {fileID: 6500000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
       propertyPath: m_Size.y

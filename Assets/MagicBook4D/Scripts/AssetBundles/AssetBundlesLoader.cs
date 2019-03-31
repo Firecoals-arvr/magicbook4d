@@ -1,13 +1,11 @@
-﻿using System;
+﻿using Firecoals.Augmentation;
+using Loxodon.Framework.Asynchronous;
+using Loxodon.Framework.Bundles;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
-using Firecoals.Augmentation;
-using Loxodon.Framework.Asynchronous;
-using Loxodon.Framework.Bundles;
 using UnityEngine;
-using Object = UnityEngine.Object;
-using Random = UnityEngine.Random;
 
 namespace Firecoals.AssetBundles
 {
@@ -16,15 +14,18 @@ namespace Firecoals.AssetBundles
 
         public Dictionary<string, IBundle> bundles = new Dictionary<string, IBundle>();
         /// <summary>
-        /// Load GameObject
+        /// Load GameObject Asynchronous
+        /// Return an GameObject
+        /// Return null if fail
         /// </summary>
         /// <param name="name"></param>
         /// <param name="parent"></param>
-        public void LoadAsset(string name, Transform parent )
+        public GameObject LoadAsset(string name, Transform parent)
         {
             //TODO Get Resource from AssetLoader
-            var myResources = this.GetResources();
+            var myResources = GetResources();
             IProgressResult<float, GameObject> result = myResources.LoadAssetAsync<GameObject>(name);
+            GameObject tempGameObject = null;
             result.Callbackable().OnCallback((r) =>
             {
                 try
@@ -32,13 +33,14 @@ namespace Firecoals.AssetBundles
                     if (r.Exception != null)
                         throw r.Exception;
 
-                    GameObject.Instantiate(r.Result, parent);
+                    tempGameObject = r.Result;
                 }
                 catch (Exception e)
                 {
                     Debug.LogErrorFormat("Load failure.Error:{0}", e);
                 }
             });
+            return tempGameObject;
         }
         /// <summary>
         /// Load An Object from asset bundle
@@ -77,7 +79,7 @@ namespace Firecoals.AssetBundles
         public UnityEngine.Object[] LoadAssetObjects(string name)
         {
             //TODO Get Resource from AssetLoader
-            var myResources = this.GetResources();
+            var myResources = GetResources();
             IProgressResult<float, UnityEngine.Object[]> result = myResources.LoadAllAssetsAsync<UnityEngine.Object>(name);
             UnityEngine.Object[] @object = null;
             result.Callbackable().OnCallback((r) =>
@@ -110,7 +112,7 @@ namespace Firecoals.AssetBundles
             IProgressResult<float, IBundle[]> result = myResources.LoadBundle(bundleNames, priority);
             result.Callbackable().OnProgressCallback(p =>
             {
-                Debug.LogFormat("PreLoading {0:F1}%", (p*100).ToString(CultureInfo.InvariantCulture));
+                Debug.LogFormat("PreLoading {0:F1}%", (p * 100).ToString(CultureInfo.InvariantCulture));
             });
             yield return result.WaitForDone();
 
@@ -127,7 +129,7 @@ namespace Firecoals.AssetBundles
 
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             if (bundles == null)
                 return;
@@ -135,7 +137,7 @@ namespace Firecoals.AssetBundles
             foreach (IBundle bundle in bundles.Values)
                 bundle.Dispose();
 
-            this.bundles = null;
+            bundles = null;
 
         }
 

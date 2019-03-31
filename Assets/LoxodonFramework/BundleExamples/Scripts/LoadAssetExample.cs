@@ -54,7 +54,7 @@ namespace Loxodon.Framework.Examples.Bundle
         }
 
         /// <summary>
-        /// 
+        /// Load Asynchronous a GameObject
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
