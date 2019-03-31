@@ -32,10 +32,13 @@ namespace Firecoals.Space
         private TestLoadSoundbundles _loadSoundBundles;
         public int soundNumber;
 
+        private AssetLoader assetloader;
+
         private IResources _resources;
         protected override void Start()
         {
             base.Start();
+            assetloader = GameObject.FindObjectOfType<AssetLoader>();
             _assethandler = new AssetHandler(mTrackableBehaviour.transform);
             _loadSoundBundles = GameObject.FindObjectOfType<TestLoadSoundbundles>();
             ApplicationContext context = Context.GetApplicationContext();
@@ -50,6 +53,7 @@ namespace Firecoals.Space
         protected override void OnTrackingFound()
         {
             var statTime = DateTime.Now;
+            assetloader.LoadGameObjectAsync(path);
             GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;
             Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
             if (go != null)
