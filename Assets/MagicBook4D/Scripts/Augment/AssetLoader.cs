@@ -5,7 +5,7 @@ using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
 using UnityEngine;
 
-namespace  Firecoals.Augmentation
+namespace Firecoals.Augmentation
 {
     public class AssetLoader : MonoBehaviour
     {
@@ -25,7 +25,6 @@ namespace  Firecoals.Augmentation
 
             ApplicationContext context = Context.GetApplicationContext();
             context.GetContainer().Register<IResources>(this.Resources);
-            
         }
 
         private void Start()
