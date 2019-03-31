@@ -6,6 +6,7 @@ using Firecoals.AssetBundles.Sound;
 using Loxodon.Framework.Bundles;
 using System;
 using System.IO;
+using Vuforia;
 
 namespace Firecoals.Space
 {
@@ -40,7 +41,15 @@ namespace Firecoals.Space
         }
         public void ReplayNameSound()
         {
+            
             PlayNameSound(_intro.soundNumber);
+        }
+        private bool isTrackingMarker(string imageTargetName)
+        {
+            var imageTarget = GameObject.Find(imageTargetName);
+            var trackable = imageTarget.GetComponent<TrackableBehaviour>();
+            var status = trackable.CurrentStatus;
+            return status == TrackableBehaviour.Status.TRACKED;
         }
     }
 }
