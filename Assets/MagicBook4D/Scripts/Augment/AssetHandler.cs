@@ -95,11 +95,10 @@ namespace Firecoals.Augmentation
         public GameObject CreateClone(string bundleName, string bundlePath)
         {
             Debug.LogWarning("prepare Create unique game object");
-            GameObject goTemplate;
             if (assetBundlesLoader.bundles.ContainsKey(bundleName))
             {
-                IBundle bundle = assetBundlesLoader.bundles[bundleName];
-                goTemplate = bundle.LoadAsset<GameObject>(bundlePath);
+                var bundle = assetBundlesLoader.bundles[bundleName];
+                var goTemplate = bundle.LoadAsset<GameObject>(bundlePath);
                 var clone = Content.Create(goTemplate, TargetContent.ContentType.Clone);
                 spawnedObject.Add(bundlePath, goTemplate);
                 Debug.LogWarning("unique object created");
