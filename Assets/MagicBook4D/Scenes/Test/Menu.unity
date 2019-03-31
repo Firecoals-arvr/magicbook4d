@@ -112,12 +112,39 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &19220039 stripped
+--- !u!1 &19220039
 GameObject:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 1631773239216732, guid: 5af44ac162f7f4c42a1a96b8dde75b82,
     type: 3}
   m_PrefabInstance: {fileID: 1720954802}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 19220040}
+  - component: {fileID: 19220041}
+  - component: {fileID: 19220042}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &19220040
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 1720954802}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19220039}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 354671130}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &19220041
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -294,10 +321,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bundleNames:
-  - animals/model/bear
-  - animals/model/elephant
-  - animals/noise
-  bundleRoot: Animal/bundles
+  - space/sound/name/en
+  bundleRoot: Space/bundles
 --- !u!4 &122870434
 Transform:
   m_ObjectHideFlags: 0
@@ -379,8 +404,69 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &215359863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 547624982}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 215359864}
+  m_Layer: 0
+  m_Name: Dog (Missing Prefab)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &215359864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 547624982}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215359863}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &354671129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 1720954802}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 354671130}
+  m_Layer: 0
+  m_Name: Bear (Missing Prefab)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &354671130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 1720954802}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354671129}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 19220040}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &547624982
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -879,7 +965,7 @@ Transform:
   m_GameObject: {fileID: 1065334894}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0013020834, y: 0.0013020834, z: 0.0013020834}
+  m_LocalScale: {x: 0.0013888889, y: 0.0013888889, z: 0.0013888889}
   m_Children:
   - {fileID: 37192370}
   - {fileID: 2073657091}
@@ -1196,19 +1282,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: fee46b827274e694aa251e2d36700135, type: 3}
       propertyPath: mHeight
-      value: 104
+      value: 391
       objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: fee46b827274e694aa251e2d36700135, type: 3}
-      propertyPath: onClick.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: fee46b827274e694aa251e2d36700135, type: 3}
-      propertyPath: onClick.Array.data[0].mTarget
+    - target: {fileID: 11400004, guid: fee46b827274e694aa251e2d36700135, type: 3}
+      propertyPath: mAtlas
       value: 
-      objectReference: {fileID: 1535954404}
-    - target: {fileID: 11400000, guid: fee46b827274e694aa251e2d36700135, type: 3}
-      propertyPath: onClick.Array.data[0].mMethodName
-      value: PlaySoundFromAssetBundle
+      objectReference: {fileID: 11400000, guid: f95e07e3d350bf748b0c42b453a69d2e,
+        type: 2}
+    - target: {fileID: 11400004, guid: fee46b827274e694aa251e2d36700135, type: 3}
+      propertyPath: mSpriteName
+      value: Beveled Outline
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: fee46b827274e694aa251e2d36700135, type: 3}
+      propertyPath: autoResizeBoxCollider
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6500000, guid: fee46b827274e694aa251e2d36700135, type: 3}
       propertyPath: m_Size.x
@@ -1216,7 +1303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6500000, guid: fee46b827274e694aa251e2d36700135, type: 3}
       propertyPath: m_Size.y
-      value: 104
+      value: 391
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: fee46b827274e694aa251e2d36700135, type: 3}
       propertyPath: mWidth
@@ -1233,6 +1320,18 @@ PrefabInstance:
     - target: {fileID: 11400002, guid: fee46b827274e694aa251e2d36700135, type: 3}
       propertyPath: mFontSize
       value: 86
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: fee46b827274e694aa251e2d36700135, type: 3}
+      propertyPath: onClick.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: fee46b827274e694aa251e2d36700135, type: 3}
+      propertyPath: onClick.Array.data[0].mTarget
+      value: 
+      objectReference: {fileID: 1535954404}
+    - target: {fileID: 11400000, guid: fee46b827274e694aa251e2d36700135, type: 3}
+      propertyPath: onClick.Array.data[0].mMethodName
+      value: PlaySoundFromAssetBundle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fee46b827274e694aa251e2d36700135, type: 3}

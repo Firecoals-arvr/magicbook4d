@@ -14,7 +14,7 @@ namespace Firecoals.Space
         public string[] bundleNames;
         private void Awake()
         {
-            StartCoroutine(AssetHandler.PreLoad(bundleRoot, bundleNames));
+            //StartCoroutine(AssetHandler.PreLoad(bundleRoot, bundleNames));
         }
 
         //IEnumerator Start()

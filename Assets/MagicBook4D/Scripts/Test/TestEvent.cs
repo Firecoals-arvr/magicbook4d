@@ -18,11 +18,12 @@ public class TestEvent : MonoBehaviour
 
     public void PlaySoundFromAssetBundle()
     {
-        IBundle bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["animals/noise"];
+        IBundle bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["space/sound/name/en"];
         ISoundManifestLoader soundManifestLoader = new SoundManifestLoader();
-        var soundManifest = soundManifestLoader.LoadSync(Application.streamingAssetsPath + "/AnimalAudioClip.json");
+        var soundManifest = soundManifestLoader.LoadSync(Application.streamingAssetsPath + "/MagicAudioSpace.json");
         //var myBundlePath = soundManifest.soundInfos[5].PathBundle;
-        AudioClip audioClip = bundleAudioClip.LoadAsset<AudioClip>(soundManifest.soundInfos[5].PathBundle);
+        //TODO query json by tag and language = bundle path
+        AudioClip audioClip = bundleAudioClip.LoadAsset<AudioClip>(soundManifest.soundInfos[38].PathBundle);
         FirecoalsSoundManager.PlaySound(audioClip);
     }
 }

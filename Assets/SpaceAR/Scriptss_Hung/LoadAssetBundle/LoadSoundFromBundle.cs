@@ -12,6 +12,7 @@ namespace Firecoals.Space
     /// </summary>
     public class LoadSoundFromBundle : AssetBundlesLoader
     {
+        
         SoundManifest soundManifest;
         public void LoadJson()
         {
