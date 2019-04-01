@@ -25,7 +25,7 @@ public class LoadingScreen : MonoBehaviour
 
     private void Start()
     {
-		m_SpinnerImage = GetComponentInChildren<UI2DSprite>();
+        m_SpinnerImage = GetComponentInChildren<UI2DSprite>();
         Application.backgroundLoadingPriority = ThreadPriority.Low;
         //StartCoroutine(LoadNextSceneAsync());
     }

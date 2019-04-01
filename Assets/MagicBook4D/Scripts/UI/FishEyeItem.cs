@@ -1,4 +1,4 @@
-﻿
+﻿using Firecoals.AssetBundles.Sound;
 using UnityEngine;
 
 namespace Firecoals.UI

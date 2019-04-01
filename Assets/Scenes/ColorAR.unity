@@ -278,11 +278,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79be5e07a98f96d4bad91ef8f5b04be0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cloudBundlePaths:
-  - Assets/ColorAR/Prefabs/Cloud/Maybay/c1.prefab
-  - Assets/ColorAR/Prefabs/Cloud/Maybay/c2.prefab
-  - Assets/ColorAR/Prefabs/Cloud/Maybay/c3.prefab
-  - Assets/ColorAR/Prefabs/Cloud/Maybay/c4.prefab
   renderCam: {fileID: 454665013}
 --- !u!114 &179395360
 MonoBehaviour:
@@ -589,62 +584,6 @@ MonoBehaviour:
   mImageTargetType: 0
   mWidth: 0.297
   mHeight: 0.210001
---- !u!1 &235760111
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 235760114}
-  - component: {fileID: 235760113}
-  - component: {fileID: 235760112}
-  m_Layer: 0
-  m_Name: InstantiationAsync
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &235760112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 235760111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5ba08d09da11cb4e8a04e1d4f2feae0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &235760113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 235760111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a376b1785a3f424dae7ae638fe5e9ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &235760114
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 235760111}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.089603126, y: 0.011270389, z: -0.024005592}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &248838762
 GameObject:
   m_ObjectHideFlags: 0
@@ -2558,7 +2497,7 @@ Transform:
   - {fileID: 1450178320}
   - {fileID: 321612963}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1320851960 stripped
 Transform:
@@ -3192,7 +3131,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1418387256
 Mesh:
@@ -3719,13 +3658,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1767834849}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfd255caab9fcd3469a3a2779140518a, type: 3}
+  m_Script: {fileID: 11500000, guid: ae4920892d6539244b560cbb86e4c620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bundleRoot: Color/bundles
   bundleNames:
   - color/model/maybay
   - color/model/cloud/maybay
+  bundleRoot: Color/bundles
 --- !u!4 &1767834851
 Transform:
   m_ObjectHideFlags: 0
@@ -3964,7 +3903,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!21 &1796503300
 Material:
