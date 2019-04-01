@@ -30,7 +30,7 @@ namespace Firecoals.Space
         /// </summary>
         private AssetHandler _assethandler;
         private TestLoadSoundbundles _loadSoundBundles;
-        public int soundNumber;
+        public string tag;
         
         private IResources _resources;
         protected override void Start()
@@ -61,7 +61,7 @@ namespace Firecoals.Space
                 GameObject.Instantiate(go, mTrackableBehaviour.transform);
                 Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
             }
-            _loadSoundBundles.PlayNameSound(soundNumber);
+            _loadSoundBundles.PlayNameSound(tag);
             base.OnTrackingFound();
         }
 
