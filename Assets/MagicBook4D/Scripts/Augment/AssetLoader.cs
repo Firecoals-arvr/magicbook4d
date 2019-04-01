@@ -104,7 +104,7 @@ namespace Firecoals.Augmentation
             GameObject tempGameObject = null;
             result.Callbackable().OnProgressCallback(p =>
             {
-                Debug.LogFormat(name+"is loading with result :{0}%", p * 100);
+                Debug.LogFormat(name + "is loading with result :{0}%", p * 100);
             });
             result.Callbackable().OnCallback((r) =>
             {

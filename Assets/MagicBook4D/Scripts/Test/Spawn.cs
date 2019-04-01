@@ -34,7 +34,7 @@ public class Spawn : MonoBehaviour
         AudioClip audioClip = bundleAudioClip.LoadAsset<AudioClip>(soundManifest.soundInfos[5].PathBundle);
         audioSource.clip = audioClip;
         audioSource.Play();
-        
+
 
         ///* Green and Red */
         //GameObject[] goTemplates = assetBundles.FindResource().LoadAssets<GameObject>("Animal/GetPreFab/Frog.prefab", "Assets/Animal/GetPreFab/Rabbit.prefab");
@@ -68,11 +68,7 @@ public class Spawn : MonoBehaviour
         //downLoad.LoadAsset("Animal/GetPreFab/Cat.prefab");
 
         //stopwatch.Stop();
-
         //UnityEngine.Debug.Log("MeasureByEnvironmentTickCount: " + stopwatch.ElapsedMilliseconds);
-
-
-
         var startTime = DateTime.Now;
 
         UnityEngine.Debug.Log("MeasureByDateTime: " + (DateTime.Now - startTime).Milliseconds);

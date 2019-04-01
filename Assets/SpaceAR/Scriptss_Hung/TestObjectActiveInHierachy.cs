@@ -6,13 +6,20 @@ namespace Firecoals.Space
 {
     public class TestObjectActiveInHierachy : MonoBehaviour
     {
+        /// <summary>
+        /// danh sách object
+        /// </summary>
         GameObject[] planet;
+
+        /// <summary>
+        /// label hiển thị tên object
+        /// </summary>
         public UILabel labelObj;
 
         // Start is called before the first frame update
         void Start()
         {
-            planet = GameObject.FindGameObjectsWithTag("planettarget");
+            planet = GameObject.FindGameObjectsWithTag("Planet");
         }
 
         // Update is called once per frame
@@ -25,9 +32,9 @@ namespace Firecoals.Space
         {
             for (int i = 0; i < planet.Length; i++)
             {
-                if (planet[i].transform.GetChild(0).gameObject.activeInHierarchy)
+                if (planet[i].gameObject.activeInHierarchy)
                 {
-                    labelObj.text = planet[i].transform.GetChild(0).name;
+                    labelObj.text = planet[i].name;
                 }
             }
 
