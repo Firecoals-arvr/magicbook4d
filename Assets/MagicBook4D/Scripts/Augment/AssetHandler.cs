@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using Loxodon.Framework.Bundles;
 using System.Collections.Generic;
 using UnityEngine;
-using Firecoals.AssetBundles;
-using Loxodon.Framework.Bundles;
-using Vuforia;
 namespace Firecoals.Augmentation
 {
     /// <summary>
@@ -13,10 +9,10 @@ namespace Firecoals.Augmentation
     public class AssetHandler
     {
         #region PUBLIC_VARIABLE
-        public static AssetBundlesLoader assetBundlesLoader;
+        public TargetContent Content { get; }
         public Dictionary<string, GameObject> spawnedObject;
         #endregion
-        public TargetContent Content { get; }
+
         #region PUBLIC_CONSTRUCTOR
         /// <summary>
         /// Asset contents under a image target
@@ -41,7 +37,8 @@ namespace Firecoals.Augmentation
         public GameObject CreateUnique(string bundleName, string bundlePath)
         {
             Debug.LogWarning("prepare Create unique game object");
-            GameObject goTemplate;
+            var assetBundlesLoader = GameObject.FindObjectOfType<AssetLoader>().assetBundlesLoader;
+            GameObject goTemplate = null;
             if (assetBundlesLoader.bundles.ContainsKey(bundleName))
             {
                 IBundle bundle = assetBundlesLoader.bundles[bundleName];
@@ -76,6 +73,7 @@ namespace Firecoals.Augmentation
         /// <returns></returns>
         public GameObject CreateClone(string bundleName, string bundlePath)
         {
+            var assetBundlesLoader = GameObject.FindObjectOfType<AssetLoader>().assetBundlesLoader;
             if (assetBundlesLoader.bundles.ContainsKey(bundleName))
             {
                 var bundle = assetBundlesLoader.bundles[bundleName];
@@ -99,6 +97,7 @@ namespace Firecoals.Augmentation
         /// <returns></returns>
         public GameObject CreateRandom(string bundleName, string[] bundlePaths)
         {
+            var assetBundlesLoader = GameObject.FindObjectOfType<AssetLoader>().assetBundlesLoader;
             var bundlePath = bundlePaths[new System.Random().Next(0, bundlePaths.Length)];
             if (assetBundlesLoader.bundles.ContainsKey(bundleName))
             {
@@ -118,7 +117,7 @@ namespace Firecoals.Augmentation
         public void ClearAll()
         {
             spawnedObject?.Clear();
-            
+
         }
         #endregion
     }
