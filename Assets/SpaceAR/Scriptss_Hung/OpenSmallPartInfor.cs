@@ -32,13 +32,13 @@ namespace Firecoals.Space
                 if (inforBtn[i].activeInHierarchy)
                 {
                     inforBtn[i].GetComponent<UIButton>().onClick.Clear();
-                    EventDelegate del = new EventDelegate(this, "PlayTweenPosition");
+                    EventDelegate del = new EventDelegate(this, "ShowSmallInfo");
                     EventDelegate.Set(inforBtn[i].GetComponent<UIButton>().onClick, del);
                 }
             }
         }
 
-        public void PlayTweenPosition()
+        public void ShowSmallInfo()
         {
             for (int i = 0; i < inforBtn.Length; i++)
             {

@@ -16,11 +16,6 @@ namespace Firecoals.Space
     public class IntroScripts : DefaultTrackableEventHandler
     {
         /// <summary>
-        /// tên object trong asset bundles
-        /// </summary>
-        //public string objName;
-
-        /// <summary>
         /// đường dẫn của object trong thư mục
         /// </summary>
         public string path;
@@ -29,23 +24,53 @@ namespace Firecoals.Space
         /// đường dẫn sound
         /// </summary>
         private AssetHandler _assethandler;
-        private TestLoadSoundbundles _loadSoundBundles;
-        //public int soundNumber;
-
-        private LoadSoundFromBundle _soundFromBundles;
-
+        //private LoadSoundFromBundle _soundFromBundles;
         private AssetLoader assetloader;
-
         private IResources _resources;
+
+        /// <summary>
+        /// thông tin chung về object
+        /// </summary>
+        [SerializeField] UILocalize objectInfo;
+
+        /// <summary>
+        /// thông tin về các thành phần của object (nếu có)
+        /// </summary>
+        [SerializeField] UILocalize componentInfo;
+
+        /// <summary>
+        /// tên của object
+        /// </summary>
+        [SerializeField] UILocalize objectName;
+
+        /// <summary>
+        /// biến để so sánh tên object với key localization
+        /// </summary>
+        private string st;
+
+        /// <summary>
+        /// key cho name object
+        /// </summary>
+        [Header("Name key")]
+        public string st1;
+
+        /// <summary>
+        /// key cho info object
+        /// </summary>
+        [Header("Information key")]
+        public string st2;
+
         protected override void Start()
         {
             base.Start();
             assetloader = GameObject.FindObjectOfType<AssetLoader>();
             _assethandler = new AssetHandler(mTrackableBehaviour.transform);
-            _loadSoundBundles = GameObject.FindObjectOfType<TestLoadSoundbundles>();
-            _soundFromBundles = GameObject.FindObjectOfType<LoadSoundFromBundle>();
+            //_soundFromBundles = GameObject.FindObjectOfType<LoadSoundFromBundle>();
             ApplicationContext context = Context.GetApplicationContext();
             this._resources = context.GetService<IResources>();
+
+            st = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
+            st.ToLower();
         }
 
         protected override void OnDestroy()
@@ -66,8 +91,8 @@ namespace Firecoals.Space
                 GameObject.Instantiate(go1, mTrackableBehaviour.transform);
                 Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
             }
-            //_loadSoundBundles.PlayNameSound(soundNumber);
-            //_soundFromBundles.PlayObjectSound();
+
+            ChangeKeyLocalization();
             base.OnTrackingFound();
         }
 
@@ -80,6 +105,8 @@ namespace Firecoals.Space
             {
                 Destroy(go.gameObject);
             }
+
+            //ClearKeyLocalization();
             base.OnTrackingLost();
         }
 
@@ -95,5 +122,24 @@ namespace Firecoals.Space
             }
         }
 
+        private void ChangeKeyLocalization()
+        {
+            if (st1.Contains(st) && st2.Contains(st))
+            {
+                objectName.key = st1;
+                objectInfo.key = st2;
+
+                objectName.GetComponent<UILabel>().text = Localization.Get(st1);
+                objectInfo.GetComponent<UILabel>().text = Localization.Get(st2);
+            }
+        }
+
+        private void ClearKeyLocalization()
+        {
+            //objectName.GetComponent<UILabel>().text = Localization.Get(string.Empty);
+            //objectInfo.GetComponent<UILabel>().text = Localization.Get(string.Empty);
+            objectName.GetComponent<UILocalize>().key = string.Empty;
+            objectInfo.GetComponent<UILocalize>().key = string.Empty;
+        }
     }
 }
