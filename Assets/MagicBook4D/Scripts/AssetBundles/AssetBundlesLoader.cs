@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Firecoals.AssetBundles
 {
@@ -13,6 +14,7 @@ namespace Firecoals.AssetBundles
     {
 
         public Dictionary<string, IBundle> bundles = new Dictionary<string, IBundle>();
+        public UISlider slider { get; set; }
         /// <summary>
         /// Load GameObject Asynchronous
         /// Return an GameObject
@@ -86,9 +88,14 @@ namespace Firecoals.AssetBundles
             result.Callbackable().OnProgressCallback(p =>
             {
                 Debug.LogFormat("PreLoading {0:F1}%", (p * 100).ToString(CultureInfo.InvariantCulture));
+                slider.value = p;
+
             });
             yield return result.WaitForDone();
-
+            if (result.IsDone)
+            {
+                SceneManager.LoadScene(ThemeController.instance.Theme, LoadSceneMode.Single);
+            }
             if (result.Exception != null)
             {
                 Debug.LogWarningFormat("Loads failure.Error:{0}", result.Exception);

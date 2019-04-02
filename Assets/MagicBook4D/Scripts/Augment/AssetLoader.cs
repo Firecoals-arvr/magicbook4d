@@ -21,24 +21,25 @@ namespace Firecoals.Augmentation
         private void Awake()
         {
             DontDestroyOnLoad(gameObject);
+        }
+
+        public void InitResource()
+        {
             BundleSetting setting = new BundleSetting(bundleRoot);
             Resources = CreateResources();
-
             ApplicationContext context = Context.GetApplicationContext();
             context.GetContainer().Register<IResources>(Resources);
-
         }
+        //private void Start()
+        //{
+        //    StartCoroutine(PreLoad());
+        //}
 
-        private void Start()
-        {
-            StartCoroutine(PreLoad());
-        }
-
-        private IEnumerator PreLoad()
+        public IEnumerator PreLoad(UISlider slider)
         {
             BundleSetting bundleSettings = new BundleSetting(bundleRoot);
             /*Preload asset bundle*/
-
+            assetBundlesLoader.slider = slider;
             yield return assetBundlesLoader.Preload(bundleNames, 1);
         }
         private IResources CreateResources()
