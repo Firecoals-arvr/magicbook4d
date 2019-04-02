@@ -15,7 +15,6 @@ public class ThemeController : MonoBehaviour
     public static ThemeController Animal => new ThemeController("Animal");
     public static ThemeController Color => new ThemeController("Color");
     public static ThemeController Space => new ThemeController("Space");
-
     private void Start()
     {
         if (instance == null)
@@ -28,6 +27,8 @@ public class ThemeController : MonoBehaviour
         }
         DontDestroyOnLoad(this);
         AddThemeEvent();
+        //PlayerPrefs.DeleteAll();
+        //Debug.LogWarning("Deleted all player preference key");
     }
 
     private void SetTheme(string themeName)
