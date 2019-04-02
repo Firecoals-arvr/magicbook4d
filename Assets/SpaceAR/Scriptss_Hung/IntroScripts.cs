@@ -7,6 +7,7 @@ using Firecoals.AssetBundles;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
 using Firecoals.AssetBundles.Sound;
+using Vuforia;
 
 namespace Firecoals.Space
 {
@@ -30,8 +31,11 @@ namespace Firecoals.Space
         /// </summary>
         private AssetHandler _assethandler;
         private TestLoadSoundbundles _loadSoundBundles;
-        public string tag;
-        
+        public string tagSound;
+        public string tagInfo;
+        [HideInInspector]
+        public TrackableBehaviour trackable;
+
         private IResources _resources;
         protected override void Start()
         {
@@ -61,7 +65,8 @@ namespace Firecoals.Space
                 GameObject.Instantiate(go, mTrackableBehaviour.transform);
                 Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
             }
-            _loadSoundBundles.PlayNameSound(tag);
+            _loadSoundBundles.PlayNameSound(tagSound);
+            
             base.OnTrackingFound();
         }
 
@@ -74,6 +79,7 @@ namespace Firecoals.Space
             {
                 Destroy(go.gameObject);
             }
+            FirecoalsSoundManager.StopAll();
             base.OnTrackingLost();
         }
 
@@ -89,5 +95,6 @@ namespace Firecoals.Space
             }
         }
         
+
     }
 }
