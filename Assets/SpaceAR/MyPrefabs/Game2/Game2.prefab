@@ -1191,7 +1191,7 @@ GameObject:
   - component: {fileID: 614021436110497357}
   m_Layer: 0
   m_Name: Game2
-  m_TagString: Player
+  m_TagString: Game2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3160,6 +3160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 614021437249632425}
+  - component: {fileID: 2253641821549316419}
   m_Layer: 0
   m_Name: System
   m_TagString: Untagged
@@ -3182,6 +3183,28 @@ Transform:
   m_Father: {fileID: 614021436110497357}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2253641821549316419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614021437249632424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c73c1ab94e28d244827af556dca1ed2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoreStartedOverGui: 1
+  IgnoreIsOverGui: 0
+  RequiredFingerCount: 0
+  RequiredSelectable: {fileID: 0}
+  Camera: {fileID: 0}
+  WheelSensitivity: 0
+  Relative: 0
+  ScaleClamp: 0
+  ScaleMin: {x: 0, y: 0, z: 0}
+  ScaleMax: {x: 0, y: 0, z: 0}
 --- !u!1 &614021437260564559
 GameObject:
   m_ObjectHideFlags: 0
@@ -3893,6 +3916,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 614021436782933869}
     m_Modifications:
+    - target: {fileID: 6156300835691190751, guid: 62419005d698d564f9e96eab07ac902c,
+        type: 3}
+      propertyPath: m_Name
+      value: BlackHole
+      objectReference: {fileID: 0}
+    - target: {fileID: 6156300835691190751, guid: 62419005d698d564f9e96eab07ac902c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6156300835691190304, guid: 62419005d698d564f9e96eab07ac902c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3946,16 +3979,6 @@ PrefabInstance:
     - target: {fileID: 6156300835691190304, guid: 62419005d698d564f9e96eab07ac902c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6156300835691190751, guid: 62419005d698d564f9e96eab07ac902c,
-        type: 3}
-      propertyPath: m_Name
-      value: BlackHole
-      objectReference: {fileID: 0}
-    - target: {fileID: 6156300835691190751, guid: 62419005d698d564f9e96eab07ac902c,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
