@@ -6,6 +6,7 @@ namespace Firecoals.Space
 {
     public class ShowPanelUI : DefaultTrackableEventHandler
     {
+        Animation anim;
         protected override void Start()
         {
             base.Start();
@@ -19,6 +20,7 @@ namespace Firecoals.Space
             base.OnTrackingFound();
             NGUITools.SetActive(gameObject.transform.GetChild(0).transform.GetChild(1).gameObject, true);
             
+
         }
         protected override void OnTrackingLost()
         {

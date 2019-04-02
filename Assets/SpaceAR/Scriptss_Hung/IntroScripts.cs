@@ -19,7 +19,7 @@ namespace Firecoals.Space
         /// <summary>
         /// tên object trong asset bundles
         /// </summary>
-        //public string objName;
+        public string objName;
 
         /// <summary>
         /// đường dẫn của object trong thư mục
@@ -35,8 +35,9 @@ namespace Firecoals.Space
         public string tagInfo;
         [HideInInspector]
         public TrackableBehaviour trackable;
-
+        private AssetLoader _assetLoader;
         private IResources _resources;
+        
         protected override void Start()
         {
             base.Start();
@@ -44,7 +45,7 @@ namespace Firecoals.Space
             _loadSoundBundles = GameObject.FindObjectOfType<TestLoadSoundbundles>();
             ApplicationContext context = Context.GetApplicationContext();
             this._resources = context.GetService<IResources>();
-
+            _assetLoader = GameObject.FindObjectOfType<AssetLoader>();
 
         }
 
@@ -52,19 +53,29 @@ namespace Firecoals.Space
         {
             base.OnDestroy();
         }
-
+        
         protected override void OnTrackingFound()
         {
             var statTime = DateTime.Now;
-            GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;              
+            //GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;              
+            GameObject go = _assetLoader.LoadGameObjectAsync(path);
             Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
             if (go != null)
             {
                 var startTime = DateTime.Now;
                 //Instantiate(go, mTrackableBehaviour.transform);
+                //Destroy(go);
+                
                 GameObject.Instantiate(go, mTrackableBehaviour.transform);
                 Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
             }
+            //else
+            //{
+            //    var startTime = DateTime.Now;
+            //    Destroy(go);
+            //    go = _assetLoader.LoadGameObjectAsync(path);
+            //    GameObject.Instantiate(go, mTrackableBehaviour.transform);
+            //}
             _loadSoundBundles.PlayNameSound(tagSound);
             
             base.OnTrackingFound();
