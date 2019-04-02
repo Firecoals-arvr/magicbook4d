@@ -23,7 +23,7 @@ namespace Firecoals.Color
 
 		protected override void OnTrackingFound()
 		{
-			GameObject go = handler.CreateUnique("color/model/maybay", "Assets/ColorAR/Prefabs/MayBay_Group.prefab");
+			GameObject go = handler.CreateUnique("color/model/maybay", "Assets/ColorAR/Prefabs/MayBay/MayBay_Group.prefab");
 			if (go)
 			{
 				GameObject maybay = Instantiate(go, mTrackableBehaviour.transform);

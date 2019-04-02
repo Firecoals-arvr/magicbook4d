@@ -38,7 +38,7 @@ namespace Firecoals.Augmentation
         {
             Debug.LogWarning("prepare Create unique game object");
             var assetBundlesLoader = GameObject.FindObjectOfType<AssetLoader>().assetBundlesLoader;
-            GameObject goTemplate = null;
+            GameObject goTemplate;
             if (assetBundlesLoader.bundles.ContainsKey(bundleName))
             {
                 IBundle bundle = assetBundlesLoader.bundles[bundleName];

@@ -69,6 +69,7 @@ namespace Firecoals.Color
 				yield return null;
 			}
 		}
+
 	}
 }
 
