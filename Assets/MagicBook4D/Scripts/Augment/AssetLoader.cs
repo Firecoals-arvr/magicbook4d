@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections;
-using Firecoals.AssetBundles;
+﻿using Firecoals.AssetBundles;
 using Loxodon.Framework.Asynchronous;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
+using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Firecoals.Augmentation
@@ -20,24 +20,26 @@ namespace Firecoals.Augmentation
         //private string key = "E4YZgiGQ0aqe5LEJ";
         private void Awake()
         {
-            DontDestroyOnLoad(this.gameObject);
-            BundleSetting setting = new BundleSetting(bundleRoot);
-            this.Resources = CreateResources();
-
-            ApplicationContext context = Context.GetApplicationContext();
-            context.GetContainer().Register<IResources>(this.Resources);
+            DontDestroyOnLoad(gameObject);
         }
 
-        private void Start()
+        public void InitResource()
         {
-            StartCoroutine(PreLoad());
+            BundleSetting setting = new BundleSetting(bundleRoot);
+            Resources = CreateResources();
+            ApplicationContext context = Context.GetApplicationContext();
+            context.GetContainer().Register<IResources>(Resources);
         }
+        //private void Start()
+        //{
+        //    StartCoroutine(PreLoad());
+        //}
 
-        private IEnumerator PreLoad()
+        public IEnumerator PreLoad(UISlider slider)
         {
             BundleSetting bundleSettings = new BundleSetting(bundleRoot);
             /*Preload asset bundle*/
-
+            assetBundlesLoader.slider = slider;
             yield return assetBundlesLoader.Preload(bundleNames, 1);
         }
         private IResources CreateResources()
@@ -97,14 +99,14 @@ namespace Firecoals.Augmentation
         /// Return an GameObject
         /// Return null if fail
         /// </summary>
-        /// <param name="name"></param>
-        public GameObject LoadGameObjectAsync(string name)
+        /// <param name="bundlePath"></param>
+        public GameObject LoadGameObjectAsync(string bundlePath)
         {
-            IProgressResult<float, GameObject> result = Resources.LoadAssetAsync<GameObject>(name);
+            IProgressResult<float, GameObject> result = Resources.LoadAssetAsync<GameObject>(bundlePath);
             GameObject tempGameObject = null;
             result.Callbackable().OnProgressCallback(p =>
             {
-                Debug.LogFormat(name + "is loading with result :{0}%", p * 100);
+                Debug.LogFormat(bundlePath + "is loading with result :{0}%", p * 100);
             });
             result.Callbackable().OnCallback((r) =>
             {

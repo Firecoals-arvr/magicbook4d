@@ -1,10 +1,8 @@
-﻿using Loxodon.Framework.Bundles;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 
-namespace Firecoals.AssetBundles
+using Loxodon.Framework.Bundles;
+
+namespace Loxodon.Framework.Examples.Bundle
 {
     public class CustomBundleLoaderBuilder : AbstractLoaderBuilder
     {
@@ -21,7 +19,7 @@ namespace Firecoals.AssetBundles
             this.decryptor = decryptor;
         }
 
-        public override BundleLoader Create(BundleManager manager, BundleInfo bundleInfo, BundleLoader[] dependencies)
+        public override BundleLoader Create(BundleManager manager, BundleInfo bundleInfo)
         {
             //Customize the rules for finding assets.
 
@@ -32,9 +30,9 @@ namespace Firecoals.AssetBundles
                 //Load assets from the cache of Unity3d.
                 loadBaseUri = this.BaseUri;
 #if UNITY_5_4_OR_NEWER
-                return new UnityWebRequestBundleLoader(new Uri(loadBaseUri, bundleInfo.Filename), bundleInfo, dependencies, manager, this.useCache);
+                return new UnityWebRequestBundleLoader(new Uri(loadBaseUri, bundleInfo.Filename), bundleInfo, manager, this.useCache);
 #else
-                return new WWWBundleLoader(new Uri(loadBaseUri, bundleInfo.Filename), bundleInfo, dependencies, manager, this.useCache);
+                return new WWWBundleLoader(new Uri(loadBaseUri, bundleInfo.Filename), bundleInfo, manager, this.useCache);
 #endif
             }
 
@@ -58,7 +56,7 @@ namespace Firecoals.AssetBundles
             if (bundleInfo.IsEncrypted)
             {
                 if (this.decryptor != null && bundleInfo.Encoding.Equals(decryptor.AlgorithmName))
-                    return new CryptographBundleLoader(new Uri(loadBaseUri, bundleInfo.Filename), bundleInfo, dependencies, manager, decryptor);
+                    return new CryptographBundleLoader(new Uri(loadBaseUri, bundleInfo.Filename), bundleInfo, manager, decryptor);
 
                 throw new NotSupportedException(string.Format("Not support the encryption algorithm '{0}'.", bundleInfo.Encoding));
             }
@@ -67,11 +65,11 @@ namespace Firecoals.AssetBundles
             //Loads assets from an Internet address if it does not exist in the local directory.
 #if UNITY_5_4_OR_NEWER
             if (this.IsRemoteUri(loadBaseUri))
-                return new UnityWebRequestBundleLoader(new Uri(loadBaseUri, bundleInfo.Filename), bundleInfo, dependencies, manager, this.useCache);
+                return new UnityWebRequestBundleLoader(new Uri(loadBaseUri, bundleInfo.Filename), bundleInfo, manager, this.useCache);
             else
-                return new FileAsyncBundleLoader(new Uri(loadBaseUri, bundleInfo.Filename), bundleInfo, dependencies, manager);
+                return new FileAsyncBundleLoader(new Uri(loadBaseUri, bundleInfo.Filename), bundleInfo, manager);
 #else
-            return new WWWBundleLoader(new Uri(loadBaseUri, bundleInfo.Filename), bundleInfo, dependencies, manager, this.useCache);
+            return new WWWBundleLoader(new Uri(loadBaseUri, bundleInfo.Filename), bundleInfo, manager, this.useCache);
 #endif
         }
     }
