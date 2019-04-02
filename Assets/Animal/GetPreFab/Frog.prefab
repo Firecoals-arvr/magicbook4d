@@ -1,70 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!111 &1300771490
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1066285040079896}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400002, guid: b5ea4dbaf9115cc40a5eefb60bd772c2, type: 3}
-  m_Animations:
-  - {fileID: 7400000, guid: b5ea4dbaf9115cc40a5eefb60bd772c2, type: 3}
-  - {fileID: 7400002, guid: b5ea4dbaf9115cc40a5eefb60bd772c2, type: 3}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 1
---- !u!65 &1300771491
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1066285040079896}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.21846153, y: 0.06653789, z: 0.100388944}
-  m_Center: {x: -0.040597394, y: 0.009426274, z: 0.33557236}
---- !u!65 &1300771493
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1066285040079896}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.40329528, y: 0.33863473, z: 0.5}
-  m_Center: {x: -0.0309818, y: 0.12237816, z: 0.06562301}
---- !u!114 &1300771489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1066285040079896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7a81f0ac2f557c40a16371befa26ecf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movingAnimationSpeed: 1
-  MoveSpeed: 0.2
-  StopDistance: 0.02
-  HaveEat: 1
-  TimeEat: 0
-  isFrog: 1
-  ScaleTemp: 0
-  movingAnimName: frog
-  stopAnimName: Idle
-  IdleAnimName: 
 --- !u!1 &1105669267
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,13 +129,13 @@ Animation:
   m_GameObject: {fileID: 1185951164}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: d71c3d83fb9c7ec40a94b428c14662ae, type: 3}
+  m_Animation: {fileID: 7400002, guid: d71c3d83fb9c7ec40a94b428c14662ae, type: 3}
   m_Animations:
   - {fileID: 7400000, guid: d71c3d83fb9c7ec40a94b428c14662ae, type: 3}
   - {fileID: 7400002, guid: d71c3d83fb9c7ec40a94b428c14662ae, type: 3}
   - {fileID: 7400004, guid: d71c3d83fb9c7ec40a94b428c14662ae, type: 3}
   m_WrapMode: 0
-  m_PlayAutomatically: 0
+  m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
 --- !u!65 &8753890799104937281
@@ -481,6 +416,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0209be58769c120478d9d734bbea5062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!111 &1300771490
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066285040079896}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400002, guid: b5ea4dbaf9115cc40a5eefb60bd772c2, type: 3}
+  m_Animations:
+  - {fileID: 7400000, guid: b5ea4dbaf9115cc40a5eefb60bd772c2, type: 3}
+  - {fileID: 7400002, guid: b5ea4dbaf9115cc40a5eefb60bd772c2, type: 3}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 1
+--- !u!65 &1300771491
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066285040079896}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.21846153, y: 0.06653789, z: 0.100388944}
+  m_Center: {x: -0.040597394, y: 0.009426274, z: 0.33557236}
+--- !u!65 &1300771493
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066285040079896}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.40329528, y: 0.33863473, z: 0.5}
+  m_Center: {x: -0.0309818, y: 0.12237816, z: 0.06562301}
+--- !u!114 &1300771489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066285040079896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7a81f0ac2f557c40a16371befa26ecf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingAnimationSpeed: 1
+  MoveSpeed: 0.2
+  StopDistance: 0.02
+  HaveEat: 1
+  TimeEat: 0
+  isFrog: 1
+  ScaleTemp: 0
+  movingAnimName: frog
+  stopAnimName: Idle
+  IdleAnimName: 
 --- !u!1 &248036063238304137
 GameObject:
   m_ObjectHideFlags: 0
@@ -3855,21 +3855,13 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 4787032780418466, guid: 21c37810a552bdf4fbc3132365e3e7b0, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4575499973887082, guid: 21c37810a552bdf4fbc3132365e3e7b0, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4097814210591826, guid: 21c37810a552bdf4fbc3132365e3e7b0, type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 4866414053075372, guid: 21c37810a552bdf4fbc3132365e3e7b0, type: 3}
+    - target: {fileID: 4401571465717820, guid: 21c37810a552bdf4fbc3132365e3e7b0, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4825748175907676, guid: 21c37810a552bdf4fbc3132365e3e7b0, type: 3}
       propertyPath: m_RootOrder
@@ -3879,29 +3871,9 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 4401571465717820, guid: 21c37810a552bdf4fbc3132365e3e7b0, type: 3}
+    - target: {fileID: 4866414053075372, guid: 21c37810a552bdf4fbc3132365e3e7b0, type: 3}
       propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6728447889126025150, guid: 21c37810a552bdf4fbc3132365e3e7b0,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6728447889126025150, guid: 21c37810a552bdf4fbc3132365e3e7b0,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6728447889126025150, guid: 21c37810a552bdf4fbc3132365e3e7b0,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6728447889126025150, guid: 21c37810a552bdf4fbc3132365e3e7b0,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 137029166719755666, guid: 21c37810a552bdf4fbc3132365e3e7b0,
         type: 3}
