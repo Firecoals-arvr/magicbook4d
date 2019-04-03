@@ -10,26 +10,20 @@ namespace Firecoals.Space
 {
     public class TestLoadSoundbundles : MonoBehaviour
     {
-        
+
         private ISoundManifestLoader _soundManifest;
         private IBundle _bundleAudioClip;
         private AssetLoader _assetLoader;
-        //private IntroScripts _intro;
         GameObject[] imageTarget;
-        //public GameObject target;
-        //bool isTrackable;
         private SoundInfo[] soundNames;
         private SoundInfo[] soundInfos;
         private SelectLanguage select;
         string language;
-        
-
 
         private void Start()
         {
             select = GameObject.FindObjectOfType<SelectLanguage>();
-            imageTarget = GameObject.FindGameObjectsWithTag ("ImageTarget");
-            
+            imageTarget = GameObject.FindGameObjectsWithTag("ImageTarget");
         }
         public void PlayNameSound(string tagSound)
         {
@@ -45,7 +39,7 @@ namespace Firecoals.Space
                 AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetSoundBundlePath(language, tagSound));
                 FirecoalsSoundManager.PlaySound(audioClip);
             }
-            if(select.vn == true)
+            if (select.vn == true)
             {
                 language = "vietnamese";
                 _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["space/sound/name/vn"];
@@ -54,7 +48,7 @@ namespace Firecoals.Space
             }
 
         }
-        private string  GetSoundBundlePath(string currentLanguage, string tag)
+        private string GetSoundBundlePath(string currentLanguage, string tag)
         {
             foreach (var soundName in soundNames)
             {
@@ -84,7 +78,7 @@ namespace Firecoals.Space
                 _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["space/sound/info/vn"];
                 AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetSoundBundlePath(language, tagInfo));
                 FirecoalsSoundManager.PlaySound(audioClip);
-                
+
             }
         }
         private string GetInfoBundlePath(string currentLanguage, string tag)

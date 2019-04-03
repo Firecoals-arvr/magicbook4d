@@ -23,10 +23,12 @@ namespace Firecoals.Space
         /// </summary>
         public GameObject _engflag;
 
+        [HideInInspector]
+        public bool en, vn;
+
         /// <summary>
         /// đổi ngôn ngữ VN
         /// </summary>
-
         public void ClickVNFlag()
         {
             buttonSelect.GetComponent<UI2DSprite>().sprite2D = _vnflag.GetComponent<UI2DSprite>().sprite2D;
@@ -34,7 +36,8 @@ namespace Firecoals.Space
             buttonSelect.GetComponent<UIButton>().hoverSprite2D = _vnflag.GetComponent<UIButton>().hoverSprite2D;
             buttonSelect.GetComponent<UIButton>().pressedSprite2D = _vnflag.GetComponent<UIButton>().pressedSprite2D;
             buttonSelect.GetComponent<UIButton>().disabledSprite2D = _vnflag.GetComponent<UIButton>().disabledSprite2D;
-
+            en = false;
+            vn = true;
             Localization.language = "Tiếng Việt";
         }
 
@@ -48,7 +51,8 @@ namespace Firecoals.Space
             buttonSelect.GetComponent<UIButton>().hoverSprite2D = _engflag.GetComponent<UIButton>().hoverSprite2D;
             buttonSelect.GetComponent<UIButton>().pressedSprite2D = _engflag.GetComponent<UIButton>().pressedSprite2D;
             buttonSelect.GetComponent<UIButton>().disabledSprite2D = _engflag.GetComponent<UIButton>().disabledSprite2D;
-
+            en = true;
+            vn = false;
             Localization.language = "English";
         }
     }

@@ -31,17 +31,17 @@ namespace Firecoals.Space
         /// <summary>
         /// thông tin chung về object
         /// </summary>
-        [SerializeField] UILocalize objectInfo;
+        private GameObject objectInfo;
 
         /// <summary>
         /// thông tin về các thành phần của object (nếu có)
         /// </summary>
-        [SerializeField] UILocalize componentInfo;
+        private GameObject componentInfo;
 
         /// <summary>
         /// tên của object
         /// </summary>
-        [SerializeField] UILocalize objectName;
+        private GameObject objectName;
 
         /// <summary>
         /// biến để so sánh tên object với key localization
@@ -60,15 +60,22 @@ namespace Firecoals.Space
         [Header("Information key")]
         public string st2;
 
+        [Header("Sounds")]
+        public string tagSound;
+        public string tagInfo;
+        private TestLoadSoundbundles _loadSoundbundle;
+
         protected override void Start()
         {
             base.Start();
             assetloader = GameObject.FindObjectOfType<AssetLoader>();
             _assethandler = new AssetHandler(mTrackableBehaviour.transform);
-            //_soundFromBundles = GameObject.FindObjectOfType<LoadSoundFromBundle>();
             ApplicationContext context = Context.GetApplicationContext();
             this._resources = context.GetService<IResources>();
-
+            _loadSoundbundle = GameObject.FindObjectOfType<TestLoadSoundbundles>();
+            objectName = GameObject.Find("UIMenu Root/Targets name/Label name");
+            objectInfo = GameObject.Find("UIMenu Root/Panel planet information/Text Information");
+            componentInfo = GameObject.Find("UIMenu Root/Panel object's component information/Text Information");
             st = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
             st.ToLower();
         }
@@ -88,10 +95,17 @@ namespace Firecoals.Space
             {
                 var startTime = DateTime.Now;
                 //Instantiate(go, mTrackableBehaviour.transform);
-                GameObject.Instantiate(go1, mTrackableBehaviour.transform);
-                Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
+                if (go1.activeInHierarchy)
+                {
+                    Destroy(go1);
+                }
+                else
+                {
+                    GameObject.Instantiate(go1, mTrackableBehaviour.transform);
+                    Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
+                }
             }
-
+            //_loadSoundbundle.PlayNameSound(tagSound);
             ChangeKeyLocalization();
             base.OnTrackingFound();
         }
@@ -106,7 +120,7 @@ namespace Firecoals.Space
                 Destroy(go.gameObject);
             }
 
-            //ClearKeyLocalization();
+            ClearKeyLocalization();
             base.OnTrackingLost();
         }
 
@@ -126,8 +140,8 @@ namespace Firecoals.Space
         {
             if (st1.Contains(st) && st2.Contains(st))
             {
-                objectName.key = st1;
-                objectInfo.key = st2;
+                objectName.GetComponent<UILocalize>().key = st1;
+                objectInfo.GetComponent<UILocalize>().key = st2;
 
                 objectName.GetComponent<UILabel>().text = Localization.Get(st1);
                 objectInfo.GetComponent<UILabel>().text = Localization.Get(st2);
@@ -136,8 +150,6 @@ namespace Firecoals.Space
 
         private void ClearKeyLocalization()
         {
-            //objectName.GetComponent<UILabel>().text = Localization.Get(string.Empty);
-            //objectInfo.GetComponent<UILabel>().text = Localization.Get(string.Empty);
             objectName.GetComponent<UILocalize>().key = string.Empty;
             objectInfo.GetComponent<UILocalize>().key = string.Empty;
         }
