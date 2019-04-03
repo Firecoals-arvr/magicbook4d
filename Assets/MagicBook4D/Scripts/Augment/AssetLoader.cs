@@ -21,6 +21,7 @@ namespace Firecoals.Augmentation
         private void Awake()
         {
             DontDestroyOnLoad(gameObject);
+            InitResource();
         }
 
         public void InitResource()
@@ -102,6 +103,7 @@ namespace Firecoals.Augmentation
         /// <param name="bundlePath"></param>
         public GameObject LoadGameObjectAsync(string bundlePath)
         {
+            
             IProgressResult<float, GameObject> result = Resources.LoadAssetAsync<GameObject>(bundlePath);
             GameObject tempGameObject = null;
             result.Callbackable().OnProgressCallback(p =>

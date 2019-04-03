@@ -19,7 +19,7 @@ namespace Firecoals.Space
         /// <summary>
         /// tên object trong asset bundles
         /// </summary>
-        public string objName;
+        //public string objName;
 
         /// <summary>
         /// đường dẫn của object trong thư mục

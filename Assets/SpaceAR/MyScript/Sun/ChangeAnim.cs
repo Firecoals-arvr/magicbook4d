@@ -8,27 +8,25 @@ namespace Firecoals.Space
 {
     public class ChangeAnim : MonoBehaviour
     {
-        public GameObject open, close;
+        public GameObject open;
         public Animator anim;
-        //public Button bt;
+        bool changAnim;
         void Start()
         {
             anim.GetComponent<Animator>();
+            changAnim = true;
         }
 
         public void OpenAnim()
         {
-            NGUITools.SetActive(open, false);
-            NGUITools.SetActive(close, true);
-
-            anim.Play("Open");
+            if (changAnim == true)
+            {
+                anim.Play("Open");
+            }else
+                anim.Play("Close");
+            changAnim = !changAnim;
         }
-        public void CloseAnim()
-        {
-            NGUITools.SetActive(open, true);
-            NGUITools.SetActive(close, false);
-            anim.Play("Close");
-        }
+        
 
     }
 }

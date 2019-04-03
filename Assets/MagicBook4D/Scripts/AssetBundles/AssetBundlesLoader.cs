@@ -26,7 +26,8 @@ namespace Firecoals.AssetBundles
         {
             //TODO Get Resource from AssetLoader DONE
             //var myResources = GetResources();
-            var myResources = GameObject.FindObjectOfType<AssetLoader>().Resources;
+           var myResources = GameObject.FindObjectOfType<AssetLoader>().Resources;
+
             IProgressResult<float, GameObject> result = myResources.LoadAssetAsync<GameObject>(name);
             GameObject tempGameObject = null;
             result.Callbackable().OnCallback((r) =>

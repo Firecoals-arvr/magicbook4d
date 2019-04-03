@@ -63,8 +63,8 @@ namespace Firecoals.Space
             if (File.Exists(audioJsonPath))
             {
                 string data = File.ReadAllText(audioJsonPath);
-                var listSound = Newtonsoft.Json.JsonConvert.DeserializeObject<List<SoundInfo>>(data);
-                SoundInfo sound = listSound.Where(s => s.Language == "english" && s.Category == "space").Single();
+                //var listSound = Newtonsoft.Json.JsonConvert.DeserializeObject<List<SoundInfo>>(data);
+                //SoundInfo sound = listSound.Where(s => s.Language == "english" && s.Category == "space").Single();
                 //List<SoundInfo> soundList = JsonUtility.
                 //SoundInfo soundinfo = JsonUtility.FromJson<SoundInfo>(data);
             }
