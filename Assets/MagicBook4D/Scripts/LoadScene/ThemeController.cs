@@ -27,9 +27,9 @@ public class ThemeController : MonoBehaviour
         }
         DontDestroyOnLoad(this);
         AddThemeEvent();
-        //PlayerPrefs.DeleteAll();
-        //Debug.LogWarning("Deleted all player preference key");
-    }
+		//PlayerPrefs.DeleteAll();
+		//Debug.LogWarning("Deleted all player preference key");
+	}
 
     private void SetTheme(string themeName)
     {

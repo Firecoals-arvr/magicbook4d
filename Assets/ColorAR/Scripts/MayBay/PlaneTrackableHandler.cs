@@ -5,7 +5,7 @@ using Firecoals.Augmentation;
 
 namespace Firecoals.Color
 {
-	public class TestTrackHandler : DefaultTrackableEventHandler
+	public class PlaneTrackableHandler : DefaultTrackableEventHandler
 	{
 		AssetHandler handler;
 		public GameObject renderCam;
@@ -46,11 +46,6 @@ namespace Firecoals.Color
 				Destroy(trans.gameObject);
 			}
 			base.OnTrackingLost();
-		}
-
-		public void Checking()
-		{
-			//handler.Content
 		}
 
 		public void CreateCloud(Transform parent)
