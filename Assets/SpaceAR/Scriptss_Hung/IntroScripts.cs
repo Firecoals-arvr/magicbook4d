@@ -68,16 +68,6 @@ namespace Firecoals.Space
         protected override void Start()
         {
             base.Start();
-            assetloader = GameObject.FindObjectOfType<AssetLoader>();
-            _assethandler = new AssetHandler(mTrackableBehaviour.transform);
-            ApplicationContext context = Context.GetApplicationContext();
-            this._resources = context.GetService<IResources>();
-            _loadSoundbundle = GameObject.FindObjectOfType<TestLoadSoundbundles>();
-            objectName = GameObject.Find("UIMenu Root/Targets name/Label name");
-            objectInfo = GameObject.Find("UIMenu Root/Panel planet information/Text Information");
-            componentInfo = GameObject.Find("UIMenu Root/Panel object's component information/Text Information");
-            st = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
-            st.ToLower();
         }
 
         protected override void OnDestroy()
@@ -88,24 +78,30 @@ namespace Firecoals.Space
         protected override void OnTrackingFound()
         {
             var statTime = DateTime.Now;
-            GameObject go1 = assetloader.LoadGameObjectAsync(path);
-            //GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;
+            _loadSoundbundle = GameObject.FindObjectOfType<TestLoadSoundbundles>();
+            assetloader = GameObject.FindObjectOfType<AssetLoader>();
+            //GameObject go1 = assetloader.LoadGameObjectAsync(path);
+
+            _assethandler = new AssetHandler(mTrackableBehaviour.transform);
+            ApplicationContext context = Context.GetApplicationContext();
+            this._resources = context.GetService<IResources>();
+            GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;
+            
             Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
-            if (go1 != null)
+            if (go != null)
             {
                 var startTime = DateTime.Now;
-                //Instantiate(go, mTrackableBehaviour.transform);
-                if (go1.activeInHierarchy)
-                {
-                    Destroy(go1);
-                }
-                else
-                {
-                    GameObject.Instantiate(go1, mTrackableBehaviour.transform);
-                    Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
-                }
+                Instantiate(go, mTrackableBehaviour.transform);
+                Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
             }
-            //_loadSoundbundle.PlayNameSound(tagSound);
+            _loadSoundbundle.PlayNameSound(tagSound);
+
+            objectName = GameObject.Find("UIMenu Root/Targets name/Label name");
+            objectInfo = GameObject.Find("UIMenu Root/Panel planet information/Text Information");
+            componentInfo = GameObject.Find("UIMenu Root/Panel object's component information/Text Information");
+            st = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
+            st.ToLower();
+
             ChangeKeyLocalization();
             base.OnTrackingFound();
         }

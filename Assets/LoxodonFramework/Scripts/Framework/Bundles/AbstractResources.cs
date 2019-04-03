@@ -598,7 +598,7 @@ namespace Loxodon.Framework.Bundles
             promise.SetResult(results.ToArray());
         }
 
-//#if SUPPORT_LOADALL
+#if SUPPORT_LOADALL
         public virtual Object[] LoadAllAssets(string bundleName)
         {
             return this.LoadAllAssets<Object>(bundleName);
@@ -722,7 +722,7 @@ namespace Loxodon.Framework.Bundles
                 return new ImmutableProgressResult<float, T[]>(e, 0f);
             }
         }
-//#endif
+#endif
         public virtual ISceneLoadingResult<Scene> LoadSceneAsync(string path, LoadSceneMode mode = LoadSceneMode.Single)
         {
             SceneLoadingResult<Scene> result = new SceneLoadingResult<Scene>();

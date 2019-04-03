@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections;
-using Firecoals.AssetBundles;
+﻿using Firecoals.AssetBundles;
 using Loxodon.Framework.Asynchronous;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
+using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Firecoals.Augmentation
@@ -18,26 +18,126 @@ namespace Firecoals.Augmentation
         public IResources Resources { private set; get; }
         //private string iv = "5Hh2390dQlVh0AqC";
         //private string key = "E4YZgiGQ0aqe5LEJ";
+
+        #region MONOBEHAVIOUR_METHOD
         private void Awake()
         {
-            DontDestroyOnLoad(this.gameObject);
-            BundleSetting setting = new BundleSetting(bundleRoot);
-            this.Resources = CreateResources();
+            DontDestroyOnLoad(gameObject);
+            switch (ThemeController.instance.Theme)
+            {
+                case "Animal":
+                    bundleRoot = "Animal/bundles";
+                    bundleNames = new[] {"animals/model/bear",
+                        "animals/model/buffalo",
+                        "animals/model/cat",
+                        "animals/model/chameleon",
+                        "animals/model/cow",
+                        "animals/model/crocodile",
+                        "animals/model/dog",
+                        "animals/model/dolphin",
+                        "animals/model/eagle",
+                        "animals/model/elephant",
+                        "animals/model/frog",
+                        "animals/model/giraffe",
+                        "animals/model/gorilla",
+                        "animals/model/horse",
+                        "animals/model/kangaroo",
+                        "animals/model/lion",
+                        "animals/model/oschinh",
+                        "animals/model/owl",
+                        "animals/model/parrot",
+                        "animals/model/peacock",
+                        "animals/model/penguin",
+                        "animals/model/pig",
+                        "animals/model/rabbit",
+                        "animals/model/rhino",
+                        "animals/model/rooster",
+                        "animals/model/sheep",
+                        "animals/model/squirrel",
+                        "animals/model/tiger",
+                        "animals/model/turtle",
+                        "animals/model/wolf",
+                        "animals/info/en",
+                        "animals/info/jp",
+                        "animals/info/vn",
+                        "animals/name/cn",
+                        "animals/name/en",
+                        "animals/name/vn",
+                        "animals/name/jp",
+                        "animals/noise"
+                    };
+                    break;
+                case "Space":
+                    bundleRoot = "Space/bundles";
+                    bundleNames = new[] {"space/models/solarsystem",
+                        "space/models/sun",
+                        "space/models/iss",
+                        "space/models/mars",
+                        "space/models/venus",
+                        "space/models/mercury",
+                        "space/models/earth",
+                        "space/models/jupiter",
+                        "space/models/saturn",
+                        "space/models/uranus",
+                        "space/models/neptune",
+                        "space/models/moon",
+                        "space/models/blackhole",
+                        "space/models/boosterandshuttle",
+                        "space/models/alienware",
+                        "space/models/satellite",
+                        "space/models/eclipse",
+                        "space/models/game1",
+                        "space/models/game2",
+                        "space/models/bigbang",
+                        "space/models/comet",
+                        "space/sound/name/en",
+                        "space/sound/name/vn",
+                        "space/sound/info/vn",
+                        "space/sound/info/en"
+                    };
+                    break;
+                case "Color":
+                    bundleRoot = "Color/bundles";
+                    bundleNames = new[] { "color/model/camtrai",
+                        "color/model/chantrau",
+                        "color/model/cloud/maybay",
+                        "color/model/dabong",
+                        "color/model/khurung",
+                        "color/model/maybay",
+                        "color/model/samac",
+                        "color/model/tambien",
+                        "color/model/thadieu",
+                        "color/model/thanhpho",
+                        "color/model/trangtrai",
+                        "color/sounds/music",
+                        "color/sounds/sounds"
+                    };
+                    break;
 
-            ApplicationContext context = Context.GetApplicationContext();
-            context.GetContainer().Register<IResources>(this.Resources);
+            }
         }
 
-        private void Start()
+
+        #endregion
+
+        public void InitResource()
         {
-            StartCoroutine(PreLoad());
+            BundleSetting setting = new BundleSetting(bundleRoot);
+            Resources = CreateResources();
+            ApplicationContext context = Context.GetApplicationContext();
+            context.GetContainer().Register<IResources>(Resources);
         }
 
-        private IEnumerator PreLoad()
+        /// <summary>
+        /// Preload header of the asset bundles
+        /// </summary>
+        /// <param name="slider"></param>
+        /// <returns></returns>
+        public IEnumerator PreLoad(UISlider slider)
         {
             BundleSetting bundleSettings = new BundleSetting(bundleRoot);
             /*Preload asset bundle*/
-
+            assetBundlesLoader.slider = slider;
             yield return assetBundlesLoader.Preload(bundleNames, 1);
         }
         private IResources CreateResources()
@@ -97,14 +197,14 @@ namespace Firecoals.Augmentation
         /// Return an GameObject
         /// Return null if fail
         /// </summary>
-        /// <param name="name"></param>
-        public GameObject LoadGameObjectAsync(string name)
+        /// <param name="bundlePath"></param>
+        public GameObject LoadGameObjectAsync(string bundlePath)
         {
-            IProgressResult<float, GameObject> result = Resources.LoadAssetAsync<GameObject>(name);
+            IProgressResult<float, GameObject> result = Resources.LoadAssetAsync<GameObject>(bundlePath);
             GameObject tempGameObject = null;
             result.Callbackable().OnProgressCallback(p =>
             {
-                Debug.LogFormat(name + "is loading with result :{0}%", p * 100);
+                Debug.LogFormat(bundlePath + "is loading with result :{0}%", p * 100);
             });
             result.Callbackable().OnCallback((r) =>
             {
