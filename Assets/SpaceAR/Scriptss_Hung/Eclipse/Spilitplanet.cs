@@ -13,7 +13,7 @@ namespace Firecoals.Space
         /// biên check trạng thái đóng/mở hành tinh
         /// </summary>
         public static bool temp;
-        // Use this for initialization
+
         void Start()
         {
             temp = true;
