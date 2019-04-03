@@ -97,6 +97,7 @@ namespace Firecoals.Augmentation
                     };
                     break;
                 case "Color":
+                    bundleRoot = "Color/bundles";
                     bundleNames = new[] { "color/model/camtrai",
                         "color/model/chantrau",
                         "color/model/cloud/maybay",
