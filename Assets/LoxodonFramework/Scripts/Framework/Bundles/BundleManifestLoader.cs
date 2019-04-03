@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using UnityEngine;
 using System.IO;
 using System.Text;
 
@@ -61,7 +62,6 @@ namespace Loxodon.Framework.Bundles
 #elif UNITY_WEBGL && !UNITY_EDITOR
             throw new NotSupportedException("Because WebGL is single-threaded, this method is not supported,please use LoadAsync instead.");
 #else
-            
             return BundleManifest.Parse(File.ReadAllText(path, Encoding.UTF8));
 #endif
         }

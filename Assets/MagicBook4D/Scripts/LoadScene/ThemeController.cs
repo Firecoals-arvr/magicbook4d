@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
-using UnityEngine.Experimental.UIElements;
 
 public class ThemeController : MonoBehaviour
 {
     [Tooltip("The grid contain UIButton theme")]
     public UIGrid gridGameObject;
     public string Theme { get; set; }
+    public static ThemeController instance = null;
+
 
     private ThemeController(string themeName)
     {
@@ -14,11 +15,20 @@ public class ThemeController : MonoBehaviour
     public static ThemeController Animal => new ThemeController("Animal");
     public static ThemeController Color => new ThemeController("Color");
     public static ThemeController Space => new ThemeController("Space");
-
     private void Start()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
         DontDestroyOnLoad(this);
         AddThemeEvent();
+        //PlayerPrefs.DeleteAll();
+        //Debug.LogWarning("Deleted all player preference key");
     }
 
     private void SetTheme(string themeName)

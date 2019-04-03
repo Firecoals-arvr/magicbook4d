@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using Loxodon.Framework.Bundles;
 using System.Collections.Generic;
 using UnityEngine;
-using Firecoals.AssetBundles;
-using Loxodon.Framework.Bundles;
-using Vuforia;
 namespace Firecoals.Augmentation
 {
     /// <summary>
@@ -13,9 +9,10 @@ namespace Firecoals.Augmentation
     public class AssetHandler
     {
         #region PUBLIC_VARIABLE
+        public TargetContent Content { get; }
         public Dictionary<string, GameObject> spawnedObject;
         #endregion
-        public TargetContent Content { get; }
+
         #region PUBLIC_CONSTRUCTOR
         /// <summary>
         /// Asset contents under a image target
@@ -40,8 +37,8 @@ namespace Firecoals.Augmentation
         /// <param name="bundlePath"></param>
         public GameObject CreateUnique(string bundleName, string bundlePath)
         {
-            var assetBundlesLoader = GameObject.FindObjectOfType<AssetLoader>().assetBundlesLoader;
             Debug.LogWarning("prepare Create unique game object");
+            var assetBundlesLoader = GameObject.FindObjectOfType<AssetLoader>().assetBundlesLoader;
             GameObject goTemplate;
             if (assetBundlesLoader.bundles.ContainsKey(bundleName))
             {
@@ -69,57 +66,47 @@ namespace Firecoals.Augmentation
             }
 
         }
-        /// <summary>
-        /// You can create many game object from the game object
-        /// </summary>
-        /// <param name="bundleName"></param>
-        /// <param name="bundlePath"></param>
-        /// <returns></returns>
-        //public GameObject CreateClone(string bundleName, string bundlePath)
-        //{
-        //    if (assetBundlesLoader.bundles.ContainsKey(bundleName))
-        //    {
-        //        var bundle = assetBundlesLoader.bundles[bundleName];
-        //        var goTemplate = bundle.LoadAsset<GameObject>(bundlePath);
-        //        var clone = Content.Create(goTemplate, TargetContent.ContentType.Clone);
-        //        spawnedObject.Add(bundlePath, goTemplate);
-        //        Debug.LogWarning("<color=green>clone object created</color>");
-        //        return goTemplate;
-        //    }
-        //    else
-        //    {
-        //        Debug.LogError("Can not create null game object, Please wait for load asset bundle is done!");
-        //        return null;
-        //    }
-        //}
-        /// <summary>
-        /// Create random a GameObject in a list bundle paths as clone
-        /// </summary>
-        /// <param name="bundleName"></param>
-        /// <param name="bundlePaths"></param>
-        /// <returns></returns>
-        //public GameObject CreateRandom(string bundleName, string[] bundlePaths)
-        //{
-        //    var bundlePath = bundlePaths[new System.Random().Next(0, bundlePaths.Length)];
-        //    if (assetBundlesLoader.bundles.ContainsKey(bundleName))
-        //    {
-        //        var bundle = assetBundlesLoader.bundles[bundleName];
-        //        var goTemplate = bundle.LoadAsset<GameObject>(bundlePath);
-        //        var clone = Content.Create(goTemplate, TargetContent.ContentType.Clone);
-        //        //spawnedObject.Add(bundlePath, goTemplate);
-        //        Debug.LogWarning("<color=green>clone random object created</color>");
-        //        return goTemplate;
-        //    }
-        //    else
-        //    {
-        //        Debug.LogError("Can not create null game object, Please wait for load asset bundle is done!");
-        //        return null;
-        //    }
-        //}
+        public GameObject CreateClone(string bundleName, string bundlePath)
+        {
+            var assetBundlesLoader = GameObject.FindObjectOfType<AssetLoader>().assetBundlesLoader;
+            if (assetBundlesLoader.bundles.ContainsKey(bundleName))
+            {
+                var bundle = assetBundlesLoader.bundles[bundleName];
+                var goTemplate = bundle.LoadAsset<GameObject>(bundlePath);
+                var clone = Content.Create(goTemplate, TargetContent.ContentType.Clone);
+                spawnedObject.Add(bundlePath, goTemplate);
+                Debug.LogWarning("<color=green>clone object created</color>");
+                return goTemplate;
+            }
+            else
+            {
+                Debug.LogError("Can not create null game object, Please wait for load asset bundle is done!");
+                return null;
+            }
+        }
+       public GameObject CreateRandom(string bundleName, string[] bundlePaths)
+        {
+            var assetBundlesLoader = GameObject.FindObjectOfType<AssetLoader>().assetBundlesLoader;
+            var bundlePath = bundlePaths[new System.Random().Next(0, bundlePaths.Length)];
+            if (assetBundlesLoader.bundles.ContainsKey(bundleName))
+            {
+                var bundle = assetBundlesLoader.bundles[bundleName];
+                var goTemplate = bundle.LoadAsset<GameObject>(bundlePath);
+                var clone = Content.Create(goTemplate, TargetContent.ContentType.Clone);
+                //spawnedObject.Add(bundlePath, goTemplate);
+                Debug.LogWarning("<color=green>clone random object created</color>");
+                return goTemplate;
+            }
+            else
+            {
+                Debug.LogError("Can not create null game object, Please wait for load asset bundle is done!");
+                return null;
+            }
+        }
         public void ClearAll()
         {
             spawnedObject?.Clear();
-            
+
         }
         #endregion
     }

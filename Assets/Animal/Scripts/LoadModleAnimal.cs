@@ -33,6 +33,7 @@ namespace Firecoals.Animal
         private AssetHandler assethandler;
         private  AudioSource audio;
         private IResources _resources;
+        public string tagInfo;
         protected override void Start()
         {
             
@@ -57,7 +58,6 @@ namespace Firecoals.Animal
         {
             base.OnTrackingFound();
             var statTime = DateTime.Now;
-            Debug.LogWarning(mTrackableBehaviour.TrackableName.ToString()+"xx");
             GameObject go = assethandler.CreateUnique(BuildName, path);    
             Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
             if (go != null)
