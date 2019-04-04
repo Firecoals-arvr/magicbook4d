@@ -11,7 +11,7 @@ namespace Firecoals.AssetBundles
     public class DownLoadAssetBundles : MyBundleResources
     {
         private IDownloader _downloader;
-        private bool downloading = false;
+        public bool downloading { get; private set; }
         private static string _platformName;
         private Dictionary<string, IBundle> bundles = new Dictionary<string, IBundle>();
 
