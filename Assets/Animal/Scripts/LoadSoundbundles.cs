@@ -18,36 +18,59 @@ namespace Firecoals.Animal
         //bool isTrackable;
         private SoundInfo[] soundNames;
         private SoundInfo[] soundInfos;
+        private SoundInfo[] soundNoises;
         private string language;
         private void Start()
         {
             imageTarget = GameObject.FindGameObjectsWithTag("ImageTarget");
         }
-        public void PlaySound(string tagSound)
+        public void PlaySound(string sound)
         {
             Debug.Log("loading json");
             _assetLoader = GameObject.FindObjectOfType<AssetLoader>();
             _soundManifest = new SoundManifestLoader();
-            var soundManifest = _soundManifest.LoadSync(Application.streamingAssetsPath + "/AnimalAudioClip.json");
-            soundNames = soundManifest.soundInfos;
+            var soundManifest = _soundManifest.LoadSync(Application.streamingAssetsPath + "/AnimalAudio.json");
+            soundNoises = soundManifest.soundInfos;
             language = "all";
             _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["animals/noise"];
-            AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetSoundBundlePath(language, tagSound));
+            AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetSoundBundlePath(language, sound));
             FirecoalsSoundManager.PlaySound(audioClip);
+        }
+        private string GetSoundBundlePath(string currentLanguage, string tag)
+        {
+            foreach (var soundNoise in soundNoises)
+            {
+                if (soundNoise.Language == currentLanguage && soundNoise.Tag == tag)
+                {
+                    return soundNoise.PathBundle;
+                }
+            }
+            return string.Empty;
+        }
+        public void PlayName(string tagName)
+        {
+            _assetLoader = GameObject.FindObjectOfType<AssetLoader>();
+            _soundManifest = new SoundManifestLoader();
+            var soundManifest = _soundManifest.LoadSync(Application.streamingAssetsPath + "/AnimalAudio.json");
+            soundNames = soundManifest.soundInfos;
             //if (select.en == true)
             //{
 
             //}
-            //if(select.vn == true)
+            language = "vietnamese";
+            _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["animals/name/vn"];
+            AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetNameBundlePath(language, tagName));
+            FirecoalsSoundManager.PlaySound(audioClip);
+            //if (select.vn == true)
             //{
             //    language = "vietnamese";
-            //    _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["animals/sound/name/vn"];
-            //    AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetSoundBundlePath(language, tagSound));
+            //    _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["animals/sound/info/vn"];
+            //    AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetSoundBundlePath(language, tagInfo));
             //    FirecoalsSoundManager.PlaySound(audioClip);
-            //}
 
+            //}
         }
-        private string GetSoundBundlePath(string currentLanguage, string tag)
+        private string GetNameBundlePath(string currentLanguage, string tag)
         {
             foreach (var soundName in soundNames)
             {
@@ -58,19 +81,20 @@ namespace Firecoals.Animal
             }
             return string.Empty;
         }
-        private void PlayInfoSound(string tagInfo)
+
+        public void PlayInfo(string tagInfo)
         {
             _assetLoader = GameObject.FindObjectOfType<AssetLoader>();
             _soundManifest = new SoundManifestLoader();
-            var soundManifest = _soundManifest.LoadSync(Application.streamingAssetsPath + "/AnimalAudioClip.json");
+            var soundManifest = _soundManifest.LoadSync(Application.streamingAssetsPath + "/AnimalAudio.json");
             soundInfos = soundManifest.soundInfos;
             //if (select.en == true)
             //{
 
             //}
-            //language = "english";
-            _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["animals/noise"];
-            AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetSoundBundlePath(language, tagInfo));
+            language = "vietnamese";
+            _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["animals/info/vn"];
+            AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetInfoBundlePath(language, tagInfo));
             FirecoalsSoundManager.PlaySound(audioClip);
             //if (select.vn == true)
             //{
@@ -92,27 +116,29 @@ namespace Firecoals.Animal
             }
             return string.Empty;
         }
-        //public void ReplayNameSound()
-        //{
-        //    foreach (GameObject go in imageTarget)
-        //    {
-        //        if (go.transform.childCount > 0)
-        //        {
-        //            PlayNameSound(go.transform.GetComponentInParent<load>().tagSound);
-        //        }
-        //    }
-
-        //}
-        public void ReplayInfoSound()
+        
+        public void ReplayName()
         {
             foreach (GameObject go in imageTarget)
             {
                 if (go.transform.childCount > 0)
                 {
-                    PlayInfoSound(go.transform.GetComponentInParent<LoadModleAnimal>().tagInfo);
+                    PlayName(go.transform.GetComponentInParent<LoadModleAnimal>().tagName);
                 }
             }
 
         }
+        public void ReplayInfo()
+        {
+            foreach (GameObject go in imageTarget)
+            {
+                if (go.transform.childCount > 0)
+                {
+                    PlayInfo(go.transform.GetComponentInParent<LoadModleAnimal>().tagInfo);
+                }
+            }
+
+        }
+
     }
 }

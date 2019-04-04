@@ -38,6 +38,8 @@ namespace Firecoals.Augmentation
         public GameObject CreateUnique(string bundleName, string bundlePath)
         {
             Debug.LogWarning("prepare Create unique game object");
+            Debug.LogWarning("bundleName"+bundleName);
+            Debug.LogWarning("bundlePath" + bundlePath);
             var assetBundlesLoader = GameObject.FindObjectOfType<AssetLoader>().assetBundlesLoader;
             GameObject goTemplate;
             if (assetBundlesLoader.bundles.ContainsKey(bundleName))

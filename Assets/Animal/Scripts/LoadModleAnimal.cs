@@ -28,18 +28,23 @@ namespace Firecoals.Animal
         /// <summary>
         /// đường dẫn sound
         /// </summary>
-        private  GameObject go;
         public float TimeStartEffect;
-        private AssetHandler assethandler;
+        private AssetHandler assetHandler { get; set; }
+        private  AssetLoader assetLoader { get; set; }
+        private LoadSoundbundles _loadsoundbundles;
         private  AudioSource audio;
         private IResources _resources;
         public string tagInfo;
+        public string tagSound;
+        public string tagName;
+
         protected override void Start()
         {
             
             base.Start();
             audio = gameObject.GetComponent<AudioSource>();
-            assethandler = new AssetHandler(mTrackableBehaviour.transform);
+            assetHandler = new AssetHandler(mTrackableBehaviour.transform);
+            _loadsoundbundles =GameObject.FindObjectOfType<LoadSoundbundles>();
         }
 
         protected override void OnDestroy()
@@ -48,22 +53,25 @@ namespace Firecoals.Animal
         }
 
       IEnumerator starEffect(GameObject go)
-        {
+      {
+          assetLoader = GameObject.FindObjectOfType<AssetLoader>();
             Debug.Log("start Effect");
            RandomEffect.Instance.Onfound(TimeStartEffect);
            yield return new WaitForSeconds(0.5f);
            GameObject.Instantiate(go, mTrackableBehaviour.transform);
+           _loadsoundbundles.PlaySound(tagSound);
+            _loadsoundbundles.PlayName(tagName);
+            
         }
         protected override void OnTrackingFound()
         {
             base.OnTrackingFound();
             var statTime = DateTime.Now;
-            GameObject go = assethandler.CreateUnique(BuildName, path);    
+            GameObject go = assetHandler.CreateUnique(BuildName, path);    
             Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
             if (go != null)
             {
                 var startTime = DateTime.Now;
-                //Instantiate(go, mTrackableBehaviour.transform);
                 StartCoroutine(starEffect(go));
               
                 Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
@@ -72,10 +80,9 @@ namespace Firecoals.Animal
         protected override void OnTrackingLost()
         {
             base.OnTrackingLost();
-           // Debug.LogWarning(mTrackableBehaviour.TrackableName.ToString() + "xx");
-                RandomEffect.Instance.Onlost();
-            assethandler?.ClearAll();
-            assethandler?.Content.ClearAll();      
+            RandomEffect.Instance.Onlost();
+            assetHandler?.ClearAll();
+            assetHandler?.Content.ClearAll();      
             foreach (Transform go in mTrackableBehaviour.transform)
             {
                Destroy(go.gameObject);
@@ -83,17 +90,17 @@ namespace Firecoals.Animal
           
         }
 
-        private void RunAnimationIntro()
-        {
-            if (this.gameObject.transform.GetChild(0).GetComponent<Animation>() != null)
-            {
-                this.gameObject.transform.GetChild(0).GetComponent<Animation>().Play("intro");
-            }
-            else
-            {
-                Debug.LogWarning("This object hasn't intro animation.");
-            }
-        }
+        //private void RunAnimationIntro()
+        //{
+        //    if (this.gameObject.transform.GetChild(0).GetComponent<Animation>() != null)
+        //    {
+        //        this.gameObject.transform.GetChild(0).GetComponent<Animation>().Play("intro");
+        //    }
+        //    else
+        //    {
+        //        Debug.LogWarning("This object hasn't intro animation.");
+        //    }
+        //}
       
     }
 }
