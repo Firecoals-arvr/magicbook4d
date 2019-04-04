@@ -26,7 +26,7 @@ namespace Firecoals.Render
         private void OnPress(bool pressed)
         {
             //Debug.Log("Pressed: " + pressed.ToString());
-            recording.StartRecording();
+            
             StartCoroutine(CowntDown(pressed));
 
             if (!pressed)
@@ -34,6 +34,10 @@ namespace Firecoals.Render
                 Reset();
                 cownting = false;
                 recording.StopRecording();
+            }
+            else
+            {
+                recording.StartRecording();
             }
 
         }
