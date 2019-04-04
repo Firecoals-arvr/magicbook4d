@@ -5,7 +5,7 @@ namespace Firecoals.Render
 {
     public class RecordButton : MonoBehaviour
     {
-        private const float MaxRecordingTime = 10f; // seconds
+        private const float MaxRecordingTime = 60f; // seconds
         public UISprite cowntdown;
         private bool cownting;
         private Recording recording; 
