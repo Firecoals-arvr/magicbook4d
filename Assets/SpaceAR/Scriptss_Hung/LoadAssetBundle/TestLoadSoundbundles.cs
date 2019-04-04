@@ -10,7 +10,6 @@ namespace Firecoals.Space
 {
     public class TestLoadSoundbundles : MonoBehaviour
     {
-
         private ISoundManifestLoader _soundManifest;
         private IBundle _bundleAudioClip;
         private AssetLoader _assetLoader;
@@ -46,7 +45,6 @@ namespace Firecoals.Space
                 AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetSoundBundlePath(language, tagSound));
                 FirecoalsSoundManager.PlaySound(audioClip);
             }
-
         }
         private string GetSoundBundlePath(string currentLanguage, string tag)
         {
@@ -101,7 +99,6 @@ namespace Firecoals.Space
                     PlayNameSound(go.transform.GetComponentInParent<IntroScripts>().tagSound);
                 }
             }
-
         }
         public void ReplayInfoSound()
         {

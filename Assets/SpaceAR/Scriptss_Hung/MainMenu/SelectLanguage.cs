@@ -23,10 +23,13 @@ namespace Firecoals.Space
         /// </summary>
         public GameObject _engflag;
 
+        /// <summary>
+        /// biến check ngôn ngữ nào đang được chọn
+        /// </summary>
         [HideInInspector]
         public bool en, vn;
 
-        /// <summary>
+        /// <summary>   
         /// đổi ngôn ngữ VN
         /// </summary>
         public void ClickVNFlag()
@@ -54,6 +57,13 @@ namespace Firecoals.Space
             en = true;
             vn = false;
             Localization.language = "English";
+        }
+
+        private void Start()
+        {
+            Localization.language = "Tiếng Việt";
+            vn = true;
+            en = false;
         }
     }
 }

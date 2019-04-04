@@ -63,7 +63,16 @@ namespace Firecoals.Space
         [Header("Sounds")]
         public string tagSound;
         public string tagInfo;
+
+        /// <summary>
+        /// load âm thanh từ assetbundles
+        /// </summary>
         private TestLoadSoundbundles _loadSoundbundle;
+
+        /// <summary>
+        /// bảng thông báo kích hoạt
+        /// </summary>
+        public GameObject panelActive;
 
         protected override void Start()
         {
@@ -82,19 +91,22 @@ namespace Firecoals.Space
             assetloader = GameObject.FindObjectOfType<AssetLoader>();
             //GameObject go1 = assetloader.LoadGameObjectAsync(path);
 
-            _assethandler = new AssetHandler(mTrackableBehaviour.transform);
+            //_assethandler = new AssetHandler(mTrackableBehaviour.transform);
+            _assethandler = new AssetHandler();
             ApplicationContext context = Context.GetApplicationContext();
             this._resources = context.GetService<IResources>();
             GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;
-            
+
             Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
             if (go != null)
             {
                 var startTime = DateTime.Now;
-                Instantiate(go, mTrackableBehaviour.transform);
+                GameObject.Instantiate(go, mTrackableBehaviour.transform);
                 Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
             }
             _loadSoundbundle.PlayNameSound(tagSound);
+
+            panelActive = GameObject.Find("UIMenu Root/Panel Active");
 
             objectName = GameObject.Find("UIMenu Root/Targets name/Label name");
             objectInfo = GameObject.Find("UIMenu Root/Panel planet information/Text Information");
@@ -109,7 +121,7 @@ namespace Firecoals.Space
         protected override void OnTrackingLost()
         {
             _assethandler?.ClearAll();
-            _assethandler?.Content.ClearAll();
+            //_assethandler?.Content.ClearAll();
 
             foreach (Transform go in mTrackableBehaviour.transform)
             {
@@ -117,6 +129,7 @@ namespace Firecoals.Space
             }
 
             ClearKeyLocalization();
+            FirecoalsSoundManager.StopAll();
             base.OnTrackingLost();
         }
 
@@ -132,6 +145,9 @@ namespace Firecoals.Space
             }
         }
 
+        /// <summary>
+        /// khi có target, gán key cho localize
+        /// </summary>
         private void ChangeKeyLocalization()
         {
             if (st1.Contains(st) && st2.Contains(st))
@@ -144,10 +160,55 @@ namespace Firecoals.Space
             }
         }
 
+        /// <summary>
+        /// khi mất target, xóa key ở localize
+        /// </summary>
         private void ClearKeyLocalization()
         {
-            objectName.GetComponent<UILocalize>().key = string.Empty;
-            objectInfo.GetComponent<UILocalize>().key = string.Empty;
+            //objectName.GetComponent<UILocalize>().key = string.Empty;
+            //objectInfo.GetComponent<UILocalize>().key = string.Empty;
+            objectName.GetComponent<UILabel>().text = Localization.Get("");
+            objectInfo.GetComponent<UILabel>().text = Localization.Get("");
+        }
+
+        /// <summary>
+        /// check đã kích hoạt thì mới sử dụng được tranh
+        /// </summary>
+        /// <returns></returns>
+        private bool IsActivedOrNot()
+        {
+            if (ActiveManager.IsActiveOfflineOk(2))
+            {
+
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// check nếu là 3 tranh đầu tiên cho dùng free
+        /// </summary>
+        /// <returns></returns>
+        private bool Is3FirstImageTarget()
+        {
+            if (this.gameObject.name == "Page 1" || this.gameObject.name == "Page 2" || this.gameObject.name == "Page 3")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// check những tranh được phép quét
+        /// </summary>
+        private void ImageTargetsCanUse()
+        {
+            if (Is3FirstImageTarget() == false)
+            {
+                panelActive.SetActive(true);
+            }
         }
     }
 }

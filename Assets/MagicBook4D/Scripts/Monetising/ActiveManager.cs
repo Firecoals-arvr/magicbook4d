@@ -103,7 +103,7 @@ public class ActiveManager
         else
         {
             string result = www.downloadHandler.text;
-            Debug.LogWarning("result: "+result);
+            Debug.LogWarning("result: " + result);
             if (result.Equals(ACTIVED))
             {
                 OnPlayerServerActived();
@@ -162,7 +162,8 @@ public class ActiveManager
             if (result.Equals("on"))
             {
                 OnShowActivationButton();
-            }else if (result.Equals("off"))
+            }
+            else if (result.Equals("off"))
             {
                 OnHideActivationButton();
             }
