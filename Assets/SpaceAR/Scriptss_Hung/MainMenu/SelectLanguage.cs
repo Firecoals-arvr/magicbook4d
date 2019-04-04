@@ -29,6 +29,14 @@ namespace Firecoals.Space
         /// <summary>
         /// đổi ngôn ngữ VN
         /// </summary>
+
+
+        private void Start()
+        {
+            vn = true;
+            en = false;
+            Localization.language = "Tiếng Việt";
+        }
         public void ClickVNFlag()
         {
             buttonSelect.GetComponent<UI2DSprite>().sprite2D = _vnflag.GetComponent<UI2DSprite>().sprite2D;

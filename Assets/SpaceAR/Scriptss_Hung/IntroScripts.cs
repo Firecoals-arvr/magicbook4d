@@ -64,7 +64,7 @@ namespace Firecoals.Space
         public string tagSound;
         public string tagInfo;
         private TestLoadSoundbundles _loadSoundbundle;
-
+        Animator anim;
         protected override void Start()
         {
             base.Start();
@@ -80,22 +80,22 @@ namespace Firecoals.Space
             var statTime = DateTime.Now;
             _loadSoundbundle = GameObject.FindObjectOfType<TestLoadSoundbundles>();
             assetloader = GameObject.FindObjectOfType<AssetLoader>();
-            //GameObject go1 = assetloader.LoadGameObjectAsync(path);
+            
 
             _assethandler = new AssetHandler(mTrackableBehaviour.transform);
             ApplicationContext context = Context.GetApplicationContext();
             this._resources = context.GetService<IResources>();
-            GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;
-            
+            //GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;
+            GameObject go1 = assetloader.LoadGameObjectAsync(path);
             Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
-            if (go != null)
+            if (go1 != null)
             {
                 var startTime = DateTime.Now;
-                Instantiate(go, mTrackableBehaviour.transform);
+                Instantiate(go1, mTrackableBehaviour.transform);
                 Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
             }
             _loadSoundbundle.PlayNameSound(tagSound);
-
+            //anim.GetComponent<Animator>().SetTrigger("Intro");
             objectName = GameObject.Find("UIMenu Root/Targets name/Label name");
             objectInfo = GameObject.Find("UIMenu Root/Panel planet information/Text Information");
             componentInfo = GameObject.Find("UIMenu Root/Panel object's component information/Text Information");
@@ -117,6 +117,7 @@ namespace Firecoals.Space
             }
 
             ClearKeyLocalization();
+            FirecoalsSoundManager.StopAll();
             base.OnTrackingLost();
         }
 
@@ -146,8 +147,12 @@ namespace Firecoals.Space
 
         private void ClearKeyLocalization()
         {
-            objectName.GetComponent<UILocalize>().key = string.Empty;
-            objectInfo.GetComponent<UILocalize>().key = string.Empty;
+            if (objectInfo != null && objectName != null)
+            {
+                objectName.GetComponent<UILocalize>().key = string.Empty;
+                objectInfo.GetComponent<UILocalize>().key = string.Empty;
+            }
         }
+
     }
 }
