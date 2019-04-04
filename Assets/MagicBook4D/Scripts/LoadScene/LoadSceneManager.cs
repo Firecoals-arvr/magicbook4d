@@ -1,30 +1,48 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoadSceneManager : MonoBehaviour
 {
-    public void LoadPreLoadScene()
-    {
-        LoadingScreen.SceneToLoad = "PreloadAssetBundleExample";
-        LoadingScreen.Run();
-    }
+    public static LoadSceneManager instance;
+    public string currentScene { get; set; }
+    public string previousScene { get; set; }
+    //private void Start()
+    //{
+    //    if (instance != this)
+    //    {
+    //        instance = this;
+    //    }
+    //    else
+    //    {
+    //        DontDestroyOnLoad(this.gameObject);
+    //    }
+    //}
 
-    public void LoadTestScene()
+    public void LoadSettingScene()
     {
-        LoadingScreen.SceneToLoad = "TestScene";
-        LoadingScreen.Run(); 
+        SceneManager.LoadScene("Settings");
     }
 
     public void LoadMenuScene()
     {
-        LoadingScreen.SceneToLoad = "Menu";
-        LoadingScreen.Run();
+        SceneManager.LoadScene("Menu");
     }
-   
-    public void LoadResourcesDownloadScene()
+
+    public void LoadInfoScene()
     {
-        LoadingScreen.SceneToLoad = "ResourcesDownloadExample";
-        LoadingScreen.Run();
+        SceneManager.LoadScene("Info");
     }
+
+    public void LoadActivateScene()
+    {
+        SceneManager.LoadScene("Activate");
+    }
+
+    public void LoadStoreScene()
+    {
+        SceneManager.LoadScene("Store");
+    }
+       
 }

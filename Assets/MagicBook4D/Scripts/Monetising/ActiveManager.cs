@@ -1,18 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Networking;
-using System;
+
 public class ActiveManager
 {
-    private const int ID_ANIMAL = 1;
-    private const int ID_SPACE = 2;
-    private const int ID_COLOR = 3;
-
-    private const string NAME_ANIMAL = "A";
-    private const string NAME_SPACE = "B";
-    private const string NAME_COLOR = "C";
-
     private static string _Url = "https://firecoalslisenceserver.herokuapp.com";
+
     //urlhttp://104.199.229.206
     //private static string _Port = "3122";
     private static string ModuleRegister = "/register";
@@ -26,33 +21,32 @@ public class ActiveManager
     private const string License = "license";
     private static string Module_Activation = "/activation";
 
-    public static event Action OnRegisterLicenseSuccess = delegate { };
+    public static event Action<string> OnRegisterLicenseSuccess = delegate { };
     public static event Action<string> OnRegisterLicenseFailure = delegate { };
     public static event Action OnConnectionError = delegate { };
-    public static event Action OnPlayerServerActived = delegate { };
+    public static event Action<string> OnPlayerServerActived = delegate { };
     public static event Action OnPlayerServerNotActived = delegate { };
     public static event Action OnShowActivationButton = delegate { };
     public static event Action OnHideActivationButton = delegate { };
     public static bool isShowActivationButton = false;
 
-
     ///<summary>
     ///Setup something. call this before use.
-    ///Project_Id: Animal = 1, Sapce = 2, Color = 3
+    ///Project_Id: Animal = 1, Space = 2, Color = 3
     ///</summary>
 
     public static void Setup(int Project_Id)
     {
         switch (Project_Id)
         {
-            case ID_ANIMAL:
-                PROJECT_NAME = NAME_ANIMAL;
+            case 1:
+                PROJECT_NAME = "A";
                 break;
-            case ID_SPACE:
-                PROJECT_NAME = NAME_SPACE;
+            case 2:
+                PROJECT_NAME = "B";
                 break;
-            case ID_COLOR:
-                PROJECT_NAME = NAME_COLOR;
+            case 3:
+                PROJECT_NAME = "C";
                 break;
         }
 
@@ -60,42 +54,40 @@ public class ActiveManager
 
     }
 
-
-    //Check network connection
-    public static bool IsNetworkConnectionOk()
+    public static IEnumerator CheckRestore(string playerId, string projectId)
     {
-        if (Application.internetReachability == NetworkReachability.NotReachable)
+        var jobsToQueue = new List<CM_Job>()
         {
-            return false;
-        }
-        return true;
+            CM_Job.Make(CheckActiveOnServer(playerId, projectId))
+        };
+        CM_JobQueue.Global.Enqueue(jobsToQueue).Start();
+        yield return null;
     }
 
     //Check current user actived offline or not
-    public static bool IsActiveOfflineOk(int projectID)
+    public static bool IsActiveOfflineOk(string projectId)
     {
-        Setup(projectID);
-        if (PlayerPrefs.GetString(PREFKEY).Equals(ACTIVED))
-        {
-            return true;
-        }
-        return false;
+        return PlayerPrefs.GetString("Project_" + projectId).Equals(ACTIVED);
     }
 
     // Save Active offline
-    public static void SaveActiveState()
-    {
-        PlayerPrefs.SetString(PREFKEY, ACTIVED);
-    }
+    //public static void SaveActiveState()
+    //{
+    //    PlayerPrefs.SetString(PREFKEY, ACTIVED);
+    //}
 
+    public static void SaveActivatedStatus(string projectId)
+    {
+        PlayerPrefs.SetString("Project_" + projectId, ACTIVED);
+    }
     //Check current user active on server or not
-    public static IEnumerator CheckActiveOnServer(string playerid)
+    public static IEnumerator CheckActiveOnServer(string playerid, string projectID)
     {
         WWWForm form = new WWWForm();
-        form.AddField(ProjectName, PROJECT_NAME);
+        form.AddField(ProjectName, projectID);
         form.AddField(PlayerID, playerid);
         UnityWebRequest www = UnityWebRequest.Post(_Url + Module_CheckActive, form);
-        yield return www.Send();
+        yield return www.SendWebRequest();
         if (www.isNetworkError)
         {
             OnConnectionError();
@@ -103,27 +95,50 @@ public class ActiveManager
         else
         {
             string result = www.downloadHandler.text;
+<<<<<<< HEAD
             Debug.LogWarning("result: " + result);
+=======
+            Debug.LogWarning("Phone number " + playerid + " and Project " + projectID + " is " + result);
+
+>>>>>>> master
             if (result.Equals(ACTIVED))
             {
-                OnPlayerServerActived();
+                SaveActivatedStatus(projectID);
+                OnPlayerServerActived(projectID);
             }
             else
             {
                 OnPlayerServerNotActived();
             }
         }
+
+        yield return null;
     }
 
+    public static string ProjectIdToName(string projectId)
+    {
+        switch (projectId)
+        {
+            case "A":
+                return "Animal";
+            case "B":
+                return "Space";
+            case "C":
+                return "Color";
+            default:
+                return string.Empty;
+
+        }
+    }
     //register new user
-    public static IEnumerator RegisterUser(string playerid, string license)
+    public static IEnumerator RegisterUser(string playerid, string projectId, string license)
     {
         WWWForm form = new WWWForm();
-        form.AddField(ProjectName, PROJECT_NAME);
+        form.AddField(ProjectName, projectId);
         form.AddField(PlayerID, playerid);
         form.AddField(License, license);
         UnityWebRequest www = UnityWebRequest.Post(_Url + ModuleRegister, form);
-        yield return www.Send();
+        yield return www.SendWebRequest();
         if (www.isNetworkError)
         {
             OnConnectionError();
@@ -133,7 +148,7 @@ public class ActiveManager
             string result = www.downloadHandler.text;
             if (result.Equals(REGISTER_OK))
             {
-                OnRegisterLicenseSuccess();
+                OnRegisterLicenseSuccess(projectId);
             }
             else
             {
@@ -149,7 +164,7 @@ public class ActiveManager
         WWWForm form = new WWWForm();
         form.AddField("projectname", PROJECT_NAME);
         UnityWebRequest www = UnityWebRequest.Post(_Url + Module_Activation, form);
-        yield return www.Send();
+        yield return www.SendWebRequest();
         if (www.isNetworkError)
         {
             OnConnectionError();
@@ -169,5 +184,6 @@ public class ActiveManager
             }
         }
     }
-
 }
+
+
