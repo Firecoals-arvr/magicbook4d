@@ -45,6 +45,7 @@ public class Spawn : MonoBehaviour
         //Debug.LogError(soundManifest.soundInfos[0].PathBundle);
 
         UnityEngine.Debug.Log("MeasureByDateTime: " + (DateTime.Now - startTime).Milliseconds);
+
     }
 
 
@@ -64,11 +65,7 @@ public class Spawn : MonoBehaviour
         //downLoad.LoadAsset("Animal/GetPreFab/Cat.prefab");
 
         //stopwatch.Stop();
-
         //UnityEngine.Debug.Log("MeasureByEnvironmentTickCount: " + stopwatch.ElapsedMilliseconds);
-
-
-
         var startTime = DateTime.Now;
 
         UnityEngine.Debug.Log("MeasureByDateTime: " + (DateTime.Now - startTime).Milliseconds);

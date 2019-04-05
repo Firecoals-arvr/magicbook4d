@@ -1,9 +1,7 @@
 fileFormatVersion: 2
 guid: a6db49cbcf8b2604286d547bd1d89c1d
-timeCreated: 1476163429
-licenseType: Free
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 23
   fileIDToRecycleName:
     100000: B1
     100002: B2
@@ -221,31 +219,49 @@ ModelImporter:
     7400000: Walk
     7400002: Action1
     7400004: Action2
+    7400006: Eat
     9500000: //RootNode
     11100000: //RootNode
     13700000: polySurface1
     13700002: polySurface29
     13700004: polySurface30
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert2
+    second: {fileID: 2100000, guid: 4ba9ba2c7dbfb3c4babc473547b964e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert3
+    second: {fileID: 2100000, guid: 4ba9ba2c7dbfb3c4babc473547b964e4, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
       name: Walk
@@ -961,31 +977,282 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: Eat
+      takeName: Take 001
+      firstFrame: 73
+      lastFrame: 240
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: r:Cylinder001
+        weight: 1
+      - path: r:Cylinder001/polySurface2
+        weight: 1
+      - path: r:Cylinder001/polySurface2/transform28
+        weight: 1
+      - path: r:Cylinder001/polySurface3
+        weight: 1
+      - path: r:Cylinder001/polySurface3/transform27
+        weight: 1
+      - path: r:Cylinder001/polySurface4
+        weight: 1
+      - path: r:Cylinder001/polySurface4/transform2
+        weight: 1
+      - path: r:Cylinder001/polySurface5
+        weight: 1
+      - path: r:Cylinder001/polySurface5/transform26
+        weight: 1
+      - path: r:Cylinder001/polySurface6
+        weight: 1
+      - path: r:Cylinder001/polySurface6/transform25
+        weight: 1
+      - path: r:Cylinder001/polySurface7
+        weight: 1
+      - path: r:Cylinder001/polySurface7/transform24
+        weight: 1
+      - path: r:Cylinder001/polySurface8
+        weight: 1
+      - path: r:Cylinder001/polySurface8/transform23
+        weight: 1
+      - path: r:Cylinder001/polySurface9
+        weight: 1
+      - path: r:Cylinder001/polySurface9/transform22
+        weight: 1
+      - path: r:Cylinder001/polySurface10
+        weight: 1
+      - path: r:Cylinder001/polySurface10/transform21
+        weight: 1
+      - path: r:Cylinder001/polySurface11
+        weight: 1
+      - path: r:Cylinder001/polySurface11/transform20
+        weight: 1
+      - path: r:Cylinder001/polySurface12
+        weight: 1
+      - path: r:Cylinder001/polySurface12/transform19
+        weight: 1
+      - path: r:Cylinder001/polySurface13
+        weight: 1
+      - path: r:Cylinder001/polySurface13/transform18
+        weight: 1
+      - path: r:Cylinder001/polySurface14
+        weight: 1
+      - path: r:Cylinder001/polySurface14/transform17
+        weight: 1
+      - path: r:Cylinder001/polySurface15
+        weight: 1
+      - path: r:Cylinder001/polySurface15/transform16
+        weight: 1
+      - path: r:Cylinder001/polySurface16
+        weight: 1
+      - path: r:Cylinder001/polySurface16/transform15
+        weight: 1
+      - path: r:Cylinder001/polySurface17
+        weight: 1
+      - path: r:Cylinder001/polySurface17/transform14
+        weight: 1
+      - path: r:Cylinder001/polySurface18
+        weight: 1
+      - path: r:Cylinder001/polySurface18/transform13
+        weight: 1
+      - path: r:Cylinder001/polySurface19
+        weight: 1
+      - path: r:Cylinder001/polySurface19/transform12
+        weight: 1
+      - path: r:Cylinder001/polySurface20
+        weight: 1
+      - path: r:Cylinder001/polySurface20/transform11
+        weight: 1
+      - path: r:Cylinder001/polySurface21
+        weight: 1
+      - path: r:Cylinder001/polySurface21/transform10
+        weight: 1
+      - path: r:Cylinder001/polySurface22
+        weight: 1
+      - path: r:Cylinder001/polySurface22/transform9
+        weight: 1
+      - path: r:Cylinder001/polySurface23
+        weight: 1
+      - path: r:Cylinder001/polySurface23/transform8
+        weight: 1
+      - path: r:Cylinder001/polySurface24
+        weight: 1
+      - path: r:Cylinder001/polySurface24/transform7
+        weight: 1
+      - path: r:Cylinder001/polySurface25
+        weight: 1
+      - path: r:Cylinder001/polySurface25/transform6
+        weight: 1
+      - path: r:Cylinder001/polySurface26
+        weight: 1
+      - path: r:Cylinder001/polySurface26/transform5
+        weight: 1
+      - path: r:Cylinder001/polySurface27
+        weight: 1
+      - path: r:Cylinder001/polySurface27/transform4
+        weight: 1
+      - path: r:Cylinder001/polySurface28
+        weight: 1
+      - path: r:Cylinder001/polySurface28/transform3
+        weight: 1
+      - path: r:Cylinder001/transform1
+        weight: 1
+      - path: Tong
+        weight: 1
+      - path: Tong/C
+        weight: 1
+      - path: Tong/C/B1
+        weight: 1
+      - path: Tong/C/B1/B2
+        weight: 1
+      - path: Tong/C/B1/B2/B3
+        weight: 1
+      - path: Tong/C/B1/B2/B3/B4
+        weight: 1
+      - path: Tong/C/B1/B2/B3/B4/NG
+        weight: 1
+      - path: Tong/C/B1/B2/B3/B4/NG/Co
+        weight: 1
+      - path: Tong/C/B1/B2/B3/B4/NG/Co/Dau
+        weight: 1
+      - path: Tong/C/B1/B2/B3/B4/NG/Co/Dau/HD1
+        weight: 1
+      - path: Tong/C/B1/B2/B3/B4/NG/Co/Dau/HD1/HD2
+        weight: 1
+      - path: Tong/C/B1/B2/B3/B4/NG/Co/Dau/HT1
+        weight: 1
+      - path: Tong/C/B1/B2/B3/B4/NG/Co/Dau/HT1/HT2
+        weight: 1
+      - path: Tong/C/B1/B2/B3/B4/NG/L_TS1
+        weight: 1
+      - path: Tong/C/B1/B2/B3/B4/NG/L_TS1/L_TS2
+        weight: 1
+      - path: Tong/C/B1/B2/B3/B4/NG/L_TS1/L_TS2/L_TS3
+        weight: 1
+      - path: Tong/C/B1/B2/B3/B4/NG/L_TS1/L_TS2/L_TS3/L_TS4
+        weight: 1
+      - path: Tong/C/B1/B2/B3/B4/NG/R_TS1
+        weight: 1
+      - path: Tong/C/B1/B2/B3/B4/NG/R_TS1/R_TS2
+        weight: 1
+      - path: Tong/C/B1/B2/B3/B4/NG/R_TS1/R_TS2/R_TS3
+        weight: 1
+      - path: Tong/C/B1/B2/B3/B4/NG/R_TS1/R_TS2/R_TS3/R_TS4
+        weight: 1
+      - path: Tong/C/D1
+        weight: 1
+      - path: Tong/C/D1/D2
+        weight: 1
+      - path: Tong/C/L_LS1
+        weight: 1
+      - path: Tong/C/L_LS1/L_LS2
+        weight: 1
+      - path: Tong/C/L_LS1/L_LS2/L_LS3
+        weight: 1
+      - path: Tong/C/L_LS1/L_LS2/L_LS3/L_LS4
+        weight: 1
+      - path: Tong/C/R_LS1
+        weight: 1
+      - path: Tong/C/R_LS1/R_LS2
+        weight: 1
+      - path: Tong/C/R_LS1/R_LS2/R_LS3
+        weight: 1
+      - path: Tong/C/R_LS1/R_LS2/R_LS3/R_LS4
+        weight: 1
+      - path: Tong/nurbsCircle1
+        weight: 1
+      - path: Tong/nurbsCircle2
+        weight: 1
+      - path: Tong/nurbsCircle3
+        weight: 1
+      - path: Tong/nurbsCircle4
+        weight: 1
+      - path: Tong/nurbsCircle5
+        weight: 1
+      - path: Tong/nurbsCircle5/nurbsCircle6
+        weight: 1
+      - path: Tong/nurbsCircle5/nurbsCircle6/nurbsCircle7
+        weight: 1
+      - path: Tong/nurbsCircle5/nurbsCircle6/nurbsCircle7/nurbsCircle8
+        weight: 1
+      - path: Tong/nurbsCircle5/nurbsCircle6/nurbsCircle7/nurbsCircle8/nurbsCircle9
+        weight: 1
+      - path: Tong/nurbsCircle5/nurbsCircle6/nurbsCircle7/nurbsCircle8/nurbsCircle9/nurbsCircle10
+        weight: 1
+      - path: Tong/nurbsCircle5/nurbsCircle6/nurbsCircle7/nurbsCircle8/nurbsCircle9/nurbsCircle10/nurbsCircle11
+        weight: 1
+      - path: Tong/nurbsCircle5/nurbsCircle6/nurbsCircle7/nurbsCircle8/nurbsCircle9/nurbsCircle10/nurbsCircle11/nurbsCircle12
+        weight: 1
+      - path: Tong/nurbsCircle5/nurbsCircle6/nurbsCircle7/nurbsCircle8/nurbsCircle9/nurbsCircle10/nurbsCircle11/nurbsCircle12/nurbsCircle13
+        weight: 1
+      - path: Tong/nurbsCircle5/nurbsCircle18
+        weight: 1
+      - path: Tong/polySurface1
+        weight: 1
+      - path: Tong/polySurface29
+        weight: 1
+      - path: Tong/polySurface30
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
     isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
+    serializedVersion: 2
     human: []
     skeleton: []
     armTwist: 0.5
@@ -997,6 +1264,8 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
     hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 1
   humanoidOversampling: 1

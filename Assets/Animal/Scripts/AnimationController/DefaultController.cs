@@ -8,12 +8,12 @@ namespace Firecoals.Animal
     {
         public string movingAnimName;
         public string stopAnimName;
-
+        public string IdleAnimName;
         protected void Update()
         {
             if (CanMove)
             {
-                SmoothMove(DestinationPosition, movingAnimName, stopAnimName);
+                SmoothMove(DestinationPosition, movingAnimName, stopAnimName, IdleAnimName);
             }
         }
 
