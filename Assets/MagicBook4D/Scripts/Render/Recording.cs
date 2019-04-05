@@ -1,4 +1,5 @@
-﻿using NatCorder;
+﻿
+using NatCorder;
 using NatCorder.Clocks;
 using NatCorder.Inputs;
 using UnityEngine;
