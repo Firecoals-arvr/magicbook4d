@@ -137,7 +137,7 @@ namespace Firecoals.Animal
                 transform.rotation = Quaternion.Lerp(transform.rotation, angle, Time.deltaTime * 100.0f);
             }
 
-            Debug.DrawLine(transform.position, target, Color.red, 30, false);
+         //   Debug.DrawLine(transform.position, target, Color.red, 30, false);
             if (Quaternion.Angle(angle, transform.rotation) < 5)
             {
                     if (Vector3.Distance(transform.position, target) > StopDistance)

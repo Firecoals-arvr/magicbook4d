@@ -115,7 +115,7 @@ public class TrackableSettings : MonoBehaviour
             }
 
             // Clear the status message
-            StatusMessage.Instance.Display(string.Empty);
+            //StatusMessage.Instance.Display(string.Empty);
         }
     }
 
