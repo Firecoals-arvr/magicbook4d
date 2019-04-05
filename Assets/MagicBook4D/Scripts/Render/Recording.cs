@@ -1,4 +1,5 @@
-﻿using NatCorder;
+﻿
+using NatCorder;
 using NatCorder.Clocks;
 using NatCorder.Inputs;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class Recording : MonoBehaviour
 {
     [Header("Recording")] public int videoWidth = 1280;
     public int videoHeight = 720;
-
+    public Camera arCamera;
     [Header("Microphone")] public bool recordMicrophone;
     public AudioSource microphoneSource;
 
@@ -27,13 +28,13 @@ public class Recording : MonoBehaviour
         videoRecorder = new MP4Recorder(
             videoWidth,
             videoHeight,
-            30,
+            60,
             recordMicrophone ? AudioSettings.outputSampleRate : 0,
             recordMicrophone ? (int) AudioSettings.speakerMode : 0,
             OnReplay
         );
         // Create recording inputs
-        cameraInput = new CameraInput(videoRecorder, recordingClock, Camera.main);
+        cameraInput = new CameraInput(videoRecorder, recordingClock, arCamera);
         if (recordMicrophone)
         {
             StartMicrophone();

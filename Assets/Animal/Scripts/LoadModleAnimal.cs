@@ -7,7 +7,7 @@ using Firecoals.AssetBundles;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
 using Firecoals.AssetBundles.Sound;
-
+using UnityEngine.SceneManagement;
 namespace Firecoals.Animal
 {
     /// <summary>
@@ -30,9 +30,9 @@ namespace Firecoals.Animal
         /// </summary>
         public float TimeStartEffect;
         private AssetHandler assetHandler { get; set; }
-        private  AssetLoader assetLoader { get; set; }
+        private AssetLoader assetLoader { get; set; }
         private LoadSoundbundles _loadsoundbundles;
-        private  AudioSource audio;
+        private AudioSource audio;
         private IResources _resources;
         public string tagInfo;
         public string tagSound;
@@ -40,11 +40,11 @@ namespace Firecoals.Animal
 
         protected override void Start()
         {
-            
+
             base.Start();
             audio = gameObject.GetComponent<AudioSource>();
             assetHandler = new AssetHandler(mTrackableBehaviour.transform);
-            _loadsoundbundles =GameObject.FindObjectOfType<LoadSoundbundles>();
+            _loadsoundbundles = GameObject.FindObjectOfType<LoadSoundbundles>();
         }
 
         protected override void OnDestroy()
@@ -52,42 +52,56 @@ namespace Firecoals.Animal
             base.OnDestroy();
         }
 
-      IEnumerator starEffect(GameObject go)
-      {
-          assetLoader = GameObject.FindObjectOfType<AssetLoader>();
+        IEnumerator starEffect(GameObject go)
+        {
+            assetLoader = GameObject.FindObjectOfType<AssetLoader>();
             Debug.Log("start Effect");
-           RandomEffect.Instance.Onfound(TimeStartEffect);
-           yield return new WaitForSeconds(0.5f);
-           GameObject.Instantiate(go, mTrackableBehaviour.transform);
-           _loadsoundbundles.PlaySound(tagSound);
+            RandomEffect.Instance.Onfound(TimeStartEffect);
+            yield return new WaitForSeconds(0.5f);
+            GameObject.Instantiate(go, mTrackableBehaviour.transform);
+            _loadsoundbundles.PlaySound(tagSound);
             _loadsoundbundles.PlayName(tagName);
-            
+
         }
         protected override void OnTrackingFound()
         {
             base.OnTrackingFound();
-            var statTime = DateTime.Now;
-            GameObject go = assetHandler.CreateUnique(BuildName, path);    
-            Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
+            GameObject go = assetHandler.CreateUnique(BuildName, path);
             if (go != null)
             {
-                var startTime = DateTime.Now;
-                StartCoroutine(starEffect(go));
-              
-                Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
+                //if (ActiveManager.IsActiveOfflineOk("A"))
+                //{
+                //    StartCoroutine(starEffect(go));
+                //}
+                //else
+                //{
+                //    if (mTrackableBehaviour.name == "Lion" || mTrackableBehaviour.name == "Elephant" || mTrackableBehaviour.name == "Gorilla")
+                //    {
+                        StartCoroutine(starEffect(go));
+                //    }
+                //    else
+                //    {
+                //        //    PopupManager.PopUpDialog("", "", PopupManager.DialogType.YesNoDialog, () =>
+                //        //    {
+                //        //        SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
+                //        //    });
+                //    }
+                //}
+             
             }
-        }       
+        }
         protected override void OnTrackingLost()
         {
             base.OnTrackingLost();
+            FirecoalsSoundManager.StopAll();
             RandomEffect.Instance.Onlost();
             assetHandler?.ClearAll();
-            assetHandler?.Content.ClearAll();      
+            assetHandler?.Content.ClearAll();
             foreach (Transform go in mTrackableBehaviour.transform)
             {
-               Destroy(go.gameObject);
+                Destroy(go.gameObject);
             }
-          
+
         }
 
         //private void RunAnimationIntro()
@@ -101,6 +115,6 @@ namespace Firecoals.Animal
         //        Debug.LogWarning("This object hasn't intro animation.");
         //    }
         //}
-      
+
     }
 }

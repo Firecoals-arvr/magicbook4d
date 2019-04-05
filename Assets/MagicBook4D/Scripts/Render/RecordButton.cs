@@ -5,7 +5,7 @@ namespace Firecoals.Render
 {
     public class RecordButton : MonoBehaviour
     {
-        private const float MaxRecordingTime = 10f; // seconds
+        private const float MaxRecordingTime = 60f; // seconds
         public UISprite cowntdown;
         private bool cownting;
         private Recording recording; 
@@ -26,7 +26,7 @@ namespace Firecoals.Render
         private void OnPress(bool pressed)
         {
             //Debug.Log("Pressed: " + pressed.ToString());
-            recording.StartRecording();
+            
             StartCoroutine(CowntDown(pressed));
 
             if (!pressed)
@@ -34,6 +34,10 @@ namespace Firecoals.Render
                 Reset();
                 cownting = false;
                 recording.StopRecording();
+            }
+            else
+            {
+                recording.StartRecording();
             }
 
         }
