@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Firecoals.Color
 {
@@ -16,6 +17,13 @@ namespace Firecoals.Color
 		void Update()
 		{
 
+		}
+
+		public void Catch()
+		{
+			var randomAction = Random.Range(0, 2);
+			//Debug.LogWarning(randomAction);
+			GetComponent<Animator>().SetInteger("Catch", randomAction);
 		}
 	}
 }

@@ -23,7 +23,7 @@ namespace Firecoals.Color
 		public void KickBall()
 		{
 			animator.SetTrigger("isKick");
-			StartCoroutine(ActionShoot(this.gameObject, initPos, stopPos, 0.2f));
+			//StartCoroutine(ActionShoot(this.gameObject, initPos, stopPos, 0.2f));
 		}
 
 		public void ReturnInitPos()
@@ -52,6 +52,8 @@ namespace Firecoals.Color
 
 			isMoving = false;
 		}
+
+
 	}
 }
 

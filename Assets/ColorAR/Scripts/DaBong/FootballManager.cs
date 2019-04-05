@@ -39,6 +39,7 @@ namespace Firecoals.Color
 			ball.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 			ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
 			ball.transform.position = initBallPos;
+			ball.transform.rotation = Quaternion.identity;
 		}
 
 		public void ToTheRight()
@@ -67,19 +68,19 @@ namespace Firecoals.Color
 			switch (direction)
 			{
 				case 0:
-					ball.GetComponent<Rigidbody>().AddForce(new Vector3(-100f, Random.Range(25f, 35f), -35f) * ballSpeed);
+					ball.GetComponent<Rigidbody>().AddForce(new Vector3(1.765f, Random.Range(0.6f, 0.68f), 0.458f) * ballSpeed);
 					direction = -1;
 					footballer.ReturnInitPos();
 					Invoke("BallReturn", 3);
 					break;
 				case 1:
-					ball.GetComponent<Rigidbody>().AddForce(new Vector3(-100f, Random.Range(25f, 35f), 0f) * ballSpeed);
+					ball.GetComponent<Rigidbody>().AddForce(new Vector3(1.765f, Random.Range(0.6f, 0.68f), 0f) * ballSpeed);
 					direction = -1;
 					footballer.ReturnInitPos();
 					Invoke("BallReturn", 3);
 					break;
 				case 2:
-					ball.GetComponent<Rigidbody>().AddForce(new Vector3(-100f, Random.Range(25f, 35f), 35f) * ballSpeed);
+					ball.GetComponent<Rigidbody>().AddForce(new Vector3(1.765f, Random.Range(0.6f, 0.68f), -0.441f) * ballSpeed);
 					direction = -1;
 					footballer.ReturnInitPos();
 					Invoke("BallReturn", 3);
