@@ -14,7 +14,7 @@ namespace Firecoals.Color
 		public FootballerController footballer;
 		public GoalkeeperController goalkeeper;
 		public LeanTouch leanTouch;
-
+		public GameObject pointTrigger;
 		public float ballSpeed;
 
 		private void Awake()
@@ -86,6 +86,15 @@ namespace Firecoals.Color
 					Invoke("BallReturn", 3);
 					break;
 			}
+		}
+
+		public void EnableTrigger()
+		{
+			pointTrigger.SetActive(true);
+		}
+		public void DisableTrigger()
+		{
+			pointTrigger.SetActive(false);
 		}
 	}
 }
