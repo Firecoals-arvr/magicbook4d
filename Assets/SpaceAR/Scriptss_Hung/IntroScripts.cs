@@ -7,6 +7,8 @@ using Firecoals.AssetBundles;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
 using Firecoals.AssetBundles.Sound;
+using UnityEngine.SceneManagement;
+using Vuforia;
 
 namespace Firecoals.Space
 {
@@ -21,11 +23,10 @@ namespace Firecoals.Space
         public string path;
 
         /// <summary>
-        /// đường dẫn sound
+        /// AssetLoader để load sound, asset hanler và iresources để load models
         /// </summary>
-        private AssetHandler _assethandler;
-        //private LoadSoundFromBundle _soundFromBundles;
         private AssetLoader assetloader;
+        private AssetHandler _assethandler;
         private IResources _resources;
 
         /// <summary>
@@ -59,12 +60,19 @@ namespace Firecoals.Space
         /// </summary>
         [Header("Information key")]
         public string st2;
-
+        /// <summary>
+        /// Key để load name và info của models
+        /// </summary>
         [Header("Sounds")]
         public string tagSound;
         public string tagInfo;
-        private TestLoadSoundbundles _loadSoundbundle;
+        private LoadSoundbundles _loadSoundbundle;
+        /// <summary>
+        /// anim để chạy animation intro lúc tracking found models
+        /// </summary>
         Animator anim;
+
+        TrackableBehaviour trackable;
         protected override void Start()
         {
             base.Start();
@@ -78,31 +86,65 @@ namespace Firecoals.Space
         protected override void OnTrackingFound()
         {
             var statTime = DateTime.Now;
-            _loadSoundbundle = GameObject.FindObjectOfType<TestLoadSoundbundles>();
+            _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
             assetloader = GameObject.FindObjectOfType<AssetLoader>();
             
-
-            _assethandler = new AssetHandler(mTrackableBehaviour.transform);
-            ApplicationContext context = Context.GetApplicationContext();
-            this._resources = context.GetService<IResources>();
-            //GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;
-            GameObject go1 = assetloader.LoadGameObjectAsync(path);
-            Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
-            if (go1 != null)
+            if (ActiveManager.IsActiveOfflineOk("B"))
             {
-                var startTime = DateTime.Now;
-                Instantiate(go1, mTrackableBehaviour.transform);
-                Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
+                _assethandler = new AssetHandler(mTrackableBehaviour.transform);
+                ApplicationContext context = Context.GetApplicationContext();
+                this._resources = context.GetService<IResources>();
+                //GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;
+                GameObject go1 = assetloader.LoadGameObjectAsync(path);
+                Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
+                if (go1 != null)
+                {
+                    var startTime = DateTime.Now;
+                    Instantiate(go1, mTrackableBehaviour.transform);
+                    PlayAnimIntro();
+                    Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
+                }
+                _loadSoundbundle.PlayNameSound(tagSound);
+                objectName = GameObject.Find("UIMenu Root/Targets name/Label name");
+                objectInfo = GameObject.Find("UIMenu Root/Panel planet information/Text Information");
+                componentInfo = GameObject.Find("UIMenu Root/Panel object's component information/Text Information");
+                st = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
+                st.ToLower();
+                ChangeKeyLocalization();
             }
-            _loadSoundbundle.PlayNameSound(tagSound);
-            //anim.GetComponent<Animator>().SetTrigger("Intro");
-            objectName = GameObject.Find("UIMenu Root/Targets name/Label name");
-            objectInfo = GameObject.Find("UIMenu Root/Panel planet information/Text Information");
-            componentInfo = GameObject.Find("UIMenu Root/Panel object's component information/Text Information");
-            st = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
-            st.ToLower();
-
-            ChangeKeyLocalization();
+            else
+            {
+                if (trackable.name == "Solarsystem_Scaled" || trackable.name == "Sun_scaled" || trackable.name == "Mercury_scaled")
+                {
+                    _assethandler = new AssetHandler(mTrackableBehaviour.transform);
+                    ApplicationContext context = Context.GetApplicationContext();
+                    this._resources = context.GetService<IResources>();
+                    //GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;
+                    GameObject go1 = assetloader.LoadGameObjectAsync(path);
+                    Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
+                    if (go1 != null)
+                    {
+                        var startTime = DateTime.Now;
+                        Instantiate(go1, mTrackableBehaviour.transform);
+                        PlayAnimIntro();
+                        Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
+                    }
+                    _loadSoundbundle.PlayNameSound(tagSound);
+                    objectName = GameObject.Find("UIMenu Root/Targets name/Label name");
+                    objectInfo = GameObject.Find("UIMenu Root/Panel planet information/Text Information");
+                    componentInfo = GameObject.Find("UIMenu Root/Panel object's component information/Text Information");
+                    st = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
+                    st.ToLower();
+                    ChangeKeyLocalization();
+                }
+                else
+                {
+                    PopupManager.PopUpDialog("", "", PopupManager.DialogType.YesNoDialog, () =>
+                    {
+                        SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
+                    });
+                }
+            }
             base.OnTrackingFound();
         }
 
@@ -152,6 +194,12 @@ namespace Firecoals.Space
                 objectName.GetComponent<UILocalize>().key = string.Empty;
                 objectInfo.GetComponent<UILocalize>().key = string.Empty;
             }
+        }
+        void PlayAnimIntro()
+        {
+            anim = this.gameObject.GetComponentInChildren<Animator>();
+            anim.SetTrigger("Intro");
+
         }
 
     }
