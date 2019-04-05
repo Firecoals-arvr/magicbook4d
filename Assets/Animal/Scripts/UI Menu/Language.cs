@@ -9,7 +9,7 @@ namespace Firecoals.Animal
     {
         public void SelectVietnamese()
         {
-            Localization.language
+            //Localization.language
         }
     }
 }

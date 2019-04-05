@@ -20,9 +20,11 @@ namespace Firecoals.Animal
         private SoundInfo[] soundInfos;
         private SoundInfo[] soundNoises;
         private string language;
+        // VN
         private void Start()
         {
             imageTarget = GameObject.FindGameObjectsWithTag("ImageTarget");
+            language = PlayerPrefs.GetString("AnimalLanguage");
         }
         public void PlaySound(string sound)
         {
@@ -57,10 +59,13 @@ namespace Firecoals.Animal
             //{
 
             //}
-            language = "vietnamese";
-            _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["animals/name/vn"];
-            AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetNameBundlePath(language, tagName));
-            FirecoalsSoundManager.PlaySound(audioClip);
+            if (language == "VI")
+            {
+                language = "vietnamese";
+                _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["animals/name/vn"];
+                AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetNameBundlePath(language, tagName));
+                FirecoalsSoundManager.PlaySound(audioClip);
+            }     
             //if (select.vn == true)
             //{
             //    language = "vietnamese";
