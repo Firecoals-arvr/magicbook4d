@@ -180,7 +180,9 @@ namespace Loxodon.Framework.Observables
                 else {
                     this.dictionary = new Dictionary<TKey, TValue>(items);
                 }
-                OnCollectionChanged(NotifyCollectionChangedAction.Add, items.ToArray());
+                
+                
+                //OnCollectionChanged(NotifyCollectionChangedAction.Add, z.ToArray());
             }
         }
 

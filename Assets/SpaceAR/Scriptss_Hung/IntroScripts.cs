@@ -7,6 +7,8 @@ using Firecoals.AssetBundles;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
 using Firecoals.AssetBundles.Sound;
+using UnityEngine.SceneManagement;
+using Vuforia;
 
 namespace Firecoals.Space
 {
@@ -21,11 +23,10 @@ namespace Firecoals.Space
         public string path;
 
         /// <summary>
-        /// đường dẫn sound
+        /// AssetLoader để load sound, asset hanler và iresources để load models
         /// </summary>
-        private AssetHandler _assethandler;
-        //private LoadSoundFromBundle _soundFromBundles;
         private AssetLoader assetloader;
+        private AssetHandler _assethandler;
         private IResources _resources;
 
         /// <summary>
@@ -59,21 +60,19 @@ namespace Firecoals.Space
         /// </summary>
         [Header("Information key")]
         public string st2;
-
+        /// <summary>
+        /// Key để load name và info của models
+        /// </summary>
         [Header("Sounds")]
         public string tagSound;
         public string tagInfo;
-
+        private LoadSoundbundles _loadSoundbundle;
         /// <summary>
-        /// load âm thanh từ assetbundles
+        /// anim để chạy animation intro lúc tracking found models
         /// </summary>
-        private TestLoadSoundbundles _loadSoundbundle;
+        Animator anim;
 
-        /// <summary>
-        /// bảng thông báo kích hoạt
-        /// </summary>
-        public GameObject panelActive;
-
+        
         protected override void Start()
         {
             base.Start();
@@ -86,42 +85,39 @@ namespace Firecoals.Space
 
         protected override void OnTrackingFound()
         {
-            var statTime = DateTime.Now;
-            _loadSoundbundle = GameObject.FindObjectOfType<TestLoadSoundbundles>();
+            
+            _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
             assetloader = GameObject.FindObjectOfType<AssetLoader>();
-            //GameObject go1 = assetloader.LoadGameObjectAsync(path);
-
-            //_assethandler = new AssetHandler(mTrackableBehaviour.transform);
-            _assethandler = new AssetHandler();
-            ApplicationContext context = Context.GetApplicationContext();
-            this._resources = context.GetService<IResources>();
-            GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;
-
-            Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
-            if (go != null)
+            //CloneModels();
+            //nếu đã purchase thì vào phần này
+            if (ActiveManager.IsActiveOfflineOk("B"))
             {
-                var startTime = DateTime.Now;
-                GameObject.Instantiate(go, mTrackableBehaviour.transform);
-                Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
+                CloneModels();
             }
-            _loadSoundbundle.PlayNameSound(tagSound);
-
-            panelActive = GameObject.Find("UIMenu Root/Panel Active");
-
-            objectName = GameObject.Find("UIMenu Root/Targets name/Label name");
-            objectInfo = GameObject.Find("UIMenu Root/Panel planet information/Text Information");
-            componentInfo = GameObject.Find("UIMenu Root/Panel object's component information/Text Information");
-            st = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
-            st.ToLower();
-
-            ChangeKeyLocalization();
+            // nếu chưa purchase thì vào phần này
+            else
+            {
+                // nếu là 3 trang đầu thì cho xem model
+                if (mTrackableBehaviour.name == "Solarsystem_Scaled" || mTrackableBehaviour.name == "Sun_scaled" || mTrackableBehaviour.name == "Mercury_scaled")
+                {
+                    CloneModels();
+                }
+                // nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
+                else
+                {
+                    PopupManager.PopUpDialog("", "", PopupManager.DialogType.YesNoDialog, () =>
+                    {
+                        SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
+                    });
+                }
+            }
             base.OnTrackingFound();
         }
 
         protected override void OnTrackingLost()
         {
             _assethandler?.ClearAll();
-            //_assethandler?.Content.ClearAll();
+            _assethandler?.Content.ClearAll();
 
             foreach (Transform go in mTrackableBehaviour.transform)
             {
@@ -145,9 +141,6 @@ namespace Firecoals.Space
             }
         }
 
-        /// <summary>
-        /// khi có target, gán key cho localize
-        /// </summary>
         private void ChangeKeyLocalization()
         {
             if (st1.Contains(st) && st2.Contains(st))
@@ -160,56 +153,44 @@ namespace Firecoals.Space
             }
         }
 
-        /// <summary>
-        /// khi mất target, xóa key ở localize
-        /// </summary>
         private void ClearKeyLocalization()
         {
-            //objectName.GetComponent<UILocalize>().key = string.Empty;
-            //objectInfo.GetComponent<UILocalize>().key = string.Empty;
-            Localization.language = "";
-            objectName.GetComponent<UILabel>().text = Localization.Get("");
-            objectInfo.GetComponent<UILabel>().text = Localization.Get("");
+            if (objectInfo != null && objectName != null)
+            {
+                objectName.GetComponent<UILocalize>().key = string.Empty;
+                objectInfo.GetComponent<UILocalize>().key = string.Empty;
+            }
         }
-
-        /// <summary>
-        /// check đã kích hoạt thì mới sử dụng được tranh
-        /// </summary>
-        /// <returns></returns>
-        private bool IsActivedOrNot()
+        void PlayAnimIntro()
         {
-            if (ActiveManager.IsActiveOfflineOk("B"))
-            {
+            anim = this.gameObject.GetComponentInChildren<Animator>();
+            anim.SetTrigger("Intro");
 
-            }
-            return true;
         }
-
-        /// <summary>
-        /// check nếu là 3 tranh đầu tiên cho dùng free
-        /// </summary>
-        /// <returns></returns>
-        private bool Is3FirstImageTarget()
+        void CloneModels()
         {
-            if (this.gameObject.name == "Page 1" || this.gameObject.name == "Page 2" || this.gameObject.name == "Page 3")
+            var statTime = DateTime.Now;
+            _assethandler = new AssetHandler(mTrackableBehaviour.transform);
+            ApplicationContext context = Context.GetApplicationContext();
+            this._resources = context.GetService<IResources>();
+            //GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;
+            GameObject go1 = assetloader.LoadGameObjectAsync(path);
+            Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
+            if (go1 != null)
             {
-                return true;
+                var startTime = DateTime.Now;
+                Instantiate(go1, mTrackableBehaviour.transform);
+                PlayAnimIntro();
+                Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
             }
-            else
-            {
-                return false;
-            }
+            _loadSoundbundle.PlayNameSound(tagSound);
+            objectName = GameObject.Find("UIMenu Root/Targets name/Label name");
+            objectInfo = GameObject.Find("UIMenu Root/Panel planet information/Text Information");
+            componentInfo = GameObject.Find("UIMenu Root/Panel object's component information/Text Information");
+            st = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
+            st.ToLower();
+            ChangeKeyLocalization();
         }
 
-        /// <summary>
-        /// check những tranh được phép quét
-        /// </summary>
-        private void ImageTargetsCanUse()
-        {
-            if (Is3FirstImageTarget() == false)
-            {
-                panelActive.SetActive(true);
-            }
-        }
     }
 }

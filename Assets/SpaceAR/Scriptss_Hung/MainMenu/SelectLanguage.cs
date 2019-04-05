@@ -6,7 +6,7 @@ namespace Firecoals.Space
     /// <summary>
     /// chọn ngôn ngữ
     /// </summary>
-    public class SelectLanguage : MonoBehaviour
+    public class SelectLanguage : LanguageController
     {
         /// <summary>
         /// button chọn ngôn ngữ
@@ -23,15 +23,20 @@ namespace Firecoals.Space
         /// </summary>
         public GameObject _engflag;
 
-        /// <summary>
-        /// biến check ngôn ngữ nào đang được chọn
-        /// </summary>
         [HideInInspector]
         public bool en, vn;
 
-        /// <summary>   
+        /// <summary>
         /// đổi ngôn ngữ VN
         /// </summary>
+
+
+        private void Start()
+        {
+            Localization.language = PlayerPrefs.GetString("SpaceLanguage");
+            vn = true;
+        }
+        
         public void ClickVNFlag()
         {
             buttonSelect.GetComponent<UI2DSprite>().sprite2D = _vnflag.GetComponent<UI2DSprite>().sprite2D;
@@ -39,9 +44,10 @@ namespace Firecoals.Space
             buttonSelect.GetComponent<UIButton>().hoverSprite2D = _vnflag.GetComponent<UIButton>().hoverSprite2D;
             buttonSelect.GetComponent<UIButton>().pressedSprite2D = _vnflag.GetComponent<UIButton>().pressedSprite2D;
             buttonSelect.GetComponent<UIButton>().disabledSprite2D = _vnflag.GetComponent<UIButton>().disabledSprite2D;
-            en = false;
+            OnOnPickLanguage("VI", "B");
+            PlayerPrefs.SetString("SpaceLanguage", "Tiếng Việt");
             vn = true;
-            Localization.language = "Tiếng Việt";
+            en = false;
         }
 
         /// <summary>
@@ -54,16 +60,11 @@ namespace Firecoals.Space
             buttonSelect.GetComponent<UIButton>().hoverSprite2D = _engflag.GetComponent<UIButton>().hoverSprite2D;
             buttonSelect.GetComponent<UIButton>().pressedSprite2D = _engflag.GetComponent<UIButton>().pressedSprite2D;
             buttonSelect.GetComponent<UIButton>().disabledSprite2D = _engflag.GetComponent<UIButton>().disabledSprite2D;
-            en = true;
+            OnOnPickLanguage("EN", "B");
+            PlayerPrefs.SetString("SpaceLanguage", "English");
             vn = false;
-            Localization.language = "English";
+            en = true;
         }
-
-        private void Start()
-        {
-            Localization.language = "Tiếng Việt";
-            vn = true;
-            en = false;
-        }
+        
     }
 }

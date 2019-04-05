@@ -6,6 +6,7 @@ namespace Firecoals.Space
 {
     public class ShowPanelUI : DefaultTrackableEventHandler
     {
+        Animator anim;
         protected override void Start()
         {
             base.Start();
@@ -16,9 +17,14 @@ namespace Firecoals.Space
         }
         protected override void OnTrackingFound()
         {
+            int i = 0;
             base.OnTrackingFound();
-            NGUITools.SetActive(gameObject.transform.GetChild(0).transform.GetChild(1).gameObject, true);
-            
+            Debug.Log("how many time = "+i);
+            anim = this.gameObject.GetComponentInChildren<Animator>();
+            anim.SetTrigger("Intro");
+            //NGUITools.SetActive(gameObject.transform.GetChild(0).transform.GetChild(1).gameObject, true);
+            i++;
+
         }
         protected override void OnTrackingLost()
         {

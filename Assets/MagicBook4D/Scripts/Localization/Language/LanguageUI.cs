@@ -22,8 +22,15 @@ public class LanguageUI : LanguageController
         EventDelegate colorBtnDelegate = new EventDelegate(this, "OnOnShowListLanguage");
         colorBtnDelegate.parameters[0].value = "C";
         EventDelegate.Set(colorButton.onClick, colorBtnDelegate);
+        InitialLanguage();
     }
-
+    //TODO Add Sprite Name to Atlas
+    //VI,EN,JP,CN,KR
+    private void InitialLanguage()
+    {
+        OnOnPickLanguage(PlayerPrefs.HasKey("AnimalLanguage") ? PlayerPrefs.GetString("AnimalLanguage") : "VI", "A");
+        OnOnPickLanguage(PlayerPrefs.HasKey("SpaceLanguage") ? PlayerPrefs.GetString("SpaceLanguage") : "VI", "B");
+    }
     protected override void OnOnPickLanguage(string languageId, string projectId)
     {
 
@@ -35,12 +42,14 @@ public class LanguageUI : LanguageController
                 //TODO Set icon for Animal Button
                 Debug.LogWarning(UIButton.current.name);
                 //animalButton.GetComponentInChildren<UISprite>().spriteName = UIButton.current.name;
+                PlayerPrefs.SetString("AnimalLanguage", UIButton.current.name);
                 break;
             case "B":
                 //TODO Set Language for Space
                 Localization.language = languageId;
                 //TODO Set icon for Space Button
                 //spaceButton.GetComponentInChildren<UISprite>().spriteName = UIButton.current.name;
+                PlayerPrefs.SetString("SpaceLanguage", UIButton.current.name);
                 break;
                 //TODO no needed set Language for Color
                 //case "C":

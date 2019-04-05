@@ -199,6 +199,97 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1320343807
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1320343811}
+  - component: {fileID: 1320343810}
+  - component: {fileID: 1320343809}
+  - component: {fileID: 1320343808}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1320343808
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320343807}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1320343809
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320343807}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &1320343810
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320343807}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1320343811
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320343807}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.555, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1992616671
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,6 +482,101 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8162882917647021988, guid: 63b313f3565b26f4a99df872a00e9080,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 246
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162882917654044262, guid: 63b313f3565b26f4a99df872a00e9080,
+        type: 3}
+      propertyPath: onClick.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162882917654044262, guid: 63b313f3565b26f4a99df872a00e9080,
+        type: 3}
+      propertyPath: onClick.Array.data[0].mTarget
+      value: 
+      objectReference: {fileID: 658127693}
+    - target: {fileID: 8162882917654044262, guid: 63b313f3565b26f4a99df872a00e9080,
+        type: 3}
+      propertyPath: onClick.Array.data[0].mMethodName
+      value: LoadActivateScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162882917654044264, guid: 63b313f3565b26f4a99df872a00e9080,
+        type: 3}
+      propertyPath: aspectRatio
+      value: 4.0545454
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162882917911931220, guid: 63b313f3565b26f4a99df872a00e9080,
+        type: 3}
+      propertyPath: aspectRatio
+      value: 4.0545454
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162882917911931226, guid: 63b313f3565b26f4a99df872a00e9080,
+        type: 3}
+      propertyPath: onClick.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162882917911931226, guid: 63b313f3565b26f4a99df872a00e9080,
+        type: 3}
+      propertyPath: onClick.Array.data[0].mTarget
+      value: 
+      objectReference: {fileID: 658127693}
+    - target: {fileID: 8162882917911931226, guid: 63b313f3565b26f4a99df872a00e9080,
+        type: 3}
+      propertyPath: onClick.Array.data[0].mMethodName
+      value: LoadSettingScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162882917917606040, guid: 63b313f3565b26f4a99df872a00e9080,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -364
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162882918028235415, guid: 63b313f3565b26f4a99df872a00e9080,
+        type: 3}
+      propertyPath: aspectRatio
+      value: 4.0545454
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162882918028235417, guid: 63b313f3565b26f4a99df872a00e9080,
+        type: 3}
+      propertyPath: onClick.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162882918028235417, guid: 63b313f3565b26f4a99df872a00e9080,
+        type: 3}
+      propertyPath: onClick.Array.data[0].mTarget
+      value: 
+      objectReference: {fileID: 658127693}
+    - target: {fileID: 8162882918028235417, guid: 63b313f3565b26f4a99df872a00e9080,
+        type: 3}
+      propertyPath: onClick.Array.data[0].mMethodName
+      value: LoadStoreScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162882918034094939, guid: 63b313f3565b26f4a99df872a00e9080,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 582
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162882918350068716, guid: 63b313f3565b26f4a99df872a00e9080,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -611
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162882918360281646, guid: 63b313f3565b26f4a99df872a00e9080,
+        type: 3}
+      propertyPath: onClick.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162882918360281646, guid: 63b313f3565b26f4a99df872a00e9080,
+        type: 3}
+      propertyPath: onClick.Array.data[0].mTarget
+      value: 
+      objectReference: {fileID: 658127693}
+    - target: {fileID: 8162882918360281646, guid: 63b313f3565b26f4a99df872a00e9080,
+        type: 3}
+      propertyPath: onClick.Array.data[0].mMethodName
+      value: LoadInfoScene
+      objectReference: {fileID: 0}
     - target: {fileID: 8162882918475171888, guid: 63b313f3565b26f4a99df872a00e9080,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -440,143 +626,6 @@ PrefabInstance:
         type: 3}
       propertyPath: topAnchor.target
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162882917917606040, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -364
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162882917911931226, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: onClick.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162882917911931226, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: onClick.Array.data[0].mTarget
-      value: 
-      objectReference: {fileID: 658127693}
-    - target: {fileID: 8162882917911931226, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: onClick.Array.data[0].mMethodName
-      value: LoadSettingScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162882917911931220, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: aspectRatio
-      value: 4.0545454
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162882918034094939, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 582
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162882918028235417, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: onClick.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162882918028235417, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: onClick.Array.data[0].mTarget
-      value: 
-      objectReference: {fileID: 658127693}
-    - target: {fileID: 8162882918028235417, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: onClick.Array.data[0].mMethodName
-      value: LoadStoreScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162882918028235415, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: aspectRatio
-      value: 4.0545454
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162882917647021988, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 246
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162882917654044262, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: onClick.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162882917654044262, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: onClick.Array.data[0].mTarget
-      value: 
-      objectReference: {fileID: 658127693}
-    - target: {fileID: 8162882917654044262, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: onClick.Array.data[0].mMethodName
-      value: LoadActivateScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162882917654044264, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: aspectRatio
-      value: 4.0545454
-      objectReference: {fileID: 0}
-<<<<<<< HEAD
-    - target: {fileID: 8162882917917606040, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -264
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162882917917606040, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 308
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162882918034094939, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 482
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162882918034094939, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -302
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162882917647021988, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 146
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162882917647021988, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -302
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162882918350068716, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -511
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162882918350068716, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 308
-=======
-    - target: {fileID: 8162882918350068716, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -611
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162882918360281646, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: onClick.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8162882918360281646, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: onClick.Array.data[0].mTarget
-      value: 
-      objectReference: {fileID: 658127693}
-    - target: {fileID: 8162882918360281646, guid: 63b313f3565b26f4a99df872a00e9080,
-        type: 3}
-      propertyPath: onClick.Array.data[0].mMethodName
-      value: LoadInfoScene
->>>>>>> master
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63b313f3565b26f4a99df872a00e9080, type: 3}
