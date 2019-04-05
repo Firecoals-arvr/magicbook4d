@@ -72,7 +72,7 @@ namespace Firecoals.Space
         /// </summary>
         Animator anim;
 
-        TrackableBehaviour trackable;
+        
         protected override void Start()
         {
             base.Start();
@@ -85,58 +85,24 @@ namespace Firecoals.Space
 
         protected override void OnTrackingFound()
         {
-            var statTime = DateTime.Now;
+            
             _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
             assetloader = GameObject.FindObjectOfType<AssetLoader>();
-            
+            //CloneModels();
+            //nếu đã purchase thì vào phần này
             if (ActiveManager.IsActiveOfflineOk("B"))
             {
-                _assethandler = new AssetHandler(mTrackableBehaviour.transform);
-                ApplicationContext context = Context.GetApplicationContext();
-                this._resources = context.GetService<IResources>();
-                //GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;
-                GameObject go1 = assetloader.LoadGameObjectAsync(path);
-                Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
-                if (go1 != null)
-                {
-                    var startTime = DateTime.Now;
-                    Instantiate(go1, mTrackableBehaviour.transform);
-                    PlayAnimIntro();
-                    Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
-                }
-                _loadSoundbundle.PlayNameSound(tagSound);
-                objectName = GameObject.Find("UIMenu Root/Targets name/Label name");
-                objectInfo = GameObject.Find("UIMenu Root/Panel planet information/Text Information");
-                componentInfo = GameObject.Find("UIMenu Root/Panel object's component information/Text Information");
-                st = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
-                st.ToLower();
-                ChangeKeyLocalization();
+                CloneModels();
             }
+            // nếu chưa purchase thì vào phần này
             else
             {
-                if (trackable.name == "Solarsystem_Scaled" || trackable.name == "Sun_scaled" || trackable.name == "Mercury_scaled")
+                // nếu là 3 trang đầu thì cho xem model
+                if (mTrackableBehaviour.name == "Solarsystem_Scaled" || mTrackableBehaviour.name == "Sun_scaled" || mTrackableBehaviour.name == "Mercury_scaled")
                 {
-                    _assethandler = new AssetHandler(mTrackableBehaviour.transform);
-                    ApplicationContext context = Context.GetApplicationContext();
-                    this._resources = context.GetService<IResources>();
-                    //GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;
-                    GameObject go1 = assetloader.LoadGameObjectAsync(path);
-                    Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
-                    if (go1 != null)
-                    {
-                        var startTime = DateTime.Now;
-                        Instantiate(go1, mTrackableBehaviour.transform);
-                        PlayAnimIntro();
-                        Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
-                    }
-                    _loadSoundbundle.PlayNameSound(tagSound);
-                    objectName = GameObject.Find("UIMenu Root/Targets name/Label name");
-                    objectInfo = GameObject.Find("UIMenu Root/Panel planet information/Text Information");
-                    componentInfo = GameObject.Find("UIMenu Root/Panel object's component information/Text Information");
-                    st = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
-                    st.ToLower();
-                    ChangeKeyLocalization();
+                    CloneModels();
                 }
+                // nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
                 else
                 {
                     PopupManager.PopUpDialog("", "", PopupManager.DialogType.YesNoDialog, () =>
@@ -200,6 +166,30 @@ namespace Firecoals.Space
             anim = this.gameObject.GetComponentInChildren<Animator>();
             anim.SetTrigger("Intro");
 
+        }
+        void CloneModels()
+        {
+            var statTime = DateTime.Now;
+            _assethandler = new AssetHandler(mTrackableBehaviour.transform);
+            ApplicationContext context = Context.GetApplicationContext();
+            this._resources = context.GetService<IResources>();
+            //GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;
+            GameObject go1 = assetloader.LoadGameObjectAsync(path);
+            Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
+            if (go1 != null)
+            {
+                var startTime = DateTime.Now;
+                Instantiate(go1, mTrackableBehaviour.transform);
+                PlayAnimIntro();
+                Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
+            }
+            _loadSoundbundle.PlayNameSound(tagSound);
+            objectName = GameObject.Find("UIMenu Root/Targets name/Label name");
+            objectInfo = GameObject.Find("UIMenu Root/Panel planet information/Text Information");
+            componentInfo = GameObject.Find("UIMenu Root/Panel object's component information/Text Information");
+            st = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
+            st.ToLower();
+            ChangeKeyLocalization();
         }
 
     }
