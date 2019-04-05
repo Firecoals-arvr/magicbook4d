@@ -33,7 +33,7 @@ public class LanguageUI : LanguageController
     }
     protected override void OnOnPickLanguage(string languageId, string projectId)
     {
-        
+
         switch (projectId)
         {
             case "A":
@@ -42,14 +42,16 @@ public class LanguageUI : LanguageController
                 //TODO Set icon for Animal Button
                 Debug.LogWarning(UIButton.current.name);
                 //animalButton.GetComponentInChildren<UISprite>().spriteName = UIButton.current.name;
-                PlayerPrefs.SetString("AnimalLanguage", UIButton.current.name);
+                if (UIButton.current != null)
+                    PlayerPrefs.SetString("AnimalLanguage", UIButton.current.name);
                 break;
             case "B":
                 //TODO Set Language for Space
                 Localization.language = languageId;
                 //TODO Set icon for Space Button
                 //spaceButton.GetComponentInChildren<UISprite>().spriteName = UIButton.current.name;
-                PlayerPrefs.SetString("SpaceLanguage", UIButton.current.name);
+                if (UIButton.current != null)
+                    PlayerPrefs.SetString("SpaceLanguage", UIButton.current.name);
                 break;
                 //TODO no needed set Language for Color
                 //case "C":
