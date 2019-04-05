@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 namespace Firecoals.Color
 {
@@ -37,14 +36,14 @@ namespace Firecoals.Color
 
 		public void MoveOnPath()
 		{
-			Sequence s = DOTween.Sequence();
-			for (int i = 0; i < posArray.Length; ++i)
-			{
-				Vector3 toPos = posArray[i];
-				Vector3 toRot = rotArray[i];
-				s.Append(this.transform.DOLocalMove(toPos, 1.5f));
-				s.Join(this.transform.DOLocalRotate(toRot, 1.5f));
-			}
+			//Sequence s = DOTween.Sequence();
+			//for (int i = 0; i < posArray.Length; ++i)
+			//{
+			//	Vector3 toPos = posArray[i];
+			//	Vector3 toRot = rotArray[i];
+			//	s.Append(this.transform.DOLocalMove(toPos, 1.5f));
+			//	s.Join(this.transform.DOLocalRotate(toRot, 1.5f));
+			//}
 		}
 
 		public void MoveCharacter()
