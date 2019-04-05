@@ -37,7 +37,7 @@ namespace Firecoals.Color
 
 		public void RotatePropeller()
 		{
-			propeller.transform.Rotate(new Vector3(0, 0, 500) * Time.deltaTime, Space.Self);
+			propeller.transform.Rotate(new Vector3(0, 0, 500) * Time.deltaTime, UnityEngine.Space.Self);
 		}
 
 		//private void HideObjectInfo()

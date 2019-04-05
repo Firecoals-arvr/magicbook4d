@@ -18,11 +18,7 @@ namespace NatCorder.Examples {
 		public Image button, countdown;
 		public UnityEvent onTouchDown, onTouchUp;
 		private bool pressed;
-<<<<<<< HEAD
 		private const float MaxRecordingTime = 10f; // seconds
-=======
-		private const float MaxRecordingTime = 60f; // seconds
->>>>>>> origin/color
 
 		private void Start () {
 			Reset();

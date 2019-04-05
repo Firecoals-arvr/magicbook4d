@@ -34,10 +34,10 @@ namespace Firecoals.Space
                     {
                         if (select != null)
                         {
-                            select.GetComponent<Renderer>().material.color = new Color(1, 1, 1);
+                            select.GetComponent<Renderer>().material.color = new UnityEngine.Color(1, 1, 1);
                         }
                         select = hit.transform.gameObject;
-                        hit.transform.GetComponent<Renderer>().material.color = new Color(1, 0, 1);
+                        hit.transform.GetComponent<Renderer>().material.color = new UnityEngine.Color(1, 0, 1);
                         if (stt == false)
                         {
                             panelInfor.GetComponent<Animation>().Play("Open");
