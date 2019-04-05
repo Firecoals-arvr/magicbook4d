@@ -87,7 +87,6 @@ namespace Firecoals.Animal
                 //        //        SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
                 //        //    });
                 //    }
-
                 //}
              
             }
