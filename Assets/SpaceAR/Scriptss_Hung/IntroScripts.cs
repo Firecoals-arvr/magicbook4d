@@ -167,6 +167,7 @@ namespace Firecoals.Space
         {
             //objectName.GetComponent<UILocalize>().key = string.Empty;
             //objectInfo.GetComponent<UILocalize>().key = string.Empty;
+            Localization.language = "";
             objectName.GetComponent<UILabel>().text = Localization.Get("");
             objectInfo.GetComponent<UILabel>().text = Localization.Get("");
         }
@@ -177,7 +178,7 @@ namespace Firecoals.Space
         /// <returns></returns>
         private bool IsActivedOrNot()
         {
-            if (ActiveManager.IsActiveOfflineOk(2))
+            if (ActiveManager.IsActiveOfflineOk("B"))
             {
 
             }
