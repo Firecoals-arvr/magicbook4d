@@ -24,28 +24,28 @@ namespace Firecoals.Color
 
 		protected override void OnTrackingFound()
 		{
-			//GameObject go = handler.CreateUnique("color/model/trangtrai", "Assets/ColorAR/Prefabs/TrangTrai/TrangTrai_Group.prefab");
-			//if (go)
-			//{
-			//	GameObject farm = Instantiate(go, mTrackableBehaviour.transform);
-			//	List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
-			//	farm.GetComponentsInChildren<RC_Get_Texture>(true, lst);
-			//	foreach (var child in lst)
-			//	{
-			//		child.RenderCamera = renderCam.GetComponent<Camera>();
-			//	}
-			//}
+			GameObject go = handler.CreateUnique("color/model/trangtrai", "Assets/ColorAR/Prefabs/TrangTrai/TrangTrai_Group.prefab");
+			if (go)
+			{
+				GameObject farm = Instantiate(go, mTrackableBehaviour.transform);
+				List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
+				farm.GetComponentsInChildren<RC_Get_Texture>(true, lst);
+				foreach (var child in lst)
+				{
+					child.RenderCamera = renderCam.GetComponent<Camera>();
+				}
+			}
 			base.OnTrackingFound();
 		}
 
 		protected override void OnTrackingLost()
 		{
-			//handler?.ClearAll();
-			//handler?.Content.ClearAll();
-			//foreach (Transform trans in mTrackableBehaviour.transform)
-			//{
-			//	Destroy(trans.gameObject);
-			//}
+			handler?.ClearAll();
+			handler?.Content.ClearAll();
+			foreach (Transform trans in mTrackableBehaviour.transform)
+			{
+				Destroy(trans.gameObject);
+			}
 			base.OnTrackingLost();
 		}
 	}
