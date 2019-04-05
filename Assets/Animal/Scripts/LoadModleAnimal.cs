@@ -74,6 +74,7 @@ namespace Firecoals.Animal
                 //    StartCoroutine(starEffect(go));
                 //}
                 //else
+
                 //{
                 //    if (mTrackableBehaviour.name == "Lion" || mTrackableBehaviour.name == "Elephant" || mTrackableBehaviour.name == "Gorilla")
                 //    {
