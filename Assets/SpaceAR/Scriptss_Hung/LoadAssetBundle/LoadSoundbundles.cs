@@ -37,6 +37,9 @@ namespace Firecoals.Space
             _soundManifest = new SoundManifestLoader();
             var soundManifest = _soundManifest.LoadSync(Application.streamingAssetsPath + "/SpaceAudio.json");
             soundNames = soundManifest.soundInfos;
+
+            
+
             if (select.en == true)
             {
                 language = "english";

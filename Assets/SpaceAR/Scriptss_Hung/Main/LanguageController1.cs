@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 namespace Firecoals.Space
 {
-    public class LanguageController : MonoBehaviour
+    public class LanguageController1 : MonoBehaviour
     {
 
         public static string LanguageCurrent;
