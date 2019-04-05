@@ -28,11 +28,11 @@ namespace Firecoals.Space
         {
             select = GameObject.FindObjectOfType<SelectLanguage>();
             imageTarget = GameObject.FindGameObjectsWithTag ("ImageTarget");
-            Debug.Log("number = " + imageTarget.Length);
+            
         }
         public void PlayNameSound(string tagSound)
         {
-            Debug.Log("loading json");
+            
             _assetLoader = GameObject.FindObjectOfType<AssetLoader>();
             _soundManifest = new SoundManifestLoader();
             var soundManifest = _soundManifest.LoadSync(Application.streamingAssetsPath + "/SpaceAudio.json");
