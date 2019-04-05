@@ -24,7 +24,6 @@ namespace Firecoals.Color
 			var randomAction = Random.Range(0, 2);
 			//Debug.LogWarning(randomAction);
 			GetComponent<Animator>().SetInteger("Catch", randomAction);
-			//GetComponent<Animator>().
 		}
 	}
 }
