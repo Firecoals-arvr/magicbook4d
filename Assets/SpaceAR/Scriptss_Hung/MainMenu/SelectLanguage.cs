@@ -33,10 +33,15 @@ namespace Firecoals.Space
 
         private void Start()
         {
+            
             Localization.language = PlayerPrefs.GetString("SpaceLanguage");
-            vn = true;
+            
         }
-        
+        protected override void OnOnPickLanguage(string languageId, string projectId)
+        {
+
+            base.OnOnPickLanguage(languageId, projectId);
+        }
         public void ClickVNFlag()
         {
             buttonSelect.GetComponent<UI2DSprite>().sprite2D = _vnflag.GetComponent<UI2DSprite>().sprite2D;
@@ -45,9 +50,8 @@ namespace Firecoals.Space
             buttonSelect.GetComponent<UIButton>().pressedSprite2D = _vnflag.GetComponent<UIButton>().pressedSprite2D;
             buttonSelect.GetComponent<UIButton>().disabledSprite2D = _vnflag.GetComponent<UIButton>().disabledSprite2D;
             OnOnPickLanguage("VI", "B");
-            PlayerPrefs.SetString("SpaceLanguage", "Tiếng Việt");
-            vn = true;
-            en = false;
+            PlayerPrefs.SetString("SpaceLanguage", "VI");
+            
         }
 
         /// <summary>
@@ -61,9 +65,8 @@ namespace Firecoals.Space
             buttonSelect.GetComponent<UIButton>().pressedSprite2D = _engflag.GetComponent<UIButton>().pressedSprite2D;
             buttonSelect.GetComponent<UIButton>().disabledSprite2D = _engflag.GetComponent<UIButton>().disabledSprite2D;
             OnOnPickLanguage("EN", "B");
-            PlayerPrefs.SetString("SpaceLanguage", "English");
-            vn = false;
-            en = true;
+            PlayerPrefs.SetString("SpaceLanguage", "EN");
+            
         }
         
     }
