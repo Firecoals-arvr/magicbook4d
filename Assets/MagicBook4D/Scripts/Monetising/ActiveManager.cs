@@ -95,8 +95,8 @@ public class ActiveManager
         else
         {
             string result = www.downloadHandler.text;
+            Debug.LogWarning("result: " + result);
             Debug.LogWarning("Phone number " + playerid + " and Project " + projectID + " is " + result);
-
             if (result.Equals(ACTIVED))
             {
                 SaveActivatedStatus(projectID);

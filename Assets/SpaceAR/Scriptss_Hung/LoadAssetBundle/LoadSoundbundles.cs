@@ -54,7 +54,6 @@ namespace Firecoals.Space
                 AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetSoundBundlePath(language, tagSound));
                 FirecoalsSoundManager.PlaySound(audioClip);
             }
-
         }
         private string  GetSoundBundlePath(string currentLanguage, string tag)
         {
@@ -109,7 +108,6 @@ namespace Firecoals.Space
                     PlayNameSound(go.transform.GetComponentInParent<IntroScripts>().tagSound);
                 }
             }
-
         }
         public void ReplayInfoSound()
         {

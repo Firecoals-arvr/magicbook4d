@@ -72,7 +72,7 @@ namespace Firecoals.Space
         /// </summary>
         Animator anim;
 
-        
+
         protected override void Start()
         {
             base.Start();
@@ -85,7 +85,6 @@ namespace Firecoals.Space
 
         protected override void OnTrackingFound()
         {
-            
             _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
             assetloader = GameObject.FindObjectOfType<AssetLoader>();
             //CloneModels();
@@ -141,6 +140,9 @@ namespace Firecoals.Space
             }
         }
 
+        /// <summary>
+        /// đổi key trong localization để lấy đúng tên, thông tin theo object
+        /// </summary>
         private void ChangeKeyLocalization()
         {
             if (st1.Contains(st) && st2.Contains(st))
