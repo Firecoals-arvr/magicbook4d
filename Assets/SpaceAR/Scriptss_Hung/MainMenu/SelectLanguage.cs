@@ -36,7 +36,11 @@ namespace Firecoals.Space
             Localization.language = PlayerPrefs.GetString("SpaceLanguage");
             vn = true;
         }
-        
+        protected override void OnOnPickLanguage(string languageId, string projectId)
+        {
+
+            base.OnOnPickLanguage(languageId, projectId);
+        }
         public void ClickVNFlag()
         {
             buttonSelect.GetComponent<UI2DSprite>().sprite2D = _vnflag.GetComponent<UI2DSprite>().sprite2D;
