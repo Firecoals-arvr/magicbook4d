@@ -165,7 +165,7 @@ namespace Firecoals.Space
         {
             anim = this.gameObject.GetComponentInChildren<Animator>();
             anim.SetTrigger("Intro");
-
+            
         }
         void CloneModels()
         {
