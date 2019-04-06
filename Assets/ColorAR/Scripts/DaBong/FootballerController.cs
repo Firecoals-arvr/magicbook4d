@@ -7,12 +7,10 @@ namespace Firecoals.Color
 	public class FootballerController : MonoBehaviour
 	{
 		Animator animator;
-		Vector3 initPos, stopPos;
 
 		private void Awake()
 		{
-			initPos = this.gameObject.transform.position;
-			stopPos = new Vector3(-1.28f, 0, 0);
+
 		}
 
 		private void Start()
@@ -23,7 +21,6 @@ namespace Firecoals.Color
 		public void KickBall()
 		{
 			animator.SetTrigger("isKick");
-			//StartCoroutine(ActionShoot(this.gameObject, initPos, stopPos, 0.2f));
 		}
 
 		public void ReturnInitPos()
