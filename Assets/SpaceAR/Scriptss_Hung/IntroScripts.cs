@@ -72,7 +72,7 @@ namespace Firecoals.Space
         /// </summary>
         Animator anim;
 
-        
+
         protected override void Start()
         {
             base.Start();
@@ -85,7 +85,6 @@ namespace Firecoals.Space
 
         protected override void OnTrackingFound()
         {
-            
             _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
             assetloader = GameObject.FindObjectOfType<AssetLoader>();
             //CloneModels();
@@ -98,7 +97,7 @@ namespace Firecoals.Space
             else
             {
                 // nếu là 3 trang đầu thì cho xem model
-                if (mTrackableBehaviour.name == "Solarsystem_Scaled" || mTrackableBehaviour.name == "Sun_scaled" || mTrackableBehaviour.name == "Mercury_scaled")
+                if (mTrackableBehaviour.TrackableName == "Solarsystem_scaled" || mTrackableBehaviour.TrackableName == "Sun_scaled" || mTrackableBehaviour.TrackableName == "Mercury_scaled")
                 {
                     CloneModels();
                 }
@@ -141,6 +140,9 @@ namespace Firecoals.Space
             }
         }
 
+        /// <summary>
+        /// đổi key trong localization để lấy đúng tên, thông tin theo object
+        /// </summary>
         private void ChangeKeyLocalization()
         {
             if (st1.Contains(st) && st2.Contains(st))
@@ -165,7 +167,7 @@ namespace Firecoals.Space
         {
             anim = this.gameObject.GetComponentInChildren<Animator>();
             anim.SetTrigger("Intro");
-
+            
         }
         void CloneModels()
         {

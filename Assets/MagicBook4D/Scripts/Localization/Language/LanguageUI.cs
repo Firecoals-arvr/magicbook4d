@@ -104,15 +104,4 @@ public class LanguageUI : LanguageController
         }
         base.OnOnShowListLanguage(projectId);
     }
-
-    //public void ShowListLanguage(string projectId)
-    //{
-
-    //}
-
-    //public void PickLanguage(string languageId, string projectId)
-    //{
-    //    //Debug.LogWarning(Camera.current.name);
-
-    //}
 }
