@@ -128,18 +128,6 @@ namespace Firecoals.Space
             base.OnTrackingLost();
         }
 
-        private void RunAnimationIntro()
-        {
-            if (this.gameObject.transform.GetChild(0).GetComponent<Animation>() != null)
-            {
-                this.gameObject.transform.GetChild(0).GetComponent<Animation>().Play("intro");
-            }
-            else
-            {
-                Debug.LogWarning("This object hasn't intro animation.");
-            }
-        }
-
         /// <summary>
         /// đổi key trong localization để lấy đúng tên, thông tin theo object
         /// </summary>
