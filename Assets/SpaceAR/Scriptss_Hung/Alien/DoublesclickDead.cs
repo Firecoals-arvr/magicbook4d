@@ -41,21 +41,6 @@ namespace Firecoals.Space
         }
         private void Update()
         {
-            //if (AlienMain != null)
-            //{
-            //    //if (AlienMain.GetComponent<Animation>().IsPlaying("Dance"))
-            //    //{
-            //    //    anima.Play("Dance");
-            //    //}
-            //    //else
-            //    //{
-            //    if (!anima.IsPlaying("Idle1"))
-            //    {
-            //        anima.Play("Idle1");
-            //    }
-            //    //}
-            //}
-
             if (DoubleClick())
             {
                 anima.Play("Dead");

@@ -10,9 +10,7 @@ namespace Firecoals.Space
     public class RotateAround : MonoBehaviour
     {
         float rotSpeed = 3f;
-        bool stt = false;
 
-        
         void OnMouseDrag()
         {
             //lấy hướng của chuột hướng x 
