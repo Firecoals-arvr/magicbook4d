@@ -98,7 +98,7 @@ namespace Firecoals.Space
             else
             {
                 // nếu là 3 trang đầu thì cho xem model
-                if (mTrackableBehaviour.name == "Solarsystem_Scaled" || mTrackableBehaviour.name == "Sun_scaled" || mTrackableBehaviour.name == "Mercury_scaled")
+                if (mTrackableBehaviour.TrackableName == "Solarsystem_scaled" || mTrackableBehaviour.TrackableName == "Sun_scaled" || mTrackableBehaviour.TrackableName == "Mercury_scaled")
                 {
                     CloneModels();
                 }
