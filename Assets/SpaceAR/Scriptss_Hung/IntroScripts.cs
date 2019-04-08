@@ -67,7 +67,6 @@ namespace Firecoals.Space
         public string tagSound;
         public string tagInfo;
         private LoadSoundbundles _loadSoundbundle;
-
         /// <summary>
         /// anim để chạy animation intro lúc tracking found models
         /// </summary>
@@ -152,13 +151,12 @@ namespace Firecoals.Space
                 objectInfo.GetComponent<UILocalize>().key = string.Empty;
             }
         }
-
         void PlayAnimIntro()
         {
             anim = this.gameObject.GetComponentInChildren<Animator>();
             anim.SetTrigger("Intro");
+            
         }
-
         void CloneModels()
         {
             var statTime = DateTime.Now;

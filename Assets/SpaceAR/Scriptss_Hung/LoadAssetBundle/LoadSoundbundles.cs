@@ -8,45 +8,67 @@ using Loxodon.Framework.Bundles;
 
 namespace Firecoals.Space
 {
+    /// <summary>
+    /// class này để load sound từ bundles
+    /// </summary>
     public class LoadSoundbundles : MonoBehaviour
     {
+        /// <summary>
+        /// các biến để load sound
+        /// </summary>
         private ISoundManifestLoader _soundManifest;
         private IBundle _bundleAudioClip;
+        /// <summary>
+        /// biến asset loader để preload sound từ bundles
+        /// </summary>
         private AssetLoader _assetLoader;
-        //private IntroScripts _intro;
+        /// <summary>
+        /// mảng các image target để lấy tag sound và tag info
+        /// </summary>
         GameObject[] imageTarget;
-        //public GameObject target;
-        //bool isTrackable;
+        /// <summary>
+        /// 2 mảng sound info để lấy được các giá trị trong file json
+        /// </summary>
         private SoundInfo[] soundNames;
         private SoundInfo[] soundInfos;
+        /// <summary>
+        ///  biến check ngôn ngữ
+        /// </summary>
         private SelectLanguage select;
         string language;
         
 
-
+        
         private void Start()
         {
+            // tìm script ngôn ngữ ở trên scene
             select = GameObject.FindObjectOfType<SelectLanguage>();
+            // tìm tất cả các tranh có tag image target
             imageTarget = GameObject.FindGameObjectsWithTag ("ImageTarget");
             
         }
+        // hàm để chạy tên của model khi tìm thấy tranh
         public void PlayNameSound(string tagSound)
         {
-            
+            // cho preload bundles
             _assetLoader = GameObject.FindObjectOfType<AssetLoader>();
+            // soundmanifest để load file json
             _soundManifest = new SoundManifestLoader();
             var soundManifest = _soundManifest.LoadSync(Application.streamingAssetsPath + "/SpaceAudio.json");
+            //đưa file json về thành 1 mảng
             soundNames = soundManifest.soundInfos;
-
-            
-
+            // nếu ngôn ngữ đang dc chọn là tiếng anh
             if (select.en == true)
             {
                 language = "english";
+                //load tất cả các bundles có tên là space/sound/name/en
                 _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["space/sound/name/en"];
+                //load audioclip theo path được tìm bởi tag name là tên của model + ngôn ngữ
                 AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetSoundBundlePath(language, tagSound));
+                // play sound
                 FirecoalsSoundManager.PlaySound(audioClip);
             }
+            // giống vs tiếng anh
             if(select.vn == true)
             {
                 language = "vietnamese";
@@ -55,10 +77,14 @@ namespace Firecoals.Space
                 FirecoalsSoundManager.PlaySound(audioClip);
             }
         }
+        // hàm để lấy dc path của tên bundles
         private string  GetSoundBundlePath(string currentLanguage, string tag)
         {
+            // chạy từng thằng trong sound bundles
             foreach (var soundName in soundNames)
             {
+                // nếu ngôn ngữ truyền vào + tên của model đúng thì trả về 1 đường path
+                // còn ko thì trả về null
                 if (soundName.Language == currentLanguage && soundName.Tag == tag)
                 {
                     return soundName.PathBundle;
@@ -66,6 +92,7 @@ namespace Firecoals.Space
             }
             return string.Empty;
         }
+        // giống vs sound name
         private void PlayInfoSound(string tagInfo)
         {
             _assetLoader = GameObject.FindObjectOfType<AssetLoader>();
@@ -99,16 +126,20 @@ namespace Firecoals.Space
             }
             return string.Empty;
         }
+        // hàm này để chạy lại tên của modle khi ấn vào nút loa
         public void ReplayNameSound()
         {
+            // tìm từng ảnh trên scene
             foreach (GameObject go in imageTarget)
             {
+                // nếu thằng nào đang có con tức là đang đc tracking found thì chạy lại hàm play name sound
                 if (go.transform.childCount > 0)
                 {
                     PlayNameSound(go.transform.GetComponentInParent<IntroScripts>().tagSound);
                 }
             }
         }
+        // giống vs hàm trên
         public void ReplayInfoSound()
         {
             foreach (GameObject go in imageTarget)
