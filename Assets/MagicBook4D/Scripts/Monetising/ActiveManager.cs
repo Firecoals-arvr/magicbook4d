@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 
 public class ActiveManager
 {
-    private static string _Url = "https://firecoalslisenceserver.herokuapp.com";
+    private static string _Url = "https://Firecoalslisenceserver.herokuapp.com";
 
     //urlhttp://104.199.229.206
     //private static string _Port = "3122";

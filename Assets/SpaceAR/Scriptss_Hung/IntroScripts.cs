@@ -67,6 +67,7 @@ namespace Firecoals.Space
         public string tagSound;
         public string tagInfo;
         private LoadSoundbundles _loadSoundbundle;
+
         /// <summary>
         /// anim để chạy animation intro lúc tracking found models
         /// </summary>
@@ -128,18 +129,6 @@ namespace Firecoals.Space
             base.OnTrackingLost();
         }
 
-        private void RunAnimationIntro()
-        {
-            if (this.gameObject.transform.GetChild(0).GetComponent<Animation>() != null)
-            {
-                this.gameObject.transform.GetChild(0).GetComponent<Animation>().Play("intro");
-            }
-            else
-            {
-                Debug.LogWarning("This object hasn't intro animation.");
-            }
-        }
-
         /// <summary>
         /// đổi key trong localization để lấy đúng tên, thông tin theo object
         /// </summary>
@@ -163,12 +152,13 @@ namespace Firecoals.Space
                 objectInfo.GetComponent<UILocalize>().key = string.Empty;
             }
         }
+
         void PlayAnimIntro()
         {
             anim = this.gameObject.GetComponentInChildren<Animator>();
             anim.SetTrigger("Intro");
-
         }
+
         void CloneModels()
         {
             var statTime = DateTime.Now;

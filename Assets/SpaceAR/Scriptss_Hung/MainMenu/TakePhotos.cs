@@ -45,7 +45,7 @@ namespace Firecoals.Space
         }
 
         /// <summary>
-        /// chụp ảnh màn hình
+        /// chụp ảnh
         /// </summary>
         public void RunTakeScreenShot()
         {

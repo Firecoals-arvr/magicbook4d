@@ -26,22 +26,18 @@ namespace Firecoals.Space
         [HideInInspector]
         public bool en, vn;
 
-        /// <summary>
-        /// đổi ngôn ngữ VN
-        /// </summary>
-
-
         private void Start()
         {
-            
             Localization.language = PlayerPrefs.GetString("SpaceLanguage");
-            
         }
         protected override void OnOnPickLanguage(string languageId, string projectId)
         {
-
             base.OnOnPickLanguage(languageId, projectId);
         }
+		
+		/// <summary>
+        /// đổi ngôn ngữ VN
+        /// </summary>
         public void ClickVNFlag()
         {
             buttonSelect.GetComponent<UI2DSprite>().sprite2D = _vnflag.GetComponent<UI2DSprite>().sprite2D;
@@ -51,7 +47,6 @@ namespace Firecoals.Space
             buttonSelect.GetComponent<UIButton>().disabledSprite2D = _vnflag.GetComponent<UIButton>().disabledSprite2D;
             OnOnPickLanguage("VI", "B");
             PlayerPrefs.SetString("SpaceLanguage", "VI");
-            
         }
 
         /// <summary>
@@ -66,8 +61,7 @@ namespace Firecoals.Space
             buttonSelect.GetComponent<UIButton>().disabledSprite2D = _engflag.GetComponent<UIButton>().disabledSprite2D;
             OnOnPickLanguage("EN", "B");
             PlayerPrefs.SetString("SpaceLanguage", "EN");
-            
         }
-        
+
     }
 }
