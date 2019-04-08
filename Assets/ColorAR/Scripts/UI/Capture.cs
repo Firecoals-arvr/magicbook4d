@@ -13,18 +13,6 @@ namespace Firecoals.Color
 		private Texture2D screenShot;
 		Sprite tempSprite;
 
-		// Start is called before the first frame update
-		void Start()
-		{
-
-		}
-
-		// Update is called once per frame
-		void Update()
-		{
-
-		}
-
 		public IEnumerator TakePhoto()
 		{
 			RenderTexture rt = new RenderTexture(Screen.width, Screen.height, 24);

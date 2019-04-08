@@ -24,28 +24,28 @@ namespace Firecoals.Color
 
 		protected override void OnTrackingFound()
 		{
-			GameObject go = handler.CreateUnique("color/model/tambien", "Assets/ColorAR/Prefabs/TamBien/TamBien_Group.prefab");
-			if (go)
-			{
-				GameObject beach = Instantiate(go, mTrackableBehaviour.transform);
-				List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
-				beach.GetComponentsInChildren<RC_Get_Texture>(true, lst);
-				foreach (var child in lst)
-				{
-					child.RenderCamera = renderCam.GetComponent<Camera>();
-				}
-			}
+			//GameObject go = handler.CreateUnique("color/model/tambien", "Assets/ColorAR/Prefabs/TamBien/TamBien_Group.prefab");
+			//if (go)
+			//{
+			//	GameObject beach = Instantiate(go, mTrackableBehaviour.transform);
+			//	List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
+			//	beach.GetComponentsInChildren<RC_Get_Texture>(true, lst);
+			//	foreach (var child in lst)
+			//	{
+			//		child.RenderCamera = renderCam.GetComponent<Camera>();
+			//	}
+			//}
 			base.OnTrackingFound();
 		}
 
 		protected override void OnTrackingLost()
 		{
-			handler?.ClearAll();
-			handler?.Content.ClearAll();
-			foreach (Transform trans in mTrackableBehaviour.transform)
-			{
-				Destroy(trans.gameObject);
-			}
+			//handler?.ClearAll();
+			//handler?.Content.ClearAll();
+			//foreach (Transform trans in mTrackableBehaviour.transform)
+			//{
+			//	Destroy(trans.gameObject);
+			//}
 			base.OnTrackingLost();
 		}
 	}

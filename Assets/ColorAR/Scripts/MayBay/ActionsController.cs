@@ -22,17 +22,13 @@ namespace Firecoals.Color
 		{
 			//HideObjectInfo();
 			RotatePropeller();
-			if (Input.GetKeyDown(KeyCode.Space))
-			{
-				CreateAnimation();
-			}
 		}
 
 		public void CreateAnimation()
 		{
 			Debug.Log("May bay was clicked!");
-			//groupMayBay.transform.RotateAround(new Vector3(0, 20f, 0), Vector3.left, 90 * Time.deltaTime);
 			StartCoroutine(RotateAirplane());
+			this.GetComponent<Animator>().SetTrigger("isWave");
 		}
 
 		public void RotatePropeller()
@@ -57,17 +53,20 @@ namespace Firecoals.Color
 
 		public IEnumerator RotateAirplane()
 		{
+			//this.gameObject.GetComponent<BoxCollider>().enabled = false;
 			Debug.Log("May bay was clicked!");
-			float duration = 2f;
+			float duration = 3f;
 
 			float counter = 0f;
 
 			while (counter < duration)
 			{
 				counter += Time.deltaTime;
-				this.transform.RotateAround(new Vector3(0, 0.1f, 0), Vector3.right, 180 * Time.deltaTime);
+				this.transform.RotateAround(new Vector3(0, 0.1f, 0), Vector3.right, 120 * Time.deltaTime);
 				yield return null;
 			}
+			//this.gameObject.GetComponent<BoxCollider>().enabled = true;
+
 		}
 
 	}
