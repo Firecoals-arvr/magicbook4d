@@ -9,11 +9,6 @@ namespace Firecoals.Space
     public class SelectLanguage : LanguageController
     {
         /// <summary>
-        /// button chọn ngôn ngữ
-        /// </summary>
-        public GameObject buttonSelect;
-
-        /// <summary>
         /// chọn ngôn ngữ VN
         /// </summary>
         public GameObject _vnflag;
@@ -25,11 +20,6 @@ namespace Firecoals.Space
 
         [HideInInspector]
         public bool en, vn;
-
-        /// <summary>
-        /// đổi ngôn ngữ VN
-        /// </summary>
-
 
         private void Start()
         {
@@ -52,13 +42,13 @@ namespace Firecoals.Space
                     vn = true;
                     en = false;
                 }
-                if(Localization.language == "EN")
+                if (Localization.language == "EN")
                 {
                     vn = false;
                     en = true;
                 }
             }
-            
+
         }
         // override lại class vs 2 Th 1 là tiếng việt thì set localization và lưu vào playprefs
         // th2 là tiếng anh cũng v
@@ -77,16 +67,16 @@ namespace Firecoals.Space
             }
             base.OnOnPickLanguage(languageId, projectId);
         }
+
+        /// <summary>
+        /// đổi ngôn ngữ VN
+        /// </summary>
         public void ClickVNFlag()
         {
-            buttonSelect.GetComponent<UI2DSprite>().sprite2D = _vnflag.GetComponent<UI2DSprite>().sprite2D;
-            buttonSelect.GetComponent<UIButton>().normalSprite2D = _vnflag.GetComponent<UIButton>().normalSprite2D;
-            buttonSelect.GetComponent<UIButton>().hoverSprite2D = _vnflag.GetComponent<UIButton>().hoverSprite2D;
-            buttonSelect.GetComponent<UIButton>().pressedSprite2D = _vnflag.GetComponent<UIButton>().pressedSprite2D;
-            buttonSelect.GetComponent<UIButton>().disabledSprite2D = _vnflag.GetComponent<UIButton>().disabledSprite2D;
             OnOnPickLanguage("VI", "B");
             vn = true;
             en = false;
+            HideIconLanguage();
         }
 
         /// <summary>
@@ -94,15 +84,23 @@ namespace Firecoals.Space
         /// </summary>
         public void ClickEngFlag()
         {
-            buttonSelect.GetComponent<UI2DSprite>().sprite2D = _engflag.GetComponent<UI2DSprite>().sprite2D;
-            buttonSelect.GetComponent<UIButton>().normalSprite2D = _engflag.GetComponent<UIButton>().normalSprite2D;
-            buttonSelect.GetComponent<UIButton>().hoverSprite2D = _engflag.GetComponent<UIButton>().hoverSprite2D;
-            buttonSelect.GetComponent<UIButton>().pressedSprite2D = _engflag.GetComponent<UIButton>().pressedSprite2D;
-            buttonSelect.GetComponent<UIButton>().disabledSprite2D = _engflag.GetComponent<UIButton>().disabledSprite2D;
             OnOnPickLanguage("EN", "B");
             vn = false;
             en = true;
+            HideIconLanguage();
         }
-        
+
+        private void HideIconLanguage()
+        {
+            UIPlayTween tw = _vnflag.AddComponent<UIPlayTween>();
+            tw.tweenTarget = _vnflag;
+            tw.includeChildren = true;
+            tw.playDirection = AnimationOrTween.Direction.Reverse;
+
+            UIPlayTween tw1 = _engflag.AddComponent<UIPlayTween>();
+            tw1.tweenTarget = _engflag;
+            tw1.includeChildren = true;
+            tw1.playDirection = AnimationOrTween.Direction.Reverse;
+        }
     }
 }
