@@ -1,6 +1,7 @@
 ﻿using NatCorder;
 using NatCorder.Clocks;
 using NatCorder.Inputs;
+using NatShareU;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -81,6 +82,7 @@ namespace Firecoals.Render
         {
             Debug.Log("Saved recording to: " + path);
             PopupManager.PopUpDialog("", "Saved recording to: " + path);
+            
             // Playback the video
 #if UNITY_EDITOR
             EditorUtility.OpenWithDefaultApp(path);
@@ -88,6 +90,7 @@ namespace Firecoals.Render
             Handheld.PlayFullScreenMovie("file://" + path);
 #elif UNITY_ANDROID
             Handheld.PlayFullScreenMovie(path);
+            NatShare.SaveToCameraRoll(path, "MagicBook 4D", false);
 #endif
         }
     }

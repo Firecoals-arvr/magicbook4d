@@ -16,6 +16,9 @@ namespace Firecoals.Render
             EventDelegate.Set(GetComponent<UIButton>().onClick, mEventDelegate);
             Reset();
         }
+        /// <summary>
+        /// Set countdown fill = 0
+        /// </summary>
         private void Reset()
         {
             //Set countdown fill = 0
@@ -37,6 +40,7 @@ namespace Firecoals.Render
                     Capture.Instance.Snap();
                     recording.audioInput.Dispose();
                     recording.cameraInput.Dispose();
+                    Reset();
                 }
                 else
                 {
@@ -48,7 +52,6 @@ namespace Firecoals.Render
             }
             else
             {
-
                 pressTime = Time.realtimeSinceStartup;
                 recording.StartRecording();
             }

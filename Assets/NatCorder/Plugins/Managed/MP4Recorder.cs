@@ -36,13 +36,10 @@ using NativeGalleryNamespace;
             videoWidth = videoWidth >> 1 << 1;
             videoHeight = videoHeight >> 1 << 1;
             var readbackFormat = TextureFormat.RGBA32;
-            string recordingDirectory;
-            //TODO CRASH
+            string recordingDirectory = Application.persistentDataPath;
             var recordingFilename = string.Format("recording_{0}.mp4", DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss_fff"));
-#if !UNITY_EDITOR && UNITY_ANDROID
-             recordingDirectory = AJC.CallStatic<string>("GetMediaPath", "MagicBook 4D");
-#endif
-            recordingDirectory = Application.persistentDataPath;
+            //recordingDirectory = Application.persistentDataPath;
+             
              
             switch (Application.platform) {
                 case RuntimePlatform.OSXEditor:
