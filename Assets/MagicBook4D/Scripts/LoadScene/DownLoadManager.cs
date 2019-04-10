@@ -49,11 +49,11 @@ public class DownLoadManager : MonoBehaviour
                 //TODO Load Play Scene Additive, Disable Loading scene UI
             });
         }
-        else if(Application.internetReachability != NetworkReachability.NotReachable && RequiredDownload())
+        else if (Application.internetReachability != NetworkReachability.NotReachable && RequiredDownload())
         {
             Download();
         }
-        else if(Application.internetReachability != NetworkReachability.NotReachable && !RequiredDownload())
+        else if (Application.internetReachability != NetworkReachability.NotReachable && !RequiredDownload())
         {
             PreLoad();
         }
