@@ -47,7 +47,7 @@ namespace Firecoals.Purchasing
         #region IN_APP_PURCHASE
         public void BuyAnimal()
         {
-            PopupManager.PopUpDialog("Thế giới động vật", "Bạn có chắc chắn muốn mua không?",
+            PopupManager.PopUpDialog("Thế giới động vật", "Bạn có chắc chắn muốn mua không?",default, "Mua","Hủy bỏ",
                 PopupManager.DialogType.YesNoDialog,
                 () =>
                 {
@@ -58,7 +58,7 @@ namespace Firecoals.Purchasing
         }
         public void BuySpace()
         {
-            PopupManager.PopUpDialog("Khám phá vũ trụ", "Bạn có chắc chắn muốn mua không?",
+            PopupManager.PopUpDialog("Khám phá vũ trụ", "Bạn có chắc chắn muốn mua không?", default, "Mua", "Hủy bỏ",
                 PopupManager.DialogType.YesNoDialog,
                 () =>
                 {
@@ -69,7 +69,7 @@ namespace Firecoals.Purchasing
         }
         public void BuyColor()
         {
-            PopupManager.PopUpDialog("Tô màu", "Bạn có chắc chắn muốn mua không?",
+            PopupManager.PopUpDialog("Tô màu", "Bạn có chắc chắn muốn mua không?", default, "Mua", "Hủy bỏ",
                 PopupManager.DialogType.YesNoDialog,
                 () =>
                 {

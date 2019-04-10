@@ -33,7 +33,7 @@ public class LanguageUI : LanguageController
     }
     protected override void OnOnPickLanguage(string languageId, string projectId)
     {
-
+        
         switch (projectId)
         {
             case "A":
@@ -102,4 +102,15 @@ public class LanguageUI : LanguageController
         }
         base.OnOnShowListLanguage(projectId);
     }
+
+    //public void ShowListLanguage(string projectId)
+    //{
+
+    //}
+
+    //public void PickLanguage(string languageId, string projectId)
+    //{
+    //    //Debug.LogWarning(Camera.current.name);
+
+    //}
 }

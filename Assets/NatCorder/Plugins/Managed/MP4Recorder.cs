@@ -4,13 +4,15 @@
 */
 
 namespace NatCorder {
-
+    using Object = UnityEngine.Object;
     using UnityEngine;
     using System;
     using System.IO;
     using Platforms;
     using Docs;
-
+#if !UNITY_EDITOR && (UNITY_ANDROID || UNITY_IOS)
+using NativeGalleryNamespace;
+#endif
     /// <summary>
     /// Recorder for recording MP4 videos encoded with the H.264 AVC/AAC codecs
     /// </summary>
@@ -34,8 +36,11 @@ namespace NatCorder {
             videoWidth = videoWidth >> 1 << 1;
             videoHeight = videoHeight >> 1 << 1;
             var readbackFormat = TextureFormat.RGBA32;
-            var recordingDirectory = Application.persistentDataPath;
+            string recordingDirectory = Application.persistentDataPath;
             var recordingFilename = string.Format("recording_{0}.mp4", DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss_fff"));
+            //recordingDirectory = Application.persistentDataPath;
+             
+             
             switch (Application.platform) {
                 case RuntimePlatform.OSXEditor:
                     recordingDirectory = Directory.GetCurrentDirectory();
@@ -104,7 +109,7 @@ namespace NatCorder {
         public void CommitSamples (float[] sampleBuffer, long timestamp) {
             internalRecorder.CommitSamples(sampleBuffer, timestamp);
         }
-        #endregion
+#endregion
 
         private readonly IMediaRecorder internalRecorder;
     }

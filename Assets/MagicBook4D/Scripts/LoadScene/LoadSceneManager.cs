@@ -44,4 +44,5 @@ public class LoadSceneManager : MonoBehaviour
     {
         SceneManager.LoadScene("Store");
     }
+       
 }

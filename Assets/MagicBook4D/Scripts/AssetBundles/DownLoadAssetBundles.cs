@@ -65,7 +65,7 @@ namespace Firecoals.AssetBundles
                 {
                     Debug.LogFormat("Downloads BundleManifest failure.Error:{0}", manifestResult.Exception);
                     PopupManager.PopUpDialog("[[9C0002]Error[-]]", "Downloads data info failure. Error:{0}" +
-                        manifestResult.Exception, PopupManager.DialogType.OkDialog,
+                        manifestResult.Exception, default,default, default, PopupManager.DialogType.OkDialog,
                         (() => SceneManager.LoadScene("Menu")));
                     yield break;
                 }
@@ -85,7 +85,7 @@ namespace Firecoals.AssetBundles
                 if (bundles == null || bundles.Count <= 0)
                 {
                     Debug.LogFormat("Please clear cache and remove StreamingAssets,try again.");
-                    PopupManager.PopUpDialog("[[9C0002]Error[-]]", "You need to clear cache to download the data, press OK to continue",
+                    PopupManager.PopUpDialog("[[9C0002]Error[-]]", "You need to clear cache to download the data, press OK to continue",default,default,default,
                         PopupManager.DialogType.YesNoDialog, () =>
                         {
                             var dlManager = GameObject.FindObjectOfType<DownLoadManager>();
@@ -114,7 +114,7 @@ namespace Firecoals.AssetBundles
                 if (downloadResult.Exception != null)
                 {
                     Debug.LogFormat("Downloads AssetBundle failure.Error:{0}", downloadResult.Exception);
-                    PopupManager.PopUpDialog("[[9C0002]Error[-]]", "Downloads Data failure. Error",
+                    PopupManager.PopUpDialog("[[9C0002]Error[-]]", "Downloads Data failure. Error",default,default,default,
                         PopupManager.DialogType.YesNoDialog, () =>
                         {
                             var dlManager = GameObject.FindObjectOfType<DownLoadManager>();

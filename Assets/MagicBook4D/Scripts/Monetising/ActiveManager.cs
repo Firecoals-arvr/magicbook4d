@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 
 public class ActiveManager
 {
-    private static string _Url = "https://Firecoalslisenceserver.herokuapp.com";
+    private static string _Url = "https://firecoalslisenceserver.herokuapp.com";
 
     //urlhttp://104.199.229.206
     //private static string _Port = "3122";
@@ -95,8 +95,8 @@ public class ActiveManager
         else
         {
             string result = www.downloadHandler.text;
-            Debug.LogWarning("result: " + result);
             Debug.LogWarning("Phone number " + playerid + " and Project " + projectID + " is " + result);
+
             if (result.Equals(ACTIVED))
             {
                 SaveActivatedStatus(projectID);
