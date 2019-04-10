@@ -19,6 +19,7 @@ namespace Firecoals.Space
         // Start is called before the first frame update
         void Start()
         {
+			// set cho thời gian = 60
             timeTxt.text = time.ToString();
 
 
@@ -27,6 +28,7 @@ namespace Firecoals.Space
         // Update is called once per frame
         void Update()
         {
+			// nếu ấn nút start thì bắt đầu tính thời gian
             if (isStart == true)
             {
                 if (time > 0)
@@ -43,13 +45,16 @@ namespace Firecoals.Space
         public void PlayButton()
         {
             isStart = true;
+			//game1 là thằng image target
             game1.transform.GetChild(0).gameObject.SetActive(true);
             NGUITools.SetActive(playBT, false);
 
         }
+		// check để tính điểm
         public void CheckResult()
         {
             rightAnswer = 0;
+			// list này là list các planet màu xanh 
             listPlanet = GameObject.FindGameObjectWithTag("ListPlanetG1");
             for (int i = 0; i < listPlanet.transform.childCount; i++)
             {
