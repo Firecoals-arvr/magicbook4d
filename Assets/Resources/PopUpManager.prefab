@@ -810,7 +810,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   okDialogObject: {fileID: 813718044375897149}
+  okLabel: {fileID: 813718044427117124}
   yesNoDialogObject: {fileID: 813718045563653776}
+  yesLabel: {fileID: 813718044918091681}
+  noLabel: {fileID: 813718044354303680}
   dialogText:
   - {fileID: 813718045085309317}
   - {fileID: 813718044523155413}
@@ -871,58 +874,6 @@ PrefabInstance:
     - target: {fileID: 400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: onClick.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: onClick.Array.data[0].mParameters.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: tweenTarget
-      value: 
-      objectReference: {fileID: 813718044365562656}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: hover.r
-      value: 0.78622323
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: hover.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: hover.b
-      value: 0.4764151
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: pressed.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: pressed.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: pressed.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: onClick.Array.data[0].mTarget
-      value: 
-      objectReference: {fileID: 5879811714015599144}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: onClick.Array.data[0].mMethodName
-      value: DismissDialog
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: onClick.Array.data[0].mParameters.Array.data[0].obj
-      value: 
-      objectReference: {fileID: 5879811714015599144}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: onClick.Array.data[0].mParameters.Array.data[0].field
-      value: AnswerNo
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
       propertyPath: leftAnchor.target
@@ -985,22 +936,58 @@ PrefabInstance:
       propertyPath: mSpriteName
       value: CircleButton BlueLight
       objectReference: {fileID: 0}
-    - target: {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: leftAnchor.target
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: onClick.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: onClick.Array.data[0].mParameters.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: hover.r
+      value: 0.78622323
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: hover.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: hover.b
+      value: 0.4764151
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: pressed.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: pressed.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: pressed.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: onClick.Array.data[0].mTarget
       value: 
-      objectReference: {fileID: 813718044365537024}
-    - target: {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: rightAnchor.target
+      objectReference: {fileID: 5879811714015599144}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: onClick.Array.data[0].mMethodName
+      value: DismissDialog
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: onClick.Array.data[0].mParameters.Array.data[0].obj
       value: 
-      objectReference: {fileID: 813718044365537024}
-    - target: {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: bottomAnchor.target
-      value: 
-      objectReference: {fileID: 813718044365537024}
-    - target: {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: topAnchor.target
-      value: 
-      objectReference: {fileID: 813718044365537024}
+      objectReference: {fileID: 5879811714015599144}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: onClick.Array.data[0].mParameters.Array.data[0].field
+      value: AnswerNo
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: m_Size.y
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
       propertyPath: mHeight
       value: 142
@@ -1026,21 +1013,23 @@ PrefabInstance:
       propertyPath: mApplyGradient
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6500000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: m_Size.y
-      value: 150
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
---- !u!4 &813718044365537024 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400002, guid: 7c3a28b051e872b448d4808cfcf9199c,
+--- !u!114 &813718044354303680 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c,
     type: 3}
   m_PrefabInstance: {fileID: 813718044365661570}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &813718044365562656 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100002, guid: 7c3a28b051e872b448d4808cfcf9199c,
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &813718044365537024 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400002, guid: 7c3a28b051e872b448d4808cfcf9199c,
     type: 3}
   m_PrefabInstance: {fileID: 813718044365661570}
   m_PrefabAsset: {fileID: 0}
@@ -1099,6 +1088,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: mColor.r
+      value: 0.63715863
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: mColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: mHeight
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: aspectRatio
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: mAtlas
+      value: 
+      objectReference: {fileID: 11400000, guid: d1f0d35b72cc5064784986d642f5289f,
+        type: 2}
+    - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: mSpriteName
+      value: CircleButton Blue
+      objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
       propertyPath: onClick.Array.size
       value: 1
@@ -1107,10 +1121,6 @@ PrefabInstance:
       propertyPath: onClick.Array.data[0].mParameters.Array.size
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: tweenTarget
-      value: 
-      objectReference: {fileID: 813718044433651620}
     - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
       propertyPath: hover.r
       value: 0.7882353
@@ -1151,47 +1161,14 @@ PrefabInstance:
       propertyPath: onClick.Array.data[0].mParameters.Array.data[0].field
       value: AnswerYes
       objectReference: {fileID: 0}
-    - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: mColor.r
-      value: 0.63715863
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: mColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: mHeight
+    - target: {fileID: 6500000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: m_Size.y
       value: 150
       objectReference: {fileID: 0}
-    - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: aspectRatio
-      value: 1
+    - target: {fileID: 400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 185
       objectReference: {fileID: 0}
-    - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: mAtlas
-      value: 
-      objectReference: {fileID: 11400000, guid: d1f0d35b72cc5064784986d642f5289f,
-        type: 2}
-    - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: mSpriteName
-      value: CircleButton Blue
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: leftAnchor.target
-      value: 
-      objectReference: {fileID: 813718044433746820}
-    - target: {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: rightAnchor.target
-      value: 
-      objectReference: {fileID: 813718044433746820}
-    - target: {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: bottomAnchor.target
-      value: 
-      objectReference: {fileID: 813718044433746820}
-    - target: {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: topAnchor.target
-      value: 
-      objectReference: {fileID: 813718044433746820}
     - target: {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
       propertyPath: mWidth
       value: 2
@@ -1217,28 +1194,26 @@ PrefabInstance:
       propertyPath: mFontSize
       value: 34
       objectReference: {fileID: 0}
-    - target: {fileID: 6500000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: m_Size.y
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 185
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
---- !u!1 &813718044433651620 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100002, guid: 7c3a28b051e872b448d4808cfcf9199c,
-    type: 3}
-  m_PrefabInstance: {fileID: 813718044433617158}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &813718044433746820 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: 7c3a28b051e872b448d4808cfcf9199c,
     type: 3}
   m_PrefabInstance: {fileID: 813718044433617158}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &813718044427117124 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c,
+    type: 3}
+  m_PrefabInstance: {fileID: 813718044433617158}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &813718044907338979
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1293,58 +1268,6 @@ PrefabInstance:
     - target: {fileID: 400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: onClick.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: onClick.Array.data[0].mParameters.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: tweenTarget
-      value: 
-      objectReference: {fileID: 813718044907371073}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: hover.r
-      value: 0.7882353
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: hover.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: hover.b
-      value: 0.47843137
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: pressed.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: pressed.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: pressed.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: onClick.Array.data[0].mTarget
-      value: 
-      objectReference: {fileID: 5879811714015599144}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: onClick.Array.data[0].mMethodName
-      value: DismissDialog
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: onClick.Array.data[0].mParameters.Array.data[0].obj
-      value: 
-      objectReference: {fileID: 5879811714015599144}
-    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: onClick.Array.data[0].mParameters.Array.data[0].field
-      value: AnswerYes
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
       propertyPath: leftAnchor.target
@@ -1403,22 +1326,58 @@ PrefabInstance:
       propertyPath: mSpriteName
       value: CircleButton Purple
       objectReference: {fileID: 0}
-    - target: {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: leftAnchor.target
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: onClick.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: onClick.Array.data[0].mParameters.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: hover.r
+      value: 0.7882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: hover.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: hover.b
+      value: 0.47843137
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: pressed.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: pressed.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: pressed.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: onClick.Array.data[0].mTarget
       value: 
-      objectReference: {fileID: 813718044906940001}
-    - target: {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: rightAnchor.target
+      objectReference: {fileID: 5879811714015599144}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: onClick.Array.data[0].mMethodName
+      value: DismissDialog
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: onClick.Array.data[0].mParameters.Array.data[0].obj
       value: 
-      objectReference: {fileID: 813718044906940001}
-    - target: {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: bottomAnchor.target
-      value: 
-      objectReference: {fileID: 813718044906940001}
-    - target: {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: topAnchor.target
-      value: 
-      objectReference: {fileID: 813718044906940001}
+      objectReference: {fileID: 5879811714015599144}
+    - target: {fileID: 11400000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: onClick.Array.data[0].mParameters.Array.data[0].field
+      value: AnswerYes
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: m_Size.y
+      value: 151
+      objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
       propertyPath: mHeight
       value: 143
@@ -1440,21 +1399,23 @@ PrefabInstance:
       propertyPath: mFontSize
       value: 34
       objectReference: {fileID: 0}
-    - target: {fileID: 6500000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
-      propertyPath: m_Size.y
-      value: 151
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
---- !u!1 &813718044907371073 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100002, guid: 7c3a28b051e872b448d4808cfcf9199c,
-    type: 3}
-  m_PrefabInstance: {fileID: 813718044907338979}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &813718044906940001 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: 7c3a28b051e872b448d4808cfcf9199c,
     type: 3}
   m_PrefabInstance: {fileID: 813718044907338979}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &813718044918091681 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c,
+    type: 3}
+  m_PrefabInstance: {fileID: 813718044907338979}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

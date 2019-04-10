@@ -26,7 +26,7 @@ public class DownLoadManager : MonoBehaviour
         }
         else if (Application.internetReachability == NetworkReachability.NotReachable && RequiredDownload())
         {
-            PopupManager.PopUpDialog("[[9C0002]Error[-]]", "Không có kết nối mạng, vui lòng thử lại", PopupManager.DialogType.YesNoDialog,
+            PopupManager.PopUpDialog("[[9C0002]Error[-]]", "Không có kết nối mạng, vui lòng thử lại",default,default,default, PopupManager.DialogType.YesNoDialog,
                 () =>
                 {
                     if (Application.internetReachability != NetworkReachability.NotReachable)
@@ -39,7 +39,7 @@ public class DownLoadManager : MonoBehaviour
         }
         else if (Application.internetReachability != NetworkReachability.NotReachable && !RequiredDownload() && NeedUpdate())
         {
-            PopupManager.PopUpDialog("", "Có bản cập nhật dữ liệu mới, bạn có muốn tải về không?", PopupManager.DialogType.YesNoDialog,
+            PopupManager.PopUpDialog("", "Có bản cập nhật dữ liệu mới, bạn có muốn tải về không?",default,default,default, PopupManager.DialogType.YesNoDialog,
                 () =>
                 {
                     RetryDownload();
@@ -87,7 +87,7 @@ public class DownLoadManager : MonoBehaviour
     public void Download()
     {
 
-        PopupManager.PopUpDialog("Xin chào!", "Bạn cần tải dữ liệu để tiếp tục, bấm Đồng ý", PopupManager.DialogType.YesNoDialog,
+        PopupManager.PopUpDialog("Xin chào!", "Bạn cần tải dữ liệu để tiếp tục, bấm Đồng ý",default,default,default ,PopupManager.DialogType.YesNoDialog,
         (() =>
         {
             _dlAssets.slider = loadingBar;
@@ -118,11 +118,10 @@ public class DownLoadManager : MonoBehaviour
         BundleManifest localManifest = manifestLoader.Load(BundleUtil.GetStorableDirectory() + BundleSetting.ManifestFilename);
         return localManifest.Version != Application.version;
     }
-
-
+    
     /// <summary>
     /// There is NO data in local
-    /// TODO for test: Delete key "Downloaded+ThemeName" when delete data
+    /// TODO for test: Delete key "Downloaded + ThemeName" when delete data
     /// </summary>
     /// <returns></returns>
     public bool RequiredDownload()

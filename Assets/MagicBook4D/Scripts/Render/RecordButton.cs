@@ -8,7 +8,7 @@ namespace Firecoals.Render
         private const float MaxRecordingTime = 60f; // seconds
         public UISprite cowntdown;
         private bool cownting;
-        private Recording recording; 
+        private Recording recording;
         private void Start()
         {
             recording = GameObject.FindObjectOfType<Recording>();
@@ -20,33 +20,45 @@ namespace Firecoals.Render
         {
             //Set countdown fill = 0
             cowntdown.fillAmount = 0;
-            Debug.Log("reset");
         }
 
+        private float pressTime;
         private void OnPress(bool pressed)
         {
-            //Debug.Log("Pressed: " + pressed.ToString());
-            
-            StartCoroutine(CowntDown(pressed));
-
+            StartCoroutine(CowntDown());
             if (!pressed)
             {
-                Reset();
-                cownting = false;
-                recording.StopRecording();
+                var deltaTime = Time.realtimeSinceStartup - pressTime;
+                Debug.LogWarning("delta time: " + deltaTime);
+                if (deltaTime < 1f)
+                {
+                    //TODO Take Screen shot
+                    Debug.LogWarning("Snap");
+                    Capture.Instance.Snap();
+                    recording.audioInput.Dispose();
+                    recording.cameraInput.Dispose();
+                }
+                else
+                {
+
+                    Reset();
+                    cownting = false;
+                    recording.StopRecording();
+                }
             }
             else
             {
+
+                pressTime = Time.realtimeSinceStartup;
                 recording.StartRecording();
             }
 
         }
 
-        private IEnumerator CowntDown(bool pressed)
+        private IEnumerator CowntDown()
         {
-
             cownting = true;
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(.2f);
             if (!cownting) yield break;
             float startTime = Time.time;
             float ratio = 0;
@@ -55,7 +67,7 @@ namespace Firecoals.Render
                 cowntdown.fillAmount = ratio;
                 yield return null;
             }
-            //Reset();
+            Reset();
 
         }
     }

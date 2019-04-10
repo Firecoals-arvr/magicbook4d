@@ -25,22 +25,5 @@ public class TestEvent : MonoBehaviour
         FirecoalsSoundManager.PlaySound(audioClip);
     }
 
-    public void ShowOKPopUp()
-    {
-        if (!PopupManager.showingDialog)
-        {
-            PopupManager.PopUpDialog("OK Dialog", "Bầu trời trong xanh thăm thẳm, không một gợn mây", PopupManager.DialogType.OkDialog);
-        }
-    }
-
-    public void ShowYesNoPopUp()
-    {
-        if (!PopupManager.showingDialog)
-        {
-            PopupManager.PopUpDialog("Yes/No Dialog","Bầu trời trong xanh thăm thẳm, không một gợn mây", PopupManager.DialogType.YesNoDialog,
-                () => { Debug.Log("You've clicked NO button"); }, () => { Debug.Log("You've clicked YES button"); });
-        }
-        
-    }
 }
 
