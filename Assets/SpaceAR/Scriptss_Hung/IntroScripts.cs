@@ -174,7 +174,7 @@ namespace Firecoals.Space
                 PlayAnimIntro();
                 Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
             }
-            //_loadSoundbundle.PlayNameSound(tagSound);
+            _loadSoundbundle.PlayNameSound(tagSound);
             objectName = GameObject.Find("UI Root/Name Panel/BangTen/Label");
             objectInfo = GameObject.Find("UI Root/PanelInfor/Scroll View/Info");
 

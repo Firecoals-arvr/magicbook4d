@@ -25,29 +25,32 @@ namespace Firecoals.Space
         {
             // Th test khi chưa qua scene setting 
             // nếu chưa chọn ngôn ngữ bên scene setting thì set mặc đinhj tiếng việt
-            if (PlayerPrefs.GetString("SpaceLanguage") == null)
-            {
-                OnOnPickLanguage("VI", "B");
-                vn = true;
-                en = false;
-            }
-            // ngược lại nếu đã có rồi thì set localization theo playpref
-            else
-            {
-                Localization.language = PlayerPrefs.GetString("SpaceLanguage");
-                // cái này ko chắc đúng vì chưa dc test
-                // nếu localization đang có key là VI đưa ra 2 biến bool để check bên sound
-                if (Localization.language == "VI")
-                {
-                    vn = true;
-                    en = false;
-                }
-                if (Localization.language == "EN")
-                {
-                    vn = false;
-                    en = true;
-                }
-            }
+            //if (PlayerPrefs.GetString("SpaceLanguage") == null)
+            //{
+            //    OnOnPickLanguage("VI", "B");
+            //    vn = true;
+            //    en = false;
+            //}
+            //// ngược lại nếu đã có rồi thì set localization theo playpref
+            //else
+            //{
+            //    Localization.language = PlayerPrefs.GetString("SpaceLanguage");
+            //    // cái này ko chắc đúng vì chưa dc test
+            //    // nếu localization đang có key là VI đưa ra 2 biến bool để check bên sound
+            //    if (Localization.language == "VI")
+            //    {
+            //        vn = true;
+            //        en = false;
+            //    }
+            //    if (Localization.language == "EN")
+            //    {
+            //        vn = false;
+            //        en = true;
+            //    }
+            //}
+            Localization.language = "VI";
+            en = false;
+            vn = true;
 
         }
         // override lại class vs 2 Th 1 là tiếng việt thì set localization và lưu vào playprefs
