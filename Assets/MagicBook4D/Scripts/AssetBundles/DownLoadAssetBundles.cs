@@ -1,4 +1,5 @@
-﻿using Loxodon.Framework.Asynchronous;
+﻿using Firecoals.MagicBook;
+using Loxodon.Framework.Asynchronous;
 using Loxodon.Framework.Bundles;
 using System;
 using System.Collections;

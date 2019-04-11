@@ -62,7 +62,7 @@ public class LoadingScreen : MonoBehaviour
 
     #region PRIVATE_METHODS
 
-    private IEnumerator LoadNextSceneAsync()
+    public IEnumerator LoadNextSceneAsync()
     {
         //int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
 

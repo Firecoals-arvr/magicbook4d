@@ -1,10 +1,12 @@
 ﻿using Firecoals.AssetBundles;
+using Firecoals.MagicBook;
 using Loxodon.Framework.Asynchronous;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Firecoals.Augmentation
 {
@@ -22,7 +24,7 @@ namespace Firecoals.Augmentation
         #region MONOBEHAVIOUR_METHOD
         private void Awake()
         {
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
             switch (ThemeController.instance.Theme)
             {
                 case "Animal":
