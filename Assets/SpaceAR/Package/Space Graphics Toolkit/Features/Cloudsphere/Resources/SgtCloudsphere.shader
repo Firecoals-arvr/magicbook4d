@@ -3,7 +3,7 @@ Shader "Hidden/SgtCloudsphere"
 	Properties
 	{
 		_Color("Color", Color) = (1, 1, 1, 1)
-		_MainTex("Main Tex", CUBE) = "white" {}
+		_CustomTex("Main Tex", CUBE) = "white" {}
 		_DepthTex("Depth Tex", 2D) = "white" {}
 
 		_NearTex("Near Tex", 2D) = "white" {}
@@ -67,7 +67,7 @@ Shader "Hidden/SgtCloudsphere"
 			#pragma multi_compile __ SHADOW_1 SHADOW_2
 
 			float4      _Color;
-			samplerCUBE _MainTex;
+			samplerCUBE _CustomTex;
 			sampler2D   _DepthTex;
 
 			sampler2D _NearTex;
@@ -157,7 +157,7 @@ Shader "Hidden/SgtCloudsphere"
 			void Frag(v2f i, out f2g o)
 			{
 				float4 depth = tex2D(_DepthTex, i.texcoord0.xx);
-				float4 main = _Color * texCUBE(_MainTex, i.normal) * depth;
+				float4 main = _Color * texCUBE(_CustomTex, i.normal) * depth;
 #if SGT_A // Near
 				float2 near01 = length(i.texcoord1) * _NearScale;
 				float  near   = tex2D(_NearTex, near01).a;

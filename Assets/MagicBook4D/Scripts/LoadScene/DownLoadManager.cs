@@ -1,5 +1,6 @@
 ﻿using Firecoals.AssetBundles;
 using Firecoals.Augmentation;
+using Firecoals.MagicBook;
 using Loxodon.Framework.Bundles;
 using UnityEngine;
 using UnityEngine.SceneManagement;

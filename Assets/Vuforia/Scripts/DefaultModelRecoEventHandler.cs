@@ -61,9 +61,9 @@ public class DefaultModelRecoEventHandler : MonoBehaviour, IObjectRecoEventHandl
     /// </summary>
     [Tooltip("Whether Vuforia should stop searching for other models, while current model is tracked and visible.")]
     public bool StopSearchWhileTracking = true;//true by default, as this is the recommended behaviour
-    public ModelTargetBehaviour ModelTargetTemplate;
+    //public ModelTargetBehaviour ModelTargetTemplate;
 
-    public bool ShowBoundingBox { get; set; }
+    //public bool ShowBoundingBox { get; set; }
 
     #endregion // PUBLIC_VARIABLES
 

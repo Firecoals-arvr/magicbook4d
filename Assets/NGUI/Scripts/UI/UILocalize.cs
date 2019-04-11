@@ -84,6 +84,7 @@ public class UILocalize : MonoBehaviour
         if (!Application.isPlaying) return;
 #endif
         mStarted = true;
+        //NGUITools.Broadcast("OnLocalize");
         OnLocalize();
     }
 

@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 616905093}
   - component: {fileID: 616905095}
   - component: {fileID: 616905094}
+  - component: {fileID: 1609244600}
   - component: {fileID: 1609244601}
   - component: {fileID: 1609244602}
-  - component: {fileID: 1590113222}
   m_Layer: 8
   m_Name: Record Button
   m_TagString: Untagged
@@ -52,25 +52,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftAnchor:
     target: {fileID: 0}
-    relative: 1
-    absolute: -136
+    relative: 0
+    absolute: 0
   rightAnchor:
     target: {fileID: 0}
     relative: 1
-    absolute: -36
+    absolute: 0
   bottomAnchor:
     target: {fileID: 0}
-    relative: 0.5
-    absolute: -16
+    relative: 0
+    absolute: 0
   topAnchor:
     target: {fileID: 0}
-    relative: 0.5
-    absolute: 84
+    relative: 1
+    absolute: 0
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 100
-  mHeight: 100
+  mWidth: 120
+  mHeight: 120
   mDepth: 1
   mMat: {fileID: 0}
   autoResizeBoxCollider: 1
@@ -125,6 +125,10 @@ MonoBehaviour:
     - obj: {fileID: 0}
       field: 
     oneShot: 0
+  - mTarget: {fileID: 1609244600}
+    mMethodName: Snap
+    mParameters: []
+    oneShot: 0
 --- !u!114 &616905095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,8 +153,24 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 100, y: 100, z: 0}
+  m_Size: {x: 120, y: 120, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1609244600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616905090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9872ffa291523d4db05ec7e472873b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  mainPanel: {fileID: 0}
+  reviewPanel: {fileID: 0}
+  unitySprite: {fileID: 0}
 --- !u!114 &1609244601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,22 +284,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &1590113222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616905090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0acd051ea88bb1249b74a72511cbe3bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 0}
-  mainPanel: {fileID: 0}
-  reviewPanel: {fileID: 0}
-  unitySprite: {fileID: 0}
 --- !u!1 &1542879990
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,8 +346,8 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 0, b: 0, a: 1}
   mPivot: 4
-  mWidth: 100
-  mHeight: 100
+  mWidth: 120
+  mHeight: 120
   mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0

@@ -1,4 +1,5 @@
 ﻿using Firecoals.Augmentation;
+using Firecoals.MagicBook;
 using Loxodon.Framework.Asynchronous;
 using Loxodon.Framework.Bundles;
 using System;
@@ -26,7 +27,7 @@ namespace Firecoals.AssetBundles
         {
             //TODO Get Resource from AssetLoader DONE
             //var myResources = GetResources();
-           var myResources = GameObject.FindObjectOfType<AssetLoader>().Resources;
+            var myResources = GameObject.FindObjectOfType<AssetLoader>().Resources;
 
             IProgressResult<float, GameObject> result = myResources.LoadAssetAsync<GameObject>(name);
             GameObject tempGameObject = null;
@@ -95,6 +96,7 @@ namespace Firecoals.AssetBundles
             yield return result.WaitForDone();
             if (result.IsDone)
             {
+                Debug.Log("<color=red>" + ThemeController.instance.Theme + "</color>");
                 SceneManager.LoadScene(ThemeController.instance.Theme, LoadSceneMode.Single);
             }
             if (result.Exception != null)
@@ -107,7 +109,6 @@ namespace Firecoals.AssetBundles
             {
                 bundles.Add(bundle.Name, bundle);
             }
-
         }
 
         private void OnDestroy()
