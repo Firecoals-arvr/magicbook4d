@@ -37,7 +37,8 @@ namespace Firecoals.Render
                 {
                     //TODO Take Screen shot
                     Debug.LogWarning("Snap");
-                    Capture.Instance.Snap();
+                    //Capture.Instance.Snap();
+                    StartCoroutine(GameObject.FindObjectOfType<Capture>().TakePhoto());
                     recording.audioInput.Dispose();
                     recording.cameraInput.Dispose();
                     Reset();

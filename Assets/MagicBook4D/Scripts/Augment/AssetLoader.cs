@@ -6,16 +6,27 @@ using Loxodon.Framework.Contexts;
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Firecoals.Augmentation
 {
+    /// <summary>
+    /// Prepare load assets to scene
+    /// </summary>
     public class AssetLoader : MonoBehaviour
     {
+        /// <summary>
+        /// Bundle name means named assetbundle which built from Unity (Loxodon Bundle Framework or AssetBundle Browser)
+        /// </summary>
         public string[] bundleNames;
 
         // Start is called before the first frame update
+        /// <summary>
+        /// Bundle root means the root folder where contains all built assetbundles and manifest file 
+        /// </summary>
         public string bundleRoot;
+        /// <summary>
+        /// For call Pre-Load assetbundle
+        /// </summary>
         public AssetBundlesLoader assetBundlesLoader = new AssetBundlesLoader();
         public IResources Resources { private set; get; }
         //private string iv = "5Hh2390dQlVh0AqC";
