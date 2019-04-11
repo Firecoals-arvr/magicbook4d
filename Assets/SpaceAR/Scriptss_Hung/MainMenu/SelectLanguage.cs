@@ -21,37 +21,37 @@ namespace Firecoals.Space
         [HideInInspector]
         public bool en, vn;
 
+        Animator anim;
+
         private void Start()
         {
-            // Th test khi chưa qua scene setting 
-            // nếu chưa chọn ngôn ngữ bên scene setting thì set mặc đinhj tiếng việt
-            //if (PlayerPrefs.GetString("SpaceLanguage") == null)
-            //{
-            //    OnOnPickLanguage("VI", "B");
-            //    vn = true;
-            //    en = false;
-            //}
-            //// ngược lại nếu đã có rồi thì set localization theo playpref
-            //else
-            //{
-            //    Localization.language = PlayerPrefs.GetString("SpaceLanguage");
-            //    // cái này ko chắc đúng vì chưa dc test
-            //    // nếu localization đang có key là VI đưa ra 2 biến bool để check bên sound
-            //    if (Localization.language == "VI")
-            //    {
-            //        vn = true;
-            //        en = false;
-            //    }
-            //    if (Localization.language == "EN")
-            //    {
-            //        vn = false;
-            //        en = true;
-            //    }
-            //}
-            Localization.language = "VI";
-            en = false;
-            vn = true;
+            anim = GetComponent<Animator>();
 
+            //Th test khi chưa qua scene setting
+            //nếu chưa chọn ngôn ngữ bên scene setting thì set mặc đinhj tiếng việt
+            if (PlayerPrefs.GetString("SpaceLanguage") == null)
+            {
+                OnOnPickLanguage("VI", "B");
+                vn = true;
+                en = false;
+            }
+            // ngược lại nếu đã có rồi thì set localization theo playpref
+            else
+            {
+                Localization.language = PlayerPrefs.GetString("SpaceLanguage");
+                // cái này ko chắc đúng vì chưa dc test
+                // nếu localization đang có key là VI đưa ra 2 biến bool để check bên sound
+                if (Localization.language == "VI")
+                {
+                    vn = true;
+                    en = false;
+                }
+                if (Localization.language == "EN")
+                {
+                    vn = false;
+                    en = true;
+                }
+            }
         }
         // override lại class vs 2 Th 1 là tiếng việt thì set localization và lưu vào playprefs
         // th2 là tiếng anh cũng v
@@ -80,6 +80,7 @@ namespace Firecoals.Space
             vn = true;
             en = false;
             HideIconLanguage();
+            Debug.Log("Current language: " + Localization.language.ToString());
         }
 
         /// <summary>
@@ -91,19 +92,24 @@ namespace Firecoals.Space
             vn = false;
             en = true;
             HideIconLanguage();
+            Debug.Log("Current language: " + Localization.language.ToString());
+        }
+
+        public void ShowAllFlagsToSelect()
+        {
+            anim.SetBool("isOpen", true);
+            //_vnflag.GetComponent<UIButton>().hoverSprite2D = _vnflag.GetComponent<UIButton>().hoverSprite2D;
+            //_vnflag.GetComponent<UIButton>().pressedSprite2D = _vnflag.GetComponent<UIButton>().pressedSprite2D;
+            //_vnflag.GetComponent<UIButton>().disabledSprite2D = _vnflag.GetComponent<UIButton>().disabledSprite2D;
+
+            //_engflag.GetComponent<UIButton>().hoverSprite2D = _engflag.GetComponent<UIButton>().hoverSprite2D;
+            //_engflag.GetComponent<UIButton>().pressedSprite2D = _engflag.GetComponent<UIButton>().pressedSprite2D;
+            //_engflag.GetComponent<UIButton>().disabledSprite2D = _engflag.GetComponent<UIButton>().disabledSprite2D;
         }
 
         private void HideIconLanguage()
         {
-            UIPlayTween tw = _vnflag.AddComponent<UIPlayTween>();
-            tw.tweenTarget = _vnflag;
-            tw.includeChildren = true;
-            tw.playDirection = AnimationOrTween.Direction.Reverse;
-
-            UIPlayTween tw1 = _engflag.AddComponent<UIPlayTween>();
-            tw1.tweenTarget = _engflag;
-            tw1.includeChildren = true;
-            tw1.playDirection = AnimationOrTween.Direction.Reverse;
+            anim.SetBool("isOpen", false);
         }
     }
 }

@@ -12,14 +12,13 @@ namespace Firecoals.Space
         /// </summary>
         public GameObject panelinfo;
 
-        bool isOpening;
-
-        UIPlayTween tw;
+        bool checkOpen;
+        Animator anim;
 
         private void Start()
         {
-            isOpening = false;
-            tw = this.GetComponent<UIPlayTween>();
+            checkOpen = false;
+            anim = panelinfo.GetComponent<Animator>();
         }
 
         /// <summary>
@@ -27,35 +26,25 @@ namespace Firecoals.Space
         /// </summary>
         public void ShowObjectInfo()
         {
-            tw.includeChildren = true;
-            //tw.playDirection = AnimationOrTween.Direction.Forward;
-            isOpening = true;
+            checkOpen = true;
+            anim.SetBool("isOpen", true);
         }
 
         public void HideObjectInfo()
         {
-            tw.includeChildren = true;
-            //tw.playDirection = AnimationOrTween.Direction.Reverse;
-            isOpening = false;
+            checkOpen = false;
+            anim.SetBool("isOpen", false);
         }
 
-        public void ClickClick()
+        public void ClickToShow()
         {
-            if (tw.playDirection == AnimationOrTween.Direction.Forward)
+            if (checkOpen == false)
             {
-                this.GetComponent<UIButton>().onClick.Clear();
-                tw.playDirection = AnimationOrTween.Direction.Reverse;
-                EventDelegate eventdel = new EventDelegate(this, "ShowObjectInfo");
-                EventDelegate.Set(this.GetComponent<UIButton>().onClick, eventdel);
-
+                ShowObjectInfo();
             }
-            if (tw.playDirection == AnimationOrTween.Direction.Reverse)
+            else
             {
-                this.GetComponent<UIButton>().onClick.Clear();
-                tw.playDirection = AnimationOrTween.Direction.Forward;
-                EventDelegate eventdel = new EventDelegate(this, "HideObjectInfo");
-                EventDelegate.Set(this.GetComponent<UIButton>().onClick, eventdel);
-
+                HideObjectInfo();
             }
         }
     }

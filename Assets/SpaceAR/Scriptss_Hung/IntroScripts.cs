@@ -37,7 +37,7 @@ namespace Firecoals.Space
         /// <summary>
         /// thông tin về các thành phần của object (nếu có)
         /// </summary>
-        private GameObject componentInfo;
+        private GameObject panelPartInfo;
 
         /// <summary>
         /// tên của object
@@ -56,7 +56,7 @@ namespace Firecoals.Space
         public string st1;
 
         /// <summary>
-        /// key cho info object
+        /// các key cho info của object & thành phần của nó
         /// </summary>
         [Header("Information key")]
         public string st2;
@@ -72,6 +72,10 @@ namespace Firecoals.Space
         /// anim để chạy animation intro lúc tracking found models
         /// </summary>
         Animator anim;
+
+        Animator animatedInfor;
+        private GameObject[] inforBtn;
+        bool checkOpen;
 
 
         protected override void Start()
@@ -89,10 +93,15 @@ namespace Firecoals.Space
             _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
             assetloader = GameObject.FindObjectOfType<AssetLoader>();
 
+            panelPartInfo = GameObject.Find("UI Root/PanelComponentInfor/Scroll View/Info");
+            inforBtn = GameObject.FindGameObjectsWithTag("infor");
+            animatedInfor = panelPartInfo.GetComponent<Animator>();
+
             //nếu đã purchase thì vào phần này
             if (ActiveManager.IsActiveOfflineOk("B"))
             {
                 CloneModels();
+                AutoTriggerInforButton();
             }
             // nếu chưa purchase thì vào phần này
             else
@@ -101,14 +110,15 @@ namespace Firecoals.Space
                 if (mTrackableBehaviour.TrackableName == "Solarsystem_scaled" || mTrackableBehaviour.TrackableName == "Sun_scaled" || mTrackableBehaviour.TrackableName == "Mercury_scaled")
                 {
                     CloneModels();
+                    AutoTriggerInforButton();
                 }
                 // nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
                 else
                 {
-                    PopupManager.PopUpDialog("", "", PopupManager.DialogType.YesNoDialog, () =>
-                    {
-                        SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
-                    });
+                    PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", default, default, default, PopupManager.DialogType.YesNoDialog, () =>
+                       {
+                           SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
+                       });
                 }
             }
             base.OnTrackingFound();
@@ -141,6 +151,8 @@ namespace Firecoals.Space
 
                 objectName.GetComponent<UILabel>().text = Localization.Get(st1);
                 objectInfo.GetComponent<UILabel>().text = Localization.Get(st2);
+
+                ShowComponentInfor();
             }
         }
 
@@ -150,6 +162,11 @@ namespace Firecoals.Space
             {
                 objectName.GetComponent<UILocalize>().key = string.Empty;
                 objectInfo.GetComponent<UILocalize>().key = string.Empty;
+
+                objectName.GetComponent<UILabel>().text = string.Empty;
+                objectInfo.GetComponent<UILabel>().text = string.Empty;
+
+                panelPartInfo.GetComponent<UILabel>().text = Localization.Get(string.Empty);
             }
         }
 
@@ -181,6 +198,53 @@ namespace Firecoals.Space
             st = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
             st.ToLower();
             ChangeKeyLocalization();
+        }
+
+        void AutoTriggerInforButton()
+        {
+            for (int i = 0; i < inforBtn.Length; i++)
+            {
+                if (inforBtn[i].activeInHierarchy)
+                {
+                    inforBtn[i].GetComponent<UIButton>().onClick.Clear();
+                    EventDelegate del = new EventDelegate(this, "ShowSmallInfo");
+                    EventDelegate.Set(inforBtn[i].GetComponent<UIButton>().onClick, del);
+                }
+            }
+        }
+
+        private void ShowComponentInfor()
+        {
+            for (int i = 0; i < inforBtn.Length; i++)
+            {
+                inforBtn[i].GetComponentInChildren<UILabel>().text = Localization.Get(inforBtn[i].GetComponentInChildren<UILocalize>().key);
+                panelPartInfo.transform.GetChild(0).transform.GetChild(0).GetComponent<UILabel>().text
+                    = Localization.Get(inforBtn[i].GetComponentInChildren<UILocalize>().key);
+            }
+        }
+
+        public void ShowSmallInfo()
+        {
+            if (checkOpen == false)
+            {
+                ShowObjectInfo();
+            }
+            else
+            {
+                HideObjectInfo();
+            }
+        }
+
+        private void ShowObjectInfo()
+        {
+            checkOpen = true;
+            anim.SetBool("isOpen", true);
+        }
+
+        private void HideObjectInfo()
+        {
+            checkOpen = false;
+            anim.SetBool("isOpen", false);
         }
     }
 }
