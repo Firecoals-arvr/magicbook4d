@@ -9,16 +9,19 @@ namespace Firecoals.UI
         private bool _animalIsPlaying = false, _spaceIsPlaying, _colorIsPlaying;
 
         public UITexture backDrop;
-        public AudioClip colorAudioClip, animalAudioClip, spaceAudioClip;
+        public AudioClip colorAudioClip, animalAudioClip, spaceAudioClip, backgroundClip;
 
+        private void Start()
+        {
+            FirecoalsSoundManager.PlayMusic(backgroundClip);
+        }
         private void Update()
         {
             if (transform.localPosition.x < 100 && transform.localPosition.x > -100 && _animalIsPlaying == false)
             {
                 //TODO Animal
                 Debug.Log("<color=green>Animal is playing</color>");
-                FirecoalsSoundManager.StopAllMusic();
-                FirecoalsSoundManager.PlayMusic(animalAudioClip);
+                FirecoalsSoundManager.PlaySound(animalAudioClip, true);
                 backDrop.mainTexture = Resources.Load<Texture2D>("Bg_texture/menu_bg_animal");
                 _animalIsPlaying = true;
                 _colorIsPlaying = false;
@@ -28,8 +31,8 @@ namespace Firecoals.UI
             {
                 //TODO color
                 Debug.Log("<color=yellow>Color is playing</color>");
-                FirecoalsSoundManager.StopAllMusic();
-                FirecoalsSoundManager.PlayMusic(colorAudioClip);
+
+                FirecoalsSoundManager.PlaySound(colorAudioClip, true);
                 backDrop.mainTexture = Resources.Load<Texture2D>("Bg_texture/menu_bg_color");
                 _animalIsPlaying = false;
                 _colorIsPlaying = true;
@@ -39,8 +42,7 @@ namespace Firecoals.UI
             {
                 //TODO Space
                 Debug.Log("<color=pink>Space is playing</color>");
-                FirecoalsSoundManager.StopAllMusic();
-                FirecoalsSoundManager.PlayMusic(spaceAudioClip);
+                FirecoalsSoundManager.PlaySound(spaceAudioClip,true);
                 backDrop.mainTexture = Resources.Load<Texture2D>("Bg_texture/menu_bg_space");
                 _animalIsPlaying = false;
                 _colorIsPlaying = false;
