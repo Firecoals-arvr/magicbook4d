@@ -18,9 +18,21 @@ public class PopupManager : MonoBehaviour
 
     //Game object for the OK only dialog box
     public GameObject okDialogObject;
+    /// <summary>
+    /// Set text for OK button
+    /// </summary>
+    public UILabel okLabel;
+
     //Game Object for the YesNO dialog box
     public GameObject yesNoDialogObject;
-
+    /// <summary>
+    /// Set text for Yes button
+    /// </summary>
+    public UILabel yesLabel;
+    /// <summary>
+    /// Set text for No button
+    /// </summary>
+    public UILabel noLabel;
     //Here go the dialog texts for both dialogs.
     public UILabel[] dialogText;
     //Here go the tialog titles for both dialogs.
@@ -95,10 +107,13 @@ public class PopupManager : MonoBehaviour
     /// </summary>
     /// <param name="_title">Title of the dialog box</param>
     /// <param name="_text">Text contained in the dialog box</param>
+    /// <param name="_okText">Set text for Ok button</param>
+    /// <param name="_yesText">Set text for Yes button</param>
+    /// <param name="_noText">Set text for No button</param>
     /// <param name="_desiredDialog">Type of the Dialog Box, either DialogType.OkDialog or DialogType.YesNoDialog</param>
     /// <param name="_dialogAnswer">Callback to call if user pressed [Ok] or [Yes] buttons</param>
     /// <param name="_dialogNegativeAnswer">Callback to call if the user presses the [No] button</param>
-    public static void PopUpDialog(string _title, string _text, DialogType _desiredDialog = DialogType.OkDialog, dialogAnswer _dialogAnswer = null, dialogAnswer _dialogNegativeAnswer = null)
+    public static void PopUpDialog(string _title, string _text, string _okText = "OK", string _yesText = "Yes", string _noText = "No", DialogType _desiredDialog = DialogType.OkDialog, dialogAnswer _dialogAnswer = null, dialogAnswer _dialogNegativeAnswer = null)
     {
         //instance.Caculate (_text);
         if (showingDialog)
@@ -113,6 +128,8 @@ public class PopupManager : MonoBehaviour
         switch (_desiredDialog)
         {
             case DialogType.OkDialog:
+                //Set text for Ok dialog
+                Instance.okLabel.text = _okText;
                 //Active and tween scale
                 Instance.okDialogObject.SetActive(true);
                 var x = TweenScale.Begin(Instance.okDialogObject, 0.3f, Vector3.one);
@@ -122,6 +139,10 @@ public class PopupManager : MonoBehaviour
 
                 break;
             case DialogType.YesNoDialog:
+                //Set text for Yes/No button
+                Instance.yesLabel.text = _yesText;
+                Instance.noLabel.text = _noText;
+
                 Instance.okDialogObject.SetActive(false);
                 Instance.yesNoDialogObject.SetActive(true);
                 //Tween scale animation

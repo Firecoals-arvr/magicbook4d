@@ -1,5 +1,4 @@
-﻿using Firecoals.AssetBundles.Sound;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Firecoals.UI
 {
@@ -39,8 +38,8 @@ namespace Firecoals.UI
             _pos = _itemTransform.localPosition.x - _scrollPanel.clipOffset.x;
             _dis = Mathf.Clamp(Mathf.Abs(_pos), 0, cellWidth);
             _itemWidget.width = System.Convert.ToInt32(((cellWidth - _dis * downScale) / cellWidth) * cellWidth);
-            var x= System.Convert.ToInt32(((cellWidth - _dis * downScale) / cellWidth) * cellWidth *0.75f);
-            model.transform.localScale =new Vector3(x,x,x);
+            var x = System.Convert.ToInt32(((cellWidth - _dis * downScale) / cellWidth) * cellWidth * 0.75f);
+            model.transform.localScale = new Vector3(x, x, x);
         }
         #endregion
 

@@ -13,36 +13,36 @@ using UnityEngine;
 [AddComponentMenu("NGUI/Interaction/Language Selection")]
 public class LanguageSelection : MonoBehaviour
 {
-	UIPopupList mList;
-	bool mStarted = false;
+    UIPopupList mList;
+    bool mStarted = false;
 
-	void Awake () { mList = GetComponent<UIPopupList>(); }
+    void Awake() { mList = GetComponent<UIPopupList>(); }
 
-	void Start ()
-	{
-		mStarted = true;
-		Refresh();
-		EventDelegate.Add(mList.onChange, delegate() { Localization.language = UIPopupList.current.value; });
-	}
+    void Start()
+    {
+        mStarted = true;
+        Refresh();
+        EventDelegate.Add(mList.onChange, delegate () { Localization.language = UIPopupList.current.value; });
+    }
 
-	void OnEnable () { if (mStarted) Refresh(); }
+    void OnEnable() { if (mStarted) Refresh(); }
 
-	/// <summary>
-	/// Immediately refresh the list of known languages.
-	/// </summary>
+    /// <summary>
+    /// Immediately refresh the list of known languages.
+    /// </summary>
 
-	public void Refresh ()
-	{
-		if (mList != null && Localization.knownLanguages != null)
-		{
-			mList.Clear();
+    public void Refresh()
+    {
+        if (mList != null && Localization.knownLanguages != null)
+        {
+            mList.Clear();
 
-			for (int i = 0, imax = Localization.knownLanguages.Length; i < imax; ++i)
-				mList.items.Add(Localization.knownLanguages[i]);
+            for (int i = 0, imax = Localization.knownLanguages.Length; i < imax; ++i)
+                mList.items.Add(Localization.knownLanguages[i]);
 
-			mList.value = Localization.language;
-		}
-	}
+            mList.value = Localization.language;
+        }
+    }
 
-	void OnLocalize () { Refresh(); } 
+    void OnLocalize() { Refresh(); }
 }

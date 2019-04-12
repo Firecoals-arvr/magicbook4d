@@ -22,7 +22,6 @@ namespace Firecoals.Augmentation
         {
             Content = new TargetContent(parent);
             spawnedObject = new Dictionary<string, GameObject>();
-
         }
 
         public AssetHandler() { }
@@ -38,10 +37,8 @@ namespace Firecoals.Augmentation
         public GameObject CreateUnique(string bundleName, string bundlePath)
         {
             Debug.LogWarning("prepare Create unique game object");
-            Debug.LogWarning("bundleName"+bundleName);
-            Debug.LogWarning("bundlePath" + bundlePath);
             var assetBundlesLoader = GameObject.FindObjectOfType<AssetLoader>().assetBundlesLoader;
-            GameObject goTemplate;
+            GameObject goTemplate = null;
             if (assetBundlesLoader.bundles.ContainsKey(bundleName))
             {
                 IBundle bundle = assetBundlesLoader.bundles[bundleName];
@@ -68,6 +65,12 @@ namespace Firecoals.Augmentation
             }
 
         }
+        /// <summary>
+        /// You can create many game object from the game object
+        /// </summary>
+        /// <param name="bundleName"></param>
+        /// <param name="bundlePath"></param>
+        /// <returns></returns>
         public GameObject CreateClone(string bundleName, string bundlePath)
         {
             var assetBundlesLoader = GameObject.FindObjectOfType<AssetLoader>().assetBundlesLoader;
@@ -86,7 +89,13 @@ namespace Firecoals.Augmentation
                 return null;
             }
         }
-       public GameObject CreateRandom(string bundleName, string[] bundlePaths)
+        /// <summary>
+        /// Create random a GameObject in a list bundle paths as clone
+        /// </summary>
+        /// <param name="bundleName"></param>
+        /// <param name="bundlePaths"></param>
+        /// <returns></returns>
+        public GameObject CreateRandom(string bundleName, string[] bundlePaths)
         {
             var assetBundlesLoader = GameObject.FindObjectOfType<AssetLoader>().assetBundlesLoader;
             var bundlePath = bundlePaths[new System.Random().Next(0, bundlePaths.Length)];

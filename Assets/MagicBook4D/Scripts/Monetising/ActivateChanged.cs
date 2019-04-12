@@ -16,7 +16,7 @@ namespace Firecoals.Purchasing
             {
                 if (ActiveManager.IsActiveOfflineOk(projectId))
                 {
-                    
+                    //TODO if have a copyright show key unlock, opposite show lock
                 }
             }
         }

@@ -7,6 +7,7 @@ using System.Collections;
 using Loxodon.Framework.Contexts;
 using Loxodon.Framework.Asynchronous;
 using System.Collections.Generic;
+using Firecoals.AssetBundles.Sound;
 
 public class Spawn : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class Spawn : MonoBehaviour
         downLoad = new DownLoadAssetBundles("Animal", "Animal/bundles");
         audioSource = GetComponent<AudioSource>();
         AssetBundlesLoader assetBundles = new AssetBundlesLoader();
-        
+
         /* Preload AssetBundle */
         yield return assetBundles.Preload(new string[] { "animals/model/dog", "animals/model/cat", "animals/model/tiger", "animals/model/giraffe", "animals/model/rabbit", "animals/noise" }, 1);
         var startTime = DateTime.Now;
@@ -26,12 +27,14 @@ public class Spawn : MonoBehaviour
         GameObject goTemplate = bundle.LoadAsset<GameObject>("Animal/GetPreFab/Tiger.prefab"); //OK
         GameObject.Instantiate(goTemplate);
         IBundle bundleAudioClip = assetBundles.bundles["animals/noise"];
-        //ISoundManifestLoader soundManifestLoader = new SoundManifestLoader();
-        //var soundManifest = soundManifestLoader.LoadSync(Application.streamingAssetsPath + "/AnimalAudioClip.json");
-        //var myBundlePath = soundManifest.soundInfos[5].PathBundle;
-        //AudioClip audioClip = bundleAudioClip.LoadAsset<AudioClip>(soundManifest.soundInfos[5].PathBundle);
-        //audioSource.clip = audioClip;
-        //audioSource.Play();
+
+        ISoundManifestLoader soundManifestLoader = new SoundManifestLoader();
+        var soundManifest = soundManifestLoader.LoadSync(Application.streamingAssetsPath + "/AnimalAudioClip.json");
+        var myBundlePath = soundManifest.soundInfos[5].PathBundle;
+        AudioClip audioClip = bundleAudioClip.LoadAsset<AudioClip>(soundManifest.soundInfos[5].PathBundle);
+        audioSource.clip = audioClip;
+        audioSource.Play();
+
 
         ///* Green and Red */
         //GameObject[] goTemplates = assetBundles.FindResource().LoadAssets<GameObject>("Animal/GetPreFab/Frog.prefab", "Assets/Animal/GetPreFab/Rabbit.prefab");
@@ -65,7 +68,11 @@ public class Spawn : MonoBehaviour
         //downLoad.LoadAsset("Animal/GetPreFab/Cat.prefab");
 
         //stopwatch.Stop();
+
         //UnityEngine.Debug.Log("MeasureByEnvironmentTickCount: " + stopwatch.ElapsedMilliseconds);
+
+
+
         var startTime = DateTime.Now;
 
         UnityEngine.Debug.Log("MeasureByDateTime: " + (DateTime.Now - startTime).Milliseconds);

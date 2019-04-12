@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 /// <summary>
 /// Example script that can be used to show tooltips.
@@ -8,23 +7,23 @@ using System.Collections.Generic;
 [AddComponentMenu("NGUI/UI/Tooltip")]
 public class UITooltip : MonoBehaviour
 {
-	protected static UITooltip mInstance;
+    protected static UITooltip mInstance;
 
-	public Camera uiCamera;
-	public UILabel text;
-	public GameObject tooltipRoot;
-	public UISprite background;
-	public float appearSpeed = 10f;
-	public bool scalingTransitions = true;
+    public Camera uiCamera;
+    public UILabel text;
+    public GameObject tooltipRoot;
+    public UISprite background;
+    public float appearSpeed = 10f;
+    public bool scalingTransitions = true;
 
-	protected GameObject mTooltip;
-	protected Transform mTrans;
-	protected float mTarget = 0f;
-	protected float mCurrent = 0f;
-	protected Vector3 mPos;
-	protected Vector3 mSize = Vector3.zero;
+    protected GameObject mTooltip;
+    protected Transform mTrans;
+    protected float mTarget = 0f;
+    protected float mCurrent = 0f;
+    protected Vector3 mPos;
+    protected Vector3 mSize = Vector3.zero;
 
-	protected UIWidget[] mWidgets;
+    protected UIWidget[] mWidgets;
 
     /// <summary>
     /// Whether the tooltip is currently visible.
@@ -32,169 +31,170 @@ public class UITooltip : MonoBehaviour
 
     public static bool isVisible { get { return (mInstance != null && mInstance.mTarget == 1f); } }
 
-    void Awake () { mInstance = this; }
-	void OnDestroy () { mInstance = null; }
+    private void Awake() { mInstance = this; }
 
-	/// <summary>
-	/// Get a list of widgets underneath the tooltip.
-	/// </summary>
+    private void OnDestroy() { mInstance = null; }
 
-	protected virtual void Start ()
-	{
-		mTrans = transform;
-		mWidgets = GetComponentsInChildren<UIWidget>();
-		mPos = mTrans.localPosition;
-		if (uiCamera == null) uiCamera = NGUITools.FindCameraForLayer(gameObject.layer);
-		SetAlpha(0f);
-	}
+    /// <summary>
+    /// Get a list of widgets underneath the tooltip.
+    /// </summary>
 
-	/// <summary>
-	/// Update the tooltip's alpha based on the target value.
-	/// </summary>
+    protected virtual void Start()
+    {
+        mTrans = transform;
+        mWidgets = GetComponentsInChildren<UIWidget>();
+        mPos = mTrans.localPosition;
+        if (uiCamera == null) uiCamera = NGUITools.FindCameraForLayer(gameObject.layer);
+        SetAlpha(0f);
+    }
 
-	protected virtual void Update ()
-	{
-		if (mTooltip != UICamera.tooltipObject)
-		{
-			mTooltip = null;
-			mTarget = 0f;
-		}
+    /// <summary>
+    /// Update the tooltip's alpha based on the target value.
+    /// </summary>
 
-		if (mCurrent != mTarget)
-		{
-			mCurrent = Mathf.Lerp(mCurrent, mTarget, RealTime.deltaTime * appearSpeed);
-			if (Mathf.Abs(mCurrent - mTarget) < 0.001f) mCurrent = mTarget;
-			SetAlpha(mCurrent * mCurrent);
+    protected virtual void Update()
+    {
+        if (mTooltip != UICamera.tooltipObject)
+        {
+            mTooltip = null;
+            mTarget = 0f;
+        }
 
-			if (scalingTransitions)
-			{
-				Vector3 offset = mSize * 0.25f;
-				offset.y = -offset.y;
+        if (mCurrent != mTarget)
+        {
+            mCurrent = Mathf.Lerp(mCurrent, mTarget, RealTime.deltaTime * appearSpeed);
+            if (Mathf.Abs(mCurrent - mTarget) < 0.001f) mCurrent = mTarget;
+            SetAlpha(mCurrent * mCurrent);
 
-				Vector3 size = Vector3.one * (1.5f - mCurrent * 0.5f);
-				Vector3 pos = Vector3.Lerp(mPos - offset, mPos, mCurrent);
+            if (scalingTransitions)
+            {
+                Vector3 offset = mSize * 0.25f;
+                offset.y = -offset.y;
 
-				mTrans.localPosition = pos;
-				mTrans.localScale = size;
-			}
-		}
-	}
+                Vector3 size = Vector3.one * (1.5f - mCurrent * 0.5f);
+                Vector3 pos = Vector3.Lerp(mPos - offset, mPos, mCurrent);
 
-	/// <summary>
-	/// Set the alpha of all widgets.
-	/// </summary>
+                mTrans.localPosition = pos;
+                mTrans.localScale = size;
+            }
+        }
+    }
 
-	protected virtual void SetAlpha (float val)
-	{
-		for (int i = 0, imax = mWidgets.Length; i < imax; ++i)
-		{
-			UIWidget w = mWidgets[i];
-			Color c = w.color;
-			c.a = val;
-			w.color = c;
-		}
-	}
+    /// <summary>
+    /// Set the alpha of all widgets.
+    /// </summary>
 
-	/// <summary>
-	/// Set the tooltip's text to the specified string.
-	/// </summary>
+    protected virtual void SetAlpha(float val)
+    {
+        for (int i = 0, imax = mWidgets.Length; i < imax; ++i)
+        {
+            UIWidget w = mWidgets[i];
+            Color c = w.color;
+            c.a = val;
+            w.color = c;
+        }
+    }
 
-	protected virtual void SetText (string tooltipText)
-	{
-		if (text != null && !string.IsNullOrEmpty(tooltipText))
-		{
-			mTarget = 1f;
-			mTooltip = UICamera.tooltipObject;
-			text.text = tooltipText;
+    /// <summary>
+    /// Set the tooltip's text to the specified string.
+    /// </summary>
 
-			// Orthographic camera positioning is trivial
-			mPos = UICamera.lastEventPosition;
+    protected virtual void SetText(string tooltipText)
+    {
+        if (text != null && !string.IsNullOrEmpty(tooltipText))
+        {
+            mTarget = 1f;
+            mTooltip = UICamera.tooltipObject;
+            text.text = tooltipText;
 
-			Transform textTrans = text.transform;
-			Vector3 offset = textTrans.localPosition;
-			Vector3 textScale = textTrans.localScale;
+            // Orthographic camera positioning is trivial
+            mPos = UICamera.lastEventPosition;
 
-			// Calculate the dimensions of the printed text
-			mSize = text.printedSize;
+            Transform textTrans = text.transform;
+            Vector3 offset = textTrans.localPosition;
+            Vector3 textScale = textTrans.localScale;
 
-			// Scale by the transform and adjust by the padding offset
-			mSize.x *= textScale.x;
-			mSize.y *= textScale.y;
+            // Calculate the dimensions of the printed text
+            mSize = text.printedSize;
 
-			if (background != null)
-			{
-				Vector4 border = background.border;
-				mSize.x += border.x + border.z + (offset.x - border.x) * 2f;
-				mSize.y += border.y + border.w + (-offset.y - border.y) * 2f;
+            // Scale by the transform and adjust by the padding offset
+            mSize.x *= textScale.x;
+            mSize.y *= textScale.y;
 
-				background.width = Mathf.RoundToInt(mSize.x);
-				background.height = Mathf.RoundToInt(mSize.y);
-			}
+            if (background != null)
+            {
+                Vector4 border = background.border;
+                mSize.x += border.x + border.z + (offset.x - border.x) * 2f;
+                mSize.y += border.y + border.w + (-offset.y - border.y) * 2f;
 
-			if (uiCamera != null)
-			{
-				// Since the screen can be of different than expected size, we want to convert
-				// mouse coordinates to view space, then convert that to world position.
-				mPos.x = Mathf.Clamp01(mPos.x / Screen.width);
-				mPos.y = Mathf.Clamp01(mPos.y / Screen.height);
+                background.width = Mathf.RoundToInt(mSize.x + 90f);
+                background.height = Mathf.RoundToInt(mSize.y + 90f);
+            }
 
-				// Calculate the ratio of the camera's target orthographic size to current screen size
-				float activeSize = uiCamera.orthographicSize / mTrans.parent.lossyScale.y;
-				float ratio = (Screen.height * 0.5f) / activeSize;
+            if (uiCamera != null)
+            {
+                // Since the screen can be of different than expected size, we want to convert
+                // mouse coordinates to view space, then convert that to world position.
+                mPos.x = Mathf.Clamp01(mPos.x / Screen.width);
+                mPos.y = Mathf.Clamp01(mPos.y / Screen.height);
 
-				// Calculate the maximum on-screen size of the tooltip window
-				Vector2 max = new Vector2(ratio * mSize.x / Screen.width, ratio * mSize.y / Screen.height);
+                // Calculate the ratio of the camera's target orthographic size to current screen size
+                float activeSize = uiCamera.orthographicSize / mTrans.parent.lossyScale.y;
+                float ratio = (Screen.height * 0.5f) / activeSize;
 
-				// Limit the tooltip to always be visible
-				mPos.x = Mathf.Min(mPos.x, 1f - max.x);
-				mPos.y = Mathf.Max(mPos.y, max.y);
+                // Calculate the maximum on-screen size of the tooltip window
+                Vector2 max = new Vector2(ratio * mSize.x / Screen.width, ratio * mSize.y / Screen.height);
 
-				// Update the absolute position and save the local one
-				mTrans.position = uiCamera.ViewportToWorldPoint(mPos);
-				mPos = mTrans.localPosition;
-				mPos.x = Mathf.Round(mPos.x);
-				mPos.y = Mathf.Round(mPos.y);
-			}
-			else
-			{
-				// Don't let the tooltip leave the screen area
-				if (mPos.x + mSize.x > Screen.width) mPos.x = Screen.width - mSize.x;
-				if (mPos.y - mSize.y < 0f) mPos.y = mSize.y;
+                // Limit the tooltip to always be visible
+                mPos.x = Mathf.Min(mPos.x, 1f - max.x);
+                mPos.y = Mathf.Max(mPos.y, max.y);
 
-				// Simple calculation that assumes that the camera is of fixed size
-				mPos.x -= Screen.width * 0.5f;
-				mPos.y -= Screen.height * 0.5f;
-			}
+                // Update the absolute position and save the local one
+                mTrans.position = uiCamera.ViewportToWorldPoint(mPos);
+                mPos = mTrans.localPosition;
+                mPos.x = Mathf.Round(mPos.x);
+                mPos.y = Mathf.Round(mPos.y);
+            }
+            else
+            {
+                // Don't let the tooltip leave the screen area
+                if (mPos.x + mSize.x > Screen.width) mPos.x = Screen.width - mSize.x;
+                if (mPos.y - mSize.y < 0f) mPos.y = mSize.y;
 
-			mTrans.localPosition = mPos;
+                // Simple calculation that assumes that the camera is of fixed size
+                mPos.x -= Screen.width * 0.5f;
+                mPos.y -= Screen.height * 0.5f;
+            }
 
-			// Force-update all anchors below the tooltip
-			if (tooltipRoot != null) tooltipRoot.BroadcastMessage("UpdateAnchors");
-			else text.BroadcastMessage("UpdateAnchors");
-		}
-		else
-		{
-			mTooltip = null;
-			mTarget = 0f;
-		}
-	}
+            mTrans.localPosition = mPos;
 
-	/// <summary>
-	/// Show a tooltip with the specified text.
-	/// </summary>
+            // Force-update all anchors below the tooltip
+            if (tooltipRoot != null) tooltipRoot.BroadcastMessage("UpdateAnchors");
+            else text.BroadcastMessage("UpdateAnchors");
+        }
+        else
+        {
+            mTooltip = null;
+            mTarget = 0f;
+        }
+    }
 
-	[System.Obsolete("Use UITooltip.Show instead")]
-	public static void ShowText (string text) { if (mInstance != null) mInstance.SetText(text); }
+    /// <summary>
+    /// Show a tooltip with the specified text.
+    /// </summary>
 
-	/// <summary>
-	/// Show the tooltip.
-	/// </summary>
+    [System.Obsolete("Use UITooltip.Show instead")]
+    public static void ShowText(string text) { if (mInstance != null) mInstance.SetText(text); }
 
-	public static void Show (string text) { if (mInstance != null) mInstance.SetText(text); }
+    /// <summary>
+    /// Show the tooltip.
+    /// </summary>
 
-	/// <summary>
-	/// Hide the tooltip.
-	/// </summary>
+    public static void Show(string text) { if (mInstance != null) mInstance.SetText(text); }
 
-	public static void Hide () { if (mInstance != null) { mInstance.mTooltip = null; mInstance.mTarget = 0f; } }
+    /// <summary>
+    /// Hide the tooltip.
+    /// </summary>
+
+    public static void Hide() { if (mInstance != null) { mInstance.mTooltip = null; mInstance.mTarget = 0f; } }
 }

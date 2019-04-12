@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class LoadSceneManager : MonoBehaviour
 {
-    public static LoadSceneManager instance;
-    public string currentScene { get; set; }
-    public string previousScene { get; set; }
+    //public static LoadSceneManager instance;
+    //public string currentScene { get; set; }
+    //public string previousScene { get; set; }
     //private void Start()
     //{
     //    if (instance != this)

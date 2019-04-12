@@ -85,12 +85,12 @@ namespace Firecoals.AssetBundles.Sound
 
         public virtual void OnBeforeSerialize()
         {
-            
+
         }
 
         public virtual void OnAfterDeserialize()
         {
-            
+
         }
 
         /// <summary>
