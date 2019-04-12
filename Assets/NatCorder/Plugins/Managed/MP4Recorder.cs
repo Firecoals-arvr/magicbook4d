@@ -4,7 +4,6 @@
 */
 
 namespace NatCorder {
-    using Object = UnityEngine.Object;
     using UnityEngine;
     using System;
     using System.IO;

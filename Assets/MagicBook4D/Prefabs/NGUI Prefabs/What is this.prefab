@@ -1,5 +1,60 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1752400517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346435793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b3dc54f924693f41b5cbecb267e647a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftAnchor:
+    target: {fileID: 346139891}
+    relative: 0
+    absolute: 0
+  rightAnchor:
+    target: {fileID: 346139891}
+    relative: 1
+    absolute: 0
+  bottomAnchor:
+    target: {fileID: 346139891}
+    relative: 0
+    absolute: 0
+  topAnchor:
+    target: {fileID: 346139891}
+    relative: 1
+    absolute: 0
+  updateAnchors: 1
+  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mPivot: 4
+  mWidth: 40
+  mHeight: 39
+  mDepth: 5
+  mMat: {fileID: 0}
+  autoResizeBoxCollider: 0
+  hideIfOffScreen: 0
+  keepAspectRatio: 1
+  aspectRatio: 1.0166667
+  mType: 0
+  mFillDirection: 4
+  mFillAmount: 1
+  mInvert: 0
+  mFlip: 0
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  centerType: 1
+  leftType: 1
+  rightType: 1
+  bottomType: 1
+  topType: 1
+  mAtlas: {fileID: 11400000, guid: 4cd6b5f4b2336ec4e9d97a52dd9c5fe0, type: 2}
+  mSpriteName: icon_question
+  mFillCenter: 1
 --- !u!1001 &346535537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9,15 +64,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
       propertyPath: m_Name
-      value: What is this
+      value: What is this- Sys Language
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 140
+      value: 210
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 298
+      value: 42
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -67,14 +122,46 @@ PrefabInstance:
       propertyPath: onClick.Array.data[0].mMethodName
       value: PhoneTextField
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: mWidth
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: mHeight
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: mAtlas
+      value: 
+      objectReference: {fileID: 11400000, guid: 9a476318b418fb3449cb80e458ec6c7e,
+        type: 2}
+    - target: {fileID: 11400004, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: mSpriteName
+      value: button_bg orange
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: m_Size.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+      propertyPath: m_Size.y
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 2222228703107079819, guid: 7c3a28b051e872b448d4808cfcf9199c,
         type: 3}
       propertyPath: text
-      value: "Mua b\u1EA3n quy\u1EC1n \u1EE9ng d\u1EE5ng m\xE0 kh\xF4ng c\u1EA7n s\xE1ch
-        gi\u1EA5y"
+      value: "Ng\xF4n ng\u1EEF c\u1EE7a c\xE1c ch\u1EE7 \u0111\u1EC1 h\u1ECDc trong
+        \u1EE9ng d\u1EE5ng"
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11400002, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7c3a28b051e872b448d4808cfcf9199c, type: 3}
+--- !u!4 &346139891 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400002, guid: 7c3a28b051e872b448d4808cfcf9199c,
+    type: 3}
+  m_PrefabInstance: {fileID: 346535537}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2222228703452621050 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2222228703107079819, guid: 7c3a28b051e872b448d4808cfcf9199c,
@@ -87,3 +174,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb88ada43743e7a4481987303f35cc64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &346435793 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 7c3a28b051e872b448d4808cfcf9199c,
+    type: 3}
+  m_PrefabInstance: {fileID: 346535537}
+  m_PrefabAsset: {fileID: 0}

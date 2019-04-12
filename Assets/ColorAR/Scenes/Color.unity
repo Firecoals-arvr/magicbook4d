@@ -2298,6 +2298,74 @@ PrefabInstance:
       propertyPath: arCamera
       value: 
       objectReference: {fileID: 1399000276}
+    - target: {fileID: 616905092, guid: fb0b1b77e50172b42b4b8e7ecae71524, type: 3}
+      propertyPath: leftAnchor.target
+      value: 
+      objectReference: {fileID: 682216188}
+    - target: {fileID: 616905092, guid: fb0b1b77e50172b42b4b8e7ecae71524, type: 3}
+      propertyPath: leftAnchor.relative
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 616905092, guid: fb0b1b77e50172b42b4b8e7ecae71524, type: 3}
+      propertyPath: leftAnchor.absolute
+      value: -174
+      objectReference: {fileID: 0}
+    - target: {fileID: 616905092, guid: fb0b1b77e50172b42b4b8e7ecae71524, type: 3}
+      propertyPath: rightAnchor.target
+      value: 
+      objectReference: {fileID: 682216188}
+    - target: {fileID: 616905092, guid: fb0b1b77e50172b42b4b8e7ecae71524, type: 3}
+      propertyPath: rightAnchor.absolute
+      value: -54
+      objectReference: {fileID: 0}
+    - target: {fileID: 616905092, guid: fb0b1b77e50172b42b4b8e7ecae71524, type: 3}
+      propertyPath: bottomAnchor.target
+      value: 
+      objectReference: {fileID: 682216188}
+    - target: {fileID: 616905092, guid: fb0b1b77e50172b42b4b8e7ecae71524, type: 3}
+      propertyPath: bottomAnchor.relative
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 616905092, guid: fb0b1b77e50172b42b4b8e7ecae71524, type: 3}
+      propertyPath: bottomAnchor.absolute
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: 616905092, guid: fb0b1b77e50172b42b4b8e7ecae71524, type: 3}
+      propertyPath: topAnchor.target
+      value: 
+      objectReference: {fileID: 682216188}
+    - target: {fileID: 616905092, guid: fb0b1b77e50172b42b4b8e7ecae71524, type: 3}
+      propertyPath: topAnchor.relative
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 616905092, guid: fb0b1b77e50172b42b4b8e7ecae71524, type: 3}
+      propertyPath: topAnchor.absolute
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542879993, guid: fb0b1b77e50172b42b4b8e7ecae71524, type: 3}
+      propertyPath: mWidth
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542879993, guid: fb0b1b77e50172b42b4b8e7ecae71524, type: 3}
+      propertyPath: mHeight
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542879993, guid: fb0b1b77e50172b42b4b8e7ecae71524, type: 3}
+      propertyPath: leftAnchor.target
+      value: 
+      objectReference: {fileID: 808310687}
+    - target: {fileID: 1542879993, guid: fb0b1b77e50172b42b4b8e7ecae71524, type: 3}
+      propertyPath: rightAnchor.target
+      value: 
+      objectReference: {fileID: 808310687}
+    - target: {fileID: 1542879993, guid: fb0b1b77e50172b42b4b8e7ecae71524, type: 3}
+      propertyPath: bottomAnchor.target
+      value: 
+      objectReference: {fileID: 808310687}
+    - target: {fileID: 1542879993, guid: fb0b1b77e50172b42b4b8e7ecae71524, type: 3}
+      propertyPath: topAnchor.target
+      value: 
+      objectReference: {fileID: 808310687}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb0b1b77e50172b42b4b8e7ecae71524, type: 3}
 --- !u!4 &808310687 stripped
@@ -3322,11 +3390,11 @@ GameObject:
   - component: {fileID: 1399000274}
   - component: {fileID: 1399000273}
   - component: {fileID: 1399000282}
+  - component: {fileID: 1399000283}
   - component: {fileID: 1399000281}
   - component: {fileID: 1399000280}
   - component: {fileID: 1399000279}
   - component: {fileID: 1399000278}
-  - component: {fileID: 1399000283}
   m_Layer: 0
   m_Name: ARCamera
   m_TagString: MainCamera
@@ -3433,10 +3501,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1399000272}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a90408f13f15c19438fa4a765b1a5d50, type: 3}
+  m_Script: {fileID: 11500000, guid: f82d747608f1c5e4e9314291c6e46a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deviceTrackerEnabled: 1
 --- !u!114 &1399000279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3446,7 +3513,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1399000272}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 961417a5c22bc3c4baedccbdaa455dbd, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f55660aedaa0a949a5a6d8101c352a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1399000280
@@ -3458,9 +3525,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1399000272}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63f70b3fa6ddc33469690a669812a217, type: 3}
+  m_Script: {fileID: 11500000, guid: 9dba5b1732ae43a469285773a6204d05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deviceTrackerEnabled: 1
 --- !u!114 &1399000281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3470,7 +3538,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1399000272}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6725eca106171d469be3e2196885ee0, type: 3}
+  m_Script: {fileID: 11500000, guid: f952e8bb4bad33f4aa96edb654f1725d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1399000282
@@ -4869,7 +4937,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 1480
   mHeight: 720
-  mDepth: 0
+  mDepth: 2
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
@@ -6057,7 +6125,7 @@ PrefabInstance:
     - target: {fileID: 6783738207984385503, guid: c5eefe7cd61979a4dbbf444066436b20,
         type: 3}
       propertyPath: mSpriteName
-      value: CircleButton Purple
+      value: Button Orange
       objectReference: {fileID: 0}
     - target: {fileID: 6783738207984385503, guid: c5eefe7cd61979a4dbbf444066436b20,
         type: 3}
