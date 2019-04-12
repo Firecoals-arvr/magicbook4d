@@ -6,6 +6,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using Firecoals.MagicBook;
 
 /// <summary>
 /// Localization manager is able to parse localization information from text assets.

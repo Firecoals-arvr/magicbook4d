@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 616905093}
   - component: {fileID: 616905095}
   - component: {fileID: 616905094}
-  - component: {fileID: 1609244600}
   - component: {fileID: 1609244601}
+  - component: {fileID: 7706277122413687761}
   - component: {fileID: 1609244602}
   m_Layer: 8
   m_Name: Record Button
@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 616905090}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 1542879991}
   m_Father: {fileID: 0}
@@ -52,25 +52,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftAnchor:
     target: {fileID: 0}
-    relative: 0
-    absolute: 0
+    relative: 1
+    absolute: -194
   rightAnchor:
     target: {fileID: 0}
     relative: 1
-    absolute: 0
+    absolute: 6
   bottomAnchor:
     target: {fileID: 0}
-    relative: 0
-    absolute: 0
+    relative: 0.5
+    absolute: -100
   topAnchor:
     target: {fileID: 0}
-    relative: 1
-    absolute: 0
+    relative: 0.5
+    absolute: 100
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 120
-  mHeight: 120
+  mWidth: 200
+  mHeight: 200
   mDepth: 1
   mMat: {fileID: 0}
   autoResizeBoxCollider: 1
@@ -125,7 +125,7 @@ MonoBehaviour:
     - obj: {fileID: 0}
       field: 
     oneShot: 0
-  - mTarget: {fileID: 1609244600}
+  - mTarget: {fileID: 7706277122413687761}
     mMethodName: Snap
     mParameters: []
     oneShot: 0
@@ -153,24 +153,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 120, y: 120, z: 0}
+  m_Size: {x: 200, y: 200, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1609244600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616905090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9872ffa291523d4db05ec7e472873b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 0}
-  mainPanel: {fileID: 0}
-  reviewPanel: {fileID: 0}
-  unitySprite: {fileID: 0}
 --- !u!114 &1609244601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,6 +172,21 @@ MonoBehaviour:
   arCamera: {fileID: 0}
   recordMicrophone: 1
   microphoneSource: {fileID: 1609244602}
+--- !u!114 &7706277122413687761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616905090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0acd051ea88bb1249b74a72511cbe3bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainPanel: {fileID: 0}
+  reviewPanel: {fileID: 0}
+  unitySprite: {fileID: 0}
 --- !u!82 &1609244602
 AudioSource:
   m_ObjectHideFlags: 0
@@ -328,26 +327,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 616905091}
+    target: {fileID: 0}
     relative: 0
     absolute: 0
   rightAnchor:
-    target: {fileID: 616905091}
+    target: {fileID: 0}
     relative: 1
     absolute: 0
   bottomAnchor:
-    target: {fileID: 616905091}
+    target: {fileID: 0}
     relative: 0
     absolute: 0
   topAnchor:
-    target: {fileID: 616905091}
+    target: {fileID: 0}
     relative: 1
     absolute: 0
   updateAnchors: 1
   mColor: {r: 1, g: 0, b: 0, a: 1}
   mPivot: 4
-  mWidth: 120
-  mHeight: 120
+  mWidth: 200
+  mHeight: 200
   mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0

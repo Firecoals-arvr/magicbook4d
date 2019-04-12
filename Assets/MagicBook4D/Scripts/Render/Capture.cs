@@ -7,12 +7,11 @@ namespace Firecoals.Render
 {
     public class Capture : MonoBehaviour
     {
-        public Camera cam;
         public GameObject mainPanel;
         public GameObject reviewPanel;
         public UI2DSprite unitySprite;
         private Texture2D _screenShot;
-        private Sprite _tempSprite;
+
         public static Capture Instance { get; private set; }
         private void Start()
         {
@@ -24,22 +23,19 @@ namespace Firecoals.Render
 
         public IEnumerator TakePhoto()
         {
-            NGUITools.SetActive(reviewPanel, true);
+
             NGUITools.SetActive(mainPanel, false);
+            NGUITools.SetActive(reviewPanel, true);
             yield return new WaitForEndOfFrame();
-            RenderTexture rt = new RenderTexture(Screen.width, Screen.height, 24);
-            cam.targetTexture = rt;
+
             _screenShot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
-            cam.Render();
-            RenderTexture.active = rt;
             _screenShot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
             _screenShot.Apply();
-            cam.targetTexture = null;
-            RenderTexture.active = null; // JC: added to avoid errors
-            Destroy(rt);
-            yield return new WaitForEndOfFrame();
-            _tempSprite = Sprite.Create(_screenShot, new Rect(0, 0, Screen.width, Screen.height), new Vector2(0, 0));
-            unitySprite.sprite2D = _tempSprite;
+
+            unitySprite.sprite2D = Sprite.Create(_screenShot, new Rect(0, 0, Screen.width, Screen.height), new Vector2(0.5f, 0.5f));
+            //unitySprite.transform.localScale = new Vector3(0.7f, 0.4f, 0f);
+
+            Debug.Log("TakeScreenShot done !");
         }
 
         public void Snap()

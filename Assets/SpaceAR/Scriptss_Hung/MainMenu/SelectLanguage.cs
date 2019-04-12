@@ -14,7 +14,7 @@ namespace Firecoals.Space
         public GameObject _vnflag;
 
         /// <summary>
-        /// chọn ngôn ngữ Anh
+        /// chọn ngôn ngữ EN
         /// </summary>
         public GameObject _engflag;
 
@@ -25,7 +25,7 @@ namespace Firecoals.Space
 
         private void Start()
         {
-            anim = GetComponent<Animator>();
+            anim = this.GetComponent<Animator>();
 
             //Th test khi chưa qua scene setting
             //nếu chưa chọn ngôn ngữ bên scene setting thì set mặc đinhj tiếng việt
@@ -98,13 +98,6 @@ namespace Firecoals.Space
         public void ShowAllFlagsToSelect()
         {
             anim.SetBool("isOpen", true);
-            //_vnflag.GetComponent<UIButton>().hoverSprite2D = _vnflag.GetComponent<UIButton>().hoverSprite2D;
-            //_vnflag.GetComponent<UIButton>().pressedSprite2D = _vnflag.GetComponent<UIButton>().pressedSprite2D;
-            //_vnflag.GetComponent<UIButton>().disabledSprite2D = _vnflag.GetComponent<UIButton>().disabledSprite2D;
-
-            //_engflag.GetComponent<UIButton>().hoverSprite2D = _engflag.GetComponent<UIButton>().hoverSprite2D;
-            //_engflag.GetComponent<UIButton>().pressedSprite2D = _engflag.GetComponent<UIButton>().pressedSprite2D;
-            //_engflag.GetComponent<UIButton>().disabledSprite2D = _engflag.GetComponent<UIButton>().disabledSprite2D;
         }
 
         private void HideIconLanguage()
