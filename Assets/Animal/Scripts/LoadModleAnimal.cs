@@ -37,16 +37,46 @@ namespace Firecoals.Animal
         public string tagInfo;
         public string tagSound;
         public string tagName;
+        /// <summary>
+        /// thông tin object
+        /// </summary>
+        private GameObject _objectInfo;
+        /// <summary>
+        /// Ten object
+        /// </summary>
+        private GameObject _objectName;
+        /// <summary>
+        /// thông tin về các thành phần của object (nếu có)
+        /// </summary>
+        private GameObject _componentInfo;
+        public string st;
+
+        /// <summary>
+        /// key cho name object
+        /// </summary>
+        [Header("Name key")]
+        public string TextInfoName;
+
+        /// <summary>
+        /// key cho info object
+        /// </summary>
+        [Header("Information key")]
+        public string st2;
+
+        /// <summary>
+        /// Key để load name và info của models
+        /// </summary>
+        private string _nameModelTracking;
 
         protected override void Start()
         {
-
+           
             base.Start();
             audio = gameObject.GetComponent<AudioSource>();
             assetHandler = new AssetHandler(mTrackableBehaviour.transform);
             _loadsoundbundles = GameObject.FindObjectOfType<LoadSoundbundles>();
+              PlayerPrefs.SetString("AnimalLanguage", "EN");
         }
-
         protected override void OnDestroy()
         {
             base.OnDestroy();
@@ -66,30 +96,42 @@ namespace Firecoals.Animal
         protected override void OnTrackingFound()
         {
             base.OnTrackingFound();
-            GameObject go = assetHandler.CreateUnique(BuildName, path);
+            GameObject  go = assetHandler.CreateUnique(BuildName, path);
+            _nameModelTracking = mTrackableBehaviour.TrackableName;
             if (go != null)
             {
                 //if (ActiveManager.IsActiveOfflineOk("A"))
                 //{
-                //    StartCoroutine(starEffect(go));
+                //    LoadModelBundles(go);
                 //}
                 //else
-
                 //{
-                //    if (mTrackableBehaviour.name == "Lion" || mTrackableBehaviour.name == "Elephant" || mTrackableBehaviour.name == "Gorilla")
+                //    if (mTrackableBehaviour.TrackableName == "Lion" || mTrackableBehaviour.TrackableName == "Elephant" || mTrackableBehaviour.TrackableName == "Gorilla")
                 //    {
-                        StartCoroutine(starEffect(go));
+                //        LoadModelBundles(go);
                 //    }
                 //    else
                 //    {
-                //        //    PopupManager.PopUpDialog("", "", PopupManager.DialogType.YesNoDialog, () =>
-                //        //    {
-                //        //        SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
-                //        //    });
+                //        PopupManager.PopUpDialog("Thông báo", "Chọn đồng ý để mở khóa trang", PopupManager.DialogType.YesNoDialog, () =>
+                //        {
+                //            SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
+                //        });
                 //    }
                 //}
-             
+                LoadModelBundles(go);
             }
+        }
+
+        public void LoadModelBundles(GameObject go)
+        {
+            StartCoroutine(starEffect(go));
+            _componentInfo = GameObject.Find("UI Root/Panel object's component information/Text Information");
+            st = mTrackableBehaviour.TrackableName;
+            if (st != null)
+            {
+                Debug.Log("S-------------------t" + st.ToString());
+              //  ChangeKeyAnimalLocalization();
+            }      
         }
         protected override void OnTrackingLost()
         {
@@ -98,11 +140,11 @@ namespace Firecoals.Animal
             RandomEffect.Instance.Onlost();
             assetHandler?.ClearAll();
             assetHandler?.Content.ClearAll();
+         //   Debug.Log("Destroy" + mTrackableBehaviour.name);
             foreach (Transform go in mTrackableBehaviour.transform)
             {
                 Destroy(go.gameObject);
             }
-
         }
 
         //private void RunAnimationIntro()
@@ -116,6 +158,21 @@ namespace Firecoals.Animal
         //        Debug.LogWarning("This object hasn't intro animation.");
         //    }
         //}
+        private void ChangeKeyAnimalLocalization()
+        {
+            _componentInfo.GetComponent<UILocalize>().key = TextInfoName;
+            Debug.Log("st"+ st);
+            _componentInfo.GetComponent<UILabel>().text = Localization.Get(TextInfoName);
+            Debug.Log("dddddddd"+_componentInfo.GetComponent<UILabel>().text);
+        }
 
+        private void ClearKeyLocalization()
+        {
+            if (_objectInfo != null && _objectName != null)
+            {
+                _objectName.GetComponent<UILocalize>().key = string.Empty;
+                _objectInfo.GetComponent<UILocalize>().key = string.Empty;
+            }
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace Firecoals.Animal
 
         protected void Update()
         {
-            Debug.Log("CanEat:" + CanEat);
+          //  Debug.Log("CanEat:" + CanEat);
 
             if (CanEat == false)
             {

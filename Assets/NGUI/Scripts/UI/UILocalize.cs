@@ -3,7 +3,10 @@
 // Copyright © 2011-2019 Tasharen Entertainment Inc
 //-------------------------------------------------
 
+using Firecoals.Animal;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.XR.WSA;
 
 /// <summary>
 /// Simple script that lets you localize a UIWidget.
@@ -12,7 +15,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 [RequireComponent(typeof(UIWidget))]
 [AddComponentMenu("NGUI/UI/Localize")]
-public class UILocalize : MonoBehaviour
+public class UILocalize :MonoBehaviour
 {
 	/// <summary>
 	/// Localization key.
@@ -20,10 +23,9 @@ public class UILocalize : MonoBehaviour
 
 	public string key;
 
-	/// <summary>
-	/// Manually change the value of whatever the localization component is attached to.
-	/// </summary>
-
+    /// <summary>
+    /// Manually change the value of whatever the localization component is attached to.
+    /// </summary>
 	public string value
 	{
 		set

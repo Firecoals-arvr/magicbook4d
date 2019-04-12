@@ -19,9 +19,9 @@ public class LanguageAnimal : LanguageController
         OnOnPickLanguage("JP", "A");
         PlayerPrefs.SetString("AnimalLanguage", "JP");
     }
-    public void SetLanguageCn()
-    {
-        OnOnPickLanguage("CN", "A");
-        PlayerPrefs.SetString("AnimalLanguage", "CN");
-    }
+    //public void SetLanguageCn()
+    //{
+    //    OnOnPickLanguage("CN", "A");
+    //    PlayerPrefs.SetString("AnimalLanguage", "CN");
+    //}
 }

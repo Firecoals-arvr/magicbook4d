@@ -48,7 +48,8 @@ namespace Firecoals.Animal
         public bool CanMove { get; set; }
         protected bool IsRotating;
         public GameObject Item { get; set; }
-        protected void Start()
+        public float ScaleAnimal { get; set; }
+        protected virtual void Start()
         {
             SetUpAnimation();
             Item = transform.parent.GetComponentInChildren<Item>().gameObject;
@@ -124,8 +125,8 @@ namespace Firecoals.Animal
         protected void SmoothMove(Vector3 target, string moveAnimClipName, string stopAnimClipName,string idleAnimClipName)
         {
             IsRotating = false;
-
             var targetDir = target - this.transform.position;
+            Debug.Log("* ScaleAnimal" + ScaleAnimal);
             var angle = Quaternion.LookRotation(targetDir);
             if (Item != null)
             {
@@ -140,9 +141,9 @@ namespace Firecoals.Animal
             Debug.DrawLine(transform.position, target, Color.red, 30, false);
             if (Quaternion.Angle(angle, transform.rotation) < 5)
             {
-                    if (Vector3.Distance(transform.position, target) > StopDistance)
+                    if (Vector3.Distance(transform.position, target) > StopDistance* ScaleAnimal)
                     {
-                        transform.position = Vector3.MoveTowards(transform.position, target, MoveSpeed * Time.deltaTime);
+                        transform.position = Vector3.MoveTowards(transform.position, target, MoveSpeed * Time.deltaTime* ScaleAnimal);
                         OnMoveEventStarted(moveAnimClipName);
                         IsRotating = false;
                     }
@@ -152,7 +153,7 @@ namespace Firecoals.Animal
             {
                 IsRotating = true;
             }
-            if (Vector3.Distance(transform.position, target) < StopDistance)
+            if (Vector3.Distance(transform.position, target) < StopDistance * ScaleAnimal)
             {
                 if (IsMoving)
                 {

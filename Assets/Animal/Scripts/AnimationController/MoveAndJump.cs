@@ -12,8 +12,8 @@ public class MoveAndJump : MonoBehaviour
     public string IdleAnimName;
     public bool IsJump;
     public bool CanjumpWolf;
-    public float timedelay=1;
-    public float SpeedJump=2;
+    public float timedelay = 1;
+    public float SpeedJump = 2;
     protected Animator animator;
     public float MoveSpeed;
     public Vector3 DestinationPosition { get; set; }
@@ -24,9 +24,9 @@ public class MoveAndJump : MonoBehaviour
     public bool IsWolf;
     public bool IsEgale;
     protected RaycastHit hit;
+    public float ScaleAnimal { get; set; }
     public GameObject Item { get; set; }
-
-    protected  void Start()
+    protected void Start()
     {
         Item = transform.parent.GetComponentInChildren<Item>().gameObject;
         animator = GetComponent<Animator>();
@@ -37,9 +37,17 @@ public class MoveAndJump : MonoBehaviour
         {
             CanEat = false;
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-      
+
             if (Physics.Raycast(ray, out hit))
             {
+                if (Vector3.Distance(transform.position, hit.point) > Jumpdistiance)
+                {
+                    IsJump = true;
+                }
+                else
+                {
+                    IsJump = false;
+                }
                 if (hit.collider.gameObject)
                 {
                     Debug.LogWarning("hit " + hit.collider.gameObject.name);
@@ -49,11 +57,11 @@ public class MoveAndJump : MonoBehaviour
                     if (IsWolf)
                     {
                         if (CanjumpWolf)
-                        onClick(hit);
+                            onClick(hit);
                     }
                     else
                     {
-                       onClick(hit);
+                        onClick(hit);
                     }
                 }
             }
@@ -73,10 +81,10 @@ public class MoveAndJump : MonoBehaviour
             }
             else
             {
-                Item.transform.position =new Vector3(hit.point.x,hit.point.y,hit.point.z-Jumpdistiance);
+                Item.transform.position = new Vector3(hit.point.x, hit.point.y, hit.point.z - Jumpdistiance * ScaleAnimal);
             }
         }
-           
+
     }
     protected void SmoothMove(Vector3 target, string moveAnimClipName, string stopAnimClipName, string idleAnimClipName)
     {
@@ -92,41 +100,52 @@ public class MoveAndJump : MonoBehaviour
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, angle, Time.deltaTime * 100.0f);
         }
-
+        Debug.Log("IsJump" + IsJump);
         Debug.DrawLine(transform.position, target, Color.red, 30, false);
         if (Quaternion.Angle(angle, transform.rotation) < 5)
         {
-
-           // transform.position = Vector3.MoveTowards(transform.position, target, MoveSpeed * Time.deltaTime);
-           if (Vector3.Distance(transform.position, target) > StopDistance)
-           {
-           }
-
-           if (Vector3.Distance(transform.position, target) > Jumpdistiance && IsJump==false) 
+            if (Vector3.Distance(transform.position, target) > Jumpdistiance * ScaleAnimal && IsJump == true)
             {
-                transform.position = Vector3.MoveTowards(transform.position, target, MoveSpeed * Time.deltaTime);
-                // OnMoveEventStarted(moveAnimClipName);
-                animator.SetBool("IsJump", false);
-                animator.SetBool("IsIdle", false);
+                transform.position = Vector3.MoveTowards(transform.position, target, MoveSpeed * Time.deltaTime*ScaleAnimal);
                 animator.SetBool("IsWalk", true);
                 CanjumpWolf = false;
                 IsRotating = false;
             }
             else
-           {
-            
-               StartCoroutine(delayjump(target));
-              
+            {
+                if (IsJump)
+                {
+    
+                    StartCoroutine(delayjump(target));
+                }
+                else
+                {
+                    Debug.Log("Vector3.Distance(transform.position, target)"+ Vector3.Distance(transform.position, target));
+                    if (Vector3.Distance(transform.position, target) > StopDistance * ScaleAnimal && IsJump == false)
+                    {
+                        transform.position = Vector3.MoveTowards(transform.position, target, MoveSpeed * Time.deltaTime*ScaleAnimal);
+                        animator.SetBool("IsWalk", true);
+                        CanjumpWolf = false;
+                        IsRotating = false;
+                    }
+                }
+
+
             }
+
+
         }
         else
         {
             IsRotating = true;
         }
-        if (Vector3.Distance(transform.position, target) < StopDistance)
+
+        if (Vector3.Distance(transform.position, target) < StopDistance * ScaleAnimal)
         {
             if (IsMoving)
             {
+
+                animator.SetBool("IsWalk", false);
                 IsMoving = false;
                 CanMove = false;
             }
@@ -143,22 +162,25 @@ public class MoveAndJump : MonoBehaviour
     {
         if (CanMove)
         {
+            ScaleAnimal = (float)this.transform.parent.transform.localScale.x;
             SmoothMove(DestinationPosition, movingAnimName, stopAnimName, IdleAnimName);
         }
     }
+
     IEnumerator delayjump(Vector3 target)
     {
 
-        animator.SetBool("IsWalk", false);
+
         animator.SetBool("IsJump", true);
-        transform.position = Vector3.MoveTowards(transform.position, target, MoveSpeed * Time.deltaTime * SpeedJump);
-        yield return  new WaitForSeconds(timedelay);
+        float speed = 0;
+        yield return new WaitForSeconds(timedelay);
+        speed = SpeedJump;
+        IsJump = false;
+        transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * speed * ScaleAnimal);
+        speed = 0;
         animator.SetBool("IsJump", false);
-        animator.SetBool("IsIdle", true);
+        animator.SetBool("IsWalk", false);
         CanjumpWolf = true;
-    
-  
-       
     }
 
 }
