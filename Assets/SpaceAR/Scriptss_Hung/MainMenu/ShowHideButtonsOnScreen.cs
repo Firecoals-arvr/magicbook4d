@@ -24,12 +24,13 @@ namespace Firecoals.Space
 
         public void ShowMenu()
         {
-            var x = TweenPosition.Begin(hideMenu, .5f, new Vector3(-553f, 4f, 0f));
+            var offset = hideMenu.transform.localPosition.x;
+            var x = TweenPosition.Begin(hideMenu, .5f, new Vector3(offset + 120f, 14f, 0f));
             x.method = UITweener.Method.EaseInOut;
             x.PlayForward();
             x.ResetToBeginning();
 
-            var y = TweenPosition.Begin(this.gameObject, .5f, new Vector3(82f, -7f, 0f));
+            var y = TweenPosition.Begin(this.gameObject, .5f, new Vector3(120f, 291f, 0f));
             y.method = UITweener.Method.EaseInOut;
             y.PlayForward();
             y.ResetToBeginning();
@@ -39,12 +40,13 @@ namespace Firecoals.Space
 
         public void HideMenu()
         {
-            var x = TweenPosition.Begin(hideMenu, .5f, new Vector3(-838f, 4f, 0f));
+            var offset = hideMenu.transform.localPosition.x;
+            var x = TweenPosition.Begin(hideMenu, .5f, new Vector3(offset - 120f, 14f, 0f));
             x.method = UITweener.Method.EaseInOut;
             x.PlayForward();
             x.ResetToBeginning();
 
-            var y = TweenPosition.Begin(this.gameObject, .5f, new Vector3(15f, -7f, 0f));
+            var y = TweenPosition.Begin(this.gameObject, .5f, new Vector3(0f, 291f, 0f));
             y.method = UITweener.Method.EaseInOut;
             y.PlayForward();
             y.ResetToBeginning();
@@ -57,12 +59,12 @@ namespace Firecoals.Space
             if (isOpening == true)
             {
                 HideMenu();
-                this.gameObject.transform.rotation = Quaternion.AngleAxis(0, Vector3.up);
+                //this.gameObject.transform.rotation = Quaternion.AngleAxis(0, Vector3.up);
             }
             else
             {
                 ShowMenu();
-                this.gameObject.transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
+                //this.gameObject.transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
             }
         }
     }

@@ -12,10 +12,10 @@ namespace Firecoals.Augmentation
 {
     public class AssetLoader : MonoBehaviour
     {
-        public string[] bundleNames;
+        private string[] bundleNames;
 
         // Start is called before the first frame update
-        public string bundleRoot;
+        private string bundleRoot;
         public AssetBundlesLoader assetBundlesLoader = new AssetBundlesLoader();
         public IResources Resources { private set; get; }
         //private string iv = "5Hh2390dQlVh0AqC";
@@ -24,7 +24,7 @@ namespace Firecoals.Augmentation
         #region MONOBEHAVIOUR_METHOD
         private void Awake()
         {
-            //DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);
             switch (ThemeController.instance.Theme)
             {
                 case "Animal":

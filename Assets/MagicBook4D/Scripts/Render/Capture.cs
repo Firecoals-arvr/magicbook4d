@@ -13,19 +13,20 @@ namespace Firecoals.Render
         private Texture2D _screenShot;
 
         public static Capture Instance { get; private set; }
-        private void Start()
-        {
-            if (Instance != this)
-            {
-                Instance = this;
-            }
-        }
+        //private void Start()
+        //{
+        //    if (Instance != this)
+        //    {
+        //        Instance = this;
+        //    }
+        //}
 
         public IEnumerator TakePhoto()
         {
 
             NGUITools.SetActive(mainPanel, false);
             NGUITools.SetActive(reviewPanel, true);
+            NGUITools.SetActive(this.gameObject, false);
             yield return new WaitForEndOfFrame();
 
             _screenShot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
@@ -33,7 +34,6 @@ namespace Firecoals.Render
             _screenShot.Apply();
 
             unitySprite.sprite2D = Sprite.Create(_screenShot, new Rect(0, 0, Screen.width, Screen.height), new Vector2(0.5f, 0.5f));
-            //unitySprite.transform.localScale = new Vector3(0.7f, 0.4f, 0f);
 
             Debug.Log("TakeScreenShot done !");
         }
@@ -47,6 +47,7 @@ namespace Firecoals.Render
         {
             NGUITools.SetActive(reviewPanel, false);
             NGUITools.SetActive(mainPanel, true);
+            NGUITools.SetActive(this.gameObject, true);
             unitySprite.sprite2D = null;
         }
 
@@ -55,6 +56,7 @@ namespace Firecoals.Render
             unitySprite.sprite2D = null;
             NGUITools.SetActive(reviewPanel, false);
             NGUITools.SetActive(mainPanel, true);
+            NGUITools.SetActive(this.gameObject, true);
             if (NativeGallery.CheckPermission() == NativeGallery.Permission.Granted)
             {
                 NativeGallery.SaveImageToGallery(_screenShot, "MagicBook 4D", Guid.NewGuid() + ".png",

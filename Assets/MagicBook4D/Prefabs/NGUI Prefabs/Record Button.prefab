@@ -1,5 +1,91 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &323061511
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 323061512}
+  - component: {fileID: 323061513}
+  m_Layer: 8
+  m_Name: 'Background '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &323061512
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323061511}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 616905091}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &323061513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323061511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b3dc54f924693f41b5cbecb267e647a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftAnchor:
+    target: {fileID: 616905091}
+    relative: 0
+    absolute: -25
+  rightAnchor:
+    target: {fileID: 616905091}
+    relative: 1
+    absolute: 25
+  bottomAnchor:
+    target: {fileID: 616905091}
+    relative: 0
+    absolute: -25
+  topAnchor:
+    target: {fileID: 616905091}
+    relative: 1
+    absolute: 25
+  updateAnchors: 1
+  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mPivot: 4
+  mWidth: 250
+  mHeight: 250
+  mDepth: 7
+  mMat: {fileID: 0}
+  autoResizeBoxCollider: 0
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: 1
+  mType: 0
+  mFillDirection: 4
+  mFillAmount: 1
+  mInvert: 0
+  mFlip: 0
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  centerType: 1
+  leftType: 1
+  rightType: 1
+  bottomType: 1
+  topType: 1
+  mAtlas: {fileID: 11400000, guid: d1f0d35b72cc5064784986d642f5289f, type: 2}
+  mSpriteName: CircleButton BlueLight
+  mFillCenter: 1
 --- !u!1 &616905090
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,6 +121,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 1542879991}
+  - {fileID: 323061512}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -52,7 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftAnchor:
     target: {fileID: 0}
-    relative: 1
+    relative: 0
     absolute: -194
   rightAnchor:
     target: {fileID: 0}
@@ -60,18 +147,18 @@ MonoBehaviour:
     absolute: 6
   bottomAnchor:
     target: {fileID: 0}
-    relative: 0.5
+    relative: 0
     absolute: -100
   topAnchor:
     target: {fileID: 0}
-    relative: 0.5
+    relative: 1
     absolute: 100
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mWidth: 200
   mHeight: 200
-  mDepth: 1
+  mDepth: 8
   mMat: {fileID: 0}
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
@@ -90,8 +177,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: d1f0d35b72cc5064784986d642f5289f, type: 2}
-  mSpriteName: Sticker
+  mAtlas: {fileID: 11400000, guid: 4cd6b5f4b2336ec4e9d97a52dd9c5fe0, type: 2}
+  mSpriteName: icon_camera
   mFillCenter: 1
 --- !u!114 &616905093
 MonoBehaviour:
@@ -345,8 +432,8 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 0, b: 0, a: 1}
   mPivot: 4
-  mWidth: 200
-  mHeight: 200
+  mWidth: 250
+  mHeight: 250
   mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0

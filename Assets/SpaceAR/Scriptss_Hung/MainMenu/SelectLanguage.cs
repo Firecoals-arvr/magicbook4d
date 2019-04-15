@@ -9,24 +9,15 @@ namespace Firecoals.Space
     public class SelectLanguage : LanguageController
     {
         /// <summary>
-        /// chọn ngôn ngữ VN
+        /// bảng chọn ngôn ngữ
         /// </summary>
-        public GameObject _vnflag;
-
-        /// <summary>
-        /// chọn ngôn ngữ EN
-        /// </summary>
-        public GameObject _engflag;
+        public GameObject languageBoard;
 
         [HideInInspector]
         public bool en, vn;
 
-        Animator anim;
-
         private void Start()
         {
-            anim = this.GetComponent<Animator>();
-
             //Th test khi chưa qua scene setting
             //nếu chưa chọn ngôn ngữ bên scene setting thì set mặc đinhj tiếng việt
             if (PlayerPrefs.GetString("SpaceLanguage") == null)
@@ -97,12 +88,12 @@ namespace Firecoals.Space
 
         public void ShowAllFlagsToSelect()
         {
-            anim.SetBool("isOpen", true);
+            NGUITools.SetActive(languageBoard, true);
         }
 
         private void HideIconLanguage()
         {
-            anim.SetBool("isOpen", false);
+            NGUITools.SetActive(languageBoard, false);
         }
     }
 }
