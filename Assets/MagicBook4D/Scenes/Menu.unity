@@ -187,7 +187,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3002
+  startingRenderQueue: 3003
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -276,7 +276,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mColor: {r: 1, g: 1, b: 1, a: 0.1764706}
   mPivot: 4
   mWidth: 2
   mHeight: 2
@@ -299,8 +299,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: d1f0d35b72cc5064784986d642f5289f, type: 2}
-  mSpriteName: StarShine
+  mAtlas: {fileID: 11400000, guid: 4cd6b5f4b2336ec4e9d97a52dd9c5fe0, type: 2}
+  mSpriteName: square_white 50x50
   mFillCenter: 1
 --- !u!114 &69316348
 MonoBehaviour:
@@ -1060,7 +1060,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mColor: {r: 1, g: 1, b: 1, a: 0.1764706}
   mPivot: 4
   mWidth: 2
   mHeight: 2
@@ -1281,6 +1281,8 @@ GameObject:
   - component: {fileID: 482087246}
   - component: {fileID: 482087248}
   - component: {fileID: 482087247}
+  - component: {fileID: 482087250}
+  - component: {fileID: 482087249}
   m_Layer: 8
   m_Name: FishEye Scroll View
   m_TagString: Untagged
@@ -1416,6 +1418,33 @@ MonoBehaviour:
   animalAudioClip: {fileID: 8300000, guid: 130216e518f99f54cb14646bb50f002b, type: 3}
   spaceAudioClip: {fileID: 8300000, guid: 32515dd26a8a4ae4a91be2f8f56cfcd3, type: 3}
   backgroundClip: {fileID: 8300000, guid: 6b6dd0330411f1e45bdbe3bcc2641a6c, type: 3}
+--- !u!65 &482087249
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482087243}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1440, y: 437.24, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &482087250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482087243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 0}
+  draggablePanel: {fileID: 0}
 --- !u!1 &489831528
 GameObject:
   m_ObjectHideFlags: 0
@@ -4472,7 +4501,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mColor: {r: 1, g: 1, b: 1, a: 0.1764706}
   mPivot: 4
   mWidth: 2
   mHeight: 2
