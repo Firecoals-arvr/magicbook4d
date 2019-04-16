@@ -89,32 +89,30 @@ namespace Firecoals.Space
 
             inforBtn = GameObject.FindGameObjectsWithTag("infor");
 
-
-            CloneModels();
             //nếu đã purchase thì vào phần này
-            //if (ActiveManager.IsActiveOfflineOk("B"))
-            //{
-            //    CloneModels();
-            //    AutoTriggerInforButton();
-            //}
-            //// nếu chưa purchase thì vào phần này
-            //else
-            //{
-            //    // nếu là 3 trang đầu thì cho xem model
-            //    if (mTrackableBehaviour.TrackableName == "Solarsystem_scaled" || mTrackableBehaviour.TrackableName == "Sun_scaled" || mTrackableBehaviour.TrackableName == "Mercury_scaled")
-            //    {
-            //        CloneModels();
-            //        AutoTriggerInforButton();
-            //    }
-            //    // nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
-            //    else
-            //    {
-            //        PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", default, default, default, PopupManager.DialogType.YesNoDialog, () =>
-            //           {
-            //               SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
-            //           });
-            //    }
-            //}
+            if (ActiveManager.IsActiveOfflineOk("B"))
+            {
+                CloneModels();
+                AutoTriggerInforButton();
+            }
+            // nếu chưa purchase thì vào phần này
+            else
+            {
+                //nếu là 3 trang đầu thì cho xem model
+                if (mTrackableBehaviour.TrackableName == "Solarsystem_scaled" || mTrackableBehaviour.TrackableName == "Sun_scaled" || mTrackableBehaviour.TrackableName == "Mercury_scaled")
+                {
+                    CloneModels();
+                    AutoTriggerInforButton();
+                }
+                //nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
+                else
+                {
+                    PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", default, default, default, PopupManager.DialogType.YesNoDialog, () =>
+                   {
+                       SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
+                   });
+                }
+            }
             base.OnTrackingFound();
         }
 
@@ -179,7 +177,7 @@ namespace Firecoals.Space
             this._resources = context.GetService<IResources>();
             GameObject go1 = assetloader.LoadGameObjectAsync(path);
             //Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
-            if (go1 != null)
+            if (this.transform.childCount == 0)
             {
                 //var startTime = DateTime.Now;
                 Instantiate(go1, mTrackableBehaviour.transform);

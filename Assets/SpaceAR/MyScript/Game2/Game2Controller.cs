@@ -18,7 +18,7 @@ namespace Firecoals.Space
         int numberRightAns;
         float timeToPlay = 0;
         GameObject go;
-        GameObject gameO;
+        public GameObject gameO;
         public GameObject playBT;
         bool rightAnswer;
         bool setTimePlay;
@@ -27,7 +27,7 @@ namespace Firecoals.Space
         {
             CheckPrefabs();
 			// gameO là thằng chứa toàn bộ model
-            gameO = GameObject.FindGameObjectWithTag("ModelInGame2");
+            
             score.transform.GetChild(0).GetComponent<UILabel>().text = "0";
             score.transform.GetChild(2).GetComponent<UILabel>().text = "0";
             numberRightAns = 0;

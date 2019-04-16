@@ -45,7 +45,7 @@ namespace Firecoals.Space
         public void PlayButton()
         {
             isStart = true;
-			//game1 là thằng image target
+			//game1 là thằng solarsystem con của thằng game1 to
             game1.transform.GetChild(0).gameObject.SetActive(true);
             NGUITools.SetActive(playBT, false);
 
@@ -55,7 +55,7 @@ namespace Firecoals.Space
         {
             rightAnswer = 0;
 			// list này là list các planet màu xanh 
-            listPlanet = GameObject.FindGameObjectWithTag("ListPlanetG1");
+            listPlanet = GameObject.FindGameObjectWithTag("planettả");
             for (int i = 0; i < listPlanet.transform.childCount; i++)
             {
                 Debug.Log("child = " + listPlanet.transform.GetChild(i).childCount);
