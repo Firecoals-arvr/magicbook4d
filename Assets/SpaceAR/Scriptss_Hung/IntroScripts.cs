@@ -1,8 +1,9 @@
-﻿
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Firecoals.Augmentation;
 using System;
-
+using Firecoals.AssetBundles;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
 using Firecoals.AssetBundles.Sound;
@@ -34,17 +35,12 @@ namespace Firecoals.Space
         private GameObject objectInfo;
 
         /// <summary>
-        /// thông tin về các thành phần của object (nếu có)
-        /// </summary>
-        private GameObject componentInfo;
-
-        /// <summary>
         /// tên của object
         /// </summary>
         private GameObject objectName;
 
         /// <summary>
-        /// biến để so sánh tên object với key localization
+        /// tên của target
         /// </summary>
         private string st;
 
@@ -55,10 +51,11 @@ namespace Firecoals.Space
         public string st1;
 
         /// <summary>
-        /// key cho info object
+        /// các key cho info của object & thành phần của nó
         /// </summary>
         [Header("Information key")]
         public string st2;
+
         /// <summary>
         /// Key để load name và info của models
         /// </summary>
@@ -70,6 +67,9 @@ namespace Firecoals.Space
         /// anim để chạy animation intro lúc tracking found models
         /// </summary>
         Animator anim;
+
+        private GameObject[] inforBtn;
+        bool checkOpen;
 
 
         protected override void Start()
@@ -86,28 +86,31 @@ namespace Firecoals.Space
         {
             _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
             assetloader = GameObject.FindObjectOfType<AssetLoader>();
-            //CloneModels();
+
+            inforBtn = GameObject.FindGameObjectsWithTag("infor");
+
             //nếu đã purchase thì vào phần này
             if (ActiveManager.IsActiveOfflineOk("B"))
             {
                 CloneModels();
+                AutoTriggerInforButton();
             }
             // nếu chưa purchase thì vào phần này
             else
             {
-                // nếu là 3 trang đầu thì cho xem model
+                //nếu là 3 trang đầu thì cho xem model
                 if (mTrackableBehaviour.TrackableName == "Solarsystem_scaled" || mTrackableBehaviour.TrackableName == "Sun_scaled" || mTrackableBehaviour.TrackableName == "Mercury_scaled")
                 {
                     CloneModels();
+                    AutoTriggerInforButton();
                 }
-                // nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
+                //nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
                 else
                 {
-                    PopupManager.PopUpDialog("", "Bạn cần kích hoạt để xem hết các tranh",default, default, default,
-                        PopupManager.DialogType.YesNoDialog,() =>
-                    {
-                        SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
-                    });
+                    PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", default, default, default, PopupManager.DialogType.YesNoDialog, () =>
+                   {
+                       SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
+                   });
                 }
             }
             base.OnTrackingFound();
@@ -128,18 +131,6 @@ namespace Firecoals.Space
             base.OnTrackingLost();
         }
 
-        private void RunAnimationIntro()
-        {
-            if (this.gameObject.transform.GetChild(0).GetComponent<Animation>() != null)
-            {
-                this.gameObject.transform.GetChild(0).GetComponent<Animation>().Play("intro");
-            }
-            else
-            {
-                Debug.LogWarning("This object hasn't intro animation.");
-            }
-        }
-
         /// <summary>
         /// đổi key trong localization để lấy đúng tên, thông tin theo object
         /// </summary>
@@ -152,47 +143,111 @@ namespace Firecoals.Space
 
                 objectName.GetComponent<UILabel>().text = Localization.Get(st1);
                 objectInfo.GetComponent<UILabel>().text = Localization.Get(st2);
+
+                //ShowComponentInfor();
             }
         }
 
+        /// <summary>
+        /// xóa key UIlocalize khi chạy vào OnTrackingLost()
+        /// </summary>
         private void ClearKeyLocalization()
         {
             if (objectInfo != null && objectName != null)
             {
                 objectName.GetComponent<UILocalize>().key = string.Empty;
                 objectInfo.GetComponent<UILocalize>().key = string.Empty;
+
+                objectName.GetComponent<UILabel>().text = string.Empty;
+                objectInfo.GetComponent<UILabel>().text = string.Empty;
             }
         }
+
         void PlayAnimIntro()
         {
             anim = this.gameObject.GetComponentInChildren<Animator>();
             anim.SetTrigger("Intro");
-            
         }
+
         void CloneModels()
         {
-            var statTime = DateTime.Now;
+            //var statTime = DateTime.Now;
             _assethandler = new AssetHandler(mTrackableBehaviour.transform);
             ApplicationContext context = Context.GetApplicationContext();
             this._resources = context.GetService<IResources>();
-            //GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;
             GameObject go1 = assetloader.LoadGameObjectAsync(path);
-            Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
-            if (go1 != null)
+            //Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
+            if (this.transform.childCount == 0)
             {
-                var startTime = DateTime.Now;
+                //var startTime = DateTime.Now;
                 Instantiate(go1, mTrackableBehaviour.transform);
                 PlayAnimIntro();
-                Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
+                //Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
             }
             _loadSoundbundle.PlayNameSound(tagSound);
-            objectName = GameObject.Find("UIMenu Root/Targets name/Label name");
-            objectInfo = GameObject.Find("UIMenu Root/Panel planet information/Text Information");
-            componentInfo = GameObject.Find("UIMenu Root/Panel object's component information/Text Information");
+            objectName = GameObject.Find("UI Root/Main Panel/BangTen/Label");
+            objectInfo = GameObject.Find("UI Root/PanelInfor/Scroll View/Info");
+
             st = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
             st.ToLower();
             ChangeKeyLocalization();
         }
 
+        /// <summary>
+        /// xem thông tin thành phần của hành tinh
+        /// </summary>
+        void AutoTriggerInforButton()
+        {
+            for (int i = 0; i < inforBtn.Length; i++)
+            {
+                if (inforBtn[i].activeInHierarchy)
+                {
+                    inforBtn[i].GetComponent<UIButton>().onClick.Clear();
+                    EventDelegate del = new EventDelegate(this, "ShowSmallInfo");
+                    EventDelegate.Set(inforBtn[i].GetComponent<UIButton>().onClick, del);
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// lấy thông tin thành phần con của hành tinh
+        /// </summary>
+        private void ShowComponentInfor()
+        {
+            for (int i = 0; i < inforBtn.Length; i++)
+            {
+                inforBtn[i].GetComponentInChildren<UILabel>().text = Localization.Get(inforBtn[i].GetComponentInChildren<UILocalize>().key);
+                objectInfo.transform.GetChild(0).transform.GetChild(0).GetComponent<UILabel>().text
+                    = Localization.Get(inforBtn[i].GetComponentInChildren<UILocalize>().key);
+            }
+        }
+
+        /// <summary>
+        /// hiện bảng thông tin con của hành tinh
+        /// </summary>
+        public void ShowSmallInfo()
+        {
+            if (checkOpen == false)
+            {
+                ShowObjectInfo();
+            }
+            else
+            {
+                HideObjectInfo();
+            }
+        }
+
+        private void ShowObjectInfo()
+        {
+            checkOpen = true;
+            anim.SetBool("isOpen", true);
+        }
+
+        private void HideObjectInfo()
+        {
+            checkOpen = false;
+            anim.SetBool("isOpen", false);
+        }
     }
 }

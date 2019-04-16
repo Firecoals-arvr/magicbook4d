@@ -155,7 +155,7 @@ namespace SpaceGraphicsToolkit
 			_InnerScale = Shader.PropertyToID("_InnerScale");
 			_LightingTex = Shader.PropertyToID("_LightingTex");
 			_LocalToWorld = Shader.PropertyToID("_LocalToWorld");
-			_MainTex = Shader.PropertyToID("_CustomTex");
+			_MainTex = Shader.PropertyToID("_MainTex");
 			_MaskMap = Shader.PropertyToID("_MaskMap");
 			_NearScale = Shader.PropertyToID("_NearScale");
 			_NearTex = Shader.PropertyToID("_NearTex");
