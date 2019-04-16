@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 8753890799104937281}
   - component: {fileID: 1185951170}
   - component: {fileID: 1185951166}
+  - component: {fileID: 4629581101830988658}
   m_Layer: 0
   m_Name: frog
   m_TagString: Creature
@@ -186,6 +187,19 @@ MonoBehaviour:
   movingAnimName: Walk
   stopAnimName: Action1
   IdleAnimName: Action1
+--- !u!114 &4629581101830988658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185951164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297f8f643f3ff9a43830127ab7a12020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 0}
 --- !u!1 &1308913943
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,7 +303,6 @@ MonoBehaviour:
   StopDistance: 0
   IsWolf: 0
   IsEgale: 0
-  Item: {fileID: 2020538193}
   ImageTarget: {fileID: 0}
   eatloop: 1
   foodpos: {x: 0, y: 40, z: 50}
@@ -1429,6 +1442,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1185951163}
+  - component: {fileID: 449725564}
   m_Layer: 0
   m_Name: Frog
   m_TagString: Untagged
@@ -1454,6 +1468,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &449725564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649536332712519061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c73c1ab94e28d244827af556dca1ed2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoreStartedOverGui: 1
+  IgnoreIsOverGui: 0
+  RequiredFingerCount: 0
+  RequiredSelectable: {fileID: 0}
+  Camera: {fileID: 0}
+  WheelSensitivity: 0
+  Relative: 0
+  ScaleClamp: 0
+  ScaleMin: {x: 0, y: 0, z: 0}
+  ScaleMax: {x: 0, y: 0, z: 0}
 --- !u!1 &1727189101507537255
 GameObject:
   m_ObjectHideFlags: 0
@@ -2263,6 +2299,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8509128190721437403}
+  - component: {fileID: 5793693979068828548}
   m_Layer: 0
   m_Name: Env
   m_TagString: Untagged
@@ -2291,6 +2328,18 @@ Transform:
   m_Father: {fileID: 1185951163}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5793693979068828548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3356869673569354727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ce4ae978c4debc448312424f1e87a2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3457703627689767679
 GameObject:
   m_ObjectHideFlags: 0
@@ -3829,15 +3878,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4786491492020832, guid: 21c37810a552bdf4fbc3132365e3e7b0, type: 3}
       propertyPath: m_LocalScale.x
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4786491492020832, guid: 21c37810a552bdf4fbc3132365e3e7b0, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4786491492020832, guid: 21c37810a552bdf4fbc3132365e3e7b0, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 6
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4050101465686992, guid: 21c37810a552bdf4fbc3132365e3e7b0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3861,7 +3902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4401571465717820, guid: 21c37810a552bdf4fbc3132365e3e7b0, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4825748175907676, guid: 21c37810a552bdf4fbc3132365e3e7b0, type: 3}
       propertyPath: m_RootOrder
@@ -3869,7 +3910,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4859923362148218, guid: 21c37810a552bdf4fbc3132365e3e7b0, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4866414053075372, guid: 21c37810a552bdf4fbc3132365e3e7b0, type: 3}
       propertyPath: m_RootOrder

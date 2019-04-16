@@ -11,9 +11,11 @@ namespace Firecoals.Color
 		Vector3[] posArray = new Vector3[21];
 
 		Vector3[] rotArray = new Vector3[21];
+        public AudioClip audio;
+        AudioSource audioSource;
 
-		// Start is called before the first frame update
-		void Start()
+        // Start is called before the first frame update
+        void Start()
 		{
 			//posArray[0] = new Vector3(0, 0, 0);
 			//posArray[1] = new Vector3(-0.154f, 0f, 0.378f);
@@ -51,6 +53,7 @@ namespace Firecoals.Color
 			this.gameObject.GetComponent<Animator>().SetTrigger("isWalk");
 
 			realCharacter.GetComponent<Animator>().SetTrigger("isMove");
+            PlayMusic();
 			StartCoroutine(EndMove());
 
 		}
@@ -59,5 +62,10 @@ namespace Firecoals.Color
 			yield return new WaitForSeconds(28.5f);
 			realCharacter.GetComponent<Animator>().SetTrigger("isStay");
 		}
-	}
+        public void PlayMusic()
+        {
+            audioSource = GetComponent<AudioSource>();
+            audioSource.PlayOneShot(audio);
+        }
+    }
 }

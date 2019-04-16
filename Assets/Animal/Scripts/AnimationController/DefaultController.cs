@@ -13,9 +13,9 @@ namespace Firecoals.Animal
         {
             if (CanMove)
             {
+                ScaleAnimal = (float)this.transform.parent.transform.localScale.x;
                 SmoothMove(DestinationPosition, movingAnimName, stopAnimName, IdleAnimName);
             }
         }
-
     }
 }

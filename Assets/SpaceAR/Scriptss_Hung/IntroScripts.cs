@@ -1,8 +1,9 @@
-﻿
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Firecoals.Augmentation;
 using System;
-
+using Firecoals.AssetBundles;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
 using Firecoals.AssetBundles.Sound;
@@ -59,6 +60,7 @@ namespace Firecoals.Space
         /// </summary>
         [Header("Information key")]
         public string st2;
+
         /// <summary>
         /// Key để load name và info của models
         /// </summary>
@@ -86,7 +88,7 @@ namespace Firecoals.Space
         {
             _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
             assetloader = GameObject.FindObjectOfType<AssetLoader>();
-            //CloneModels();
+
             //nếu đã purchase thì vào phần này
             if (ActiveManager.IsActiveOfflineOk("B"))
             {
@@ -103,8 +105,7 @@ namespace Firecoals.Space
                 // nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
                 else
                 {
-                    PopupManager.PopUpDialog("", "Bạn cần kích hoạt để xem hết các tranh",default, default, default,
-                        PopupManager.DialogType.YesNoDialog,() =>
+                    PopupManager.PopUpDialog("", "", PopupManager.DialogType.YesNoDialog, () =>
                     {
                         SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
                     });
@@ -126,18 +127,6 @@ namespace Firecoals.Space
             ClearKeyLocalization();
             FirecoalsSoundManager.StopAll();
             base.OnTrackingLost();
-        }
-
-        private void RunAnimationIntro()
-        {
-            if (this.gameObject.transform.GetChild(0).GetComponent<Animation>() != null)
-            {
-                this.gameObject.transform.GetChild(0).GetComponent<Animation>().Play("intro");
-            }
-            else
-            {
-                Debug.LogWarning("This object hasn't intro animation.");
-            }
         }
 
         /// <summary>
@@ -163,19 +152,19 @@ namespace Firecoals.Space
                 objectInfo.GetComponent<UILocalize>().key = string.Empty;
             }
         }
+
         void PlayAnimIntro()
         {
             anim = this.gameObject.GetComponentInChildren<Animator>();
             anim.SetTrigger("Intro");
-            
         }
+
         void CloneModels()
         {
             var statTime = DateTime.Now;
             _assethandler = new AssetHandler(mTrackableBehaviour.transform);
             ApplicationContext context = Context.GetApplicationContext();
             this._resources = context.GetService<IResources>();
-            //GameObject go = _resources.LoadAsset<GameObject>(path) as GameObject;
             GameObject go1 = assetloader.LoadGameObjectAsync(path);
             Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
             if (go1 != null)
@@ -185,14 +174,13 @@ namespace Firecoals.Space
                 PlayAnimIntro();
                 Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
             }
-            _loadSoundbundle.PlayNameSound(tagSound);
-            objectName = GameObject.Find("UIMenu Root/Targets name/Label name");
-            objectInfo = GameObject.Find("UIMenu Root/Panel planet information/Text Information");
-            componentInfo = GameObject.Find("UIMenu Root/Panel object's component information/Text Information");
+            //_loadSoundbundle.PlayNameSound(tagSound);
+            objectName = GameObject.Find("UI Root/Name Panel/BangTen/Label");
+            objectInfo = GameObject.Find("UI Root/PanelInfor/Scroll View/Info");
+
             st = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
             st.ToLower();
             ChangeKeyLocalization();
         }
-
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Firecoals.Augmentation;
+using Firecoals.AssetBundles.Sound;
 
 namespace Firecoals.Color
 {
@@ -9,6 +10,8 @@ namespace Firecoals.Color
 	{
 		AssetHandler handler;
 		public GameObject renderCam;
+        private LoadSoundBundlesColor _loadSoundBundles;
+        public string tagSound;
 		protected override void Start()
 		{
 			base.Start();
@@ -23,29 +26,33 @@ namespace Firecoals.Color
 
 		protected override void OnTrackingFound()
 		{
-			//GameObject go = handler.CreateUnique("color/model/maybay", "Assets/ColorAR/Prefabs/MayBay/MayBay_Group.prefab");
-			//if (go)
-			//{
-			//	GameObject maybay = Instantiate(go, mTrackableBehaviour.transform);
-			//	CreateCloud(maybay.transform);
-			//	List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
-			//	maybay.GetComponentsInChildren<RC_Get_Texture>(true, lst);
-			//	foreach (var child in lst)
-			//	{
-			//		child.RenderCamera = renderCam.GetComponent<Camera>();
-			//	}
-			//}
-			base.OnTrackingFound();
+            GameObject go = handler.CreateUnique("color/model/maybay", "Assets/ColorAR/Prefabs/MayBay/MayBay_Group.prefab");
+            _loadSoundBundles = GameObject.FindObjectOfType<LoadSoundBundlesColor>();
+            if (go)
+            {
+                GameObject maybay = Instantiate(go, mTrackableBehaviour.transform);
+                CreateCloud(maybay.transform);
+                List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
+                maybay.GetComponentsInChildren<RC_Get_Texture>(true, lst);
+                foreach (var child in lst)
+                {
+                    child.RenderCamera = renderCam.GetComponent<Camera>();
+                }
+
+            }
+            _loadSoundBundles.PlaySound(tagSound);
+            base.OnTrackingFound();
 		}
 		protected override void OnTrackingLost()
 		{
-			//handler?.ClearAll();
-			//handler?.Content.ClearAll();
-			//foreach (Transform trans in mTrackableBehaviour.transform)
-			//{
-			//	Destroy(trans.gameObject);
-			//}
-			base.OnTrackingLost();
+            handler?.ClearAll();
+            handler?.Content.ClearAll();
+            foreach (Transform trans in mTrackableBehaviour.transform)
+            {
+                Destroy(trans.gameObject);
+            }
+            FirecoalsSoundManager.StopAll();
+            base.OnTrackingLost();
 		}
 
 		public void CreateCloud(Transform parent)

@@ -103,7 +103,6 @@ MonoBehaviour:
   StopDistance: 0
   IsWolf: 0
   IsEgale: 0
-  Item: {fileID: 688301005}
   ImageTarget: {fileID: 0}
   eatloop: 0
   foodpos: {x: 0, y: 200, z: 0}
@@ -167,6 +166,7 @@ GameObject:
   - component: {fileID: 2206635662054661179}
   - component: {fileID: 2088531739277418366}
   - component: {fileID: 908797042}
+  - component: {fileID: 4664092651969549000}
   m_Layer: 0
   m_Name: tiger
   m_TagString: Creature
@@ -245,6 +245,19 @@ MonoBehaviour:
   movingAnimName: Walk
   stopAnimName: Action1
   IdleAnimName: Action2
+--- !u!114 &4664092651969549000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908797038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297f8f643f3ff9a43830127ab7a12020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 0}
 --- !u!1 &1867123202
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,6 +377,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4525868722386823554}
+  - component: {fileID: 6491152553655658301}
   m_Layer: 0
   m_Name: Environment
   m_TagString: Untagged
@@ -389,6 +403,18 @@ Transform:
   m_Father: {fileID: 688301004}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6491152553655658301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264707025132211830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ce4ae978c4debc448312424f1e87a2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &405638424987343723
 GameObject:
   m_ObjectHideFlags: 0
@@ -771,6 +797,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 688301004}
+  - component: {fileID: 7994234329301362010}
   m_Layer: 0
   m_Name: Tiger
   m_TagString: Untagged
@@ -795,6 +822,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7994234329301362010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2468204091411524983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c73c1ab94e28d244827af556dca1ed2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoreStartedOverGui: 1
+  IgnoreIsOverGui: 0
+  RequiredFingerCount: 0
+  RequiredSelectable: {fileID: 0}
+  Camera: {fileID: 0}
+  WheelSensitivity: 0
+  Relative: 0
+  ScaleClamp: 0
+  ScaleMin: {x: 0, y: 0, z: 0}
+  ScaleMax: {x: 0, y: 0, z: 0}
 --- !u!1 &2531893952574455353
 GameObject:
   m_ObjectHideFlags: 0

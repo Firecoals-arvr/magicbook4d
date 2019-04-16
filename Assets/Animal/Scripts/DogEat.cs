@@ -15,13 +15,6 @@ public class DogEat : DefaultController
     public bool caught = false;
     public Transform targetitemtransform;
     bool change;
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (CanEat==false)
@@ -31,9 +24,6 @@ public class DogEat : DefaultController
             transform.localRotation = Quaternion.Euler(Vector3.zero);
             caught = false;
         }
-
-
-
     }
     void OnTriggerEnter(Collider coll)
     {

@@ -8,11 +8,14 @@ namespace Firecoals.Color
 	{
 		public GoalkeeperController goalkeeper;
 		public Collider footballer;
-
+        public new AudioClip audio;
+        AudioSource audioSource;
 		private void OnTriggerEnter(Collider other)
 		{
 			if (other.gameObject == footballer.gameObject)
 			{
+                audioSource = GetComponent<AudioSource>();
+                audioSource.PlayOneShot(audio);
 				goalkeeper.Catch();
 			}
 		}

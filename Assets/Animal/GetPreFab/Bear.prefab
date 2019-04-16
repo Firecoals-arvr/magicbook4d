@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 9018589202283702514}
   - component: {fileID: 866509441944243220}
   - component: {fileID: 1132607061}
+  - component: {fileID: 1115714341818320353}
   m_Layer: 0
   m_Name: bear
   m_TagString: Creature
@@ -157,16 +158,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7a81f0ac2f557c40a16371befa26ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingAnimationSpeed: 0.8
+  movingAnimationSpeed: 1
   MoveSpeed: 0.05
-  StopDistance: 0.05
+  StopDistance: 0.055
   HaveEat: 0
   TimeEat: 0
   isFrog: 0
   ScaleTemp: 0
   movingAnimName: Run
   stopAnimName: EatHoney
-  IdleAnimName: 
+  IdleAnimName: EatHoney
+--- !u!114 &1115714341818320353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132607059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297f8f643f3ff9a43830127ab7a12020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 0}
 --- !u!1 &388420797386753120
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,7 +344,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 677282859932958133}
   m_LocalRotation: {x: -0, y: -0.9992014, z: 0, w: -0.03995731}
-  m_LocalPosition: {x: -0, y: -64, z: 0}
+  m_LocalPosition: {x: -18.9, y: -64, z: -0.4}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 3528613965829926504}
@@ -936,6 +950,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 193280704}
+  - component: {fileID: 4879923723367510799}
   m_Layer: 0
   m_Name: Bear
   m_TagString: Untagged
@@ -950,7 +965,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3717267291224810924}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -960,6 +975,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4879923723367510799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3717267291224810924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c73c1ab94e28d244827af556dca1ed2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoreStartedOverGui: 1
+  IgnoreIsOverGui: 0
+  RequiredFingerCount: 0
+  RequiredSelectable: {fileID: 0}
+  Camera: {fileID: 0}
+  WheelSensitivity: 0
+  Relative: 0
+  ScaleClamp: 0
+  ScaleMin: {x: 0, y: 0, z: 0}
+  ScaleMax: {x: 0, y: 0, z: 0}
 --- !u!1 &3770010405970097362
 GameObject:
   m_ObjectHideFlags: 0
@@ -1361,6 +1398,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 871282770058719820}
+  - component: {fileID: 4886495575023174883}
   m_Layer: 0
   m_Name: Env
   m_TagString: Untagged
@@ -1385,6 +1423,18 @@ Transform:
   m_Father: {fileID: 193280704}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4886495575023174883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5419009622334316048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ce4ae978c4debc448312424f1e87a2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5909110063320479157
 GameObject:
   m_ObjectHideFlags: 0
@@ -1561,7 +1611,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6327797744520945362}
   m_LocalRotation: {x: -0.9999888, y: -0, z: -0, w: -0.0047417707}
-  m_LocalPosition: {x: -1.29, y: -23.38, z: 0.03}
+  m_LocalPosition: {x: -20.2, y: -23.38, z: -0.4}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_Children:
   - {fileID: 2994421906945049419}

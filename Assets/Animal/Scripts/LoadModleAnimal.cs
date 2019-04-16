@@ -7,6 +7,7 @@ using Firecoals.AssetBundles;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
 using Firecoals.AssetBundles.Sound;
+using Lean.Touch;
 using UnityEngine.SceneManagement;
 namespace Firecoals.Animal
 {
@@ -28,6 +29,7 @@ namespace Firecoals.Animal
         /// <summary>
         /// đường dẫn sound
         /// </summary>
+        ///
         public float TimeStartEffect;
         private AssetHandler assetHandler { get; set; }
         private AssetLoader assetLoader { get; set; }
@@ -37,74 +39,106 @@ namespace Firecoals.Animal
         public string tagInfo;
         public string tagSound;
         public string tagName;
+        private GameObject _textInfo;
+        private GameObject _textName;
+        public string st;
+        /// <summary>
+        /// key cho name object
+        /// </summary>
+        [Header("Name key")]
+        public string TextInfoName;
 
+        /// <summary>
+        /// key cho info object
+        /// </summary>
+        [Header("Information key")]
+        public string st2;
+
+        /// <summary>
+        /// Key để load name và info của models
+        /// </summary>
+        private string _nameModelTracking;
+
+        private UILabel InformationLabel;
         protected override void Start()
         {
-
+           
             base.Start();
             audio = gameObject.GetComponent<AudioSource>();
             assetHandler = new AssetHandler(mTrackableBehaviour.transform);
             _loadsoundbundles = GameObject.FindObjectOfType<LoadSoundbundles>();
+              PlayerPrefs.SetString("AnimalLanguage", "EN");
         }
-
         protected override void OnDestroy()
         {
             base.OnDestroy();
         }
 
-        IEnumerator starEffect(GameObject go)
+        IEnumerator StarEffect(GameObject go)
         {
             assetLoader = GameObject.FindObjectOfType<AssetLoader>();
-            Debug.Log("start Effect");
+            Debug.Log("mTrackableBehaviour"+ mTrackableBehaviour);
             RandomEffect.Instance.Onfound(TimeStartEffect);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.1f);
             GameObject.Instantiate(go, mTrackableBehaviour.transform);
             _loadsoundbundles.PlaySound(tagSound);
-            _loadsoundbundles.PlayName(tagName);
-
+            _loadsoundbundles.PlayName(tagName);  
         }
+       
         protected override void OnTrackingFound()
         {
-            base.OnTrackingFound();
-            GameObject go = assetHandler.CreateUnique(BuildName, path);
+            
+            GameObject  go  = assetHandler.CreateUnique(BuildName, path);
+            _nameModelTracking = mTrackableBehaviour.TrackableName;
             if (go != null)
             {
                 //if (ActiveManager.IsActiveOfflineOk("A"))
                 //{
-                //    StartCoroutine(starEffect(go));
+                //    LoadModelBundles(go);
                 //}
                 //else
-
                 //{
-                //    if (mTrackableBehaviour.name == "Lion" || mTrackableBehaviour.name == "Elephant" || mTrackableBehaviour.name == "Gorilla")
+                //    if (mTrackableBehaviour.TrackableName == "Lion" || mTrackableBehaviour.TrackableName == "Elephant" || mTrackableBehaviour.TrackableName == "Gorilla")
                 //    {
-                        StartCoroutine(starEffect(go));
+                //        LoadModelBundles(go);
                 //    }
                 //    else
                 //    {
-                //        //    PopupManager.PopUpDialog("", "", PopupManager.DialogType.YesNoDialog, () =>
-                //        //    {
-                //        //        SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
-                //        //    });
+                //        PopupManager.PopUpDialog("Thông báo", "Chọn đồng ý để mở khóa trang", PopupManager.DialogType.YesNoDialog, () =>
+                //        {
+                //            SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
+                //        });
                 //    }
                 //}
-             
+                LoadModelBundles(go);
+                base.OnTrackingFound();
             }
+        }
+
+        public void LoadModelBundles(GameObject go)
+        {
+            StartCoroutine(StarEffect(go));
+            _textName = GameObject.Find("UI Root/Name Panel/BangTen/Label");
+            _textInfo = GameObject.Find("UI Root/PanelInfor/Scroll View/Info");
+            if (st != null)
+            {
+                Debug.Log("S-------------------t" + st.ToString());
+              ChangeKeyAnimalLocalization();
+            }      
         }
         protected override void OnTrackingLost()
         {
-            base.OnTrackingLost();
             FirecoalsSoundManager.StopAll();
             RandomEffect.Instance.Onlost();
             assetHandler?.ClearAll();
             assetHandler?.Content.ClearAll();
+            //   Debug.Log("Destroy" + mTrackableBehaviour.name);
             foreach (Transform go in mTrackableBehaviour.transform)
             {
                 Destroy(go.gameObject);
             }
-
+            base.OnTrackingLost();
         }
-
         //private void RunAnimationIntro()
         //{
         //    if (this.gameObject.transform.GetChild(0).GetComponent<Animation>() != null)
@@ -116,6 +150,19 @@ namespace Firecoals.Animal
         //        Debug.LogWarning("This object hasn't intro animation.");
         //    }
         //}
-
+        private void ChangeKeyAnimalLocalization()
+        {
+            _textInfo.GetComponent<UILocalize>().key = TextInfoName;
+            _textInfo.GetComponent<UILabel>().text = Localization.Get(TextInfoName);
+            _textName.GetComponent<UILabel>().text = _nameModelTracking;
+        }
+        private void ClearKeyLocalization()
+        {
+            if (_textName != null && _textInfo != null)
+            {
+                _textName.GetComponent<UILocalize>().key = string.Empty;
+                _textInfo.GetComponent<UILocalize>().key = string.Empty;
+            }
+        }
     }
 }
