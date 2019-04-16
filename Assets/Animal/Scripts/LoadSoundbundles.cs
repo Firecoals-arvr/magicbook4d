@@ -10,7 +10,8 @@ namespace Firecoals.Animal
     public class LoadSoundbundles : MonoBehaviour
     {
         private ISoundManifestLoader _soundManifest;
-        private IBundle _bundleAudioClip;
+        private IBundle 
+            _bundleAudioClip;
         private AssetLoader _assetLoader;
         //private IntroScripts _intro;
         GameObject[] imageTarget;

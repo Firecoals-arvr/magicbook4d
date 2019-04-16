@@ -54,8 +54,8 @@ GameObject:
   - component: {fileID: 2261301384892823895}
   - component: {fileID: 7231668407461695878}
   - component: {fileID: 1249463998342731678}
-  - component: {fileID: 1189336050}
   - component: {fileID: 1189336054}
+  - component: {fileID: 6848798155197184129}
   m_Layer: 0
   m_Name: kangaroo
   m_TagString: Creature
@@ -110,28 +110,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.19, y: 0.18, z: 0.21}
   m_Center: {x: 0, y: 0.12, z: 0.09}
---- !u!114 &1189336050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1189336049}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7a81f0ac2f557c40a16371befa26ecf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movingAnimationSpeed: 1
-  MoveSpeed: 0.04
-  StopDistance: 0.05
-  HaveEat: 0
-  TimeEat: 0
-  isFrog: 0
-  ScaleTemp: 0
-  movingAnimName: Walk
-  stopAnimName: Action1
-  IdleAnimName: 
 --- !u!114 &1189336054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +132,19 @@ MonoBehaviour:
   movingAnimName: Walk
   stopAnimName: Action1
   idle: idle
+--- !u!114 &6848798155197184129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189336049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297f8f643f3ff9a43830127ab7a12020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 0}
 --- !u!1 &16886713684082431
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,6 +464,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4137518775294265082}
+  - component: {fileID: 9139105491245888102}
   m_Layer: 0
   m_Name: Env
   m_TagString: Untagged
@@ -499,6 +491,18 @@ Transform:
   m_Father: {fileID: 1189336048}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &9139105491245888102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547683336636899258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ce4ae978c4debc448312424f1e87a2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1695868526854938846
 GameObject:
   m_ObjectHideFlags: 0

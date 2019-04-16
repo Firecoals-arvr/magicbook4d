@@ -35,7 +35,7 @@ namespace Firecoals.Augmentation
         #region MONOBEHAVIOUR_METHOD
         private void Awake()
         {
-            //DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);
             switch (ThemeController.instance.Theme)
             {
                 case "Animal":

@@ -1,27 +1,43 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Firecoals.Animal;
 using UnityEngine;
+using  UnityEngine.SceneManagement;
 
-public class UIAnimalController : MonoBehaviour
+namespace Firecoals.Animal
 {
-    public GameObject SoundName,Language;
-    public void MoveNextCodePage()
-    { 
-            var x = TweenPosition.Begin(SoundName, .5f, new Vector3(1480f, 0f, 0f));
-            x.method = UITweener.Method.EaseInOut;
-            x.Play(true);
-            var y = TweenPosition.Begin(Language, .5f, new Vector3(0f, 0f, 0f));
-            y.method = UITweener.Method.EaseInOut;
-            y.Play(true);
-    }
-
-    public void MoveBackPhonePage()
+    public class UIAnimalController : MonoBehaviour
     {
-        var x = TweenPosition.Begin(SoundName, .5f, new Vector3(0f, 0f, 0f));
-        x.method = UITweener.Method.EaseInOut;
-        x.Play(true);
-        var y = TweenPosition.Begin(Language, .5f, new Vector3(-1480f, 0f));
-        y.method = UITweener.Method.EaseInOut;
-        y.Play(true);
+        //public GameObject SoundName, Language;
+        public GameObject SettingLanguage;
+        public bool CheckSetActive;
+
+        private void Start()
+        {
+            CheckSetActive = true;
+        }
+        public void SettingLanguageAnimal()
+        {
+             NGUITools.SetActive(SettingLanguage, true);
+        }
+        public void ExitAnimal()
+        {
+            SceneManager.LoadScene("Menu");
+        }
+
+        public void Environment()
+        {
+          
+            if (CheckSetActive)
+            {
+
+                NGUITools.SetActive(GameObject.FindGameObjectWithTag("Environment"), true);
+            }
+            else
+            {
+                NGUITools.SetActive(GameObject.FindGameObjectWithTag("Environment"), false);
+            }
+            CheckSetActive = !CheckSetActive;
+        }
     }
 }

@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1067015490}
   m_LocalRotation: {x: -0.17337231, y: 0.77949506, z: 0.003959355, w: -0.60192513}
-  m_LocalPosition: {x: -0.0050000004, y: 0, z: -0.2}
+  m_LocalPosition: {x: -0.0773, y: 0.0152, z: -0.1959}
   m_LocalScale: {x: 0.0020000008, y: 0.002, z: 0.0020000006}
   m_Children:
   - {fileID: 5866278680663666415}
@@ -748,6 +748,7 @@ GameObject:
   - component: {fileID: 1305922631845051419}
   - component: {fileID: 6659632693816558355}
   - component: {fileID: 8646669068722974196}
+  - component: {fileID: 929601842954276357}
   m_Layer: 0
   m_Name: Squirrel
   m_TagString: Creature
@@ -786,7 +787,7 @@ Animation:
   m_GameObject: {fileID: 3078216215020925351}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400002, guid: 853a30610161eb64db3384b15f6b39f1, type: 3}
+  m_Animation: {fileID: 7400000, guid: 853a30610161eb64db3384b15f6b39f1, type: 3}
   m_Animations:
   - {fileID: 7400000, guid: 853a30610161eb64db3384b15f6b39f1, type: 3}
   - {fileID: 7400002, guid: 853a30610161eb64db3384b15f6b39f1, type: 3}
@@ -828,7 +829,20 @@ MonoBehaviour:
   ScaleTemp: 0
   movingAnimName: Walk
   stopAnimName: Action1
-  IdleAnimName: 
+  IdleAnimName: Action1
+--- !u!114 &929601842954276357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3078216215020925351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297f8f643f3ff9a43830127ab7a12020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 0}
 --- !u!1 &3207577438868636595
 GameObject:
   m_ObjectHideFlags: 0
@@ -1313,7 +1327,7 @@ Transform:
   m_GameObject: {fileID: 4536587152979719881}
   m_LocalRotation: {x: -0.000000096857505, y: 0.000000059604616, z: -0.000000014901154,
     w: 1}
-  m_LocalPosition: {x: -0.00012922284, y: -0.00003320787, z: 0.000021390826}
+  m_LocalPosition: {x: 78.6, y: 7.7, z: -55.6}
   m_LocalScale: {x: 80.10617, y: 80.046074, z: 80.09152}
   m_Children: []
   m_Father: {fileID: 5265592650956604956}
@@ -1451,7 +1465,6 @@ MonoBehaviour:
   StopDistance: 0
   IsWolf: 0
   IsEgale: 0
-  Item: {fileID: 1067015490}
   ImageTarget: {fileID: 0}
   eatloop: 1
   foodpos: {x: 0, y: 0, z: 0}
@@ -2327,6 +2340,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 441495829939770328}
+  - component: {fileID: 4474241140194216062}
   m_Layer: 0
   m_Name: Env
   m_TagString: Untagged
@@ -2353,6 +2367,18 @@ Transform:
   m_Father: {fileID: 1067015489}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4474241140194216062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7959232824611433190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ce4ae978c4debc448312424f1e87a2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8054735684506187294
 GameObject:
   m_ObjectHideFlags: 0

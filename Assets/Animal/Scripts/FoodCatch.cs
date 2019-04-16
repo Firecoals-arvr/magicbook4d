@@ -6,7 +6,6 @@ namespace Firecoals.Animal
 {
     public class FoodCatch : MoveAndJump
     {
-        public GameObject Item;
 
         public GameObject ImageTarget;
 

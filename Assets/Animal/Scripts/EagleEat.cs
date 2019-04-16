@@ -6,7 +6,6 @@ namespace Firecoals.Animal
 {
     public class EagleEat : EagleMove
     {
-        public GameObject Item;
 
         public GameObject ImageTarget;
 
@@ -18,7 +17,7 @@ namespace Firecoals.Animal
         public Vector3 inpos;
         public Transform feet;
         public bool caught = false;
-        protected void Update()
+        protected new void Update()
         {
              Debug.Log("CanEat:" +CanEat);
 

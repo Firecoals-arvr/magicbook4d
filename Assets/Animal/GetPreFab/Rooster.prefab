@@ -217,6 +217,7 @@ Transform:
   m_Children:
   - {fileID: 4029433421094576}
   - {fileID: 4661705948782152}
+  - {fileID: 3619917151745250874}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1113,6 +1114,8 @@ GameObject:
   - component: {fileID: 4029433421094576}
   - component: {fileID: 111600551004695750}
   - component: {fileID: 65032850528385480}
+  - component: {fileID: 1075457233}
+  - component: {fileID: 3466820453911758682}
   m_Layer: 0
   m_Name: Rooster
   m_TagString: Creature
@@ -1172,6 +1175,41 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.06, y: 0.15452354, z: 0.14}
   m_Center: {x: 0.0034090572, y: 0.07251873, z: -0.020025313}
+--- !u!114 &1075457233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191215155053422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7a81f0ac2f557c40a16371befa26ecf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingAnimationSpeed: 1
+  MoveSpeed: 0.04
+  StopDistance: 0.01
+  HaveEat: 0
+  TimeEat: 0
+  isFrog: 0
+  ScaleTemp: 0
+  movingAnimName: Walk
+  stopAnimName: Action1
+  IdleAnimName: Action1
+--- !u!114 &3466820453911758682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191215155053422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297f8f643f3ff9a43830127ab7a12020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 0}
 --- !u!1 &1192038106970528
 GameObject:
   m_ObjectHideFlags: 0
@@ -5207,6 +5245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4661705948782152}
+  - component: {fileID: 1075457232}
   m_Layer: 0
   m_Name: Env
   m_TagString: Untagged
@@ -5235,6 +5274,18 @@ Transform:
   m_Father: {fileID: 4835145168213714}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1075457232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991985741899840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ce4ae978c4debc448312424f1e87a2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1993056702188888
 GameObject:
   m_ObjectHideFlags: 0
@@ -5266,3 +5317,46 @@ Transform:
   m_Father: {fileID: 4198135019095274}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &527665189833227234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3619917151745250874}
+  - component: {fileID: 8717773593376485938}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3619917151745250874
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 527665189833227234}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4835145168213714}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8717773593376485938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 527665189833227234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0209be58769c120478d9d734bbea5062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

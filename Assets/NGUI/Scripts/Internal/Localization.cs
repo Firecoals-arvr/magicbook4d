@@ -5,6 +5,7 @@
 
 using UnityEngine;
 using System.Collections.Generic;
+using Firecoals.MagicBook;
 using UnityEngine.SceneManagement;
 
 /// <summary>
@@ -153,13 +154,13 @@ static public class Localization
         {
             if (loadFunction == null)
             {
-                var asset = Resources.Load<TextAsset>(CheckScene());
+                var asset = Resources.Load<TextAsset>("Localization");
                 if (asset != null) bytes = asset.bytes;
 #if W2
 				else bytes = TNet.Tools.ReadFile("Localization.txt") ?? TNet.Tools.ReadFile("Localization.csv");
 #endif
             }
-            else bytes = loadFunction(CheckScene());
+            else bytes = loadFunction("Localization");
             localizationHasBeenSet = true;
         }
 
@@ -186,24 +187,25 @@ static public class Localization
         return false;
     }
 
-    private static string CheckScene()
-    {
-        if (ThemeController.instance.Theme == "Animal")
-        {
-            return "Animal";
-        }
+    //private static string CheckScene()
+    //{
+    //    if (ThemeController.instance.Theme == "Animal")
+    //    {
+    //        return "Animal";
+    //    }
 
-        if (ThemeController.instance.Theme == "Space")
-        {
-            return "Space";
-        }
+    //    if (ThemeController.instance.Theme == "Space")
+    //    {
+    //        return "Space";
+    //    }
 
-        if (ThemeController.instance.Theme == "Color")
-        {
-            return "Color";
-        }
-        return null;
-    }
+    //    if (ThemeController.instance.Theme == "Color")
+    //    {
+    //        return "Color";
+    //    }
+
+    //    return null;
+    //}
 
 
     /// <summary>

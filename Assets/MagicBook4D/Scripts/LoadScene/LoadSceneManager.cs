@@ -5,21 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class LoadSceneManager : MonoBehaviour
 {
-    //public static LoadSceneManager instance;
-    //public string currentScene { get; set; }
-    //public string previousScene { get; set; }
-    //private void Start()
-    //{
-    //    if (instance != this)
-    //    {
-    //        instance = this;
-    //    }
-    //    else
-    //    {
-    //        DontDestroyOnLoad(this.gameObject);
-    //    }
-    //}
-
     public void LoadSettingScene()
     {
         SceneManager.LoadScene("Settings");

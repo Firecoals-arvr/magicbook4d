@@ -34,7 +34,7 @@ namespace Firecoals.Augmentation
         /// </summary>
         /// <param name="bundleName">name of the bundle which was </param>
         /// <param name="bundlePath"></param>
-        public GameObject CreateUnique(string bundleName, string bundlePath)
+        public GameObject  CreateUnique(string bundleName, string bundlePath)
         {
             Debug.LogWarning("prepare Create unique game object");
             var assetBundlesLoader = GameObject.FindObjectOfType<AssetLoader>().assetBundlesLoader;
@@ -46,7 +46,7 @@ namespace Firecoals.Augmentation
                 if (!spawnedObject.ContainsKey(bundlePath))
                 {
                     //var clone = Instantiate(goTemplate, content.parent) as GameObject;
-
+                    Debug.LogWarning("<color=red>bundlePath</color>");
                     Content.Create(goTemplate, TargetContent.ContentType.Unique);
                     spawnedObject.Add(bundlePath, goTemplate);
                     Debug.LogWarning("<color=green>unique object created</color>");

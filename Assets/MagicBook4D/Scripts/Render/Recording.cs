@@ -88,6 +88,7 @@ namespace Firecoals.Render
             EditorUtility.OpenWithDefaultApp(path);
 #elif UNITY_IOS
             Handheld.PlayFullScreenMovie("file://" + path);
+            NatShare.SaveToCameraRoll(path, "MagicBook 4D", false);
 #elif UNITY_ANDROID
             Handheld.PlayFullScreenMovie(path);
             NatShare.SaveToCameraRoll(path, "MagicBook 4D", false);

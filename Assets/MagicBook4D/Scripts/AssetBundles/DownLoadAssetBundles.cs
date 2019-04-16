@@ -47,7 +47,7 @@ namespace Firecoals.AssetBundles
             _platformName = "Android";
 #endif
 #if UNITY_IOS
-        platformName = "IOS";
+        _platformName = "IOS";
 #endif
             var currentVersion = Application.version;
             var url = "https://s3-ap-southeast-1.amazonaws.com/magicbook4d/" + currentVersion + "/" + _platformName + "/" + bookName + "/bundles/";

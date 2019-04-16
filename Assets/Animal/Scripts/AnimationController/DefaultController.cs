@@ -9,13 +9,11 @@ namespace Firecoals.Animal
         public string movingAnimName;
         public string stopAnimName;
         public string IdleAnimName;
-
         protected void Update()
         {
             if (CanMove)
             {
                 ScaleAnimal = (float)this.transform.parent.transform.localScale.x;
-                Debug.Log("Stop:"+StopDistance);
                 SmoothMove(DestinationPosition, movingAnimName, stopAnimName, IdleAnimName);
             }
         }

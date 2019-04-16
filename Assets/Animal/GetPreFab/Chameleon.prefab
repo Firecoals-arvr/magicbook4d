@@ -554,6 +554,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5379002166945748509}
+  - component: {fileID: 1004311341024560574}
   m_Layer: 0
   m_Name: Env
   m_TagString: Untagged
@@ -577,6 +578,18 @@ Transform:
   m_Father: {fileID: 5379136233101283245}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1004311341024560574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5381944769824230857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ce4ae978c4debc448312424f1e87a2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5381945125972844817
 GameObject:
   m_ObjectHideFlags: 0
@@ -1609,7 +1622,6 @@ MonoBehaviour:
   StopDistance: 0
   IsWolf: 0
   IsEgale: 0
-  Item: {fileID: 5382617470457426713}
   ImageTarget: {fileID: 0}
   eatloop: 1
   foodpos: {x: 0, y: 40, z: 50}
@@ -2262,6 +2274,7 @@ GameObject:
   - component: {fileID: 5420799447696735835}
   - component: {fileID: 5359194652746685665}
   - component: {fileID: 5383585483371959346}
+  - component: {fileID: 923223276353663408}
   m_Layer: 0
   m_Name: chameleon
   m_TagString: Creature
@@ -2339,7 +2352,20 @@ MonoBehaviour:
   ScaleTemp: 0
   movingAnimName: Walk
   stopAnimName: Action1
-  IdleAnimName: 
+  IdleAnimName: Action1
+--- !u!114 &923223276353663408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5382765737404717763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 297f8f643f3ff9a43830127ab7a12020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 0}
 --- !u!1 &5382767810321082059
 GameObject:
   m_ObjectHideFlags: 0
