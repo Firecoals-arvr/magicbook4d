@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Firecoals.Augmentation;
+using Firecoals.AssetBundles.Sound;
 
 namespace Firecoals.Color
 {
@@ -9,9 +10,10 @@ namespace Firecoals.Color
 	{
 		AssetHandler handler;
 		public GameObject renderCam;
-
-		// Start is called before the first frame update
-		protected override void Start()
+        private LoadSoundBundlesColor _loadSoundBundles;
+        public string tagSound;
+        // Start is called before the first frame update
+        protected override void Start()
 		{
 			base.Start();
 			handler = new AssetHandler(mTrackableBehaviour.transform);
@@ -24,29 +26,32 @@ namespace Firecoals.Color
 
 		protected override void OnTrackingFound()
 		{
-			//GameObject go = handler.CreateUnique("color/model/thadieu", "Assets/ColorAR/Prefabs/ThaDieu/ThaDieu_Group.prefab");
-			//if (go)
-			//{
-			//	GameObject kiting = Instantiate(go, mTrackableBehaviour.transform);
-			//	List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
-			//	kiting.GetComponentsInChildren<RC_Get_Texture>(true, lst);
-			//	foreach (var child in lst)
-			//	{
-			//		child.RenderCamera = renderCam.GetComponent<Camera>();
-			//	}
-			//}
-			base.OnTrackingFound();
+            GameObject go = handler.CreateUnique("color/model/thadieu", "Assets/ColorAR/Prefabs/ThaDieu/ThaDieu_Group.prefab");
+            _loadSoundBundles = GameObject.FindObjectOfType<LoadSoundBundlesColor>();
+            if (go)
+            {
+                GameObject kiting = Instantiate(go, mTrackableBehaviour.transform);
+                List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
+                kiting.GetComponentsInChildren<RC_Get_Texture>(true, lst);
+                foreach (var child in lst)
+                {
+                    child.RenderCamera = renderCam.GetComponent<Camera>();
+                }
+            }
+            _loadSoundBundles.PlaySound(tagSound);
+            base.OnTrackingFound();
 		}
 
 		protected override void OnTrackingLost()
 		{
-			//handler?.ClearAll();
-			//handler?.Content.ClearAll();
-			//foreach (Transform trans in mTrackableBehaviour.transform)
-			//{
-			//	Destroy(trans.gameObject);
-			//}
-			base.OnTrackingLost();
+            handler?.ClearAll();
+            handler?.Content.ClearAll();
+            foreach (Transform trans in mTrackableBehaviour.transform)
+            {
+                Destroy(trans.gameObject);
+            }
+            FirecoalsSoundManager.StopAll();
+            base.OnTrackingLost();
 		}
 	}
 }

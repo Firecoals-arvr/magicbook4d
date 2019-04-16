@@ -1,4 +1,5 @@
-﻿using Firecoals.Augmentation;
+﻿using Firecoals.AssetBundles.Sound;
+using Firecoals.Augmentation;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,9 +10,10 @@ namespace Firecoals.Color
 	{
 		AssetHandler handler;
 		public GameObject renderCam;
-
-		// Start is called before the first frame update
-		protected override void Start()
+        private LoadSoundBundlesColor _loadSoundBundles;
+        public string tagSound;
+        // Start is called before the first frame update
+        protected override void Start()
 		{
 			base.Start();
 			handler = new AssetHandler(mTrackableBehaviour.transform);
@@ -24,28 +26,31 @@ namespace Firecoals.Color
 
 		protected override void OnTrackingFound()
 		{
-            //GameObject go = handler.CreateUnique("color/model/chantrau", "Assets/ColorAR/Prefabs/ChanTrau/ChanTrau_Group.prefab");
-            //if (go)
-            //{
-            //    GameObject group = Instantiate(go, mTrackableBehaviour.transform);
-            //    List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
-            //    group.GetComponentsInChildren<RC_Get_Texture>(true, lst);
-            //    foreach (var child in lst)
-            //    {
-            //        child.RenderCamera = renderCam.GetComponent<Camera>();
-            //    }
-            //}
+            GameObject go = handler.CreateUnique("color/model/chantrau", "Assets/ColorAR/Prefabs/ChanTrau/ChanTrau_Group.prefab");
+            _loadSoundBundles = GameObject.FindObjectOfType<LoadSoundBundlesColor>();
+            if (go)
+            {
+                GameObject group = Instantiate(go, mTrackableBehaviour.transform);
+                List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
+                group.GetComponentsInChildren<RC_Get_Texture>(true, lst);
+                foreach (var child in lst)
+                {
+                    child.RenderCamera = renderCam.GetComponent<Camera>();
+                }
+            }
+            _loadSoundBundles.PlaySound(tagSound);
             base.OnTrackingFound();
 		}
 
 		protected override void OnTrackingLost()
 		{
-            //handler?.ClearAll();
-            //handler?.Content.ClearAll();
-            //foreach (Transform trans in mTrackableBehaviour.transform)
-            //{
-            //    Destroy(trans.gameObject);
-            //}
+            handler?.ClearAll();
+            handler?.Content.ClearAll();
+            foreach (Transform trans in mTrackableBehaviour.transform)
+            {
+                Destroy(trans.gameObject);
+            }
+            FirecoalsSoundManager.StopAll();
             base.OnTrackingLost();
 		}
 	}

@@ -8,10 +8,13 @@ namespace Firecoals.Color
     {
         public GameObject boyMain;
         public GameObject girlMain;
+        public AudioClip audio;
+        AudioSource audioSource;
         public void MoveToCamp()
         {
             this.gameObject.GetComponent<Animator>().SetTrigger("MoveToCamp");
             boyMain.GetComponent<Animator>().SetTrigger("FootMove");
+            PlayMusic();
             StartCoroutine(EndMove("Talk"));
             StartCoroutine(EndAnim());
         }
@@ -31,6 +34,11 @@ namespace Firecoals.Color
             yield return new WaitForSeconds(14f);
             girlMain.GetComponent<Animator>().SetTrigger("Idle");
             boyMain.GetComponent<Animator>().SetTrigger("Idle");
+        }
+        public void PlayMusic()
+        {
+            audioSource = GetComponent<AudioSource>();
+            audioSource.PlayOneShot(audio);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Firecoals.Augmentation;
+using Firecoals.AssetBundles.Sound;
 
 namespace Firecoals.Color
 {
@@ -9,9 +10,10 @@ namespace Firecoals.Color
 	{
 		AssetHandler handler;
 		public GameObject renderCam;
-
-		// Start is called before the first frame update
-		protected override void Start()
+        private LoadSoundBundlesColor _loadSoundBundles;
+        public string tagSound;
+        // Start is called before the first frame update
+        protected override void Start()
 		{
 			base.Start();
 			handler = new AssetHandler(mTrackableBehaviour.transform);
@@ -25,7 +27,8 @@ namespace Firecoals.Color
 		protected override void OnTrackingFound()
 		{
 			GameObject go = handler.CreateUnique("color/model/thanhpho", "Assets/ColorAR/Prefabs/ThanhPho/ThanhPho_Group.prefab");
-			if (go)
+            _loadSoundBundles = GameObject.FindObjectOfType<LoadSoundBundlesColor>();
+            if (go)
 			{
 				GameObject city = Instantiate(go, mTrackableBehaviour.transform);
 				List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
@@ -35,7 +38,8 @@ namespace Firecoals.Color
 					child.RenderCamera = renderCam.GetComponent<Camera>();
 				}
 			}
-			base.OnTrackingFound();
+            _loadSoundBundles.PlaySound(tagSound);
+            base.OnTrackingFound();
 		}
 
 		protected override void OnTrackingLost()
@@ -46,7 +50,8 @@ namespace Firecoals.Color
 			{
 				Destroy(trans.gameObject);
 			}
-			base.OnTrackingLost();
+            FirecoalsSoundManager.StopAll();
+            base.OnTrackingLost();
 		}
 	}
 }

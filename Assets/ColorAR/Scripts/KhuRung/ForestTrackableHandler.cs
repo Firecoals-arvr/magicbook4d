@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Firecoals.Augmentation;
+using Firecoals.AssetBundles.Sound;
 
 namespace Firecoals.Color
 {
@@ -9,9 +10,10 @@ namespace Firecoals.Color
 	{
 		AssetHandler handler;
 		public GameObject renderCam;
-
-		// Start is called before the first frame update
-		protected override void Start()
+        private LoadSoundBundlesColor _loadSoundBundles;
+        public string tagSound;
+        // Start is called before the first frame update
+        protected override void Start()
 		{
 			base.Start();
 			handler = new AssetHandler(mTrackableBehaviour.transform);
@@ -25,6 +27,7 @@ namespace Firecoals.Color
 		protected override void OnTrackingFound()
 		{
             GameObject go = handler.CreateUnique("color/model/khurung", "Assets/ColorAR/Prefabs/KhuRung/KhuRung_Group.prefab");
+            _loadSoundBundles = GameObject.FindObjectOfType<LoadSoundBundlesColor>();
             if (go)
             {
                 GameObject forest = Instantiate(go, mTrackableBehaviour.transform);
@@ -35,7 +38,7 @@ namespace Firecoals.Color
                     child.RenderCamera = renderCam.GetComponent<Camera>();
                 }
             }
-
+            _loadSoundBundles.PlaySound(tagSound);
             base.OnTrackingFound();
 		}
 
@@ -47,6 +50,7 @@ namespace Firecoals.Color
             {
                 Destroy(trans.gameObject);
             }
+            FirecoalsSoundManager.StopAll();
             base.OnTrackingLost();
 		}
 	}

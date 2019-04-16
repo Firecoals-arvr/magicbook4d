@@ -7,11 +7,11 @@ namespace Firecoals.Color
 	public class MoveManAndCamel : MonoBehaviour
 	{
 		public GameObject manAndCamel;
-
-		public void TouchToCharacter()
+        public void TouchToCharacter()
 		{
 			manAndCamel.GetComponent<Animator>().SetTrigger("isWave");
-		}
-	}
+        }
+        
+    }
 }
 
