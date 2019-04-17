@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Firecoals.Augmentation;
 using Firecoals.AssetBundles.Sound;
+using UnityEngine.SceneManagement;
 
 namespace Firecoals.Color
 {
@@ -26,20 +27,30 @@ namespace Firecoals.Color
 
 		protected override void OnTrackingFound()
 		{
-            GameObject go = handler.CreateUnique("color/model/dabong", "Assets/ColorAR/Prefabs/DaBong/DaBong_Group.prefab");
-            _loadSoundBundles = GameObject.FindObjectOfType<LoadSoundBundlesColor>();
-            if (go)
+            if (ActiveManager.IsActiveOfflineOk("C"))
             {
-                GameObject match = Instantiate(go, mTrackableBehaviour.transform);
-                CreateCloud(match.transform);
-                List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
-                match.GetComponentsInChildren<RC_Get_Texture>(true, lst);
-                foreach (var child in lst)
+                GameObject go = handler.CreateUnique("color/model/dabong", "Assets/ColorAR/Prefabs/DaBong/DaBong_Group.prefab");
+                _loadSoundBundles = GameObject.FindObjectOfType<LoadSoundBundlesColor>();
+                if (go)
                 {
-                    child.RenderCamera = renderCam.GetComponent<Camera>();
+                    GameObject match = Instantiate(go, mTrackableBehaviour.transform);
+                    CreateCloud(match.transform);
+                    List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
+                    match.GetComponentsInChildren<RC_Get_Texture>(true, lst);
+                    foreach (var child in lst)
+                    {
+                        child.RenderCamera = renderCam.GetComponent<Camera>();
+                    }
                 }
+                _loadSoundBundles.PlaySound(tagSound);
             }
-            _loadSoundBundles.PlaySound(tagSound);
+            else
+            {
+                PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", default, default, default, PopupManager.DialogType.YesNoDialog, () =>
+                {
+                    SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
+                });
+            }
             base.OnTrackingFound();
 			GameObject ground = GameObject.FindGameObjectWithTag("Ground");
 			if (ground.activeSelf == true)

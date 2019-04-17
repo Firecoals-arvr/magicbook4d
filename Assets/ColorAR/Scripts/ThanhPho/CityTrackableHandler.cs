@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Firecoals.Augmentation;
 using Firecoals.AssetBundles.Sound;
+using UnityEngine.SceneManagement;
 
 namespace Firecoals.Color
 {
@@ -26,19 +27,28 @@ namespace Firecoals.Color
 
 		protected override void OnTrackingFound()
 		{
-			GameObject go = handler.CreateUnique("color/model/thanhpho", "Assets/ColorAR/Prefabs/ThanhPho/ThanhPho_Group.prefab");
-            _loadSoundBundles = GameObject.FindObjectOfType<LoadSoundBundlesColor>();
-            if (go)
-			{
-				GameObject city = Instantiate(go, mTrackableBehaviour.transform);
-				List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
-				city.GetComponentsInChildren<RC_Get_Texture>(true, lst);
-				foreach (var child in lst)
-				{
-					child.RenderCamera = renderCam.GetComponent<Camera>();
-				}
-			}
-            _loadSoundBundles.PlaySound(tagSound);
+            if (ActiveManager.IsActiveOfflineOk("C"))
+            {
+                GameObject go = handler.CreateUnique("color/model/thanhpho", "Assets/ColorAR/Prefabs/ThanhPho/ThanhPho_Group.prefab");
+                _loadSoundBundles = GameObject.FindObjectOfType<LoadSoundBundlesColor>();
+                if (go)
+                {
+                    GameObject city = Instantiate(go, mTrackableBehaviour.transform);
+                    List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
+                    city.GetComponentsInChildren<RC_Get_Texture>(true, lst);
+                    foreach (var child in lst)
+                    {
+                        child.RenderCamera = renderCam.GetComponent<Camera>();
+                    }
+                }
+                _loadSoundBundles.PlaySound(tagSound);
+            }else
+            {
+                PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", default, default, default, PopupManager.DialogType.YesNoDialog, () =>
+                {
+                    SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
+                });
+            }
             base.OnTrackingFound();
 		}
 

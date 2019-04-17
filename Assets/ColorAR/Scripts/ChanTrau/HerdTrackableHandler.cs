@@ -3,6 +3,7 @@ using Firecoals.Augmentation;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Firecoals.Color
 {
@@ -26,19 +27,29 @@ namespace Firecoals.Color
 
 		protected override void OnTrackingFound()
 		{
-            GameObject go = handler.CreateUnique("color/model/chantrau", "Assets/ColorAR/Prefabs/ChanTrau/ChanTrau_Group.prefab");
-            _loadSoundBundles = GameObject.FindObjectOfType<LoadSoundBundlesColor>();
-            if (go)
+            if (ActiveManager.IsActiveOfflineOk("C"))
             {
-                GameObject group = Instantiate(go, mTrackableBehaviour.transform);
-                List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
-                group.GetComponentsInChildren<RC_Get_Texture>(true, lst);
-                foreach (var child in lst)
+                GameObject go = handler.CreateUnique("color/model/chantrau", "Assets/ColorAR/Prefabs/ChanTrau/ChanTrau_Group.prefab");
+                _loadSoundBundles = GameObject.FindObjectOfType<LoadSoundBundlesColor>();
+                if (go)
                 {
-                    child.RenderCamera = renderCam.GetComponent<Camera>();
+                    GameObject group = Instantiate(go, mTrackableBehaviour.transform);
+                    List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
+                    group.GetComponentsInChildren<RC_Get_Texture>(true, lst);
+                    foreach (var child in lst)
+                    {
+                        child.RenderCamera = renderCam.GetComponent<Camera>();
+                    }
                 }
+                _loadSoundBundles.PlaySound(tagSound);
             }
-            _loadSoundBundles.PlaySound(tagSound);
+            else
+            {
+                PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", default, default, default, PopupManager.DialogType.YesNoDialog, () =>
+                {
+                    SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
+                });
+            }
             base.OnTrackingFound();
 		}
 

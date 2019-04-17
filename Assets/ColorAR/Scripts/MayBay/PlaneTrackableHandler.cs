@@ -6,6 +6,9 @@ using Firecoals.AssetBundles.Sound;
 
 namespace Firecoals.Color
 {
+    /// <summary>
+    /// class để sinh model khi found tranh
+    /// </summary>
 	public class PlaneTrackableHandler : DefaultTrackableEventHandler
 	{
 		AssetHandler handler;
@@ -38,7 +41,6 @@ namespace Firecoals.Color
                 {
                     child.RenderCamera = renderCam.GetComponent<Camera>();
                 }
-
             }
             _loadSoundBundles.PlaySound(tagSound);
             base.OnTrackingFound();
