@@ -22,11 +22,12 @@ namespace Firecoals.Space
             if (changAnim == true)
             {
                 anim.Play("Open");
-            }else
+            }
+            else
                 anim.Play("Close");
             changAnim = !changAnim;
         }
-        
+
 
     }
 }

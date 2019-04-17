@@ -9,22 +9,17 @@ namespace Firecoals.Space
     public class SelectLanguage : LanguageController
     {
         /// <summary>
-        /// chọn ngôn ngữ VN
+        /// bảng chọn ngôn ngữ
         /// </summary>
-        public GameObject _vnflag;
-
-        /// <summary>
-        /// chọn ngôn ngữ Anh
-        /// </summary>
-        public GameObject _engflag;
+        public GameObject languageBoard;
 
         [HideInInspector]
         public bool en, vn;
 
         private void Start()
         {
-            // Th test khi chưa qua scene setting 
-            // nếu chưa chọn ngôn ngữ bên scene setting thì set mặc đinhj tiếng việt
+            //Th test khi chưa qua scene setting
+            //nếu chưa chọn ngôn ngữ bên scene setting thì set mặc đinhj tiếng việt
             if (PlayerPrefs.GetString("SpaceLanguage") == null)
             {
                 OnOnPickLanguage("VI", "B");
@@ -48,7 +43,6 @@ namespace Firecoals.Space
                     en = true;
                 }
             }
-
         }
         // override lại class vs 2 Th 1 là tiếng việt thì set localization và lưu vào playprefs
         // th2 là tiếng anh cũng v
@@ -77,6 +71,7 @@ namespace Firecoals.Space
             vn = true;
             en = false;
             HideIconLanguage();
+            Debug.Log("Current language: " + Localization.language.ToString());
         }
 
         /// <summary>
@@ -88,19 +83,17 @@ namespace Firecoals.Space
             vn = false;
             en = true;
             HideIconLanguage();
+            Debug.Log("Current language: " + Localization.language.ToString());
+        }
+
+        public void ShowAllFlagsToSelect()
+        {
+            NGUITools.SetActive(languageBoard, true);
         }
 
         private void HideIconLanguage()
         {
-            UIPlayTween tw = _vnflag.AddComponent<UIPlayTween>();
-            tw.tweenTarget = _vnflag;
-            tw.includeChildren = true;
-            tw.playDirection = AnimationOrTween.Direction.Reverse;
-
-            UIPlayTween tw1 = _engflag.AddComponent<UIPlayTween>();
-            tw1.tweenTarget = _engflag;
-            tw1.includeChildren = true;
-            tw1.playDirection = AnimationOrTween.Direction.Reverse;
+            NGUITools.SetActive(languageBoard, false);
         }
     }
 }

@@ -11,11 +11,14 @@ namespace Firecoals.Space
         /// </summary>
         private GameObject[] inforBtn;
         [SerializeField] private GameObject panelPartInfo;
+        bool checkOpen;
+        Animator anim;
 
         // Start is called before the first frame update
         void Start()
         {
             //inforBtn = GameObject.FindGameObjectsWithTag("infor");
+            anim = panelPartInfo.GetComponent<Animator>();
         }
 
         // Update is called once per frame
@@ -40,21 +43,26 @@ namespace Firecoals.Space
 
         public void ShowSmallInfo()
         {
-            for (int i = 0; i < inforBtn.Length; i++)
+            if (checkOpen == false)
             {
-                UIPlayTween tw = inforBtn[i].AddComponent<UIPlayTween>();
-                tw.tweenTarget = panelPartInfo;
-                tw.includeChildren = true;
-                tw.trigger = AnimationOrTween.Trigger.OnClick;
-                if (panelPartInfo.transform.position == new Vector3(1069f, 194f, 0f))
-                {
-                    tw.playDirection = AnimationOrTween.Direction.Forward;
-                }
-                if (panelPartInfo.transform.position == new Vector3(2216f, 194f, 0f))
-                {
-                    tw.playDirection = AnimationOrTween.Direction.Reverse;
-                }
+                ShowObjectInfo();
             }
+            else
+            {
+                HideObjectInfo();
+            }
+        }
+
+        private void ShowObjectInfo()
+        {
+            checkOpen = true;
+            anim.SetBool("isOpen", true);
+        }
+
+        private void HideObjectInfo()
+        {
+            checkOpen = false;
+            anim.SetBool("isOpen", false);
         }
     }
 }
