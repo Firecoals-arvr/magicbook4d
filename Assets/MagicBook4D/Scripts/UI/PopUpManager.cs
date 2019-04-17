@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
 public class PopupManager : MonoBehaviour
@@ -99,6 +100,11 @@ public class PopupManager : MonoBehaviour
             if (this != _instance)
                 Destroy(gameObject);
         }
+    }
+
+    internal static void PopUpDialog(string v1, string v2, DialogType yesNoDialog, Func<object> p)
+    {
+        throw new NotImplementedException();
     }
 
     /// <summary>
