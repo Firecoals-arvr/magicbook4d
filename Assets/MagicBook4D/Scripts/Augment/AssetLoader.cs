@@ -35,7 +35,7 @@ namespace Firecoals.Augmentation
         #region MONOBEHAVIOUR_METHOD
         private void Awake()
         {
-            //DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);
             switch (ThemeController.instance.Theme)
             {
                 case "Animal":
@@ -114,6 +114,8 @@ namespace Firecoals.Augmentation
                     bundleNames = new[] { "color/model/camtrai",
                         "color/model/chantrau",
                         "color/model/cloud/maybay",
+                        "color/model/cloud/dabong",
+                        "color/model/cloud/camtrai",
                         "color/model/dabong",
                         "color/model/khurung",
                         "color/model/maybay",
@@ -121,8 +123,7 @@ namespace Firecoals.Augmentation
                         "color/model/tambien",
                         "color/model/thadieu",
                         "color/model/thanhpho",
-                        "color/model/trangtrai",
-                        "color/sounds/music",
+                        "color/model/trangtrai", 
                         "color/sounds/sounds"
                     };
                     break;

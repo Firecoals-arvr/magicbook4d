@@ -179,9 +179,14 @@ namespace Firecoals.Space
             //Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
             if (this.transform.childCount == 0)
             {
+
                 //var startTime = DateTime.Now;
-                Instantiate(go1, mTrackableBehaviour.transform);
-                PlayAnimIntro();
+                if (go1 != null)
+                {
+                    Instantiate(go1, mTrackableBehaviour.transform);
+                    PlayAnimIntro();
+                }
+
                 //Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
             }
             _loadSoundbundle.PlayNameSound(tagSound);

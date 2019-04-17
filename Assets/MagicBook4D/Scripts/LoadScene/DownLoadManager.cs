@@ -1,6 +1,7 @@
 ﻿using Firecoals.AssetBundles;
 using Firecoals.Augmentation;
 using Firecoals.MagicBook;
+using Firecoals.SceneTransition;
 using Loxodon.Framework.Bundles;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -27,7 +28,7 @@ public class DownLoadManager : MonoBehaviour
         }
         else if (Application.internetReachability == NetworkReachability.NotReachable && RequiredDownload())
         {
-            PopupManager.PopUpDialog("[[9C0002]Error[-]]", "Không có kết nối mạng, vui lòng thử lại",default,default,default, PopupManager.DialogType.YesNoDialog,
+            PopupManager.PopUpDialog("[[9C0002]Error[-]]", "Không có kết nối mạng, vui lòng thử lại","Ok","Thử lại","Menu", PopupManager.DialogType.YesNoDialog,
                 () =>
                 {
                     if (Application.internetReachability != NetworkReachability.NotReachable)
@@ -35,12 +36,12 @@ public class DownLoadManager : MonoBehaviour
                         Download();
                     }
 
-                    SceneManager.LoadScene("Menu");
-                }, () => SceneManager.LoadScene("Menu"));
+                    SceneLoader.LoadScene("Menu");
+                }, () => SceneLoader.LoadScene("Menu"));
         }
         else if (Application.internetReachability != NetworkReachability.NotReachable && !RequiredDownload() && NeedUpdate())
         {
-            PopupManager.PopUpDialog("", "Có bản cập nhật dữ liệu mới, bạn có muốn tải về không?",default,default,default, PopupManager.DialogType.YesNoDialog,
+            PopupManager.PopUpDialog("", "Có bản cập nhật dữ liệu mới, bạn có muốn tải về không?",default,"Đồng ý","Hủy bỏ", PopupManager.DialogType.YesNoDialog,
                 () =>
                 {
                     RetryDownload();
@@ -88,13 +89,13 @@ public class DownLoadManager : MonoBehaviour
     public void Download()
     {
 
-        PopupManager.PopUpDialog("Xin chào!", "Bạn cần tải dữ liệu để tiếp tục, bấm Đồng ý",default,default,default ,PopupManager.DialogType.YesNoDialog,
+        PopupManager.PopUpDialog("Xin chào!", "Bạn cần tải dữ liệu để tiếp tục, bấm Đồng ý",default,"Đồng ý","Hủy bỏ" ,PopupManager.DialogType.YesNoDialog,
         (() =>
         {
             _dlAssets.slider = loadingBar;
             NGUITools.SetActive(loadingBar.gameObject, true);
             StartCoroutine(_dlAssets.Download());
-        }), () => SceneManager.LoadScene("Menu"));
+        }), () => SceneLoader.LoadScene("Menu"));
     }
     /// <summary>
     /// If the download has been failed retry download

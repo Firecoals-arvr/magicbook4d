@@ -30,6 +30,7 @@ public class ActiveManager
     public static event Action OnHideActivationButton = delegate { };
     public static bool isShowActivationButton = false;
 
+    public static Dictionary<string, string> activeStatus;
     ///<summary>
     ///Setup something. call this before use.
     ///Project_Id: Animal = 1, Space = 2, Color = 3
@@ -83,6 +84,7 @@ public class ActiveManager
     //Check current user active on server or not
     public static IEnumerator CheckActiveOnServer(string playerid, string projectID)
     {
+        activeStatus = new Dictionary<string, string>();
         WWWForm form = new WWWForm();
         form.AddField(ProjectName, projectID);
         form.AddField(PlayerID, playerid);
@@ -97,6 +99,7 @@ public class ActiveManager
             string result = www.downloadHandler.text;
             Debug.LogWarning("result: " + result);
             Debug.LogWarning("Phone number " + playerid + " and Project " + projectID + " is " + result);
+            activeStatus.Add(projectID, result);
             if (result.Equals(ACTIVED))
             {
                 SaveActivatedStatus(projectID);
