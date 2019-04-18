@@ -43,18 +43,35 @@ public class LanguageUI : LanguageController
                 Localization.language = languageId;
                 //TODO Set icon for Animal Button
                 if (UIButton.current != null)
-                    animalButton.GetComponentInChildren<UISprite>().spriteName = UIButton.current.name;
-                if (UIButton.current != null)
+                {
                     PlayerPrefs.SetString("AnimalLanguage", UIButton.current.name);
+                    animalButton.GetComponentInChildren<UISprite>().spriteName = UIButton.current.name;
+                    Debug.Log("<color=blue>Set language Animal value: " + UIButton.current.name + "</color>");
+                }
+                else if(PlayerPrefs.HasKey("AnimalLanguage"))
+                {
+                    animalButton.GetComponentInChildren<UISprite>().spriteName = PlayerPrefs.GetString("AnimalLanguage");
+                }
+                    
+                    
                 break;
             case "B":
                 //TODO Set Language for Space
                 Localization.language = languageId;
                 //TODO Set icon for Space Button
                 if (UIButton.current != null)
+                {
                     spaceButton.GetComponentInChildren<UISprite>().spriteName = UIButton.current.name;
-                if (UIButton.current != null)
                     PlayerPrefs.SetString("SpaceLanguage", UIButton.current.name);
+                    Debug.Log("<color=blue>Set language Space value: "+ UIButton.current.name + "</color>");
+                }
+                else if (PlayerPrefs.HasKey("SpaceLanguage"))
+                {
+                    animalButton.GetComponentInChildren<UISprite>().spriteName = PlayerPrefs.GetString("SpaceLanguage");
+                }
+
+
+
                 break;
                 //TODO no needed set Language for Color
                 //case "C":

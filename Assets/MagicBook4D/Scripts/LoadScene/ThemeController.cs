@@ -10,7 +10,7 @@
 
         public string Theme { get; private set; }
         public static ThemeController instance;
-
+        
 
         private ThemeController(string themeName)
         {
@@ -36,6 +36,8 @@
             AddThemeEvent();
             //PlayerPrefs.DeleteAll();
             //Debug.LogWarning("Deleted all player preference key");
+            StartCoroutine(ActiveManager.AssetBundleVersion());
+
         }
 
         /// <summary>

@@ -154,7 +154,7 @@ namespace Firecoals.Animal
         {
             _textInfo.GetComponent<UILocalize>().key = TextInfoName;
             _textInfo.GetComponent<UILabel>().text = Localization.Get(TextInfoName);
-            _textName.GetComponent<UILabel>().text = _nameModelTracking;
+            _textName.GetComponent<UILabel>().text = st;
         }
         private void ClearKeyLocalization()
         {

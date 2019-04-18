@@ -7,6 +7,7 @@ using Firecoals.AssetBundles;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
 using Firecoals.AssetBundles.Sound;
+using Firecoals.SceneTransition;
 using UnityEngine.SceneManagement;
 using Vuforia;
 
@@ -75,6 +76,11 @@ namespace Firecoals.Space
         protected override void Start()
         {
             base.Start();
+            _assethandler = new AssetHandler(mTrackableBehaviour.transform);
+            ApplicationContext context = Context.GetApplicationContext();
+            this._resources = context.GetService<IResources>();
+            _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
+            assetloader = GameObject.FindObjectOfType<AssetLoader>();
         }
 
         protected override void OnDestroy()
@@ -84,8 +90,7 @@ namespace Firecoals.Space
 
         protected override void OnTrackingFound()
         {
-            _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
-            assetloader = GameObject.FindObjectOfType<AssetLoader>();
+
 
             inforBtn = GameObject.FindGameObjectsWithTag("infor");
 
@@ -107,9 +112,9 @@ namespace Firecoals.Space
                 //nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
                 else
                 {
-                    PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", default, default, default, PopupManager.DialogType.YesNoDialog, () =>
+                    PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", default, "Đồng ý", "Không", PopupManager.DialogType.YesNoDialog, () =>
                    {
-                       SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
+                       SceneLoader.LoadScene("Activate");
                    });
                 }
             }
@@ -172,9 +177,7 @@ namespace Firecoals.Space
         void CloneModels()
         {
             //var statTime = DateTime.Now;
-            _assethandler = new AssetHandler(mTrackableBehaviour.transform);
-            ApplicationContext context = Context.GetApplicationContext();
-            this._resources = context.GetService<IResources>();
+
             GameObject go1 = assetloader.LoadGameObjectAsync(path);
             //Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
             if (this.transform.childCount == 0)

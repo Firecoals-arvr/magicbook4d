@@ -31,6 +31,7 @@ public class ActiveManager
     public static bool isShowActivationButton = false;
 
     public static Dictionary<string, string> activeStatus;
+    public static string cloudBundleVersion;
     ///<summary>
     ///Setup something. call this before use.
     ///Project_Id: Animal = 1, Space = 2, Color = 3
@@ -97,9 +98,13 @@ public class ActiveManager
         else
         {
             string result = www.downloadHandler.text;
+            while (!www.isDone)
+            {
+                yield return null;
+            }
             Debug.LogWarning("result: " + result);
             Debug.LogWarning("Phone number " + playerid + " and Project " + projectID + " is " + result);
-            activeStatus.Add(projectID, result);
+            
             if (result.Equals(ACTIVED))
             {
                 SaveActivatedStatus(projectID);
@@ -109,6 +114,7 @@ public class ActiveManager
             {
                 OnPlayerServerNotActived();
             }
+            yield return new WaitForSecondsRealtime(3f);
         }
 
         yield return null;
@@ -137,6 +143,7 @@ public class ActiveManager
         form.AddField(PlayerID, playerid);
         form.AddField(License, license);
         UnityWebRequest www = UnityWebRequest.Post(_Url + ModuleRegister, form);
+        //https://firecoalslisenceserver.herokuapp.com/register
         yield return www.SendWebRequest();
         if (www.isNetworkError)
         {
@@ -182,6 +189,14 @@ public class ActiveManager
                 OnHideActivationButton();
             }
         }
+    }
+
+    public static IEnumerator AssetBundleVersion()
+    {
+        UnityWebRequest www = UnityWebRequest.Post("https://firecoalslisenceserver.herokuapp.com/getbundlename", "");
+        yield return www.SendWebRequest();
+        string result = www.downloadHandler.text;
+        cloudBundleVersion = result;
     }
 }
 

@@ -4,7 +4,9 @@ using Firecoals.MagicBook;
 using Firecoals.SceneTransition;
 using Loxodon.Framework.Bundles;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using Version = System.Version;
 
 public class DownLoadManager : MonoBehaviour
 {
@@ -118,6 +120,8 @@ public class DownLoadManager : MonoBehaviour
     {
         IBundleManifestLoader manifestLoader = new BundleManifestLoader();
         BundleManifest localManifest = manifestLoader.Load(BundleUtil.GetStorableDirectory() + BundleSetting.ManifestFilename);
+        var localVersion = new Version(localManifest.Version);
+        var cloudVersion = new Version();
         return localManifest.Version != Application.version;
     }
     

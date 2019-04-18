@@ -8,7 +8,7 @@ namespace Firecoals.UI
     /// </summary>
     public class LiveMenu : MonoBehaviour
     {
-        private bool _animalIsPlaying = false, _spaceIsPlaying, _colorIsPlaying;
+        private bool _animalIsPlaying = false, _spaceIsPlaying, _colorIsPlaying, _comingSoon;
 
         public UITexture backDrop;
         public AudioClip colorAudioClip, animalAudioClip, spaceAudioClip, backgroundClip;
@@ -53,16 +53,15 @@ namespace Firecoals.UI
                 _colorIsPlaying = false;
                 _spaceIsPlaying = true;
             }
-            if (transform.localPosition.x > 800f && _spaceIsPlaying == false)
+            if (transform.localPosition.x > 800f)
             {
                 //TODO ComingSoon
                 //Debug.Log("<color=pink>Space is playing</color>");
                 FirecoalsSoundManager.StopAllSounds();
-                FirecoalsSoundManager.PlaySound(spaceAudioClip, true);
-                backDrop.mainTexture = Resources.Load<Texture2D>("Bg_texture/menu_bg_space");
+                backDrop.mainTexture = Resources.Load<Texture2D>("Bg_texture/bg_all");
                 _animalIsPlaying = false;
                 _colorIsPlaying = false;
-                _spaceIsPlaying = true;
+                _spaceIsPlaying = false;
             }
         }
     }
