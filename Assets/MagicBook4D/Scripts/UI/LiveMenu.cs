@@ -26,7 +26,7 @@ namespace Firecoals.UI
                 FirecoalsSoundManager.StopAllSounds();
                 FirecoalsSoundManager.PlaySound(animalAudioClip, true);
                 
-                backDrop.mainTexture = Resources.Load<Texture2D>("Bg_texture/menu_bg_animal");
+                backDrop.mainTexture = Resources.Load<Texture2D>("Bg_texture/menu_ bg animal");
                 _animalIsPlaying = true;
                 _colorIsPlaying = false;
                 _spaceIsPlaying = false;
@@ -37,7 +37,7 @@ namespace Firecoals.UI
                 //Debug.Log("<color=yellow>Color is playing</color>");
                 FirecoalsSoundManager.StopAllSounds();
                 FirecoalsSoundManager.PlaySound(colorAudioClip, true);
-                backDrop.mainTexture = Resources.Load<Texture2D>("Bg_texture/menu_bg_color");
+                backDrop.mainTexture = Resources.Load<Texture2D>("Bg_texture/menu_bg color");
                 _animalIsPlaying = false;
                 _colorIsPlaying = true;
                 _spaceIsPlaying = false;
@@ -48,7 +48,7 @@ namespace Firecoals.UI
                 //Debug.Log("<color=pink>Space is playing</color>");
                 FirecoalsSoundManager.StopAllSounds();
                 FirecoalsSoundManager.PlaySound(spaceAudioClip,true);
-                backDrop.mainTexture = Resources.Load<Texture2D>("Bg_texture/menu_bg_space");
+                backDrop.mainTexture = Resources.Load<Texture2D>("Bg_texture/menu_bg space");
                 _animalIsPlaying = false;
                 _colorIsPlaying = false;
                 _spaceIsPlaying = true;

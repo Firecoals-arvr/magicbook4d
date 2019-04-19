@@ -10,10 +10,6 @@ namespace Firecoals.Space
     public class Rotatetouchcfull : MonoBehaviour
     {
         float rotSpeed = 3f;
-        void Start()
-        {
-
-        }
 
         void OnMouseDrag()
         {

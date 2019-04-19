@@ -100,7 +100,6 @@ GameObject:
   - component: {fileID: 616905095}
   - component: {fileID: 616905094}
   - component: {fileID: 1609244601}
-  - component: {fileID: 7706277122413687761}
   - component: {fileID: 1609244602}
   m_Layer: 8
   m_Name: Record Button
@@ -139,19 +138,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftAnchor:
     target: {fileID: 0}
-    relative: 0
-    absolute: -194
+    relative: 1
+    absolute: -191
   rightAnchor:
     target: {fileID: 0}
     relative: 1
-    absolute: 6
+    absolute: 9
   bottomAnchor:
     target: {fileID: 0}
-    relative: 0
+    relative: 0.5
     absolute: -100
   topAnchor:
     target: {fileID: 0}
-    relative: 1
+    relative: 0.5
     absolute: 100
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
@@ -212,10 +211,6 @@ MonoBehaviour:
     - obj: {fileID: 0}
       field: 
     oneShot: 0
-  - mTarget: {fileID: 7706277122413687761}
-    mMethodName: Snap
-    mParameters: []
-    oneShot: 0
 --- !u!114 &616905095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,22 +254,6 @@ MonoBehaviour:
   arCamera: {fileID: 0}
   recordMicrophone: 1
   microphoneSource: {fileID: 1609244602}
---- !u!114 &7706277122413687761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616905090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0acd051ea88bb1249b74a72511cbe3bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 0}
-  mainPanel: {fileID: 0}
-  reviewPanel: {fileID: 0}
-  unitySprite: {fileID: 0}
 --- !u!82 &1609244602
 AudioSource:
   m_ObjectHideFlags: 0

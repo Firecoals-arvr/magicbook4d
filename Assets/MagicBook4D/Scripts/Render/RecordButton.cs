@@ -35,13 +35,14 @@ namespace Firecoals.Render
                 Debug.LogWarning("delta time: " + deltaTime);
                 if (deltaTime < 1f)
                 {
-                    //TODO Take Screen shot
-                    Debug.LogWarning("Snap");
-                    //Capture.Instance.Snap();
-                    StartCoroutine(GameObject.FindObjectOfType<Capture>().TakePhoto());
+                    Reset();
                     recording.audioInput.Dispose();
                     recording.cameraInput.Dispose();
-                    Reset();
+                    //TODO Take Screen shot
+                    
+                    Capture.Instance.Snap();
+                    Debug.LogWarning("Snap");
+                    //StartCoroutine(GameObject.FindObjectOfType<Capture>().TakePhoto());
                 }
                 else
                 {

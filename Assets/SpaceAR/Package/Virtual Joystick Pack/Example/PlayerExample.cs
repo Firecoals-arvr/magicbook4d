@@ -10,14 +10,14 @@ namespace Firecoals.Space
         public float moveSpeed;
         public GameObject alienChild;
         public Joystick joystick;
-        Animation anima;
-        AudioSource Audio;
-        public AudioClip[] ListAudio;
+        [SerializeField] Animation anima;
+        //[SerializeField] AudioSource audioSrc;
+        //public AudioClip[] ListAudio;
 
         void Start()
         {
-            Audio = GetComponent<AudioSource>();
-            anima = alienChild.GetComponent<Animation>();
+            //audioSrc = GetComponent<AudioSource>();
+            //anima = alienChild.GetComponent<Animation>();
         }
 
         void Update()
@@ -54,7 +54,7 @@ namespace Firecoals.Space
         public void AlienTalk()
         {
             anima.Play("Talking");
-            Audio.Play();
+            //audioSrc.Play();
             alienChild.GetComponent<AudioSource>().Stop();
         }
 

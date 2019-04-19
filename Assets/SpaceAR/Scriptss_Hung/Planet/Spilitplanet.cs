@@ -13,11 +13,6 @@ namespace Firecoals.Space
             temp = true;
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
         public static bool temp;
         public void Spilit()
         {

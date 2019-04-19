@@ -12,8 +12,22 @@ namespace Firecoals.Space
         /// </summary>
         public GameObject panelinfo;
 
+        /// <summary>
+        /// object chứa các imagetargets
+        /// </summary>
+        public GameObject target;
+
+        /// <summary>
+        /// check bảng thông tin mở/đóng
+        /// </summary>
         bool checkOpen;
+
+        /// <summary>
+        /// animator của bảng thông tin
+        /// </summary>
         Animator anim;
+
+        List<Transform> go = new List<Transform>();
 
         private void Start()
         {
@@ -22,7 +36,7 @@ namespace Firecoals.Space
         }
 
         /// <summary>
-        /// click để show bảng thông tin 
+        /// show bảng thông tin 
         /// </summary>
         public void ShowObjectInfo()
         {
@@ -30,22 +44,52 @@ namespace Firecoals.Space
             anim.SetBool("isOpen", true);
         }
 
+        /// <summary>
+        /// hide bảng thông tin
+        /// </summary>
         public void HideObjectInfo()
         {
             checkOpen = false;
             anim.SetBool("isOpen", false);
         }
 
+        /// <summary>
+        /// chạy show/hide bảng thông tin
+        /// </summary>
         public void ClickToShow()
         {
-            if (checkOpen == false)
+            if (CheckTargetHasChildOrNot() == true)
             {
-                ShowObjectInfo();
+                if (checkOpen == false)
+                {
+                    ShowObjectInfo();
+                }
+                else
+                {
+                    HideObjectInfo();
+                }
             }
-            else
+        }
+
+        /// <summary>
+        /// check có hành tinh trên scene thì mới mở bảng thông tin,
+        /// không có thì không mở
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckTargetHasChildOrNot()
+        {
+            foreach (Transform a in target.transform)
             {
-                HideObjectInfo();
+                go.Add(a);
             }
+            foreach (Transform a in go)
+            {
+                if (a.childCount != 0)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

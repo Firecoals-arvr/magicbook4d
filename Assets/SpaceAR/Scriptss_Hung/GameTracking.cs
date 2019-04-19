@@ -32,12 +32,12 @@ namespace Firecoals.Space
         /// <summary>
         /// thông tin chung về object
         /// </summary>
-        private GameObject objectInfo;
+        [SerializeField] private GameObject objectInfo;
 
         /// <summary>
         /// tên của object
         /// </summary>
-        private GameObject objectName;
+        [SerializeField] private GameObject objectName;
 
         /// <summary>
         /// tên của target
@@ -154,8 +154,8 @@ namespace Firecoals.Space
                 Instantiate(go1, mTrackableBehaviour.transform);
                 //Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
             }
-            objectName = GameObject.Find("UI Root/Main Panel/BangTen/Label");
-            objectInfo = GameObject.Find("UI Root/PanelInfor/Scroll View/Info");
+            //objectName = GameObject.Find("UI Root/Main Panel/BangTen/Label");
+            //objectInfo = GameObject.Find("UI Root/PanelInfor/Scroll View/Info");
 
             st = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
             st.ToLower();

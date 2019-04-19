@@ -7,7 +7,6 @@ using Firecoals.AssetBundles;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
 using Firecoals.AssetBundles.Sound;
-using Firecoals.SceneTransition;
 using UnityEngine.SceneManagement;
 using Vuforia;
 
@@ -33,12 +32,12 @@ namespace Firecoals.Space
         /// <summary>
         /// thông tin chung về object
         /// </summary>
-        private GameObject objectInfo;
+        [SerializeField] private GameObject objectInfo;
 
         /// <summary>
         /// tên của object
         /// </summary>
-        private GameObject objectName;
+        [SerializeField] private GameObject objectName;
 
         /// <summary>
         /// tên của target
@@ -64,6 +63,7 @@ namespace Firecoals.Space
         public string tagSound;
         public string tagInfo;
         private LoadSoundbundles _loadSoundbundle;
+
         /// <summary>
         /// anim để chạy animation intro lúc tracking found models
         /// </summary>
@@ -75,12 +75,9 @@ namespace Firecoals.Space
 
         protected override void Start()
         {
-            base.Start();
-            _assethandler = new AssetHandler(mTrackableBehaviour.transform);
             ApplicationContext context = Context.GetApplicationContext();
             this._resources = context.GetService<IResources>();
-            _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
-            assetloader = GameObject.FindObjectOfType<AssetLoader>();
+            base.Start();
         }
 
         protected override void OnDestroy()
@@ -90,10 +87,9 @@ namespace Firecoals.Space
 
         protected override void OnTrackingFound()
         {
-
-
             inforBtn = GameObject.FindGameObjectsWithTag("infor");
-
+            _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
+            assetloader = GameObject.FindObjectOfType<AssetLoader>();
             //nếu đã purchase thì vào phần này
             if (ActiveManager.IsActiveOfflineOk("B"))
             {
@@ -112,9 +108,9 @@ namespace Firecoals.Space
                 //nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
                 else
                 {
-                    PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", default, "Đồng ý", "Không", PopupManager.DialogType.YesNoDialog, () =>
+                    PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", default, default, default, PopupManager.DialogType.YesNoDialog, () =>
                    {
-                       SceneLoader.LoadScene("Activate");
+                       SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
                    });
                 }
             }
@@ -176,25 +172,22 @@ namespace Firecoals.Space
 
         void CloneModels()
         {
-            //var statTime = DateTime.Now;
+            _assethandler = new AssetHandler(mTrackableBehaviour.transform);
 
+            var statTime = DateTime.Now;
             GameObject go1 = assetloader.LoadGameObjectAsync(path);
-            //Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
+
+            Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
             if (this.transform.childCount == 0)
             {
-
-                //var startTime = DateTime.Now;
-                if (go1 != null)
-                {
-                    Instantiate(go1, mTrackableBehaviour.transform);
-                    PlayAnimIntro();
-                }
-
-                //Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
+                var startTime = DateTime.Now;
+                Instantiate(go1, mTrackableBehaviour.transform);
+                PlayAnimIntro();
+                Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
             }
             _loadSoundbundle.PlayNameSound(tagSound);
-            objectName = GameObject.Find("UI Root/Main Panel/BangTen/Label");
-            objectInfo = GameObject.Find("UI Root/PanelInfor/Scroll View/Info");
+            //objectName = GameObject.Find("UI Root/Main Panel/BangTen/Label");
+            //objectInfo = GameObject.Find("UI Root/PanelInfor/Scroll View/Info");
 
             st = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
             st.ToLower();
@@ -216,7 +209,6 @@ namespace Firecoals.Space
                 }
             }
         }
-
 
         /// <summary>
         /// lấy thông tin thành phần con của hành tinh

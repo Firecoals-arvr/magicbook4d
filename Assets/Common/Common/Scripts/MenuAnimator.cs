@@ -89,8 +89,8 @@ public class MenuAnimator : MonoBehaviour
     public void Show()
     {
         mVisible = true;
-        if (mMenuOptions)
-            mMenuOptions.UpdateUI();
+        //if (mMenuOptions)
+            //mMenuOptions.UpdateUI();
     }
 
     public void Hide()

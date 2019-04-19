@@ -46,11 +46,11 @@ public class LanguageUI : LanguageController
                 {
                     PlayerPrefs.SetString("AnimalLanguage", UIButton.current.name);
                     animalButton.GetComponentInChildren<UISprite>().spriteName = UIButton.current.name;
-                    Debug.Log("<color=blue>Set language Animal value: " + UIButton.current.name + "</color>");
                 }
                 else if(PlayerPrefs.HasKey("AnimalLanguage"))
                 {
-                    animalButton.GetComponentInChildren<UISprite>().spriteName = PlayerPrefs.GetString("AnimalLanguage");
+
+                    animalButton.GetComponentInChildren<UISprite>().spriteName = languageId;
                 }
                     
                     
@@ -63,11 +63,11 @@ public class LanguageUI : LanguageController
                 {
                     spaceButton.GetComponentInChildren<UISprite>().spriteName = UIButton.current.name;
                     PlayerPrefs.SetString("SpaceLanguage", UIButton.current.name);
-                    Debug.Log("<color=blue>Set language Space value: "+ UIButton.current.name + "</color>");
                 }
                 else if (PlayerPrefs.HasKey("SpaceLanguage"))
                 {
-                    animalButton.GetComponentInChildren<UISprite>().spriteName = PlayerPrefs.GetString("SpaceLanguage");
+
+                    spaceButton.GetComponentInChildren<UISprite>().spriteName = languageId;
                 }
 
 

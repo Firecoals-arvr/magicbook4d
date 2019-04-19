@@ -4,16 +4,9 @@ using UnityEngine;
 
 public class SatelliteController : MonoBehaviour
 {
-    private Animation anim;
+    [SerializeField] Animation anim;
     private bool stt = false;
 
-    // Use this for initialization
-    void Start()
-    {
-        anim = GetComponent<Animation>();
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0))

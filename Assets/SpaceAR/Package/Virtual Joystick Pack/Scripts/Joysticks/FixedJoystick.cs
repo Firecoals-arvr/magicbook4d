@@ -9,12 +9,6 @@ public class FixedJoystick : Joystick
     Vector2 joystickPosition = Vector2.zero;
     private Camera cam = new Camera();
 
-    void Start()
-    {
-
-
-    }
-
     public override void OnDrag(PointerEventData eventData)
     {
         if (joystickPosition == Vector2.zero)

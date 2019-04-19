@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 57684115}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.9, y: -0.3, z: 1}
+  m_LocalPosition: {x: 0.9, y: -0.3, z: 0.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 459096594}
@@ -108,10 +108,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 459096594}
-  - component: {fileID: 459096598}
   - component: {fileID: 459096597}
   - component: {fileID: 459096596}
   - component: {fileID: 459096595}
+  - component: {fileID: 1128784260}
   m_Layer: 0
   m_Name: SpilitButton
   m_TagString: Untagged
@@ -133,64 +133,6 @@ Transform:
   m_Father: {fileID: 57684116}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &459096598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 459096593}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96b31ce75e592f45a1cff563a4869db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftAnchor:
-    target: {fileID: 0}
-    relative: 0
-    absolute: -302
-  rightAnchor:
-    target: {fileID: 0}
-    relative: 1
-    absolute: -156
-  bottomAnchor:
-    target: {fileID: 0}
-    relative: 0
-    absolute: 50
-  topAnchor:
-    target: {fileID: 0}
-    relative: 1
-    absolute: 199
-  updateAnchors: 1
-  mColor: {r: 1, g: 1, b: 1, a: 1}
-  mPivot: 4
-  mWidth: 146
-  mHeight: 149
-  mDepth: 0
-  mMat: {fileID: 0}
-  autoResizeBoxCollider: 1
-  hideIfOffScreen: 0
-  keepAspectRatio: 0
-  aspectRatio: 0.9798658
-  mType: 0
-  mFillDirection: 4
-  mFillAmount: 1
-  mInvert: 0
-  mFlip: 0
-  mApplyGradient: 0
-  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
-  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
-  centerType: 1
-  leftType: 1
-  rightType: 1
-  bottomType: 1
-  topType: 1
-  mSprite: {fileID: 21300000, guid: d674050eb63d4024fb0e4d2824d64c3b, type: 3}
-  mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
-  mBorder: {x: 0, y: 0, z: 0, w: 0}
-  mFixedAspect: 0
-  mPixelSize: 1
-  nextSprite: {fileID: 0}
 --- !u!114 &459096597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,7 +159,7 @@ MonoBehaviour:
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
   onClick:
-  - mTarget: {fileID: 0}
+  - mTarget: {fileID: 5241608644641417133}
     mMethodName: Spilit
     mParameters: []
     oneShot: 0
@@ -232,7 +174,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 146, y: 149, z: 0}
+  m_Size: {x: 146, y: 146, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &459096595
 MonoBehaviour:
@@ -250,6 +192,61 @@ MonoBehaviour:
   trigger: 0
   volume: 1
   pitch: 1
+--- !u!114 &1128784260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459096593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b3dc54f924693f41b5cbecb267e647a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftAnchor:
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
+  rightAnchor:
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
+  bottomAnchor:
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
+  topAnchor:
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
+  updateAnchors: 1
+  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mPivot: 4
+  mWidth: 146
+  mHeight: 146
+  mDepth: 0
+  mMat: {fileID: 0}
+  autoResizeBoxCollider: 1
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: 1
+  mType: 0
+  mFillDirection: 4
+  mFillAmount: 1
+  mInvert: 0
+  mFlip: 0
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  centerType: 1
+  leftType: 1
+  rightType: 1
+  bottomType: 1
+  topType: 1
+  mAtlas: {fileID: 11400000, guid: eacab99beca480c46926c3e8b4656ea5, type: 2}
+  mSpriteName: 06-sun-icon
+  mFillCenter: 1
 --- !u!1 &1023076069781104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1048,7 +1045,7 @@ MonoBehaviour:
   aspectRatio: 4
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 9a0c4154c228a09488d6c4229b583cb3, type: 2}
+  mFont: {fileID: 11400000, guid: 46e8a5f30d43ec7408573033d45647c9, type: 2}
   mText: "L\xF5i"
   mFontSize: 30
   mFontStyle: 0
@@ -1163,7 +1160,7 @@ MonoBehaviour:
   aspectRatio: 4
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 9a0c4154c228a09488d6c4229b583cb3, type: 2}
+  mFont: {fileID: 11400000, guid: 46e8a5f30d43ec7408573033d45647c9, type: 2}
   mText: "Hidro Kim Lo\u1EA1i"
   mFontSize: 30
   mFontStyle: 0
@@ -1400,7 +1397,7 @@ MonoBehaviour:
   aspectRatio: 4
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 9a0c4154c228a09488d6c4229b583cb3, type: 2}
+  mFont: {fileID: 11400000, guid: 46e8a5f30d43ec7408573033d45647c9, type: 2}
   mText: "Kh\xED Quy\u1EC3n"
   mFontSize: 30
   mFontStyle: 0
@@ -1771,7 +1768,7 @@ MonoBehaviour:
   aspectRatio: 4
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 9a0c4154c228a09488d6c4229b583cb3, type: 2}
+  mFont: {fileID: 11400000, guid: 46e8a5f30d43ec7408573033d45647c9, type: 2}
   mText: "Hidro Ph\u1EE7"
   mFontSize: 12
   mFontStyle: 0
@@ -2335,7 +2332,6 @@ GameObject:
   - component: {fileID: 114228889770007142}
   - component: {fileID: 82928709733957544}
   - component: {fileID: 5241608644641417133}
-  - component: {fileID: 5010311163943244114}
   m_Layer: 0
   m_Name: jupiter
   m_TagString: childplanet
@@ -2511,18 +2507,6 @@ AudioSource:
     m_PostInfinity: 2
     m_RotationOrder: 0
 --- !u!114 &5241608644641417133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1807471108089112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80a307c1a330d724da0f412fd517ec33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5010311163943244114
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
