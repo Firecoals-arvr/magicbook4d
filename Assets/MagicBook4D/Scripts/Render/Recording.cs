@@ -82,7 +82,7 @@ namespace Firecoals.Render
         {
             Debug.Log("Saved recording to: " + path);
             PopupManager.PopUpDialog("", "Saved recording to: " + path);
-            
+
             // Playback the video
 #if UNITY_EDITOR
             EditorUtility.OpenWithDefaultApp(path);
