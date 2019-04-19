@@ -16,7 +16,7 @@ namespace Firecoals.Render
         [Header("Microphone")] public bool recordMicrophone = true;
         public AudioSource microphoneSource;
 
-        private MP4Recorder videoRecorder;
+        public MP4Recorder videoRecorder;
         private IClock recordingClock;
         public CameraInput cameraInput { get; private set; }
         public AudioInput audioInput { get; private set; }

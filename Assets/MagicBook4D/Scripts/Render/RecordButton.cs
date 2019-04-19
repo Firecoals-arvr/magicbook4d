@@ -11,7 +11,7 @@ namespace Firecoals.Render
         private Recording recording;
         private void Start()
         {
-            recording = GameObject.FindObjectOfType<Recording>();
+            recording = GetComponent<Recording>();
             EventDelegate mEventDelegate = new EventDelegate(this, "OnPress");
             EventDelegate.Set(GetComponent<UIButton>().onClick, mEventDelegate);
             Reset();
@@ -38,6 +38,7 @@ namespace Firecoals.Render
                     Reset();
                     recording.audioInput.Dispose();
                     recording.cameraInput.Dispose();
+                    recording.videoRecorder.Dispose();
                     //TODO Take Screen shot
                     
                     Capture.Instance.Snap();
