@@ -1,9 +1,14 @@
-﻿using Firecoals.AssetBundles.Sound;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using Firecoals.Augmentation;
+using System;
+using Firecoals.AssetBundles;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
-using UnityEngine;
+using Firecoals.AssetBundles.Sound;
 using UnityEngine.SceneManagement;
+using Vuforia;
 
 namespace Firecoals.Space
 {
@@ -80,7 +85,7 @@ namespace Firecoals.Space
                 // nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
                 else
                 {
-                    PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", default, "Yes", "No", PopupManager.DialogType.YesNoDialog, () =>
+                    PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", "OK", "Yes", "No", PopupManager.DialogType.YesNoDialog, () =>
                        {
                            SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
                        });
@@ -136,21 +141,22 @@ namespace Firecoals.Space
             }
         }
 
-        private void CloneModels()
+        void CloneModels()
         {
             //var statTime = DateTime.Now;
             _assethandler = new AssetHandler(mTrackableBehaviour.transform);
             ApplicationContext context = Context.GetApplicationContext();
-            _resources = context.GetService<IResources>();
+            this._resources = context.GetService<IResources>();
             GameObject go1 = assetloader.LoadGameObjectAsync(path);
             //Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
-            if (transform.childCount == 0)
+            if (this.transform.childCount == 0)
             {
                 //var startTime = DateTime.Now;
                 Instantiate(go1, mTrackableBehaviour.transform);
                 //Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
             }
-
+            //objectName = GameObject.Find("UI Root/Main Panel/BangTen/Label");
+            //objectInfo = GameObject.Find("UI Root/PanelInfor/Scroll View/Info");
 
             st = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
             st.ToLower();

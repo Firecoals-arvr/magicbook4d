@@ -1,10 +1,14 @@
-﻿using Firecoals.AssetBundles.Sound;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using Firecoals.Augmentation;
+using System;
+using Firecoals.AssetBundles;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
-using System;
-using UnityEngine;
+using Firecoals.AssetBundles.Sound;
 using UnityEngine.SceneManagement;
+using Vuforia;
 
 namespace Firecoals.Space
 {
@@ -63,16 +67,16 @@ namespace Firecoals.Space
         /// <summary>
         /// anim để chạy animation intro lúc tracking found models
         /// </summary>
-        private Animator anim;
+        Animator anim;
 
         private GameObject[] inforBtn;
-        private bool checkOpen;
+        bool checkOpen;
 
 
         protected override void Start()
         {
             ApplicationContext context = Context.GetApplicationContext();
-            _resources = context.GetService<IResources>();
+            this._resources = context.GetService<IResources>();
             base.Start();
         }
 
@@ -105,7 +109,7 @@ namespace Firecoals.Space
                 //nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
                 else
                 {
-                    PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", default, "Yes", "No", PopupManager.DialogType.YesNoDialog, () =>
+                    PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", "OK", "Yes", "No", PopupManager.DialogType.YesNoDialog, () =>
                    {
                        SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
                    });
@@ -162,13 +166,16 @@ namespace Firecoals.Space
             }
         }
 
-        private void PlayAnimIntro()
+        void PlayAnimIntro()
         {
-            anim = gameObject.GetComponentInChildren<Animator>();
-            anim.SetTrigger("Intro");
+            if (this.gameObject.GetComponentInChildren<Animator>() != null)
+            {
+                anim = this.gameObject.GetComponentInChildren<Animator>();
+                anim.SetTrigger("Intro");
+            }
         }
 
-        private void CloneModels()
+        void CloneModels()
         {
             _assethandler = new AssetHandler(mTrackableBehaviour.transform);
 
@@ -176,7 +183,7 @@ namespace Firecoals.Space
             GameObject go1 = assetloader.LoadGameObjectAsync(path);
 
             Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
-            if (transform.childCount == 0)
+            if (this.transform.childCount == 0)
             {
                 var startTime = DateTime.Now;
                 Instantiate(go1, mTrackableBehaviour.transform);
@@ -184,8 +191,6 @@ namespace Firecoals.Space
                 Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
             }
             _loadSoundbundle.PlayNameSound(tagSound);
-            //objectName = GameObject.Find("UI Root/Main Panel/BangTen/Label");
-            //objectInfo = GameObject.Find("UI Root/PanelInfor/Scroll View/Info");
 
             st = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
             st.ToLower();
@@ -195,7 +200,7 @@ namespace Firecoals.Space
         /// <summary>
         /// xem thông tin thành phần của hành tinh
         /// </summary>
-        private void AutoTriggerInforButton()
+        void AutoTriggerInforButton()
         {
             for (int i = 0; i < inforBtn.Length; i++)
             {
