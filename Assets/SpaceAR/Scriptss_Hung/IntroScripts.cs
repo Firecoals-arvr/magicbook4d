@@ -90,6 +90,7 @@ namespace Firecoals.Space
             inforBtn = GameObject.FindGameObjectsWithTag("infor");
             _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
             assetloader = GameObject.FindObjectOfType<AssetLoader>();
+            NGUITools.SetActive(objectName, true);
             //nếu đã purchase thì vào phần này
             if (ActiveManager.IsActiveOfflineOk("B"))
             {
@@ -108,7 +109,7 @@ namespace Firecoals.Space
                 //nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
                 else
                 {
-                    PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", default, default, default, PopupManager.DialogType.YesNoDialog, () =>
+                    PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", "OK", "Yes", "No", PopupManager.DialogType.YesNoDialog, () =>
                    {
                        SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
                    });
@@ -126,6 +127,7 @@ namespace Firecoals.Space
             {
                 Destroy(go.gameObject);
             }
+            NGUITools.SetActive(objectName, false);
 
             ClearKeyLocalization();
             FirecoalsSoundManager.StopAll();
@@ -139,10 +141,10 @@ namespace Firecoals.Space
         {
             if (st1.Contains(st) && st2.Contains(st))
             {
-                objectName.GetComponent<UILocalize>().key = st1;
+                objectName.GetComponentInChildren<UILocalize>().key = st1;
                 objectInfo.GetComponent<UILocalize>().key = st2;
 
-                objectName.GetComponent<UILabel>().text = Localization.Get(st1);
+                objectName.GetComponentInChildren<UILabel>().text = Localization.Get(st1);
                 objectInfo.GetComponent<UILabel>().text = Localization.Get(st2);
 
                 //ShowComponentInfor();
@@ -156,18 +158,21 @@ namespace Firecoals.Space
         {
             if (objectInfo != null && objectName != null)
             {
-                objectName.GetComponent<UILocalize>().key = string.Empty;
+                objectName.GetComponentInChildren<UILocalize>().key = string.Empty;
                 objectInfo.GetComponent<UILocalize>().key = string.Empty;
 
-                objectName.GetComponent<UILabel>().text = string.Empty;
+                objectName.GetComponentInChildren<UILabel>().text = string.Empty;
                 objectInfo.GetComponent<UILabel>().text = string.Empty;
             }
         }
 
         void PlayAnimIntro()
         {
-            anim = this.gameObject.GetComponentInChildren<Animator>();
-            anim.SetTrigger("Intro");
+            if (this.gameObject.GetComponentInChildren<Animator>() != null)
+            {
+                anim = this.gameObject.GetComponentInChildren<Animator>();
+                anim.SetTrigger("Intro");
+            }
         }
 
         void CloneModels()
@@ -186,8 +191,6 @@ namespace Firecoals.Space
                 Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
             }
             _loadSoundbundle.PlayNameSound(tagSound);
-            //objectName = GameObject.Find("UI Root/Main Panel/BangTen/Label");
-            //objectInfo = GameObject.Find("UI Root/PanelInfor/Scroll View/Info");
 
             st = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
             st.ToLower();

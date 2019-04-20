@@ -30,12 +30,12 @@ public static class OpenSourceInitializer
         var trackablePlaceholders = Object.FindObjectsOfType<DefaultTrackableBehaviourPlaceholder>().ToList();
         var initErrorsPlaceholders = Object.FindObjectsOfType<DefaultInitializationErrorHandlerPlaceHolder>().ToList();
         var modelRecoEventPlaceholders = Object.FindObjectsOfType<DefaultModelRecoEventHandlerPlaceHolder>().ToList();
-        
+
         trackablePlaceholders.ForEach(ReplaceTrackablePlaceHolder);
         initErrorsPlaceholders.ForEach(ReplaceInitErrorPlaceHolder);
         modelRecoEventPlaceholders.ForEach(ReplaceModelRecoEventPlaceHolder);
     }
-    
+
     static void ReplaceTrackablePlaceHolder(DefaultTrackableBehaviourPlaceholder placeHolder)
     {
         var go = placeHolder.gameObject;
@@ -72,9 +72,11 @@ public static class OpenSourceInitializer
             go.AddComponent<DefaultInitializationErrorHandler>();
         }
 
-        public void AddDefaultModelRecoEventHandler(GameObject modelReco)
+        public void AddDefaultModelRecoEventHandler(GameObject modelReco, ModelTargetBehaviour modelTargetTemplate)
         {
-            modelReco.AddComponent<DefaultModelRecoEventHandler>();
+            var mreh = modelReco.AddComponent<DefaultModelRecoEventHandler>();
+            mreh.ShowBoundingBox = true;
+            mreh.ModelTargetTemplate = modelTargetTemplate;
         }
     }
 }
