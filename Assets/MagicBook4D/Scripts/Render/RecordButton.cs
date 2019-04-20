@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.IO;
+using System.Linq;
 using UnityEngine;
 
 namespace Firecoals.Render
@@ -9,6 +12,7 @@ namespace Firecoals.Render
         public UISprite cowntdown;
         private bool cownting;
         private Recording recording;
+        public static bool toBeCreatedMP4;
         private void Start()
         {
             recording = GetComponent<Recording>();
@@ -35,19 +39,20 @@ namespace Firecoals.Render
                 Debug.LogWarning("delta time: " + deltaTime);
                 if (deltaTime < 1f)
                 {
+                    toBeCreatedMP4 = false;
                     Reset();
+                    Capture.Instance.Snap();
                     recording.audioInput.Dispose();
                     recording.cameraInput.Dispose();
-                    recording.videoRecorder.Dispose();
+                    //recording.videoRecorder.Dispose();
                     //TODO Take Screen shot
-                    
-                    Capture.Instance.Snap();
+                    DeleteAllRedudantMp4File();
                     Debug.LogWarning("Snap");
                     //StartCoroutine(GameObject.FindObjectOfType<Capture>().TakePhoto());
                 }
                 else
                 {
-
+                    toBeCreatedMP4 = true;
                     Reset();
                     cownting = false;
                     recording.StopRecording();
@@ -61,6 +66,48 @@ namespace Firecoals.Render
 
         }
 
+        private void DeleteAllRedudantMp4File()
+        {
+            string path = Application.persistentDataPath;
+
+            switch (Application.platform)
+            {
+                case RuntimePlatform.WindowsEditor:
+                    path = Directory.GetCurrentDirectory();
+                    goto case RuntimePlatform.WindowsPlayer;
+                case RuntimePlatform.WindowsPlayer:
+                case RuntimePlatform.IPhonePlayer:
+                    {
+                        var di = new DirectoryInfo(path);
+                        var files = di.GetFiles("*.mp4")
+                            .Where(p => p.Extension == ".mp4").ToArray();
+                        foreach (FileInfo file in files)
+                            try
+                            {
+                                file.Attributes = FileAttributes.Normal;
+                                File.Delete(file.FullName);
+                                Debug.Log("<color>deleted " + file.FullName + "</color>");
+                            }
+                            catch(Exception ex) { Debug.LogError(ex.Message); }
+                        break;
+                    }
+                case RuntimePlatform.Android:
+                    {
+                        var di = new DirectoryInfo(path);
+                        var files = di.GetFiles("*.mp4")
+                            .Where(p => p.Extension == ".mp4").ToArray();
+                        foreach (FileInfo file in files)
+                            try
+                            {
+                                file.Attributes = FileAttributes.Normal;
+                                File.Delete(file.FullName);
+                                Debug.Log("<color>deleted " + file.FullName + "</color>");
+                            }
+                            catch (Exception ex) { Debug.LogError(ex.Message); }
+                        break;
+                    }
+            }
+        }
         private IEnumerator CowntDown()
         {
             cownting = true;

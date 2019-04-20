@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -33,9 +34,8 @@ namespace Firecoals.Augmentation
         /// <param name="original">GameObject to be spawn</param>
         /// <param name="parent"></param>
         /// <param name="delayTimeInMillisecond">delay time</param>
-        public void InstantiateAsync(GameObject original, Transform parent, int delayTimeInMillisecond)
+        public static void InstantiateAsync(GameObject original, Transform parent, int delayTimeInMillisecond)
         {
-
             Task.Run(async () =>
             {
                 // Example of long running code.
@@ -53,7 +53,7 @@ namespace Firecoals.Augmentation
         /// </summary>
         /// <param name="original">GameObject to be spawn</param>
         /// <param name="delayTimeInMillisecond">delay time</param>
-        public void InstantiateAsync(GameObject original, int delayTimeInMillisecond)
+        public static void InstantiateAsync(GameObject original, int delayTimeInMillisecond)
         {
 
             Task.Run(async () =>
@@ -74,7 +74,7 @@ namespace Firecoals.Augmentation
         /// <param name="parent"></param>
         /// <param name="instantiateInWorldSpace"></param>
         /// <param name="delayTimeInMillisecond"></param>
-        public void InstantiateAsync(GameObject original, Transform parent, bool instantiateInWorldSpace, int delayTimeInMillisecond)
+        public static void InstantiateAsync(GameObject original, Transform parent, bool instantiateInWorldSpace, int delayTimeInMillisecond)
         {
 
             Task.Run(async () =>
@@ -95,7 +95,7 @@ namespace Firecoals.Augmentation
         /// <param name="position"></param>
         /// <param name="quaternion"></param>
         /// <param name="delayTimeInMillisecond"></param>
-        public void InstantiateAsync(GameObject original, Vector3 position, Quaternion quaternion, int delayTimeInMillisecond)
+        public static void InstantiateAsync(GameObject original, Vector3 position, Quaternion quaternion, int delayTimeInMillisecond)
         {
 
             Task.Run(async () =>
@@ -117,7 +117,7 @@ namespace Firecoals.Augmentation
         /// <param name="quaternion"></param>
         /// <param name="parent"></param>
         /// <param name="delayTimeInMillisecond"></param>
-        public void InstantiateAsync(GameObject original, Vector3 position, Quaternion quaternion, Transform parent, int delayTimeInMillisecond)
+        public static void InstantiateAsync(GameObject original, Vector3 position, Quaternion quaternion, Transform parent, int delayTimeInMillisecond)
         {
 
             Task.Run(async () =>
@@ -141,6 +141,16 @@ namespace Firecoals.Augmentation
         {
             yield return new WaitForSeconds(second);
             Destroy(clone);
+        }
+        public static void Asynchronous( Action callback,int delayTimeInMillisecond)
+        {
+            Task.Run(async () =>
+            {
+                // Example of long running code.
+                await Task.Delay(delayTimeInMillisecond);
+                Dispatcher.Instance.Invoke(() => { callback(); });
+            });
+
         }
     }
 

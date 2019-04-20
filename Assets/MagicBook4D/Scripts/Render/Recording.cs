@@ -16,7 +16,7 @@ namespace Firecoals.Render
         [Header("Microphone")] public bool recordMicrophone = true;
         public AudioSource microphoneSource;
 
-        public MP4Recorder videoRecorder;
+        private MP4Recorder videoRecorder;
         private IClock recordingClock;
         public CameraInput cameraInput { get; private set; }
         public AudioInput audioInput { get; private set; }
@@ -25,6 +25,7 @@ namespace Firecoals.Render
         {
             // Start recording
             recordingClock = new RealtimeClock();
+            
             videoRecorder = new MP4Recorder(
                 videoWidth,
                 videoHeight,
@@ -66,6 +67,7 @@ namespace Firecoals.Render
             }
 
             cameraInput.Dispose();
+            
             // Stop recording
             videoRecorder.Dispose();
         }
@@ -81,8 +83,8 @@ namespace Firecoals.Render
         private void OnReplay(string path)
         {
             Debug.Log("Saved recording to: " + path);
-            PopupManager.PopUpDialog("", "Saved recording to: " + path);
-
+            //PopupManager.PopUpDialog("", "Saved recording to: " + path);
+            
             // Playback the video
 #if UNITY_EDITOR
             EditorUtility.OpenWithDefaultApp(path);

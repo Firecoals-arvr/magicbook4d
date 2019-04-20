@@ -1,6 +1,7 @@
 ﻿using NatShareU;
 using System;
 using System.Collections;
+using System.IO;
 using UnityEngine;
 
 namespace Firecoals.Render
@@ -45,6 +46,7 @@ namespace Firecoals.Render
 
             NGUITools.SetActive(reviewPanel, true);
             NGUITools.SetActive(mainPanel, false);
+            PopupManager.Instance.HideAll();
             yield return new WaitForEndOfFrame();
             _screenShot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
             _screenShot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
@@ -74,6 +76,16 @@ namespace Firecoals.Render
             unitySprite.gameObject.transform.localScale = Vector3.zero;
             NGUITools.SetActive(reviewPanel, false);
             NGUITools.SetActive(mainPanel, true);
+
+#if UNITY_EDITOR
+            // Encode texture into PNG
+            byte[] bytes = _screenShot.EncodeToPNG();
+            UnityEngine.Object.Destroy(_screenShot);
+
+            // For testing purposes, also write to a file in the project folder
+             File.WriteAllBytes(Application.dataPath + "/../"+DateTime.Now.Second+ DateTime.Now.Second +"SavedScreen.png", bytes);
+             return;
+#endif
             if (NativeGallery.CheckPermission() == NativeGallery.Permission.Granted)
             {
                 NativeGallery.SaveImageToGallery(_screenShot, "MagicBook 4D", Guid.NewGuid() + ".png",

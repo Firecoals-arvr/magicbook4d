@@ -90,7 +90,6 @@ public class DownLoadManager : MonoBehaviour
     /// </summary>
     public void Download()
     {
-
         PopupManager.PopUpDialog("Xin chào!", "Bạn cần tải dữ liệu để tiếp tục, bấm Đồng ý",default,"Đồng ý","Hủy bỏ" ,PopupManager.DialogType.YesNoDialog,
         (() =>
         {
@@ -110,6 +109,7 @@ public class DownLoadManager : MonoBehaviour
         //Downloading
         _dlAssets.slider = loadingBar;
         _dlAssets.slider.value = 0;
+        NGUITools.SetActive(loadingBar.gameObject, true);
         StartCoroutine(_dlAssets.Download());
     }
 
@@ -120,9 +120,14 @@ public class DownLoadManager : MonoBehaviour
     {
         IBundleManifestLoader manifestLoader = new BundleManifestLoader();
         BundleManifest localManifest = manifestLoader.Load(BundleUtil.GetStorableDirectory() + BundleSetting.ManifestFilename);
-        var localVersion = new Version(localManifest.Version);
-        var cloudVersion = new Version();
-        return localManifest.Version != Application.version;
+        if (!ActiveManager.cloudBundleVersion.IsNullOrEmpty())
+        {
+            var localVersion = new Version(localManifest.Version);
+            var cloudVersion = new Version(ActiveManager.cloudBundleVersion);
+            var result = cloudVersion.CompareTo(localVersion);
+            return result > 0;
+        }
+        return false;
     }
     
     /// <summary>
