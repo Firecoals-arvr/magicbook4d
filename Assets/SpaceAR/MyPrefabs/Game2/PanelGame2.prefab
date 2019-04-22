@@ -62,19 +62,19 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 40
-  mHeight: 46
-  mDepth: 3
+  mWidth: 100
+  mHeight: 100
+  mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 0.8695652
+  aspectRatio: 1
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 46e8a5f30d43ec7408573033d45647c9, type: 2}
-  mText: 10
-  mFontSize: 30
+  mFont: {fileID: 0}
+  mText: 
+  mFontSize: 16
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -84,7 +84,7 @@ MonoBehaviour:
   mSymbols: 1
   mEffectDistance: {x: 1, y: 1}
   mOverflow: 0
-  mApplyGradient: 1
+  mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
   mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   mSpacingX: 0
@@ -118,7 +118,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1192090683016636586
 Transform:
   m_ObjectHideFlags: 0
@@ -179,13 +179,13 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3004
+  startingRenderQueue: 3000
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
   mClipSoftness: {x: 4, y: 4}
-  mDepth: 4
+  mDepth: 0
   mSortingOrder: 0
   mSortingLayerName: 
   mClipOffset: {x: 0, y: 0}
@@ -202,18 +202,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15fdb011aae36164e8eae5bb73be39ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelTotal: {fileID: 1192090683040803301}
-  panelAnswer: {fileID: 1192090683027573394}
-  bt:
-  - {fileID: 1192090683286678727}
-  - {fileID: 1192090684753857237}
-  - {fileID: 1192090684539207682}
-  - {fileID: 1192090683355381839}
-  anim: {fileID: 1708687860}
-  score: {fileID: 1192090683145657005}
-  timeText: {fileID: 1192090684460323022}
-  scoretext: {fileID: 1192090684670058921}
-  playBT: {fileID: 1192090683297106026}
+  panelTotal: {fileID: 0}
+  panelAnswer: {fileID: 0}
+  bt: []
+  anim: {fileID: 0}
+  score: {fileID: 0}
+  timeText: {fileID: 0}
+  scoretext: {fileID: 0}
+  gameO: {fileID: 0}
+  playBT: {fileID: 0}
 --- !u!1 &1192090683027573394
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,32 +259,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 1192090683016636586}
+    target: {fileID: 0}
     relative: 0
-    absolute: 140
+    absolute: 0
   rightAnchor:
-    target: {fileID: 1192090683016636586}
+    target: {fileID: 0}
     relative: 1
-    absolute: -160
+    absolute: 0
   bottomAnchor:
-    target: {fileID: 1192090683016636586}
+    target: {fileID: 0}
     relative: 0
-    absolute: 16
+    absolute: 0
   topAnchor:
-    target: {fileID: 1192090683016636586}
-    relative: 0
-    absolute: 84
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 440
-  mHeight: 68
-  mDepth: 3
+  mWidth: 100
+  mHeight: 100
+  mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6.470588
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -301,8 +298,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: 69045925377400149bac9566d1352664, type: 2}
-  mSpriteName: "12-01-popup-tr\u1EAFc-nghi\u1EC7m"
+  mAtlas: {fileID: 0}
+  mSpriteName: 
   mFillCenter: 1
 --- !u!1 &1192090683040803301
 GameObject:
@@ -368,14 +365,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 436
-  mHeight: 192
+  mWidth: 100
+  mHeight: 100
   mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.2708333
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -389,8 +386,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: 69045925377400149bac9566d1352664, type: 2}
-  mSpriteName: 02-information-popup
+  mAtlas: {fileID: 0}
+  mSpriteName: 
   mFillCenter: 1
 --- !u!1 &1192090683145657005
 GameObject:
@@ -469,37 +466,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 1192090683286678745}
+    target: {fileID: 0}
     relative: 0
-    absolute: 1
+    absolute: 0
   rightAnchor:
-    target: {fileID: 1192090683286678745}
+    target: {fileID: 0}
     relative: 1
-    absolute: -1
+    absolute: 0
   bottomAnchor:
-    target: {fileID: 1192090683286678745}
+    target: {fileID: 0}
     relative: 0
-    absolute: 1
+    absolute: 0
   topAnchor:
-    target: {fileID: 1192090683286678745}
+    target: {fileID: 0}
     relative: 1
-    absolute: -1
+    absolute: 0
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 80
-  mHeight: 34
-  mDepth: 6
+  mWidth: 100
+  mHeight: 100
+  mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.3529413
+  aspectRatio: 1
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 46e8a5f30d43ec7408573033d45647c9, type: 2}
-  mText: Mao Trach Dong
-  mFontSize: 10
+  mFont: {fileID: 0}
+  mText: 
+  mFontSize: 16
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -509,7 +506,7 @@ MonoBehaviour:
   mSymbols: 1
   mEffectDistance: {x: 1, y: 1}
   mOverflow: 0
-  mApplyGradient: 1
+  mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
   mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   mSpacingX: 0
@@ -573,7 +570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fdca5042b1d12a4890ec1bd4f04290d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tweenTarget: {fileID: 1192090683286678746}
+  tweenTarget: {fileID: 0}
   hover: {r: 0.88235295, g: 0.78431374, b: 0.5882353, a: 1}
   pressed: {r: 0.7176471, g: 0.6392157, b: 0.48235294, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
@@ -612,7 +609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d44bc69c2ca5f943b845318866dc1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: c4d77a224f3c9a647b6924c2560ffd8a, type: 3}
+  audioClip: {fileID: 0}
   trigger: 0
   volume: 1
   pitch: 1
@@ -647,14 +644,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 82
-  mHeight: 36
-  mDepth: 4
+  mWidth: 100
+  mHeight: 100
+  mDepth: 0
   mMat: {fileID: 0}
-  autoResizeBoxCollider: 1
+  autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.2777777
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -668,8 +665,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: 69045925377400149bac9566d1352664, type: 2}
-  mSpriteName: "12-02-textbox-c\xE2u-h\u1ECFi"
+  mAtlas: {fileID: 0}
+  mSpriteName: 
   mFillCenter: 1
 --- !u!1 &1192090683297106026
 GameObject:
@@ -717,7 +714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fdca5042b1d12a4890ec1bd4f04290d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tweenTarget: {fileID: 1192090683297106026}
+  tweenTarget: {fileID: 0}
   hover: {r: 0.88235295, g: 0.78431374, b: 0.5882353, a: 1}
   pressed: {r: 0.7176471, g: 0.6392157, b: 0.48235294, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
@@ -730,11 +727,7 @@ MonoBehaviour:
   pressedSprite2D: {fileID: 0}
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
-  onClick:
-  - mTarget: {fileID: 1192090683016636584}
-    mMethodName: PlayGame
-    mParameters: []
-    oneShot: 0
+  onClick: []
 --- !u!65 &1192090683297106024
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -760,7 +753,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d44bc69c2ca5f943b845318866dc1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: c4d77a224f3c9a647b6924c2560ffd8a, type: 3}
+  audioClip: {fileID: 0}
   trigger: 0
   volume: 1
   pitch: 1
@@ -777,32 +770,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 1192090683016636586}
-    relative: 0.5
-    absolute: -61
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
   rightAnchor:
-    target: {fileID: 1192090683016636586}
-    relative: 0.5
-    absolute: 61
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
   bottomAnchor:
-    target: {fileID: 1192090683016636586}
-    relative: 0.5
-    absolute: -60
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
   topAnchor:
-    target: {fileID: 1192090683016636586}
-    relative: 0.5
-    absolute: 60
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
   updateAnchors: 1
-  mColor: {r: 0.9811321, g: 0.8172562, b: 0, a: 1}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 122
-  mHeight: 120
+  mWidth: 100
+  mHeight: 100
   mDepth: 0
   mMat: {fileID: 0}
-  autoResizeBoxCollider: 1
+  autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.0166667
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -816,8 +809,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: 69045925377400149bac9566d1352664, type: 2}
-  mSpriteName: icon_play
+  mAtlas: {fileID: 0}
+  mSpriteName: 
   mFillCenter: 1
 --- !u!1 &1192090683321693713
 GameObject:
@@ -865,7 +858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fdca5042b1d12a4890ec1bd4f04290d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tweenTarget: {fileID: 1192090683321693713}
+  tweenTarget: {fileID: 0}
   hover: {r: 0.88235295, g: 0.78431374, b: 0.5882353, a: 1}
   pressed: {r: 0.7176471, g: 0.6392157, b: 0.48235294, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
@@ -878,11 +871,7 @@ MonoBehaviour:
   pressedSprite2D: {fileID: 0}
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
-  onClick:
-  - mTarget: {fileID: 1192090683016636584}
-    mMethodName: ResetGame
-    mParameters: []
-    oneShot: 0
+  onClick: []
 --- !u!65 &1192090683321693727
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -908,7 +897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d44bc69c2ca5f943b845318866dc1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: c4d77a224f3c9a647b6924c2560ffd8a, type: 3}
+  audioClip: {fileID: 0}
   trigger: 0
   volume: 1
   pitch: 1
@@ -925,29 +914,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 1192090683016636586}
-    relative: 1
-    absolute: -70
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
   rightAnchor:
-    target: {fileID: 1192090683016636586}
+    target: {fileID: 0}
     relative: 1
-    absolute: -20
+    absolute: 0
   bottomAnchor:
-    target: {fileID: 1192090683016636586}
+    target: {fileID: 0}
     relative: 0
-    absolute: 13
+    absolute: 0
   topAnchor:
-    target: {fileID: 1192090683016636586}
-    relative: 0
-    absolute: 63
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 50
-  mHeight: 50
+  mWidth: 100
+  mHeight: 100
   mDepth: 0
   mMat: {fileID: 0}
-  autoResizeBoxCollider: 1
+  autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1
@@ -964,8 +953,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: 69045925377400149bac9566d1352664, type: 2}
-  mSpriteName: icon_retry
+  mAtlas: {fileID: 0}
+  mSpriteName: 
   mFillCenter: 1
 --- !u!1 &1192090683331489847
 GameObject:
@@ -1029,19 +1018,19 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 412
-  mHeight: 66
-  mDepth: 4
+  mWidth: 100
+  mHeight: 100
+  mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6.242424
+  aspectRatio: 1
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 46e8a5f30d43ec7408573033d45647c9, type: 2}
-  mText: "S\u1ED1 \u0111i\u1EC3m c\u1EE7a b\u1EA1n l\xE0"
-  mFontSize: 20
+  mFont: {fileID: 0}
+  mText: 
+  mFontSize: 16
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -1051,7 +1040,7 @@ MonoBehaviour:
   mSymbols: 1
   mEffectDistance: {x: 1, y: 1}
   mOverflow: 0
-  mApplyGradient: 1
+  mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
   mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   mSpacingX: 0
@@ -1115,7 +1104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fdca5042b1d12a4890ec1bd4f04290d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tweenTarget: {fileID: 1192090683355381826}
+  tweenTarget: {fileID: 0}
   hover: {r: 0.88235295, g: 0.78431374, b: 0.5882353, a: 1}
   pressed: {r: 0.7176471, g: 0.6392157, b: 0.48235294, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
@@ -1154,7 +1143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d44bc69c2ca5f943b845318866dc1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: c4d77a224f3c9a647b6924c2560ffd8a, type: 3}
+  audioClip: {fileID: 0}
   trigger: 0
   volume: 1
   pitch: 1
@@ -1189,14 +1178,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 94
-  mHeight: 38
-  mDepth: 4
+  mWidth: 100
+  mHeight: 100
+  mDepth: 0
   mMat: {fileID: 0}
-  autoResizeBoxCollider: 1
+  autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.4736843
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -1210,8 +1199,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: 69045925377400149bac9566d1352664, type: 2}
-  mSpriteName: "12-02-textbox-c\xE2u-h\u1ECFi"
+  mAtlas: {fileID: 0}
+  mSpriteName: 
   mFillCenter: 1
 --- !u!1 &1192090683541207464
 GameObject:
@@ -1290,37 +1279,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 1192090683016636586}
-    relative: 0.5
-    absolute: -50
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
   rightAnchor:
-    target: {fileID: 1192090683016636586}
-    relative: 0.5
-    absolute: -8
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
   bottomAnchor:
-    target: {fileID: 1192090683016636586}
-    relative: 1
-    absolute: -50
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
   topAnchor:
-    target: {fileID: 1192090683016636586}
+    target: {fileID: 0}
     relative: 1
-    absolute: -14
+    absolute: 0
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 42
-  mHeight: 36
+  mWidth: 100
+  mHeight: 100
   mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.1666666
+  aspectRatio: 1
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 46e8a5f30d43ec7408573033d45647c9, type: 2}
-  mText: 0
-  mFontSize: 40
+  mFont: {fileID: 0}
+  mText: 
+  mFontSize: 16
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -1391,26 +1380,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 1192090683016636586}
-    relative: 0.5
-    absolute: -33
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
   rightAnchor:
-    target: {fileID: 1192090683016636586}
-    relative: 0.5
-    absolute: 7
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
   bottomAnchor:
-    target: {fileID: 1192090683016636586}
-    relative: 1
-    absolute: -52
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
   topAnchor:
-    target: {fileID: 1192090683016636586}
+    target: {fileID: 0}
     relative: 1
-    absolute: -12
+    absolute: 0
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 40
-  mHeight: 40
+  mWidth: 100
+  mHeight: 100
   mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
@@ -1419,9 +1408,9 @@ MonoBehaviour:
   aspectRatio: 1
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 46e8a5f30d43ec7408573033d45647c9, type: 2}
-  mText: /
-  mFontSize: 30
+  mFont: {fileID: 0}
+  mText: 
+  mFontSize: 16
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -1524,37 +1513,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 1192090684539207684}
+    target: {fileID: 0}
     relative: 0
     absolute: 0
   rightAnchor:
-    target: {fileID: 1192090684539207684}
+    target: {fileID: 0}
     relative: 1
     absolute: 0
   bottomAnchor:
-    target: {fileID: 1192090684539207684}
+    target: {fileID: 0}
     relative: 0
     absolute: 0
   topAnchor:
-    target: {fileID: 1192090684539207684}
+    target: {fileID: 0}
     relative: 1
     absolute: 0
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 94
-  mHeight: 38
-  mDepth: 6
+  mWidth: 100
+  mHeight: 100
+  mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.4736843
+  aspectRatio: 1
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 46e8a5f30d43ec7408573033d45647c9, type: 2}
-  mText: Donal Trump
-  mFontSize: 10
+  mFont: {fileID: 0}
+  mText: 
+  mFontSize: 16
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -1564,7 +1553,7 @@ MonoBehaviour:
   mSymbols: 1
   mEffectDistance: {x: 1, y: 1}
   mOverflow: 0
-  mApplyGradient: 1
+  mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
   mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   mSpacingX: 0
@@ -1643,19 +1632,19 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 410
-  mHeight: 88
-  mDepth: 3
+  mWidth: 100
+  mHeight: 100
+  mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.659091
+  aspectRatio: 1
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 46e8a5f30d43ec7408573033d45647c9, type: 2}
-  mText: /
-  mFontSize: 20
+  mFont: {fileID: 0}
+  mText: 
+  mFontSize: 16
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -1665,7 +1654,7 @@ MonoBehaviour:
   mSymbols: 1
   mEffectDistance: {x: 1, y: 1}
   mOverflow: 0
-  mApplyGradient: 1
+  mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
   mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   mSpacingX: 0
@@ -1726,26 +1715,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 1192090683016636586}
-    relative: 1
-    absolute: -63
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
   rightAnchor:
-    target: {fileID: 1192090683016636586}
+    target: {fileID: 0}
     relative: 1
-    absolute: -23
+    absolute: 0
   bottomAnchor:
-    target: {fileID: 1192090683016636586}
-    relative: 0.5
-    absolute: -77
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
   topAnchor:
-    target: {fileID: 1192090683016636586}
-    relative: 0.5
-    absolute: -37
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 40
-  mHeight: 40
+  mWidth: 100
+  mHeight: 100
   mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
@@ -1765,8 +1754,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: 69045925377400149bac9566d1352664, type: 2}
-  mSpriteName: "11-03-s\u1EAFp-x\u1EBFp-time"
+  mAtlas: {fileID: 0}
+  mSpriteName: 
   mFillCenter: 1
 --- !u!1 &1192090684351629546
 GameObject:
@@ -1864,8 +1853,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d44bc69c2ca5f943b845318866dc1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 5ca1d39084491c64686eca50edfcc03f, type: 3}
-  trigger: 6
+  audioClip: {fileID: 0}
+  trigger: 0
   volume: 1
   pitch: 1
 --- !u!114 &2941533136362884103
@@ -1899,8 +1888,8 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 50
-  mHeight: 50
+  mWidth: 100
+  mHeight: 100
   mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
@@ -1920,8 +1909,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: 69045925377400149bac9566d1352664, type: 2}
-  mSpriteName: sai-20
+  mAtlas: {fileID: 0}
+  mSpriteName: 
   mFillCenter: 1
 --- !u!1 &1192090684460323008
 GameObject:
@@ -1967,37 +1956,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 1192090683016636586}
-    relative: 1
-    absolute: -63
-  rightAnchor:
-    target: {fileID: 1192090683016636586}
-    relative: 1
-    absolute: -25
-  bottomAnchor:
-    target: {fileID: 1192090683016636586}
+    target: {fileID: 0}
     relative: 0
-    absolute: 68
+    absolute: 0
+  rightAnchor:
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
+  bottomAnchor:
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
   topAnchor:
-    target: {fileID: 1192090683016636586}
-    relative: 0.5
-    absolute: -82
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 38
-  mHeight: 30
-  mDepth: 1
+  mWidth: 100
+  mHeight: 100
+  mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.2666667
+  aspectRatio: 1
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 46e8a5f30d43ec7408573033d45647c9, type: 2}
-  mText: 10s
-  mFontSize: 40
+  mFont: {fileID: 0}
+  mText: 
+  mFontSize: 16
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -2007,7 +1996,7 @@ MonoBehaviour:
   mSymbols: 1
   mEffectDistance: {x: 1, y: 1}
   mOverflow: 0
-  mApplyGradient: 1
+  mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
   mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   mSpacingX: 0
@@ -2068,37 +2057,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 1192090684753857239}
+    target: {fileID: 0}
     relative: 0
     absolute: 0
   rightAnchor:
-    target: {fileID: 1192090684753857239}
+    target: {fileID: 0}
     relative: 1
     absolute: 0
   bottomAnchor:
-    target: {fileID: 1192090684753857239}
+    target: {fileID: 0}
     relative: 0
     absolute: 0
   topAnchor:
-    target: {fileID: 1192090684753857239}
+    target: {fileID: 0}
     relative: 1
     absolute: 0
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 94
-  mHeight: 38
-  mDepth: 6
+  mWidth: 100
+  mHeight: 100
+  mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.4736843
+  aspectRatio: 1
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 46e8a5f30d43ec7408573033d45647c9, type: 2}
-  mText: Kim Jung Un
-  mFontSize: 10
+  mFont: {fileID: 0}
+  mText: 
+  mFontSize: 16
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -2108,7 +2097,7 @@ MonoBehaviour:
   mSymbols: 1
   mEffectDistance: {x: 1, y: 1}
   mOverflow: 0
-  mApplyGradient: 1
+  mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
   mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   mSpacingX: 0
@@ -2172,7 +2161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fdca5042b1d12a4890ec1bd4f04290d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tweenTarget: {fileID: 1192090684539207685}
+  tweenTarget: {fileID: 0}
   hover: {r: 0.88235295, g: 0.78431374, b: 0.5882353, a: 1}
   pressed: {r: 0.7176471, g: 0.6392157, b: 0.48235294, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
@@ -2211,7 +2200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d44bc69c2ca5f943b845318866dc1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: c4d77a224f3c9a647b6924c2560ffd8a, type: 3}
+  audioClip: {fileID: 0}
   trigger: 0
   volume: 1
   pitch: 1
@@ -2246,14 +2235,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 94
-  mHeight: 38
-  mDepth: 4
+  mWidth: 100
+  mHeight: 100
+  mDepth: 0
   mMat: {fileID: 0}
-  autoResizeBoxCollider: 1
+  autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.4736843
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -2267,8 +2256,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: 69045925377400149bac9566d1352664, type: 2}
-  mSpriteName: "12-02-textbox-c\xE2u-h\u1ECFi"
+  mAtlas: {fileID: 0}
+  mSpriteName: 
   mFillCenter: 1
 --- !u!1 &1192090684660486784
 GameObject:
@@ -2314,8 +2303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d44bc69c2ca5f943b845318866dc1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: e225328a88e440f4398109b86805cbf3, type: 3}
-  trigger: 6
+  audioClip: {fileID: 0}
+  trigger: 0
   volume: 1
   pitch: 1
 --- !u!114 &306298749368108131
@@ -2349,8 +2338,8 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 50
-  mHeight: 50
+  mWidth: 100
+  mHeight: 100
   mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
@@ -2370,8 +2359,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: 69045925377400149bac9566d1352664, type: 2}
-  mSpriteName: "\u0111\xFAng-20"
+  mAtlas: {fileID: 0}
+  mSpriteName: 
   mFillCenter: 1
 --- !u!1 &1192090684670058923
 GameObject:
@@ -2435,19 +2424,19 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 36
-  mHeight: 46
-  mDepth: 3
+  mWidth: 100
+  mHeight: 100
+  mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 0.7826087
+  aspectRatio: 1
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 46e8a5f30d43ec7408573033d45647c9, type: 2}
-  mText: 0
-  mFontSize: 30
+  mFont: {fileID: 0}
+  mText: 
+  mFontSize: 16
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -2457,7 +2446,7 @@ MonoBehaviour:
   mSymbols: 1
   mEffectDistance: {x: 1, y: 1}
   mOverflow: 0
-  mApplyGradient: 1
+  mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
   mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   mSpacingX: 0
@@ -2521,7 +2510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fdca5042b1d12a4890ec1bd4f04290d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tweenTarget: {fileID: 1192090684753857192}
+  tweenTarget: {fileID: 0}
   hover: {r: 0.88235295, g: 0.78431374, b: 0.5882353, a: 1}
   pressed: {r: 0.7176471, g: 0.6392157, b: 0.48235294, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
@@ -2560,7 +2549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d44bc69c2ca5f943b845318866dc1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: c4d77a224f3c9a647b6924c2560ffd8a, type: 3}
+  audioClip: {fileID: 0}
   trigger: 0
   volume: 1
   pitch: 1
@@ -2595,14 +2584,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 94
-  mHeight: 38
-  mDepth: 4
+  mWidth: 100
+  mHeight: 100
+  mDepth: 0
   mMat: {fileID: 0}
-  autoResizeBoxCollider: 1
+  autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.4736843
+  aspectRatio: 1
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -2616,8 +2605,8 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11400000, guid: 69045925377400149bac9566d1352664, type: 2}
-  mSpriteName: "12-02-textbox-c\xE2u-h\u1ECFi"
+  mAtlas: {fileID: 0}
+  mSpriteName: 
   mFillCenter: 1
 --- !u!1 &1192090684814293329
 GameObject:
@@ -2663,37 +2652,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 1192090683016636586}
-    relative: 0.5
-    absolute: -8
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
   rightAnchor:
-    target: {fileID: 1192090683016636586}
-    relative: 0.5
-    absolute: 30
+    target: {fileID: 0}
+    relative: 1
+    absolute: 0
   bottomAnchor:
-    target: {fileID: 1192090683016636586}
-    relative: 1
-    absolute: -50
+    target: {fileID: 0}
+    relative: 0
+    absolute: 0
   topAnchor:
-    target: {fileID: 1192090683016636586}
+    target: {fileID: 0}
     relative: 1
-    absolute: -14
+    absolute: 0
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 38
-  mHeight: 36
+  mWidth: 100
+  mHeight: 100
   mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.0555556
+  aspectRatio: 1
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 46e8a5f30d43ec7408573033d45647c9, type: 2}
-  mText: 10
-  mFontSize: 36
+  mFont: {fileID: 0}
+  mText: 
+  mFontSize: 16
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -2764,37 +2753,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
-    target: {fileID: 1192090683355381825}
+    target: {fileID: 0}
     relative: 0
     absolute: 0
   rightAnchor:
-    target: {fileID: 1192090683355381825}
+    target: {fileID: 0}
     relative: 1
     absolute: 0
   bottomAnchor:
-    target: {fileID: 1192090683355381825}
+    target: {fileID: 0}
     relative: 0
     absolute: 0
   topAnchor:
-    target: {fileID: 1192090683355381825}
+    target: {fileID: 0}
     relative: 1
     absolute: 0
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 94
-  mHeight: 38
-  mDepth: 6
+  mWidth: 100
+  mHeight: 100
+  mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.4736843
+  aspectRatio: 1
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 46e8a5f30d43ec7408573033d45647c9, type: 2}
-  mText: Vladimia Putin
-  mFontSize: 10
+  mFont: {fileID: 0}
+  mText: 
+  mFontSize: 16
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -2804,7 +2793,7 @@ MonoBehaviour:
   mSymbols: 1
   mEffectDistance: {x: 1, y: 1}
   mOverflow: 0
-  mApplyGradient: 1
+  mApplyGradient: 0
   mGradientTop: {r: 1, g: 1, b: 1, a: 1}
   mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   mSpacingX: 0

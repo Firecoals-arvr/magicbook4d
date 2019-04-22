@@ -6,7 +6,6 @@ using System;
 using Firecoals.AssetBundles;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
-using Firecoals.AssetBundles.Sound;
 using UnityEngine.SceneManagement;
 using Vuforia;
 
@@ -17,6 +16,7 @@ namespace Firecoals.Space
     /// </summary>
     public class GameTracking : DefaultTrackableEventHandler
     {
+
         /// <summary>
         /// đường dẫn của object trong thư mục
         /// </summary>
@@ -30,34 +30,45 @@ namespace Firecoals.Space
         private IResources _resources;
 
         /// <summary>
-        /// thông tin chung về object
+        /// bảng hiển thị thông tin về object
         /// </summary>
-        private GameObject objectInfo;
+        [SerializeField] private GameObject objectInfo;
 
         /// <summary>
-        /// tên của object
+        /// bảng hiển thị tên của object
         /// </summary>
-        private GameObject objectName;
+        [SerializeField] private GameObject objectName;
 
         /// <summary>
         /// tên của target
         /// </summary>
-        private string st;
+        private string nameTargetSpace;
 
         /// <summary>
-        /// key cho name object
+        /// key cho name object trong localization
         /// </summary>
         [Header("Name key")]
-        public string st1;
+        public string nameKeySpace;
 
         /// <summary>
-        /// các key cho info của object & thành phần của nó
+        /// các key cho info của object & thành phần của nó trong localization
         /// </summary>
         [Header("Information key")]
-        public string st2;
+        public string inforKeySpace;
+
+        /// <summary>
+        /// anim để chạy animation intro lúc tracking found models
+        /// </summary>
+        Animator anim;
+
+        private GameObject[] inforBtn;
+        bool checkOpen;
+
 
         protected override void Start()
         {
+            ApplicationContext context = Context.GetApplicationContext();
+            this._resources = context.GetService<IResources>();
             base.Start();
         }
 
@@ -68,28 +79,34 @@ namespace Firecoals.Space
 
         protected override void OnTrackingFound()
         {
+            _assethandler = new AssetHandler(mTrackableBehaviour.transform);
+            assetloader = GameObject.FindObjectOfType<AssetLoader>();
+            inforBtn = GameObject.FindGameObjectsWithTag("infor");
+            NGUITools.SetActive(objectName, true);
+
+            SpawnModel();
             //nếu đã purchase thì vào phần này
-            if (ActiveManager.IsActiveOfflineOk("B"))
-            {
-                CloneModels();
-            }
-            // nếu chưa purchase thì vào phần này
-            else
-            {
-                // nếu là 3 trang đầu thì cho xem model
-                if (mTrackableBehaviour.TrackableName == "Solarsystem_scaled" || mTrackableBehaviour.TrackableName == "Sun_scaled" || mTrackableBehaviour.TrackableName == "Mercury_scaled")
-                {
-                    CloneModels();
-                }
-                // nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
-                else
-                {
-                    PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", default, default, default, PopupManager.DialogType.YesNoDialog, () =>
-                       {
-                           SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
-                       });
-                }
-            }
+            //if (ActiveManager.IsActiveOfflineOk("B"))
+            //{
+            //    SpawnModel();
+            //}
+            //// nếu chưa purchase thì vào phần này
+            //else
+            //{
+            //    //nếu là 3 trang đầu thì cho xem model
+            //    if (mTrackableBehaviour.TrackableName == "Solarsystem_scaled" || mTrackableBehaviour.TrackableName == "Sun_scaled" || mTrackableBehaviour.TrackableName == "Mercury_scaled")
+            //    {
+            //        SpawnModel();
+            //    }
+            //    //nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
+            //    else
+            //    {
+            //        PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", "OK", "Yes", "No", PopupManager.DialogType.YesNoDialog, () =>
+            //        {
+            //            SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
+            //        });
+            //    }
+            //}
             base.OnTrackingFound();
         }
 
@@ -102,9 +119,9 @@ namespace Firecoals.Space
             {
                 Destroy(go.gameObject);
             }
+            NGUITools.SetActive(objectName, false);
 
             ClearKeyLocalization();
-            FirecoalsSoundManager.StopAll();
             base.OnTrackingLost();
         }
 
@@ -113,15 +130,27 @@ namespace Firecoals.Space
         /// </summary>
         private void ChangeKeyLocalization()
         {
-            if (st1.Contains(st) && st2.Contains(st))
+            if (nameKeySpace.Contains(nameTargetSpace) && inforKeySpace.Contains(nameTargetSpace))
             {
-                objectName.GetComponent<UILocalize>().key = st1;
-                objectInfo.GetComponent<UILocalize>().key = st2;
+                objectName.GetComponentInChildren<UILocalize>().key = nameKeySpace;
+                objectInfo.GetComponent<UILocalize>().key = inforKeySpace;
 
-                objectName.GetComponent<UILabel>().text = Localization.Get(st1);
-                objectInfo.GetComponent<UILabel>().text = Localization.Get(st2);
+                objectName.GetComponentInChildren<UILabel>().text = Localization.Get(nameKeySpace);
+                objectInfo.GetComponent<UILabel>().text = Localization.Get(inforKeySpace);
 
                 //ShowComponentInfor();
+            }
+        }
+
+        private void SpawnModel()
+        {
+            if (IsTargetEmpty() && !_cached)
+            {
+                CachingArContents();
+            }
+            if (IsTargetEmpty() && _cached)
+            {
+                LoadingCache();
             }
         }
 
@@ -132,34 +161,84 @@ namespace Firecoals.Space
         {
             if (objectInfo != null && objectName != null)
             {
-                objectName.GetComponent<UILocalize>().key = string.Empty;
+                objectName.GetComponentInChildren<UILocalize>().key = string.Empty;
                 objectInfo.GetComponent<UILocalize>().key = string.Empty;
 
-                objectName.GetComponent<UILabel>().text = string.Empty;
+                objectName.GetComponentInChildren<UILabel>().text = string.Empty;
                 objectInfo.GetComponent<UILabel>().text = string.Empty;
             }
         }
 
-        void CloneModels()
+        void PlayAnimIntro()
         {
-            //var statTime = DateTime.Now;
-            _assethandler = new AssetHandler(mTrackableBehaviour.transform);
-            ApplicationContext context = Context.GetApplicationContext();
-            this._resources = context.GetService<IResources>();
-            GameObject go1 = assetloader.LoadGameObjectAsync(path);
-            //Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
-            if (this.transform.childCount == 0)
+            if (this.gameObject.GetComponentInChildren<Animator>() != null)
             {
-                //var startTime = DateTime.Now;
-                Instantiate(go1, mTrackableBehaviour.transform);
-                //Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
+                anim = this.gameObject.GetComponentInChildren<Animator>();
+                anim.SetTrigger("Intro");
             }
-            objectName = GameObject.Find("UI Root/Main Panel/BangTen/Label");
-            objectInfo = GameObject.Find("UI Root/PanelInfor/Scroll View/Info");
+        }
 
-            st = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
-            st.ToLower();
+        private bool _cached = false;
+
+        void CloneModels(GameObject go)
+        {
+            StartCoroutine(InstantiationAsycnModels(go));
+            PlayAnimIntro();
+
+            //var statTime = DateTime.Now;
+            //Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
+            //if (this.transform.childCount == 0)
+            //{
+            //    var startTime = DateTime.Now;
+            //    //Instantiate(go1, mTrackableBehaviour.transform);
+            //    PlayAnimIntro();
+            //    Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
+            //}
+
+            nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
+            nameTargetSpace.ToLower();
             ChangeKeyLocalization();
+        }
+
+        private IEnumerator InstantiationAsycnModels(GameObject go)
+        {
+            yield return new WaitForSeconds(0.2f);
+            Instantiate(go, mTrackableBehaviour.transform);
+            //assetloader = GameObject.FindObjectOfType<AssetLoader>();
+            //InstantiationAsync.InstantiateAsync(go, mTrackableBehaviour.transform, 300);
+        }
+
+        /// <summary>
+        /// Check if there is no child on the target
+        /// </summary>
+        /// <returns></returns>
+        private bool IsTargetEmpty()
+        {
+            return mTrackableBehaviour.transform.childCount <= 0;
+        }
+
+        private void CachingArContents()
+        {
+            GameObject go = null;
+
+            InstantiationAsync.Asynchronous(() =>
+            {
+                if (IsTargetEmpty())
+                {
+                    go = assetloader.LoadGameObjectAsync(path);
+                    _cached = true;
+                    if (go != null)
+                        CloneModels(go);
+                }
+
+            }, 100);
+        }
+
+        private void LoadingCache()
+        {
+            GameObject go = assetloader.LoadGameObjectAsync(path);
+            if (go != null)
+                CloneModels(go);
         }
     }
 }

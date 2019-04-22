@@ -9,6 +9,7 @@ using Loxodon.Framework.Contexts;
 using Firecoals.AssetBundles.Sound;
 using UnityEngine.SceneManagement;
 using Vuforia;
+using System.Threading.Tasks;
 
 namespace Firecoals.Space
 {
@@ -17,6 +18,7 @@ namespace Firecoals.Space
     /// </summary>
     public class IntroScripts : DefaultTrackableEventHandler
     {
+
         /// <summary>
         /// đường dẫn của object trong thư mục
         /// </summary>
@@ -30,31 +32,31 @@ namespace Firecoals.Space
         private IResources _resources;
 
         /// <summary>
-        /// thông tin chung về object
+        /// bảng hiển thị thông tin về object
         /// </summary>
-        private GameObject objectInfo;
+        [SerializeField] private GameObject objectInfo;
 
         /// <summary>
-        /// tên của object
+        /// bảng hiển thị tên của object
         /// </summary>
-        private GameObject objectName;
+        [SerializeField] private GameObject objectName;
 
         /// <summary>
         /// tên của target
         /// </summary>
-        private string st;
+        private string nameTargetSpace;
 
         /// <summary>
-        /// key cho name object
+        /// key cho name object trong localization
         /// </summary>
         [Header("Name key")]
-        public string st1;
+        public string nameKeySpace;
 
         /// <summary>
-        /// các key cho info của object & thành phần của nó
+        /// các key cho info của object & thành phần của nó trong localization
         /// </summary>
         [Header("Information key")]
-        public string st2;
+        public string inforKeySpace;
 
         /// <summary>
         /// Key để load name và info của models
@@ -63,17 +65,22 @@ namespace Firecoals.Space
         public string tagSound;
         public string tagInfo;
         private LoadSoundbundles _loadSoundbundle;
+
         /// <summary>
         /// anim để chạy animation intro lúc tracking found models
         /// </summary>
         Animator anim;
 
-        private GameObject[] inforBtn;
+        private GameObject[] inforBtn = new GameObject[] { };
         bool checkOpen;
 
 
         protected override void Start()
         {
+            ApplicationContext context = Context.GetApplicationContext();
+            this._resources = context.GetService<IResources>();
+
+            _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
             base.Start();
         }
 
@@ -84,35 +91,40 @@ namespace Firecoals.Space
 
         protected override void OnTrackingFound()
         {
-            _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
+            _assethandler = new AssetHandler(mTrackableBehaviour.transform);
             assetloader = GameObject.FindObjectOfType<AssetLoader>();
-
             inforBtn = GameObject.FindGameObjectsWithTag("infor");
-
+            foreach (var a in inforBtn)
+            {
+                Debug.Log("button name: " + a.name);
+            }
+            NGUITools.SetActive(objectName, true);
+            SpawnModel();
+            AutoTriggerInforButton();
             //nếu đã purchase thì vào phần này
-            if (ActiveManager.IsActiveOfflineOk("B"))
-            {
-                CloneModels();
-                AutoTriggerInforButton();
-            }
-            // nếu chưa purchase thì vào phần này
-            else
-            {
-                //nếu là 3 trang đầu thì cho xem model
-                if (mTrackableBehaviour.TrackableName == "Solarsystem_scaled" || mTrackableBehaviour.TrackableName == "Sun_scaled" || mTrackableBehaviour.TrackableName == "Mercury_scaled")
-                {
-                    CloneModels();
-                    AutoTriggerInforButton();
-                }
-                //nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
-                else
-                {
-                    PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", default, default, default, PopupManager.DialogType.YesNoDialog, () =>
-                   {
-                       SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
-                   });
-                }
-            }
+            //if (ActiveManager.IsActiveOfflineOk("B"))
+            //{
+            //    SpawnModel();
+            //    AutoTriggerInforButton();
+            //}
+            //// nếu chưa purchase thì vào phần này
+            //else
+            //{
+            //    //nếu là 3 trang đầu thì cho xem model
+            //    if (mTrackableBehaviour.TrackableName == "Solarsystem_scaled" || mTrackableBehaviour.TrackableName == "Sun_scaled" || mTrackableBehaviour.TrackableName == "Mercury_scaled")
+            //    {
+            //        SpawnModel();
+            //        AutoTriggerInforButton();
+            //    }
+            //    //nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
+            //    else
+            //    {
+            //        PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", "OK", "Yes", "No", PopupManager.DialogType.YesNoDialog, () =>
+            //        {
+            //            SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
+            //        });
+            //    }
+            //}
             base.OnTrackingFound();
         }
 
@@ -125,26 +137,59 @@ namespace Firecoals.Space
             {
                 Destroy(go.gameObject);
             }
+            NGUITools.SetActive(objectName, false);
 
             ClearKeyLocalization();
             FirecoalsSoundManager.StopAll();
             base.OnTrackingLost();
         }
 
+        //private void Augment()
+        //{
+        //    GameObject go = null;
+        //    Task loadTask = Dispatcher.instance.TaskToMainThread(() =>
+        //    {
+        //        go = assetLoader.LoadGameObjectSync(bundleName, bundlePath);
+        //        //_cached = true;
+        //        Debug.Log("<color=red> GameObject created in background thread: " + go.name + "<color>");
+
+        //    });
+        //    loadTask.ContinueInMainThreadWith((task) =>
+        //    {
+        //        if (task.IsCompleted)
+        //        {
+        //            if (go != null)
+        //                CloneModels(go);
+        //        }
+        //    });
+        //}
+
         /// <summary>
         /// đổi key trong localization để lấy đúng tên, thông tin theo object
         /// </summary>
         private void ChangeKeyLocalization()
         {
-            if (st1.Contains(st) && st2.Contains(st))
+            if (nameKeySpace.Contains(nameTargetSpace) && inforKeySpace.Contains(nameTargetSpace))
             {
-                objectName.GetComponent<UILocalize>().key = st1;
-                objectInfo.GetComponent<UILocalize>().key = st2;
+                objectName.GetComponentInChildren<UILocalize>().key = nameKeySpace;
+                objectInfo.GetComponent<UILocalize>().key = inforKeySpace;
 
-                objectName.GetComponent<UILabel>().text = Localization.Get(st1);
-                objectInfo.GetComponent<UILabel>().text = Localization.Get(st2);
+                objectName.GetComponentInChildren<UILabel>().text = Localization.Get(nameKeySpace);
+                objectInfo.GetComponent<UILabel>().text = Localization.Get(inforKeySpace);
 
                 //ShowComponentInfor();
+            }
+        }
+
+        private void SpawnModel()
+        {
+            if (IsTargetEmpty() && !_cached)
+            {
+                CachingArContents();
+            }
+            if (IsTargetEmpty() && _cached)
+            {
+                LoadingCache();
             }
         }
 
@@ -155,42 +200,83 @@ namespace Firecoals.Space
         {
             if (objectInfo != null && objectName != null)
             {
-                objectName.GetComponent<UILocalize>().key = string.Empty;
+                objectName.GetComponentInChildren<UILocalize>().key = string.Empty;
                 objectInfo.GetComponent<UILocalize>().key = string.Empty;
 
-                objectName.GetComponent<UILabel>().text = string.Empty;
+                objectName.GetComponentInChildren<UILabel>().text = string.Empty;
                 objectInfo.GetComponent<UILabel>().text = string.Empty;
             }
         }
 
         void PlayAnimIntro()
         {
-            anim = this.gameObject.GetComponentInChildren<Animator>();
-            anim.SetTrigger("Intro");
+            if (this.gameObject.GetComponentInChildren<Animator>() != null)
+            {
+                anim = this.gameObject.GetComponentInChildren<Animator>();
+                anim.SetTrigger("Intro");
+            }
         }
 
-        void CloneModels()
-        {
-            //var statTime = DateTime.Now;
-            _assethandler = new AssetHandler(mTrackableBehaviour.transform);
-            ApplicationContext context = Context.GetApplicationContext();
-            this._resources = context.GetService<IResources>();
-            GameObject go1 = assetloader.LoadGameObjectAsync(path);
-            //Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
-            if (this.transform.childCount == 0)
-            {
-                //var startTime = DateTime.Now;
-                Instantiate(go1, mTrackableBehaviour.transform);
-                PlayAnimIntro();
-                //Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
-            }
-            _loadSoundbundle.PlayNameSound(tagSound);
-            objectName = GameObject.Find("UI Root/Main Panel/BangTen/Label");
-            objectInfo = GameObject.Find("UI Root/PanelInfor/Scroll View/Info");
+        private bool _cached = false;
 
-            st = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
-            st.ToLower();
+        void CloneModels(GameObject go)
+        {
+            StartCoroutine(InstantiationAsycnModels(go));
+            PlayAnimIntro();
+
+            //var statTime = DateTime.Now;
+            //Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
+            //if (this.transform.childCount == 0)
+            //{
+            //    var startTime = DateTime.Now;
+            //    //Instantiate(go1, mTrackableBehaviour.transform);
+            //    PlayAnimIntro();
+            //    Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
+            //}
+
+            nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
+            nameTargetSpace.ToLower();
             ChangeKeyLocalization();
+        }
+
+        private IEnumerator InstantiationAsycnModels(GameObject go)
+        {
+            yield return new WaitForSeconds(0.2f);
+            Instantiate(go, mTrackableBehaviour.transform);
+            _loadSoundbundle.PlayNameSound(tagSound);
+        }
+
+        /// <summary>
+        /// Check if there is no child on the target
+        /// </summary>
+        /// <returns></returns>
+        private bool IsTargetEmpty()
+        {
+            return mTrackableBehaviour.transform.childCount <= 0;
+        }
+
+        private void CachingArContents()
+        {
+            GameObject go = null;
+
+            InstantiationAsync.Asynchronous(() =>
+            {
+                if (IsTargetEmpty())
+                {
+                    go = assetloader.LoadGameObjectAsync(path);
+                    _cached = true;
+                    if (go != null)
+                        CloneModels(go);
+                }
+
+            }, 100);
+        }
+
+        private void LoadingCache()
+        {
+            GameObject go = assetloader.LoadGameObjectAsync(path);
+            if (go != null)
+                CloneModels(go);
         }
 
         /// <summary>
@@ -209,7 +295,6 @@ namespace Firecoals.Space
             }
         }
 
-
         /// <summary>
         /// lấy thông tin thành phần con của hành tinh
         /// </summary>
@@ -217,20 +302,28 @@ namespace Firecoals.Space
         {
             for (int i = 0; i < inforBtn.Length; i++)
             {
-                inforBtn[i].GetComponentInChildren<UILabel>().text = Localization.Get(inforBtn[i].GetComponentInChildren<UILocalize>().key);
-                objectInfo.transform.GetChild(0).transform.GetChild(0).GetComponent<UILabel>().text
-                    = Localization.Get(inforBtn[i].GetComponentInChildren<UILocalize>().key);
+                if (inforBtn[i] != null)
+                {
+                    inforBtn[i].GetComponentInChildren<UILabel>().text = Localization.Get(inforBtn[i].GetComponentInChildren<UILocalize>().key);
+                    objectInfo.GetComponent<UILabel>().text
+                        = Localization.Get(inforBtn[i].GetComponentInChildren<UILocalize>().key);
+                }
+                else
+                {
+                    objectInfo.GetComponent<UILabel>().text = Localization.Get(string.Empty);
+                }
             }
         }
 
         /// <summary>
         /// hiện bảng thông tin con của hành tinh
         /// </summary>
-        public void ShowSmallInfo()
+        private void ShowSmallInfo()
         {
             if (checkOpen == false)
             {
                 ShowObjectInfo();
+                ShowComponentInfor();
             }
             else
             {
@@ -238,16 +331,19 @@ namespace Firecoals.Space
             }
         }
 
+        [Header("Panel information")]
+        [SerializeField] Animator panelInforAnim;
+
         private void ShowObjectInfo()
         {
             checkOpen = true;
-            anim.SetBool("isOpen", true);
+            panelInforAnim.SetBool("isOpen", true);
         }
 
         private void HideObjectInfo()
         {
             checkOpen = false;
-            anim.SetBool("isOpen", false);
+            panelInforAnim.SetBool("isOpen", false);
         }
     }
 }

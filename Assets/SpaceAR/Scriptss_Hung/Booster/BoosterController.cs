@@ -6,17 +6,8 @@ namespace Firecoals.Space
 {
     public class BoosterController : MonoBehaviour
     {
+        [SerializeField] Animation anima;
 
-        // Use this for initialization
-        void Start()
-        {
-            anima = GetComponent<Animation>();
-        }
-        Animation anima;
-        void Update()
-        {
-
-        }
         public void Lauch()
         {
             if (anima.isPlaying)
@@ -31,15 +22,13 @@ namespace Firecoals.Space
                 GetComponent<AudioSource>().Play();
             }
         }
-        public void Lauch2()
-        {
-            anima.Play("Lauch2");
-        }
+
         public void Idle()
         {
             anima.Play("Idle");
             GetComponent<AudioSource>().Stop();
         }
+
         public void Booster4d()
         {
             if (!anima.isPlaying)
