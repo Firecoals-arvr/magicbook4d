@@ -13,7 +13,7 @@ namespace Firecoals.Space
         bool changAnim;
         void Start()
         {
-            anim.GetComponent<Animator>();
+            //anim.GetComponent<Animator>();
             changAnim = true;
         }
 

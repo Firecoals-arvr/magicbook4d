@@ -8,18 +8,6 @@ namespace Firecoals.Space
     {
         public float speed;
 
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         private void OnMouseDrag()
         {
             float rotX = Input.GetAxis("Mouse X") * Mathf.Deg2Rad * speed;

@@ -142,7 +142,7 @@ namespace Firecoals.Augmentation
             yield return new WaitForSeconds(second);
             Destroy(clone);
         }
-        public static void Asynchronous(Action callback, int delayTimeInMillisecond)
+        public static void Asynchronous( Action callback,int delayTimeInMillisecond)
         {
             Task.Run(async () =>
             {

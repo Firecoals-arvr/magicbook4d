@@ -1,6 +1,8 @@
 ﻿/*==============================================================================
 Copyright (c) 2019 PTC Inc. All Rights Reserved.
+
 Confidential and Proprietary - Protected under copyright and other laws.
+
 Vuforia is a trademark of PTC Inc., registered in the United States and other 
 countries.
 ==============================================================================*/
@@ -28,7 +30,7 @@ public class DefaultModelRecoEventHandler : MonoBehaviour, IObjectRecoEventHandl
 
     // ModelRecoBehaviour reference to avoid lookups
     protected ModelRecoBehaviour mModelRecoBehaviour;
-
+    
     // Target Finder reference to avoid lookups
     protected TargetFinder mTargetFinder;
 
@@ -61,9 +63,6 @@ public class DefaultModelRecoEventHandler : MonoBehaviour, IObjectRecoEventHandl
     /// </summary>
     [Tooltip("Whether Vuforia should stop searching for other models, while current model is tracked and visible.")]
     public bool StopSearchWhileTracking = true;//true by default, as this is the recommended behaviour
-    public ModelTargetBehaviour ModelTargetTemplate;
-
-    public bool ShowBoundingBox { get; set; }
 
     #endregion // PUBLIC_VARIABLES
 
@@ -95,7 +94,7 @@ public class DefaultModelRecoEventHandler : MonoBehaviour, IObjectRecoEventHandl
         if (mTargetFinder == null || mLastRecoModelTarget == null)
             return;
 
-
+        
         // Check periodically if model target is tracked and in view
         // The test is not necessary when the search is stopped after first model was found
         float elapsed = Time.realtimeSinceStartup - mLastStatusCheckTime;
@@ -123,7 +122,7 @@ public class DefaultModelRecoEventHandler : MonoBehaviour, IObjectRecoEventHandl
             }
         }
     }
-
+    
 
     private void OnDestroy()
     {
@@ -275,7 +274,7 @@ public class DefaultModelRecoEventHandler : MonoBehaviour, IObjectRecoEventHandl
         var axisX = mtb.transform.TransformVector(localExtents.x, 0, 0);
         var axisY = mtb.transform.TransformVector(0, localExtents.y, 0);
         var axisZ = mtb.transform.TransformVector(0, 0, localExtents.z);
-
+        
         Vector3 worldExtents = Vector3.zero;
         worldExtents.x = Mathf.Abs(axisX.x) + Mathf.Abs(axisY.x) + Mathf.Abs(axisZ.x);
         worldExtents.y = Mathf.Abs(axisX.y) + Mathf.Abs(axisY.y) + Mathf.Abs(axisZ.y);
@@ -298,7 +297,7 @@ public class DefaultModelRecoEventHandler : MonoBehaviour, IObjectRecoEventHandl
 
         // Compute the center of the model in World coordinates
         Bounds modelBounds = GetModelTargetWorldBounds(modelTarget);
-
+        
         var frustumPlanes = GeometryUtility.CalculateFrustumPlanes(cam);
         return GeometryUtility.TestPlanesAABB(frustumPlanes, modelBounds);
     }

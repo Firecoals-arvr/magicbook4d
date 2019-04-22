@@ -6,16 +6,27 @@ using Loxodon.Framework.Contexts;
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Firecoals.Augmentation
 {
+    /// <summary>
+    /// Prepare load assets to scene
+    /// </summary>
     public class AssetLoader : MonoBehaviour
     {
-        private string[] bundleNames;
+        /// <summary>
+        /// Bundle name means named assetbundle which built from Unity (Loxodon Bundle Framework or AssetBundle Browser)
+        /// </summary>
+        public string[] bundleNames;
 
         // Start is called before the first frame update
-        private string bundleRoot;
+        /// <summary>
+        /// Bundle root means the root folder where contains all built assetbundles and manifest file 
+        /// </summary>
+        public string bundleRoot;
+        /// <summary>
+        /// For call Pre-Load assetbundle
+        /// </summary>
         public AssetBundlesLoader assetBundlesLoader = new AssetBundlesLoader();
         public IResources Resources { private set; get; }
         //private string iv = "5Hh2390dQlVh0AqC";
@@ -103,6 +114,8 @@ namespace Firecoals.Augmentation
                     bundleNames = new[] { "color/model/camtrai",
                         "color/model/chantrau",
                         "color/model/cloud/maybay",
+                        "color/model/cloud/dabong",
+                        "color/model/cloud/camtrai",
                         "color/model/dabong",
                         "color/model/khurung",
                         "color/model/maybay",
@@ -110,8 +123,7 @@ namespace Firecoals.Augmentation
                         "color/model/tambien",
                         "color/model/thadieu",
                         "color/model/thanhpho",
-                        "color/model/trangtrai",
-                        "color/sounds/music",
+                        "color/model/trangtrai", 
                         "color/sounds/sounds"
                     };
                     break;
@@ -223,6 +235,13 @@ namespace Firecoals.Augmentation
                 }
             });
             return tempGameObject;
+        }
+
+        public GameObject LoadGameObjectSync(string bundleName, string bundlePath)
+        {
+            IBundle bundle = assetBundlesLoader.bundles[bundleName];
+            var go = bundle.LoadAsset<GameObject>(bundlePath);
+            return go;
         }
 
     }

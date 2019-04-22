@@ -85,8 +85,10 @@ namespace Firecoals.AssetBundles
         /// <returns></returns>
         public IEnumerator Preload(string[] bundleNames, int priority)
         {
+            Dispose();
             var myResources = GameObject.FindObjectOfType<AssetLoader>().Resources;//= GetResources();
             IProgressResult<float, IBundle[]> result = myResources.LoadBundle(bundleNames, priority);
+            
             result.Callbackable().OnProgressCallback(p =>
             {
                 Debug.LogFormat("PreLoading {0:F1}%", (p * 100).ToString(CultureInfo.InvariantCulture));
@@ -123,6 +125,15 @@ namespace Firecoals.AssetBundles
 
         }
 
+        private void Dispose()
+        {
+            if (bundles == null || bundles.Count == 0)
+                return;
+
+            foreach (IBundle bundle in bundles.Values)
+                bundle.Dispose();
+            bundles = new Dictionary<string, IBundle>();
+        }
     }
 }
 

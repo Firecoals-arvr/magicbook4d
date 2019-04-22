@@ -25,6 +25,7 @@ namespace Firecoals.Render
         {
             // Start recording
             recordingClock = new RealtimeClock();
+            
             videoRecorder = new MP4Recorder(
                 videoWidth,
                 videoHeight,
@@ -66,6 +67,7 @@ namespace Firecoals.Render
             }
 
             cameraInput.Dispose();
+            
             // Stop recording
             videoRecorder.Dispose();
         }
@@ -81,13 +83,14 @@ namespace Firecoals.Render
         private void OnReplay(string path)
         {
             Debug.Log("Saved recording to: " + path);
-            PopupManager.PopUpDialog("", "Saved recording to: " + path);
+            //PopupManager.PopUpDialog("", "Saved recording to: " + path);
             
             // Playback the video
 #if UNITY_EDITOR
             EditorUtility.OpenWithDefaultApp(path);
 #elif UNITY_IOS
             Handheld.PlayFullScreenMovie("file://" + path);
+            NatShare.SaveToCameraRoll(path, "MagicBook 4D", false);
 #elif UNITY_ANDROID
             Handheld.PlayFullScreenMovie(path);
             NatShare.SaveToCameraRoll(path, "MagicBook 4D", false);

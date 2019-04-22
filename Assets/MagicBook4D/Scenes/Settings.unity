@@ -284,14 +284,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 180, guid: fadab555cb31c9645bf12274eaa63c4e, type: 3}
-      propertyPath: uiCamera
+    - target: {fileID: 195, guid: fadab555cb31c9645bf12274eaa63c4e, type: 3}
+      propertyPath: mWidth
+      value: 236
+      objectReference: {fileID: 0}
+    - target: {fileID: 195, guid: fadab555cb31c9645bf12274eaa63c4e, type: 3}
+      propertyPath: mHeight
+      value: 168
+      objectReference: {fileID: 0}
+    - target: {fileID: 195, guid: fadab555cb31c9645bf12274eaa63c4e, type: 3}
+      propertyPath: mFont
       value: 
-      objectReference: {fileID: 946703466}
+      objectReference: {fileID: 11400000, guid: f18f4e2f965087f4fb69d7bfc4fae1f2,
+        type: 2}
+    - target: {fileID: 195, guid: fadab555cb31c9645bf12274eaa63c4e, type: 3}
+      propertyPath: aspectRatio
+      value: 1.4047619
+      objectReference: {fileID: 0}
     - target: {fileID: 196, guid: fadab555cb31c9645bf12274eaa63c4e, type: 3}
       propertyPath: aspectRatio
       value: 1.4681818
       objectReference: {fileID: 0}
+    - target: {fileID: 180, guid: fadab555cb31c9645bf12274eaa63c4e, type: 3}
+      propertyPath: uiCamera
+      value: 
+      objectReference: {fileID: 946703466}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fadab555cb31c9645bf12274eaa63c4e, type: 3}
 --- !u!4 &72723103 stripped
@@ -372,7 +389,7 @@ MonoBehaviour:
   aspectRatio: 6.7
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 3f8bc34a42dc69c469ad0080e4cedf8c, type: 2}
+  mFont: {fileID: 11400000, guid: f18f4e2f965087f4fb69d7bfc4fae1f2, type: 2}
   mText: "H\u1ECDc ng\xF4n ng\u1EEF"
   mFontSize: 40
   mFontStyle: 0
@@ -473,7 +490,7 @@ MonoBehaviour:
   aspectRatio: 4.4242425
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 3f8bc34a42dc69c469ad0080e4cedf8c, type: 2}
+  mFont: {fileID: 11400000, guid: f18f4e2f965087f4fb69d7bfc4fae1f2, type: 2}
   mText: New Label
   mFontSize: 38
   mFontStyle: 0
@@ -636,8 +653,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 361178372}
-  hover: {r: 0.88235295, g: 0.78431374, b: 0.5882353, a: 1}
-  pressed: {r: 0.7176471, g: 0.6392157, b: 0.48235294, a: 1}
+  hover: {r: 0.7512022, g: 0.88235295, b: 0.5882353, a: 1}
+  pressed: {r: 1, g: 1, b: 1, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   duration: 0.2
   dragHighlight: 0
@@ -962,8 +979,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 558447233}
-  hover: {r: 0.88235295, g: 0.78431374, b: 0.5882353, a: 1}
-  pressed: {r: 0.7176471, g: 0.6392157, b: 0.48235294, a: 1}
+  hover: {r: 0.6404946, g: 0.88235295, b: 0.5882353, a: 1}
+  pressed: {r: 1, g: 1, b: 1, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   duration: 0.2
   dragHighlight: 0
@@ -1129,7 +1146,7 @@ MonoBehaviour:
   aspectRatio: 4.4210525
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 3f8bc34a42dc69c469ad0080e4cedf8c, type: 2}
+  mFont: {fileID: 11400000, guid: f18f4e2f965087f4fb69d7bfc4fae1f2, type: 2}
   mText: "C\xE0i \u0111\u1EB7t"
   mFontSize: 38
   mFontStyle: 0
@@ -1525,7 +1542,7 @@ MonoBehaviour:
   aspectRatio: 4.7
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 3f8bc34a42dc69c469ad0080e4cedf8c, type: 2}
+  mFont: {fileID: 11400000, guid: f18f4e2f965087f4fb69d7bfc4fae1f2, type: 2}
   mText: "\xC2m l\u01B0\u1EE3ng"
   mFontSize: 40
   mFontStyle: 0
@@ -1719,8 +1736,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 880468319}
-  hover: {r: 0.88235295, g: 0.78431374, b: 0.5882353, a: 1}
-  pressed: {r: 0.7176471, g: 0.6392157, b: 0.48235294, a: 1}
+  hover: {r: 0.7980602, g: 0.88235295, b: 0.5882353, a: 1}
+  pressed: {r: 1, g: 1, b: 1, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   duration: 0.2
   dragHighlight: 0
@@ -2129,7 +2146,7 @@ MonoBehaviour:
   aspectRatio: 2.909091
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 3f8bc34a42dc69c469ad0080e4cedf8c, type: 2}
+  mFont: {fileID: 11400000, guid: f18f4e2f965087f4fb69d7bfc4fae1f2, type: 2}
   mText: Space
   mFontSize: 22
   mFontStyle: 0
@@ -2230,7 +2247,7 @@ MonoBehaviour:
   aspectRatio: 9.45
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 3f8bc34a42dc69c469ad0080e4cedf8c, type: 2}
+  mFont: {fileID: 11400000, guid: f18f4e2f965087f4fb69d7bfc4fae1f2, type: 2}
   mText: "Ng\xF4n ng\u1EEF h\u1EC7 th\u1ED1ng"
   mFontSize: 40
   mFontStyle: 0
@@ -2750,7 +2767,7 @@ MonoBehaviour:
   aspectRatio: 2.7272727
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 3f8bc34a42dc69c469ad0080e4cedf8c, type: 2}
+  mFont: {fileID: 11400000, guid: f18f4e2f965087f4fb69d7bfc4fae1f2, type: 2}
   mText: Color
   mFontSize: 22
   mFontStyle: 0
@@ -3285,7 +3302,7 @@ MonoBehaviour:
   aspectRatio: 2
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 3f8bc34a42dc69c469ad0080e4cedf8c, type: 2}
+  mFont: {fileID: 11400000, guid: f18f4e2f965087f4fb69d7bfc4fae1f2, type: 2}
   mText: 61%
   mFontSize: 25
   mFontStyle: 0
@@ -3447,8 +3464,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 1394896896}
-  hover: {r: 0.88235295, g: 0.78431374, b: 0.5882353, a: 1}
-  pressed: {r: 0.7176471, g: 0.6392157, b: 0.48235294, a: 1}
+  hover: {r: 0.73674184, g: 0.88235295, b: 0.5882353, a: 1}
+  pressed: {r: 1, g: 1, b: 1, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   duration: 0.2
   dragHighlight: 0
@@ -3660,7 +3677,7 @@ MonoBehaviour:
   aspectRatio: 3.6363637
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 3f8bc34a42dc69c469ad0080e4cedf8c, type: 2}
+  mFont: {fileID: 11400000, guid: f18f4e2f965087f4fb69d7bfc4fae1f2, type: 2}
   mText: Animal
   mFontSize: 22
   mFontStyle: 0
@@ -4393,8 +4410,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 1685693675}
-  hover: {r: 0.88235295, g: 0.78431374, b: 0.5882353, a: 1}
-  pressed: {r: 0.7176471, g: 0.6392157, b: 0.48235294, a: 1}
+  hover: {r: 0.71343625, g: 0.88235295, b: 0.5882353, a: 1}
+  pressed: {r: 1, g: 1, b: 1, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   duration: 0.2
   dragHighlight: 0
@@ -4890,7 +4907,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: 6db50eb02e5df31479e5d2331c319204, type: 3}
+  mTexture: {fileID: 2800000, guid: 16da4082b6be7474bbaf284e23b9e3bb, type: 3}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
   mFixedAspect: 0

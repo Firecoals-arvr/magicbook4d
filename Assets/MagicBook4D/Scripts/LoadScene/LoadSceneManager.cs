@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Firecoals.SceneTransition;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,27 +23,32 @@ public class LoadSceneManager : MonoBehaviour
 
     public void LoadSettingScene()
     {
-        SceneManager.LoadScene("Settings");
+        //SceneManager.LoadScene("Settings");
+        SceneLoader.LoadScene("Settings");
     }
 
     public void LoadMenuScene()
     {
-        SceneManager.LoadScene("Menu");
+        //SceneManager.LoadScene("Menu");
+        SceneLoader.LoadScene("Menu");
     }
 
     public void LoadInfoScene()
     {
-        SceneManager.LoadScene("Info");
+        //SceneManager.LoadScene("Info");
+        SceneLoader.LoadScene("Info");
     }
 
     public void LoadActivateScene()
     {
-        SceneManager.LoadScene("Activate");
+        //SceneManager.LoadScene("Activate");
+        SceneLoader.LoadScene("Activate");
     }
 
     public void LoadStoreScene()
     {
-        SceneManager.LoadScene("Store");
+        //SceneManager.LoadScene("Store");
+        SceneLoader.LoadScene("Store");
     }
        
 }

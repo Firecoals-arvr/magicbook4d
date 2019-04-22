@@ -18,13 +18,8 @@ namespace Firecoals.Space
         public GameObject Mecuryinfor;
         //public GameObject //Suninfor;
 
-        void Start()
-        {
-
-        }
         GameObject temp;
-        //Stack stack = new Stack();
-        // Update is called once per frame
+
         void Update()
         {
             if (Input.GetMouseButtonDown(0))
@@ -47,7 +42,6 @@ namespace Firecoals.Space
                             hit.transform.localScale += new Vector3(0.04f, 0.04f, 0.04f);
                             temp = hit.transform.gameObject;
                         }
-
                     }
                     //stack.Push(hit);
                     // hit.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);

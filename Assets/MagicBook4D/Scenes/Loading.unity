@@ -141,15 +141,15 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: 0.92663187, g: 1, b: 0.5613208, a: 1}
+  mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 730
-  mHeight: 153
+  mWidth: 650
+  mHeight: 136
   mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
-  keepAspectRatio: 0
+  keepAspectRatio: 1
   aspectRatio: 4.7712417
   mType: 1
   mFillDirection: 4
@@ -165,7 +165,7 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 11400000, guid: d1f0d35b72cc5064784986d642f5289f, type: 2}
-  mSpriteName: loadingbar Blue
+  mSpriteName: loadingbar Purple
   mFillCenter: 1
 --- !u!114 &140436916
 MonoBehaviour:
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 150114390}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b3dc54f924693f41b5cbecb267e647a, type: 3}
   m_Name: 
@@ -196,10 +196,10 @@ MonoBehaviour:
     relative: 1
     absolute: -59
   updateAnchors: 1
-  mColor: {r: 0.96516526, g: 0.71488965, b: 0.990566, a: 1}
+  mColor: {r: 0.7725646, g: 0.7735849, b: 0.33935562, a: 1}
   mPivot: 4
-  mWidth: 730
-  mHeight: 153
+  mWidth: 650
+  mHeight: 136
   mDepth: 1
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
@@ -251,21 +251,21 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mColor: {r: 0.032796368, g: 0.6320754, b: 0.24146754, a: 1}
   mPivot: 7
-  mWidth: 42
-  mHeight: 30
+  mWidth: 100
+  mHeight: 36
   mDepth: 3
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.4
+  aspectRatio: 1.6666666
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
-  mFont: {fileID: 11400000, guid: 46e8a5f30d43ec7408573033d45647c9, type: 2}
-  mText: 0%
-  mFontSize: 30
+  mFont: {fileID: 11400000, guid: f18f4e2f965087f4fb69d7bfc4fae1f2, type: 2}
+  mText: 100%
+  mFontSize: 35
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -307,7 +307,7 @@ MonoBehaviour:
   thumb: {fileID: 150277232}
   mBG: {fileID: 140436912}
   mFG: {fileID: 140436916}
-  mValue: 0
+  mValue: 1
   mFill: 0
   numberOfSteps: 0
   onChange:
@@ -411,7 +411,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 150114384}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -365, y: 0, z: 0}
+  m_LocalPosition: {x: 325, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 150277234}
@@ -427,7 +427,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 150114386}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 33.66, y: 0, z: 0}
+  m_LocalPosition: {x: 76, y: -14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 150277232}
@@ -983,7 +983,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1318866281}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96b31ce75e592f45a1cff563a4869db, type: 3}
+  m_Script: {fileID: 11500000, guid: d5c5ca47aa5c01740810b7c66662099f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
@@ -1007,7 +1007,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 1480
   mHeight: 720
-  mDepth: -2
+  mDepth: -1
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
@@ -1026,12 +1026,16 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mSprite: {fileID: 21300000, guid: 9a8d09c7cde4746d28e63825039ae0eb, type: 3}
+  mRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  mTexture: {fileID: 2800000, guid: 16da4082b6be7474bbaf284e23b9e3bb, type: 3}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
   mFixedAspect: 0
-  mPixelSize: 1
-  nextSprite: {fileID: 0}
 --- !u!1 &2036838401
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,12 +1108,12 @@ MonoBehaviour:
   softBorderPadding: 1
   renderQueue: 0
   startingRenderQueue: 3004
-  mClipTexture: {fileID: 2800000, guid: 1041b4d44f00957468b974ddae93f9a4, type: 3}
+  mClipTexture: {fileID: 2800000, guid: 46bdfa92acc421942b3d7bfb21f09987, type: 3}
   mAlpha: 1
   mClipping: 1
-  mClipRange: {x: 0, y: 0, z: 730, w: 153}
+  mClipRange: {x: 0, y: 0, z: 650, w: 136}
   mClipSoftness: {x: 4, y: 4}
-  mDepth: 1
+  mDepth: 2
   mSortingOrder: 0
   mSortingLayerName: 
   mClipOffset: {x: 0, y: 0}
