@@ -237,6 +237,13 @@ namespace Firecoals.Augmentation
             return tempGameObject;
         }
 
+        public GameObject LoadGameObjectSync(string bundleName, string bundlePath)
+        {
+            IBundle bundle = assetBundlesLoader.bundles[bundleName];
+            var go = bundle.LoadAsset<GameObject>(bundlePath);
+            return go;
+        }
+
     }
 
 }

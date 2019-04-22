@@ -22,6 +22,7 @@ namespace Firecoals.Animal
 
             if (CanMove)
             {
+                ScaleAnimal = (float)this.transform.parent.transform.localScale.x;
                 SmoothMove(DestinationPosition, movingAnimName, stopAnimName);
             }
             if (DemJump != 0)
@@ -64,15 +65,15 @@ namespace Firecoals.Animal
 
             if (IsRotating == false)
             {
-                transform.rotation = Quaternion.Lerp(transform.rotation, angle, Time.deltaTime * 100.0f);
+                transform.rotation = Quaternion.Lerp(transform.rotation, angle, Time.deltaTime * 100.0f* ScaleAnimal);
             }
 
             //Debug.DrawLine(transform.position, target, Color.red, 30, false);
             if (Quaternion.Angle(angle, transform.rotation) < 5)
             {
-                if (Vector3.Distance(transform.position, target) > StopDistance)
+                if (Vector3.Distance(transform.position, target) > StopDistance* ScaleAnimal)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, target, MoveSpeed * Time.deltaTime);
+                    transform.position = Vector3.MoveTowards(transform.position, target, MoveSpeed * Time.deltaTime* ScaleAnimal);
                     OnMoveEventStarted(moveAnimClipName);
                     IsRotating = false;
                 }
@@ -82,7 +83,7 @@ namespace Firecoals.Animal
             {
                 IsRotating = true;
             }
-            if (Vector3.Distance(transform.position, target) < StopDistance)
+            if (Vector3.Distance(transform.position, target) < StopDistance* ScaleAnimal)
             {
                 if (IsMoving)
                 {
@@ -98,7 +99,7 @@ namespace Firecoals.Animal
                            StartCoroutine(wait());
                         }                          
                     }
-                  
+                
                 }
             }
             else

@@ -55,7 +55,6 @@ GameObject:
   - component: {fileID: 6166251103756440202}
   - component: {fileID: 8867271737648316751}
   - component: {fileID: 1361573357}
-  - component: {fileID: 8270034872350979771}
   m_Layer: 0
   m_Name: Dolphin
   m_TagString: Creature
@@ -127,7 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingAnimationSpeed: 1
   MoveSpeed: 0.04
-  StopDistance: 0.05
+  StopDistance: 0.001
   HaveEat: 0
   TimeEat: 0
   isFrog: 0
@@ -135,18 +134,6 @@ MonoBehaviour:
   movingAnimName: Walk
   stopAnimName: Action1
   idle: Action2
---- !u!114 &8270034872350979771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1361573352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297f8f643f3ff9a43830127ab7a12020, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &289413340422038869
 GameObject:
   m_ObjectHideFlags: 0
@@ -2582,6 +2569,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1361573351}
+  - component: {fileID: 3742517275072439004}
   m_Layer: 0
   m_Name: Dolphin
   m_TagString: Untagged
@@ -2606,6 +2594,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3742517275072439004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7926797057597639910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c73c1ab94e28d244827af556dca1ed2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoreStartedOverGui: 1
+  IgnoreIsOverGui: 0
+  RequiredFingerCount: 0
+  RequiredSelectable: {fileID: 0}
+  Camera: {fileID: 0}
+  WheelSensitivity: 0
+  Relative: 0
+  ScaleClamp: 0
+  ScaleMin: {x: 0, y: 0, z: 0}
+  ScaleMax: {x: 0, y: 0, z: 0}
 --- !u!1 &8074391269776838095
 GameObject:
   m_ObjectHideFlags: 0

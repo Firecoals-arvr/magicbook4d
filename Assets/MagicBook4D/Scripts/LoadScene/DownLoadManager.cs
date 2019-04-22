@@ -4,8 +4,6 @@ using Firecoals.MagicBook;
 using Firecoals.SceneTransition;
 using Loxodon.Framework.Bundles;
 using UnityEngine;
-using UnityEngine.Networking;
-using UnityEngine.SceneManagement;
 using Version = System.Version;
 
 public class DownLoadManager : MonoBehaviour
@@ -30,7 +28,7 @@ public class DownLoadManager : MonoBehaviour
         }
         else if (Application.internetReachability == NetworkReachability.NotReachable && RequiredDownload())
         {
-            PopupManager.PopUpDialog("[[9C0002]Error[-]]", "Không có kết nối mạng, vui lòng thử lại","Ok","Thử lại","Menu", PopupManager.DialogType.YesNoDialog,
+            PopupManager.PopUpDialog("[[9C0002]Error[-]]", "Không có kết nối mạng, vui lòng thử lại", "Ok", "Thử lại", "Menu", PopupManager.DialogType.YesNoDialog,
                 () =>
                 {
                     if (Application.internetReachability != NetworkReachability.NotReachable)
@@ -43,7 +41,7 @@ public class DownLoadManager : MonoBehaviour
         }
         else if (Application.internetReachability != NetworkReachability.NotReachable && !RequiredDownload() && NeedUpdate())
         {
-            PopupManager.PopUpDialog("", "Có bản cập nhật dữ liệu mới, bạn có muốn tải về không?",default,"Đồng ý","Hủy bỏ", PopupManager.DialogType.YesNoDialog,
+            PopupManager.PopUpDialog("", "Có bản cập nhật dữ liệu mới, bạn có muốn tải về không?", default, "Đồng ý", "Hủy bỏ", PopupManager.DialogType.YesNoDialog,
                 () =>
                 {
                     RetryDownload();
@@ -90,7 +88,7 @@ public class DownLoadManager : MonoBehaviour
     /// </summary>
     public void Download()
     {
-        PopupManager.PopUpDialog("Xin chào!", "Bạn cần tải dữ liệu để tiếp tục, bấm Đồng ý",default,"Đồng ý","Hủy bỏ" ,PopupManager.DialogType.YesNoDialog,
+        PopupManager.PopUpDialog("Xin chào!", "Bạn cần tải dữ liệu để tiếp tục, bấm Đồng ý", default, "Đồng ý", "Hủy bỏ", PopupManager.DialogType.YesNoDialog,
         (() =>
         {
             _dlAssets.slider = loadingBar;
@@ -129,7 +127,7 @@ public class DownLoadManager : MonoBehaviour
         }
         return false;
     }
-    
+
     /// <summary>
     /// There is NO data in local
     /// TODO for test: Delete key "Downloaded + ThemeName" when delete data

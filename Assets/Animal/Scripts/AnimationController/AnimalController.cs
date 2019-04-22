@@ -21,8 +21,8 @@ namespace Firecoals.Animal
                     CanEat = false;
                     DemJump = 0;
                     var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                    if (Physics.Raycast(ray, out var hit))
-                    {
+                if (Physics.Raycast(ray, out var hit) && !UICamera.isOverUI)
+                {
 
                         if (hit.collider.gameObject)
                         {
@@ -41,6 +41,7 @@ namespace Firecoals.Animal
                             //TODO SetActive(touch effect) = true
                         }
                     }
+              
             }
 
         }

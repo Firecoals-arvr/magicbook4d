@@ -1,8 +1,11 @@
 ﻿using Firecoals.AssetBundles.Sound;
 using Firecoals.Augmentation;
+using Firecoals.Threading.Tasks;
 using Loxodon.Framework.Bundles;
 using System.Collections;
 using UnityEngine;
+using Dispatcher = Firecoals.Threading.Dispatcher;
+
 namespace Firecoals.Animal
 {
     /// <summary>
@@ -13,19 +16,18 @@ namespace Firecoals.Animal
         /// <summary>
         /// tên object trong asset bundles
         /// </summary>
-        public string BuildName;
+        public string bundleName;
 
         /// <summary>
         /// đường dẫn của object trong thư mục
         /// </summary>
-        public string path;
+        public string bundlePath;
 
         /// <summary>
         /// đường dẫn sound
         /// </summary>
         ///
         public float TimeStartEffect;
-        private AssetHandler assetHandler { get; set; }
         private AssetLoader assetLoader { get; set; }
         private LoadSoundbundles _loadsoundbundles;
         private AudioSource audio;
@@ -34,40 +36,34 @@ namespace Firecoals.Animal
         public string tagSound;
         public string tagName;
         private GameObject _textInfo;
-        private GameObject _textName;
-        public string st;
         /// <summary>
         /// key cho name object
         /// </summary>
-        [Header("Name key")]
+        [Header("Name key Load Bundles")]
         public string TextInfoName;
-
         /// <summary>
         /// key cho info object
-        /// </summary>
-        [Header("Information key")]
-        public string st2;
-
         /// <summary>
         /// Key để load name và info của models
         /// </summary>
         private string _nameModelTracking;
 
         private UILabel InformationLabel;
+        [Header("Name Animal")]
+        public string nameAnimal;
+        public UILabel objName;
         protected override void Start()
         {
-
             base.Start();
             audio = gameObject.GetComponent<AudioSource>();
-            assetHandler = new AssetHandler(mTrackableBehaviour.transform);
             _loadsoundbundles = GameObject.FindObjectOfType<LoadSoundbundles>();
-            PlayerPrefs.SetString("AnimalLanguage", "EN");
+            //PlayerPrefs.SetString("AnimalLanguage", "EN");
+            Dispatcher.Initialize();
+            assetLoader = GameObject.FindObjectOfType<AssetLoader>();
         }
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            assetHandler?.ClearAll();
-            assetHandler?.Content.ClearAll();
             //   Debug.Log("Destroy" + mTrackableBehaviour.name);
             foreach (Transform go in mTrackableBehaviour.transform)
             {
@@ -77,52 +73,57 @@ namespace Firecoals.Animal
 
         private IEnumerator StarEffect(GameObject go)
         {
-            assetLoader = GameObject.FindObjectOfType<AssetLoader>();
-            Debug.Log("<color=green>mTrackableBehaviour</color>" + mTrackableBehaviour);
             RandomEffect.Instance.Onfound(TimeStartEffect);
             yield return new WaitForSeconds(0.1f);
             //GameObject.Instantiate(go, mTrackableBehaviour.transform);
             InstantiationAsync.InstantiateAsync(go, mTrackableBehaviour.transform, 300);
             _loadsoundbundles.PlaySound(tagSound);
             _loadsoundbundles.PlayName(tagName);
+            StartCoroutine("LoadNameAnimal");
         }
 
-        private bool _cached = false;
+        public void Execute()
+        {
+#if UNITY_WSA && !UNITY_EDITOR
+        System.Threading.Tasks.Task t = new System.Threading.Tasks.Task(Augment);
+#else
+            System.Threading.Thread t = new System.Threading.Thread(new System.Threading.ThreadStart(Augment));
+#endif
+            t.Start();
+        }
 
-        private void CachingArContents()
+        private void Augment()
         {
             GameObject go = null;
+            Task loadTask= Dispatcher.instance.TaskToMainThread(() =>
+            {                                                                              
+                go = assetLoader.LoadGameObjectSync(bundleName, bundlePath);
+                //_cached = true;
+                Debug.Log("<color=red> GameObject created in background thread: " + go.name + "<color>");
 
-            InstantiationAsync.Asynchronous(() =>
+            });
+            loadTask.ContinueInMainThreadWith((task) =>
             {
-                if (IsTargetEmpty())
+                if (task.IsCompleted)
                 {
-                    go = assetHandler.CreateUnique(BuildName, path);
-                    _cached = true;
                     if (go != null)
                         LoadModelBundles(go);
                 }
-
-            }, 100);
-        }
-
-        private void LoadingCache()
-        {
-            GameObject go = assetHandler.CreateUnique(BuildName, path);
-            if (go != null)
-                LoadModelBundles(go);
+            });
         }
         protected override void OnTrackingFound()
         {
             ClearAllOtherTargetContents();
-            if (IsTargetEmpty() && !_cached)
-            {
-                CachingArContents();
-            }
-            if (IsTargetEmpty() && _cached)
-            {
-                LoadingCache();
-            }
+            //if (IsTargetEmpty() && !_cached)
+            //{
+            //    CachingArContents();
+            //}
+            //if (IsTargetEmpty() && _cached)
+            //{
+            //    LoadingCache();
+            //}
+            if(IsTargetEmpty())
+                Execute();
             //if (ActiveManager.IsActiveOfflineOk("A"))
             //{
             //    LoadModelBundles(go);
@@ -150,9 +151,8 @@ namespace Firecoals.Animal
         public void LoadModelBundles(GameObject go)
         {
             StartCoroutine(StarEffect(go));
-            _textName = GameObject.Find("UI Root/Name Panel/BangTen/Label");
-            _textInfo = GameObject.Find("UI Root/PanelInfor/Scroll View/Info");
-            if (st != null)
+            _textInfo = GameObject.Find("UI Root/PanelButtons/PanelInfor/Scroll View/Info");
+            if (_textInfo != null)
             {
                 ChangeKeyAnimalLocalization();
             }
@@ -170,11 +170,10 @@ namespace Firecoals.Animal
         /// </summary>
         private void ClearAllOtherTargetContents()
         {
-            Debug.LogWarning(mTrackableBehaviour.transform.parent.transform.name);
             foreach (Transform target in mTrackableBehaviour.transform.parent.transform)
             {
-                if (target != this.transform  && target.childCount > 0) 
-                        Destroy(target.GetChild(0).gameObject);
+                if (target != transform && target.childCount > 0)
+                    Destroy(target.GetChild(0).gameObject);
             }
         }
         private void EnableAllChildOfTheTarget()
@@ -195,8 +194,6 @@ namespace Firecoals.Animal
         {
             FirecoalsSoundManager.StopAll();
             RandomEffect.Instance.Onlost();
-            assetHandler?.ClearAll();
-            assetHandler?.Content.ClearAll();
             //   Debug.Log("Destroy" + mTrackableBehaviour.name);
             foreach (Transform go in mTrackableBehaviour.transform)
             {
@@ -206,6 +203,9 @@ namespace Firecoals.Animal
             //{
             //    DesableAllChildOfTheTarget();
             //}
+
+            // DisActive TextNameAnimal trên scene
+            NGUITools.SetActive(objName.gameObject, false);
             base.OnTrackingLost();
         }
         //private void RunAnimationIntro()
@@ -223,15 +223,21 @@ namespace Firecoals.Animal
         {
             _textInfo.GetComponent<UILocalize>().key = TextInfoName;
             _textInfo.GetComponent<UILabel>().text = Localization.Get(TextInfoName);
-            _textName.GetComponent<UILabel>().text = st;
         }
         private void ClearKeyLocalization()
         {
-            if (_textName != null && _textInfo != null)
+            if (_textInfo != null)
             {
-                _textName.GetComponent<UILocalize>().key = string.Empty;
                 _textInfo.GetComponent<UILocalize>().key = string.Empty;
             }
+        }
+        // hiển thị text trên scene khi load sound name
+        public IEnumerator LoadNameAnimal()
+        {
+            objName.text = nameAnimal;
+            NGUITools.SetActive(objName.gameObject, true);
+            yield return new WaitForSeconds(2);
+            NGUITools.SetActive(objName.gameObject, false);
         }
     }
 }

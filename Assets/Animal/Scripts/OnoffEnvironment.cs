@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Firecoals.Animal;
 using UnityEngine;
@@ -15,12 +16,12 @@ public class OnoffEnvironment : MonoBehaviour
     {
         Onclick();
     }
-    public void Onclick()
+   private void  Onclick()
     {
-        EventDelegate onpick = new EventDelegate(this, "OnMoveEventStarted");
-        EventDelegate.Set(button.GetComponent<UIButton>().onClick, onpick);
+            EventDelegate onpick = new EventDelegate(this, "OnMoveEventStarted");
+            EventDelegate.Set(button.GetComponent<UIButton>().onClick, onpick);     
     }
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         button = GameObject.FindGameObjectWithTag("Environment");
         ObjEnvironment = transform.parent.GetComponentInChildren<EnvironmentAnimal>().gameObject;

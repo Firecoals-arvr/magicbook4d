@@ -31,16 +31,17 @@ namespace Firecoals.Animal
         }
         protected void FixedUpdate()
         {
+
             if (Input.GetMouseButtonDown(0))//TODO && not hover UI
             {
-                CanEat = false;
+                CanEat = false; 
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                if (Physics.Raycast(ray, out hit))
+                if (Physics.Raycast(ray, out var hit) && !UICamera.isOverUI)
                 {
                     if (Vector3.Distance(transform.position, hit.point) > Jumpdistiance* ScaleAnimal)
                     {
                         IsJump = true;
+                        
                     }
                     else
                     {

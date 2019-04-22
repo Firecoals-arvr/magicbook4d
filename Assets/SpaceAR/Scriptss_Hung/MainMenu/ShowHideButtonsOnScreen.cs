@@ -25,7 +25,7 @@ namespace Firecoals.Space
         public void ShowMenu()
         {
             var offset = hideMenu.transform.localPosition.x;
-            var x = TweenPosition.Begin(hideMenu, .5f, new Vector3(offset + 120f, 14f, 0f));
+            var x = TweenPosition.Begin(hideMenu, .5f, new Vector3(offset + 130f, 14f, 0f));
             x.method = UITweener.Method.EaseInOut;
             x.PlayForward();
             x.ResetToBeginning();
@@ -41,7 +41,7 @@ namespace Firecoals.Space
         public void HideMenu()
         {
             var offset = hideMenu.transform.localPosition.x;
-            var x = TweenPosition.Begin(hideMenu, .5f, new Vector3(offset - 120f, 14f, 0f));
+            var x = TweenPosition.Begin(hideMenu, .5f, new Vector3(offset - 130f, 14f, 0f));
             x.method = UITweener.Method.EaseInOut;
             x.PlayForward();
             x.ResetToBeginning();

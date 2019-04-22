@@ -6,6 +6,7 @@ namespace Firecoals.SceneTransition
     {
         public float speed = 5f;
         private float gondelarm_sin;
+
         private void Update()
         {
 
@@ -15,10 +16,11 @@ namespace Firecoals.SceneTransition
             //{
             //    transform.rotation = Quaternion.AngleAxis(0, Vector3.back);
             //}
-
             float arm_rot = Mathf.Sin(gondelarm_sin) * 80.0f * 0.5f;
             gondelarm_sin += Time.deltaTime * speed;
             transform.localEulerAngles = new Vector3(0.0f, 0.0f, arm_rot);
+
         }
+
     }
 }

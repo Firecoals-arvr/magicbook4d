@@ -68,7 +68,7 @@ namespace Firecoals.AssetBundles
                     Debug.LogFormat("Downloads BundleManifest failure.Error:{0}", manifestResult.Exception);
                     PopupManager.PopUpDialog("[[9C0002]Error[-]]", "Downloads data info failure. Error:{0}" +
                         manifestResult.Exception, "Menu",default, default, PopupManager.DialogType.OkDialog,
-                        (() => SceneManager.LoadScene("Menu")));
+                        (() => SceneLoader.LoadScene("Menu")));
                     yield break;
                 }
 
@@ -92,16 +92,20 @@ namespace Firecoals.AssetBundles
                         {
                             var dlManager = GameObject.FindObjectOfType<DownLoadManager>();
                             dlManager.RetryDownload();
-                        }, () => SceneManager.LoadScene("Menu"));
+                        }, () => SceneLoader.LoadScene("Menu"));
                     yield break;
                 }
 
                 IProgressResult<Progress, bool> downloadResult = _downloader.DownloadBundles(bundles);
+                
                 downloadResult.Callbackable().OnProgressCallback(p =>
                 {
+                    
                     Debug.LogFormat("Downloading {0:F2}KB/{1:F2}KB {2:F3}KB/S", p.GetCompletedSize(UNIT.KB), p.GetTotalSize(UNIT.KB), p.GetSpeed(UNIT.KB));
                     var percent = p.GetCompletedSize(UNIT.KB) / p.GetTotalSize(UNIT.KB);
+                    
                     slider.value = percent;
+                    
                     //var label =  slider.transform.Find("displaytext").gameObject.GetComponent<UILabel>();
                     //label.text = p.GetCompletedSize(UNIT.KB).ToString()+"/"+ p.GetTotalSize(UNIT.KB).ToString();
 
@@ -116,7 +120,7 @@ namespace Firecoals.AssetBundles
                 if (downloadResult.Exception != null)
                 {
                     Debug.LogFormat("Downloads AssetBundle failure.Error:{0}", downloadResult.Exception);
-                    PopupManager.PopUpDialog("[[9C0002]Error[-]]", "Downloads Data failure. Error",default,"Thử lại","Menu",
+                    PopupManager.PopUpDialog("[[9C0002]Error[-]]", "Downloads Data failure. Error"+ downloadResult.Exception, default,"Thử lại","Menu",
                         PopupManager.DialogType.YesNoDialog, () =>
                         {
                             var dlManager = GameObject.FindObjectOfType<DownLoadManager>();

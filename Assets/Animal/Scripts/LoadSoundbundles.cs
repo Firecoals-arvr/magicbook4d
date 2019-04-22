@@ -35,7 +35,7 @@ namespace Firecoals.Animal
             var soundManifest = _soundManifest.LoadSync(Application.streamingAssetsPath + "/AnimalAudioClip.json");
             soundNoises = soundManifest.soundInfos;
             _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["animals/noise"];
-            Debug.LogWarning("GetNameBundlePath" + GetSoundBundlePath("all", sound).ToString());
+            //Debug.LogWarning("GetNameBundlePath" + GetSoundBundlePath("all", sound).ToString());
             AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetSoundBundlePath("all", sound));
             FirecoalsSoundManager.PlaySound(audioClip);
         }
