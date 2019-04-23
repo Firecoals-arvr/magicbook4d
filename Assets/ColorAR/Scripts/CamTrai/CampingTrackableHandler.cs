@@ -8,16 +8,17 @@ namespace Firecoals.Color
 {
 	public class CampingTrackableHandler : DefaultTrackableEventHandler
 	{
-		AssetHandler handler;
 		public GameObject renderCam;
         private LoadSoundBundlesColor _loadSoundBundles;
         public string tagSound;
+
+        private AssetLoader _assetLoader;
         // Start is called before the first frame update
         protected override void Start()
 		{
 			base.Start();
-			handler = new AssetHandler(mTrackableBehaviour.transform);
-		}
+            _assetLoader = FindObjectOfType<AssetLoader>();
+        }
 
 		protected override void OnDestroy()
 		{
@@ -26,7 +27,7 @@ namespace Firecoals.Color
 
 		protected override void OnTrackingFound()
 		{
-            GameObject go = handler.CreateUnique("color/model/camtrai", "Assets/ColorAR/Prefabs/CamTrai/CamTrai_Group.prefab");
+            GameObject go =_assetLoader.LoadGameObjectSync("color/model/camtrai", "Assets/ColorAR/Prefabs/CamTrai/CamTrai_Group.prefab");
             _loadSoundBundles = GameObject.FindObjectOfType<LoadSoundBundlesColor>();
             if (go)
             {
@@ -45,8 +46,6 @@ namespace Firecoals.Color
 
 		protected override void OnTrackingLost()
 		{
-            handler?.ClearAll();
-            handler?.Content.ClearAll();
             foreach (Transform trans in mTrackableBehaviour.transform)
             {
                 Destroy(trans.gameObject);
@@ -56,10 +55,10 @@ namespace Firecoals.Color
 		}
         public void CreateCloud(Transform parent)
         {
-            GameObject cloud_1 = handler.CreateUnique("color/model/cloud/camtrai", "Assets/ColorAR/Prefabs/Cloud/Camtrai/c1.prefab");
-            Instantiate(cloud_1, parent.transform.GetChild(1));
-            GameObject cloud_2 = handler.CreateUnique("color/model/cloud/camtrai", "Assets/ColorAR/Prefabs/Cloud/Camtrai/c2.prefab");
-            Instantiate(cloud_2, parent.transform.GetChild(1));
+            //GameObject cloud_1 = handler.CreateUnique("color/model/cloud/camtrai", "Assets/ColorAR/Prefabs/Cloud/Camtrai/c1.prefab");
+            //Instantiate(cloud_1, parent.transform.GetChild(1));
+            //GameObject cloud_2 = handler.CreateUnique("color/model/cloud/camtrai", "Assets/ColorAR/Prefabs/Cloud/Camtrai/c2.prefab");
+            //Instantiate(cloud_2, parent.transform.GetChild(1));
         }
     }
 }

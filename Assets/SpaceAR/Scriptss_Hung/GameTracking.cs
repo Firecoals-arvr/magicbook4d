@@ -26,7 +26,6 @@ namespace Firecoals.Space
         /// AssetLoader để load sound, asset hanler và iresources để load models
         /// </summary>
         private AssetLoader assetloader;
-        private AssetHandler _assethandler;
         private IResources _resources;
 
         /// <summary>
@@ -96,8 +95,6 @@ namespace Firecoals.Space
 
         protected override void OnTrackingLost()
         {
-            _assethandler?.ClearAll();
-            _assethandler?.Content.ClearAll();
 
             foreach (Transform go in mTrackableBehaviour.transform)
             {
@@ -144,7 +141,6 @@ namespace Firecoals.Space
         void CloneModels()
         {
             //var statTime = DateTime.Now;
-            _assethandler = new AssetHandler(mTrackableBehaviour.transform);
             ApplicationContext context = Context.GetApplicationContext();
             this._resources = context.GetService<IResources>();
             GameObject go1 = assetloader.LoadGameObjectAsync(path);

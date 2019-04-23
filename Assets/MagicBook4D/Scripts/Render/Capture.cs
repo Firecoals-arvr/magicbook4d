@@ -58,7 +58,8 @@ namespace Firecoals.Render
 
         public void Snap()
         {
-            StartCoroutine(TakePhoto());
+            Firecoals.Threading.Dispatcher.instance.LaunchCoroutine(TakePhoto());
+            //StartCoroutine(TakePhoto());
         }
 
         public void BackScreenShot()

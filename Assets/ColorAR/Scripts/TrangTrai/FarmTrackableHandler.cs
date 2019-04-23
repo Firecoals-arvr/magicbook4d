@@ -8,7 +8,7 @@ namespace Firecoals.Color
 {
 	public class FarmTrackableHandler : DefaultTrackableEventHandler
 	{
-		AssetHandler handler;
+		AssetLoader _assetLoader;
 		public GameObject renderCam;
         public string tagSound;
         private LoadSoundBundlesColor _loadSoundBundles;
@@ -16,8 +16,8 @@ namespace Firecoals.Color
         protected override void Start()
 		{
 			base.Start();
-			
-		}
+            _assetLoader = FindObjectOfType<AssetLoader>();
+        }
 
 		protected override void OnDestroy()
 		{
@@ -26,8 +26,8 @@ namespace Firecoals.Color
 
 		protected override void OnTrackingFound()
 		{
-            handler = new AssetHandler(mTrackableBehaviour.transform);
-            GameObject go = handler.CreateUnique("color/model/trangtrai", "Assets/ColorAR/Prefabs/TrangTrai/TrangTrai_Group.prefab");
+            
+            GameObject go = _assetLoader.LoadGameObjectSync("color/model/trangtrai", "Assets/ColorAR/Prefabs/TrangTrai/TrangTrai_Group.prefab");
             _loadSoundBundles = GameObject.FindObjectOfType<LoadSoundBundlesColor>();
             if (go)
             {
@@ -45,8 +45,6 @@ namespace Firecoals.Color
 
 		protected override void OnTrackingLost()
 		{
-            handler?.ClearAll();
-            handler?.Content.ClearAll();
             foreach (Transform trans in mTrackableBehaviour.transform)
             {
                 Destroy(trans.gameObject);

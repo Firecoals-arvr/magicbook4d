@@ -7,8 +7,10 @@ using Firecoals.AssetBundles;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
 using Firecoals.AssetBundles.Sound;
+using Firecoals.SceneTransition;
 using UnityEngine.SceneManagement;
 using Vuforia;
+using Dispatcher = Firecoals.Threading.Dispatcher;
 
 namespace Firecoals.Space
 {
@@ -78,6 +80,9 @@ namespace Firecoals.Space
             ApplicationContext context = Context.GetApplicationContext();
             this._resources = context.GetService<IResources>();
             base.Start();
+            Dispatcher.Initialize();
+            _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
+            assetloader = GameObject.FindObjectOfType<AssetLoader>();
         }
 
         protected override void OnDestroy()
@@ -88,8 +93,7 @@ namespace Firecoals.Space
         protected override void OnTrackingFound()
         {
             inforBtn = GameObject.FindGameObjectsWithTag("infor");
-            _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
-            assetloader = GameObject.FindObjectOfType<AssetLoader>(); //TODO what the hell sao để đây!
+
             NGUITools.SetActive(objectName, true);
             //nếu đã purchase thì vào phần này
             if (ActiveManager.IsActiveOfflineOk("B"))
@@ -111,7 +115,7 @@ namespace Firecoals.Space
                 {
                     PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", "OK", "Yes", "No", PopupManager.DialogType.YesNoDialog, () =>
                    {
-                       SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
+                       SceneLoader.LoadScene("Activate");
                    });
                 }
             }
@@ -180,10 +184,10 @@ namespace Firecoals.Space
             Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
             if (this.transform.childCount == 0)
             {
-                var startTime = DateTime.Now;
+                //var startTime = DateTime.Now;
                 Instantiate(go1, mTrackableBehaviour.transform);
                 PlayAnimIntro();
-                Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
+                //Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
             }
             _loadSoundbundle.PlayNameSound(tagSound);
 

@@ -8,7 +8,7 @@ namespace Firecoals.Color
 {
 	public class KitingTrackableHandler : DefaultTrackableEventHandler
 	{
-		AssetHandler handler;
+		AssetLoader _assetLoader;
 		public GameObject renderCam;
         private LoadSoundBundlesColor _loadSoundBundles;
         public string tagSound;
@@ -16,7 +16,7 @@ namespace Firecoals.Color
         protected override void Start()
 		{
 			base.Start();
-			handler = new AssetHandler(mTrackableBehaviour.transform);
+            _assetLoader = FindObjectOfType<AssetLoader>();
 		}
 
 		protected override void OnDestroy()
@@ -26,7 +26,7 @@ namespace Firecoals.Color
 
 		protected override void OnTrackingFound()
 		{
-            GameObject go = handler.CreateUnique("color/model/thadieu", "Assets/ColorAR/Prefabs/ThaDieu/ThaDieu_Group.prefab");
+            GameObject go = _assetLoader.LoadGameObjectSync("color/model/thadieu", "Assets/ColorAR/Prefabs/ThaDieu/ThaDieu_Group.prefab");
             _loadSoundBundles = GameObject.FindObjectOfType<LoadSoundBundlesColor>();
             if (go)
             {
@@ -44,8 +44,6 @@ namespace Firecoals.Color
 
 		protected override void OnTrackingLost()
 		{
-            handler?.ClearAll();
-            handler?.Content.ClearAll();
             foreach (Transform trans in mTrackableBehaviour.transform)
             {
                 Destroy(trans.gameObject);

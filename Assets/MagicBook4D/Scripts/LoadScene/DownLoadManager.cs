@@ -102,7 +102,7 @@ public class DownLoadManager : MonoBehaviour
     public void RetryDownload()
     {
         //Clear persistent data path
-        BundleUtil.ClearStorableDirectory();
+        //BundleUtil.ClearStorableDirectory();
         PlayerPrefs.DeleteKey("Downloaded" + ThemeController.instance.Theme);
         //Downloading
         _dlAssets.slider = loadingBar;
