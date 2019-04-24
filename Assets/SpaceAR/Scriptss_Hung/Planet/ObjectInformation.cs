@@ -25,14 +25,14 @@ namespace Firecoals.Space
         /// <summary>
         /// animator của bảng thông tin
         /// </summary>
-        Animator anim;
+        [SerializeField] Animator anim;
 
         List<Transform> go = new List<Transform>();
 
         private void Start()
         {
             checkOpen = false;
-            anim = panelinfo.GetComponent<Animator>();
+            //anim = panelinfo.GetComponent<Animator>();
         }
 
         /// <summary>

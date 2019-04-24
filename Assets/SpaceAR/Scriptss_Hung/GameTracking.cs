@@ -8,6 +8,8 @@ using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
 using UnityEngine.SceneManagement;
 using Vuforia;
+using Firecoals.Threading.Tasks;
+using Dispatcher = Firecoals.Threading.Dispatcher;
 
 namespace Firecoals.Space
 {
@@ -16,6 +18,10 @@ namespace Firecoals.Space
     /// </summary>
     public class GameTracking : DefaultTrackableEventHandler
     {
+        /// <summary>
+        /// tên bundle của object
+        /// </summary>
+        public string bundleName;
 
         /// <summary>
         /// đường dẫn của object trong thư mục
@@ -26,7 +32,7 @@ namespace Firecoals.Space
         /// AssetLoader để load sound, asset hanler và iresources để load models
         /// </summary>
         private AssetLoader assetloader;
-        private AssetHandler _assethandler;
+
         private IResources _resources;
 
         /// <summary>
@@ -69,6 +75,7 @@ namespace Firecoals.Space
         {
             ApplicationContext context = Context.GetApplicationContext();
             this._resources = context.GetService<IResources>();
+            assetloader = GameObject.FindObjectOfType<AssetLoader>();
             base.Start();
         }
 
@@ -79,42 +86,40 @@ namespace Firecoals.Space
 
         protected override void OnTrackingFound()
         {
-            _assethandler = new AssetHandler(mTrackableBehaviour.transform);
-            assetloader = GameObject.FindObjectOfType<AssetLoader>();
+
             inforBtn = GameObject.FindGameObjectsWithTag("infor");
             NGUITools.SetActive(objectName, true);
 
-            SpawnModel();
+            //SpawnModel();
             //nếu đã purchase thì vào phần này
-            //if (ActiveManager.IsActiveOfflineOk("B"))
-            //{
-            //    SpawnModel();
-            //}
-            //// nếu chưa purchase thì vào phần này
-            //else
-            //{
-            //    //nếu là 3 trang đầu thì cho xem model
-            //    if (mTrackableBehaviour.TrackableName == "Solarsystem_scaled" || mTrackableBehaviour.TrackableName == "Sun_scaled" || mTrackableBehaviour.TrackableName == "Mercury_scaled")
-            //    {
-            //        SpawnModel();
-            //    }
-            //    //nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
-            //    else
-            //    {
-            //        PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", "OK", "Yes", "No", PopupManager.DialogType.YesNoDialog, () =>
-            //        {
-            //            SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
-            //        });
-            //    }
-            //}
+            if (ActiveManager.IsActiveOfflineOk("B"))
+            {
+                //SpawnModel();
+                ShowModelsOnScreen();
+            }
+            // nếu chưa purchase thì vào phần này
+            else
+            {
+                //nếu là 3 trang đầu thì cho xem model
+                if (mTrackableBehaviour.TrackableName == "Solarsystem_scaled" || mTrackableBehaviour.TrackableName == "Sun_scaled" || mTrackableBehaviour.TrackableName == "Mercury_scaled")
+                {
+                    //SpawnModel();
+                    ShowModelsOnScreen();
+                }
+                //nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
+                else
+                {
+                    PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", "OK", "Yes", "No", PopupManager.DialogType.YesNoDialog, () =>
+                    {
+                        SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
+                    });
+                }
+            }
             base.OnTrackingFound();
         }
 
         protected override void OnTrackingLost()
         {
-            _assethandler?.ClearAll();
-            _assethandler?.Content.ClearAll();
-
             foreach (Transform go in mTrackableBehaviour.transform)
             {
                 Destroy(go.gameObject);
@@ -123,6 +128,53 @@ namespace Firecoals.Space
 
             ClearKeyLocalization();
             base.OnTrackingLost();
+        }
+
+        private void ShowModelsOnScreen()
+        {
+            if (IsTargetEmpty())
+            {
+                Execute();
+            }
+        }
+
+        public void Execute()
+        {
+#if UNITY_WSA && !UNITY_EDITOR
+        System.Threading.Tasks.Task t = new System.Threading.Tasks.Task(Augment);
+#else
+            System.Threading.Thread t = new System.Threading.Thread(new System.Threading.ThreadStart(Augment));
+#endif
+            t.Start();
+        }
+
+        private void Augment()
+        {
+            GameObject go = null;
+            Task loadTask = Dispatcher.instance.TaskToMainThread(() =>
+            {
+                go = assetloader.LoadGameObjectSync(bundleName, path);
+                //_cached = true;
+                //Debug.Log("<color=red> GameObject created in background thread: " + go.name + "<color>");
+
+            });
+            loadTask.ContinueInMainThreadWith((task) =>
+            {
+                if (task.IsCompleted)
+                {
+                    if (go != null)
+                        CloneModels(go);
+                }
+            });
+        }
+
+        private void ClearAllOtherTargetContents()
+        {
+            foreach (Transform target in mTrackableBehaviour.transform.parent.transform)
+            {
+                if (target != transform && target.childCount > 0)
+                    Destroy(target.GetChild(0).gameObject);
+            }
         }
 
         /// <summary>

@@ -9,7 +9,8 @@ using Loxodon.Framework.Contexts;
 using Firecoals.AssetBundles.Sound;
 using UnityEngine.SceneManagement;
 using Vuforia;
-using System.Threading.Tasks;
+using Firecoals.Threading.Tasks;
+using Dispatcher = Firecoals.Threading.Dispatcher;
 
 namespace Firecoals.Space
 {
@@ -18,6 +19,10 @@ namespace Firecoals.Space
     /// </summary>
     public class IntroScripts : DefaultTrackableEventHandler
     {
+        /// <summary>
+        /// tên bundle của object
+        /// </summary>
+        public string bundleName;
 
         /// <summary>
         /// đường dẫn của object trong thư mục
@@ -28,7 +33,7 @@ namespace Firecoals.Space
         /// AssetLoader để load sound, asset hanler và iresources để load models
         /// </summary>
         private AssetLoader assetloader;
-        private AssetHandler _assethandler;
+
         private IResources _resources;
 
         /// <summary>
@@ -79,9 +84,10 @@ namespace Firecoals.Space
         {
             ApplicationContext context = Context.GetApplicationContext();
             this._resources = context.GetService<IResources>();
-
+            assetloader = GameObject.FindObjectOfType<AssetLoader>();
             _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
             base.Start();
+            Dispatcher.Initialize();
         }
 
         protected override void OnDestroy()
@@ -91,48 +97,55 @@ namespace Firecoals.Space
 
         protected override void OnTrackingFound()
         {
-            _assethandler = new AssetHandler(mTrackableBehaviour.transform);
-            assetloader = GameObject.FindObjectOfType<AssetLoader>();
+            //assetloader = GameObject.FindObjectOfType<AssetLoader>();
             inforBtn = GameObject.FindGameObjectsWithTag("infor");
-            foreach (var a in inforBtn)
-            {
-                Debug.Log("button name: " + a.name);
-            }
+
+            //if (IsTargetEmpty())
+            //{
+            //    Execute();
+            //}
+
             NGUITools.SetActive(objectName, true);
-            SpawnModel();
             AutoTriggerInforButton();
             //nếu đã purchase thì vào phần này
-            //if (ActiveManager.IsActiveOfflineOk("B"))
-            //{
-            //    SpawnModel();
-            //    AutoTriggerInforButton();
-            //}
-            //// nếu chưa purchase thì vào phần này
-            //else
-            //{
-            //    //nếu là 3 trang đầu thì cho xem model
-            //    if (mTrackableBehaviour.TrackableName == "Solarsystem_scaled" || mTrackableBehaviour.TrackableName == "Sun_scaled" || mTrackableBehaviour.TrackableName == "Mercury_scaled")
-            //    {
-            //        SpawnModel();
-            //        AutoTriggerInforButton();
-            //    }
-            //    //nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
-            //    else
-            //    {
-            //        PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", "OK", "Yes", "No", PopupManager.DialogType.YesNoDialog, () =>
-            //        {
-            //            SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
-            //        });
-            //    }
-            //}
+            if (ActiveManager.IsActiveOfflineOk("B"))
+            {
+                //SpawnModel();
+                ShowModelsOnScreen();
+                AutoTriggerInforButton();
+            }
+            // nếu chưa purchase thì vào phần này
+            else
+            {
+                //nếu là 3 trang đầu thì cho xem model
+                if (mTrackableBehaviour.TrackableName == "Solarsystem_scaled" || mTrackableBehaviour.TrackableName == "Sun_scaled" || mTrackableBehaviour.TrackableName == "Mercury_scaled")
+                {
+                    //SpawnModel();
+                    ShowModelsOnScreen();
+                    AutoTriggerInforButton();
+                }
+                //nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
+                else
+                {
+                    PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", "OK", "Yes", "No", PopupManager.DialogType.YesNoDialog, () =>
+                    {
+                        SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
+                    });
+                }
+            }
             base.OnTrackingFound();
+        }
+
+        private void ShowModelsOnScreen()
+        {
+            if (IsTargetEmpty())
+            {
+                Execute();
+            }
         }
 
         protected override void OnTrackingLost()
         {
-            _assethandler?.ClearAll();
-            _assethandler?.Content.ClearAll();
-
             foreach (Transform go in mTrackableBehaviour.transform)
             {
                 Destroy(go.gameObject);
@@ -144,25 +157,35 @@ namespace Firecoals.Space
             base.OnTrackingLost();
         }
 
-        //private void Augment()
-        //{
-        //    GameObject go = null;
-        //    Task loadTask = Dispatcher.instance.TaskToMainThread(() =>
-        //    {
-        //        go = assetLoader.LoadGameObjectSync(bundleName, bundlePath);
-        //        //_cached = true;
-        //        Debug.Log("<color=red> GameObject created in background thread: " + go.name + "<color>");
+        public void Execute()
+        {
+#if UNITY_WSA && !UNITY_EDITOR
+        System.Threading.Tasks.Task t = new System.Threading.Tasks.Task(Augment);
+#else
+            System.Threading.Thread t = new System.Threading.Thread(new System.Threading.ThreadStart(Augment));
+#endif
+            t.Start();
+        }
 
-        //    });
-        //    loadTask.ContinueInMainThreadWith((task) =>
-        //    {
-        //        if (task.IsCompleted)
-        //        {
-        //            if (go != null)
-        //                CloneModels(go);
-        //        }
-        //    });
-        //}
+        private void Augment()
+        {
+            GameObject go = null;
+            Task loadTask = Dispatcher.instance.TaskToMainThread(() =>
+            {
+                go = assetloader.LoadGameObjectSync(bundleName, path);
+                //_cached = true;
+                //Debug.Log("<color=red> GameObject created in background thread: " + go.name + "<color>");
+
+            });
+            loadTask.ContinueInMainThreadWith((task) =>
+            {
+                if (task.IsCompleted)
+                {
+                    if (go != null)
+                        CloneModels(go);
+                }
+            });
+        }
 
         /// <summary>
         /// đổi key trong localization để lấy đúng tên, thông tin theo object
@@ -181,15 +204,28 @@ namespace Firecoals.Space
             }
         }
 
-        private void SpawnModel()
+
+        //private void SpawnModel()
+        //{
+        //    if (IsTargetEmpty() && !_cached)
+        //    {
+        //        CachingArContents();
+        //    }
+        //    if (IsTargetEmpty() && _cached)
+        //    {
+        //        LoadingCache();
+        //    }
+        //}
+
+        /// <summary>
+        /// Clear all except this
+        /// </summary>
+        private void ClearAllOtherTargetContents()
         {
-            if (IsTargetEmpty() && !_cached)
+            foreach (Transform target in mTrackableBehaviour.transform.parent.transform)
             {
-                CachingArContents();
-            }
-            if (IsTargetEmpty() && _cached)
-            {
-                LoadingCache();
+                if (target != transform && target.childCount > 0)
+                    Destroy(target.GetChild(0).gameObject);
             }
         }
 
