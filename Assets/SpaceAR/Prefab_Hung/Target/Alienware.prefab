@@ -89,7 +89,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3010
+  startingRenderQueue: 3011
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -172,7 +172,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3009
+  startingRenderQueue: 3010
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -2903,7 +2903,7 @@ MonoBehaviour:
   moveSpeed: 0.01
   alienChild: {fileID: 1610797135102232}
   joystick: {fileID: 114356288439074072}
-  anima: {fileID: 111746348888729628}
+  anima: {fileID: 0}
   stt: 0
 --- !u!114 &114157808202761412
 MonoBehaviour:
@@ -10513,7 +10513,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4238582032452606}
-  - component: {fileID: 1002986272}
   m_Layer: 0
   m_Name: 1352 Flying Saucer
   m_TagString: Untagged
@@ -10536,18 +10535,6 @@ Transform:
   m_Father: {fileID: 4741273563322016}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1002986272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1899416006909592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e5616d1d5e35304f95fd4329d9798df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1900685478567402
 GameObject:
   m_ObjectHideFlags: 0
@@ -11915,7 +11902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e7d41ecae6d304a8b80e50b6500732, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alienMain: {fileID: 1610797135102232}
+  alAnim: {fileID: 111746348888729628}
 --- !u!1001 &1205387662
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12051,21 +12038,11 @@ PrefabInstance:
       propertyPath: ColorModule.gradient.maxGradient.key0.b
       value: 0.16353682
       objectReference: {fileID: 0}
-    - target: {fileID: 19824060, guid: 13755b5fbb6b69b4c81b942c6e32a512, type: 3}
-      propertyPath: SubModule.subEmitters.Array.data[0].emitter
-      value: 
-      objectReference: {fileID: 1190571422}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13755b5fbb6b69b4c81b942c6e32a512, type: 3}
 --- !u!4 &1205850070 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 462424, guid: 13755b5fbb6b69b4c81b942c6e32a512,
-    type: 3}
-  m_PrefabInstance: {fileID: 1205387662}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &1190571422 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 19819536, guid: 13755b5fbb6b69b4c81b942c6e32a512,
     type: 3}
   m_PrefabInstance: {fileID: 1205387662}
   m_PrefabAsset: {fileID: 0}

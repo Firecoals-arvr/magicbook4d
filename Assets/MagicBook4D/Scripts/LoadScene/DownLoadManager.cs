@@ -111,6 +111,18 @@ public class DownLoadManager : MonoBehaviour
         StartCoroutine(_dlAssets.Download());
     }
 
+    public void ClearCacheAndRetry()
+    {
+        //Clear persistent data path
+        BundleUtil.ClearStorableDirectory();
+        PlayerPrefs.DeleteKey("Downloaded" + ThemeController.instance.Theme);
+        //Downloading
+        _dlAssets.slider = loadingBar;
+        _dlAssets.slider.value = 0;
+        NGUITools.SetActive(loadingBar.gameObject, true);
+        StartCoroutine(_dlAssets.Download());
+    }
+
     /// <summary>
     /// Check if manifest version different application version
     /// </summary>
@@ -135,8 +147,9 @@ public class DownLoadManager : MonoBehaviour
     /// <returns></returns>
     public bool RequiredDownload()
     {
+        return !BundleUtil.ExistsInStorableDirectory(BundleUtil.GetStorableDirectory() + BundleSetting.ManifestFilename);
         //return !PlayerPrefs.GetString("Downloaded" + ThemeController.instance.Theme).Equals("DONE");
-        return !PlayerPrefs.GetString("Downloaded" + ThemeController.instance.Theme).Equals("DONE");
+        //return !PlayerPrefs.GetString("Downloaded" + ThemeController.instance.Theme).Equals("DONE");
     }
 
 }

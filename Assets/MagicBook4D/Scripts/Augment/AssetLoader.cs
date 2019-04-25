@@ -153,6 +153,7 @@ namespace Firecoals.Augmentation
             /*Preload asset bundle*/
             assetBundlesLoader.slider = slider;
             yield return assetBundlesLoader.Preload(bundleNames, 1);
+            
         }
         private IResources CreateResources()
         {
@@ -212,7 +213,7 @@ namespace Firecoals.Augmentation
         /// Return null if fail
         /// </summary>
         /// <param name="bundlePath"></param>
-        public GameObject LoadGameObjectAsync(string bundlePath)
+        public void LoadGameObjectAsync(string bundlePath, Transform parrent)
         {
             IProgressResult<float, GameObject> result = Resources.LoadAssetAsync<GameObject>(bundlePath);
             GameObject tempGameObject = null;
@@ -220,22 +221,56 @@ namespace Firecoals.Augmentation
             {
                 Debug.LogFormat(bundlePath + "is loading with result :{0}%", p * 100);
             });
+            
             result.Callbackable().OnCallback((r) =>
             {
                 try
                 {
                     if (r.Exception != null)
                         throw r.Exception;
+                    //tempGameObject = r.Result;
+                    Debug.Log("<color=yellow>Instantiated " + r.Result.name + "</color>");
+                    GameObject.Instantiate(r.Result, parrent);
 
-                    tempGameObject = r.Result;
+                   
                 }
                 catch (Exception e)
                 {
                     Debug.LogErrorFormat("Load failure.Error:{0}", e);
                 }
             });
-            return tempGameObject;
+            
+            
+            //return tempGameObject;
         }
+
+        public GameObject[] LoadGameObjectsAsync()
+        {
+            IProgressResult<float, GameObject[]> results = Resources.LoadAssetsAsync<GameObject>(bundleNames);
+            GameObject[] tempGameObjects = null;
+            results.Callbackable().OnProgressCallback(p =>
+            {
+                Debug.LogFormat("bundles is loading with results :{0}%", p * 100);
+            });
+
+            results.Callbackable().OnCallback((r) =>
+            {
+                try
+                {
+                    if (r.Exception != null)
+                        throw r.Exception;
+
+                    tempGameObjects = r.Result;
+                }
+                catch (Exception e)
+                {
+                    Debug.LogErrorFormat("Load failure.Error:{0}", e);
+                }
+            });
+            return tempGameObjects;
+        }
+
+
 
         public GameObject LoadGameObjectSync(string bundleName, string bundlePath)
         {

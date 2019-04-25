@@ -19,7 +19,7 @@ namespace Firecoals.Space
         private void Start()
         {
             //Th test khi chưa qua scene setting
-            //nếu chưa chọn ngôn ngữ bên scene setting thì set mặc đinhj tiếng việt
+            //nếu chưa chọn ngôn ngữ bên scene setting thì set mặc định tiếng việt
             if (PlayerPrefs.GetString("SpaceLanguage") == null)
             {
                 OnOnPickLanguage("VI", "B");

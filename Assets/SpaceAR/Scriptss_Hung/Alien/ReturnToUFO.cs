@@ -9,13 +9,7 @@ namespace Firecoals.Space
     /// </summary>
     public class ReturnToUFO : MonoBehaviour
     {
-        [SerializeField] GameObject alienMain;
-        private Animation alAnim;
-
-        private void Start()
-        {
-            alAnim = alienMain.GetComponent<Animation>();
-        }
+        [SerializeField] Animation alAnim;
 
         public void CallUFO()
         {

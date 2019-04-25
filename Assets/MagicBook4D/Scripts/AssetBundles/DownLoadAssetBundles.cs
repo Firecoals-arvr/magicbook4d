@@ -91,7 +91,7 @@ namespace Firecoals.AssetBundles
                         PopupManager.DialogType.YesNoDialog, () =>
                         {
                             var dlManager = GameObject.FindObjectOfType<DownLoadManager>();
-                            dlManager.RetryDownload();
+                            dlManager.ClearCacheAndRetry();
                         }, () => SceneLoader.LoadScene("Menu"));
                     yield break;
                 }
@@ -131,8 +131,8 @@ namespace Firecoals.AssetBundles
 
                 if (downloadResult.IsDone)
                 {
-                    PlayerPrefs.SetString("Downloaded" + ThemeController.instance.Theme, "DONE");
-                    Debug.LogWarning("DONE download");
+                    //PlayerPrefs.SetString("Downloaded" + ThemeController.instance.Theme, "DONE");
+                    //Debug.LogWarning("DONE download");
                     var dlManager = GameObject.FindObjectOfType<DownLoadManager>();
                     dlManager.PreLoad();
                 }

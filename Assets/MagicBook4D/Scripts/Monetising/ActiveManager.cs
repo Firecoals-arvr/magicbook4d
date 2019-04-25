@@ -114,7 +114,7 @@ public class ActiveManager
             {
                 OnPlayerServerNotActived();
             }
-            yield return new WaitForSecondsRealtime(3f);
+            yield return new WaitForSecondsRealtime(0.5f);
         }
 
         yield return null;

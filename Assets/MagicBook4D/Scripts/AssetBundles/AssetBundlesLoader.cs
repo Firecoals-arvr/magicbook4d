@@ -99,6 +99,7 @@ namespace Firecoals.AssetBundles
             if (result.IsDone)
             {
                 Debug.Log("<color=red>" + ThemeController.instance.Theme + "</color>");
+
                 SceneManager.LoadScene(ThemeController.instance.Theme, LoadSceneMode.Single);
             }
             if (result.Exception != null)
