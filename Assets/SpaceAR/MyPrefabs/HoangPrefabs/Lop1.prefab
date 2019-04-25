@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 2943404429205420112}
   - component: {fileID: 554514794600502264}
   - component: {fileID: 4921249191160595791}
-  - component: {fileID: 2579701883247310858}
+  - component: {fileID: 465975050555459765}
+  - component: {fileID: 5866234938457848036}
   m_Layer: 0
   m_Name: 2D Sprite
   m_TagString: infor
@@ -129,18 +130,43 @@ MonoBehaviour:
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
   onClick: []
---- !u!114 &2579701883247310858
+--- !u!114 &465975050555459765
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1174561129764124356}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e9c021a760127e48b205da15c2a0241, type: 3}
+  m_Script: {fileID: 11500000, guid: 1fb5f5f1cd211db44bc48fa205ea1926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  label: {fileID: 2831604872425015729}
+--- !u!114 &5866234938457848036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174561129764124356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaee0fa3c7a782f43ac65b3fea68c1d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenTarget: {fileID: 1174561129764124356}
+  tweenGroup: 0
+  trigger: 0
+  playDirection: 1
+  resetOnPlay: 0
+  resetIfDisabled: 0
+  ifDisabledOnPlay: 0
+  disableWhenFinished: 0
+  includeChildren: 0
+  onFinished: []
+  eventReceiver: {fileID: 0}
+  callWhenFinished: 
 --- !u!1 &1609087488791544646
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,6 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   open: {fileID: 0}
   anim: {fileID: 1609087488791544647}
+  checkOpen: 1
 --- !u!114 &6175993274299896335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,7 +450,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3011
+  startingRenderQueue: 3013
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 3

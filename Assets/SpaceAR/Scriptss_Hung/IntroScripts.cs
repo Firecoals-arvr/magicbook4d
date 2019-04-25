@@ -1,15 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Firecoals.AssetBundles.Sound;
 using Firecoals.Augmentation;
-using System;
-using Firecoals.AssetBundles;
+using Firecoals.Threading.Tasks;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
-using Firecoals.AssetBundles.Sound;
-using UnityEngine.SceneManagement;
-using Vuforia;
-using Firecoals.Threading.Tasks;
+using System.Collections;
+using UnityEngine;
 using Dispatcher = Firecoals.Threading.Dispatcher;
 
 namespace Firecoals.Space
@@ -74,16 +69,17 @@ namespace Firecoals.Space
         /// <summary>
         /// anim để chạy animation intro lúc tracking found models
         /// </summary>
-        Animator anim;
+        private Animator anim;
 
-        private GameObject[] inforBtn = new GameObject[] { };
-        bool checkOpen;
+        //private GameObject[] inforBtn;
+        private bool checkOpen;
 
+        private AudioSource _audiosrc;
 
         protected override void Start()
         {
             ApplicationContext context = Context.GetApplicationContext();
-            this._resources = context.GetService<IResources>();
+            _resources = context.GetService<IResources>();
             assetloader = GameObject.FindObjectOfType<AssetLoader>();
             _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
             base.Start();
@@ -98,45 +94,51 @@ namespace Firecoals.Space
         protected override void OnTrackingFound()
         {
             //assetloader = GameObject.FindObjectOfType<AssetLoader>();
-            inforBtn = GameObject.FindGameObjectsWithTag("infor");
-            foreach (var a in inforBtn)
-            {
-                Debug.Log("<color=orange>" + a.name + "</color>");
-            }
+            //inforBtn = GameObject.FindGameObjectsWithTag("infor");
+            //foreach (var a in inforBtn)
+            //{
+            //    Debug.Log("<color=orange>" + a.name + "</color>");
+            //}
+
+            _audiosrc = gameObject.GetComponentInChildren<AudioSource>();
 
             //if (IsTargetEmpty())
             //{
             //    Execute();
             //}
 
-            NGUITools.SetActive(objectName, true);
-            AutoTriggerInforButton();
-            //nếu đã purchase thì vào phần này
-            if (ActiveManager.IsActiveOfflineOk("B"))
+            if (IsTargetEmpty())
             {
-                //SpawnModel();
                 ShowModelsOnScreen();
-                AutoTriggerInforButton();
+                PlayAudioOfObject();
             }
-            // nếu chưa purchase thì vào phần này
-            else
-            {
-                //nếu là 3 trang đầu thì cho xem model
-                if (mTrackableBehaviour.TrackableName == "Solarsystem_scaled" || mTrackableBehaviour.TrackableName == "Sun_scaled" || mTrackableBehaviour.TrackableName == "Mercury_scaled")
-                {
-                    //SpawnModel();
-                    ShowModelsOnScreen();
-                    AutoTriggerInforButton();
-                }
-                //nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
-                else
-                {
-                    PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", "OK", "Yes", "No", PopupManager.DialogType.YesNoDialog, () =>
-                    {
-                        SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
-                    });
-                }
-            }
+
+            //nếu đã purchase thì vào phần này
+            //if (ActiveManager.IsActiveOfflineOk("B"))
+            //{
+            //    //SpawnModel();
+            //    ShowModelsOnScreen();
+            //    AutoTriggerInforButton();
+            //}
+            //// nếu chưa purchase thì vào phần này
+            //else
+            //{
+            //    //nếu là 3 trang đầu thì cho xem model
+            //    if (mTrackableBehaviour.TrackableName == "Solarsystem_scaled" || mTrackableBehaviour.TrackableName == "Sun_scaled" || mTrackableBehaviour.TrackableName == "Mercury_scaled")
+            //    {
+            //        //SpawnModel();
+            //        ShowModelsOnScreen();
+            //        AutoTriggerInforButton();
+            //    }
+            //    //nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
+            //    else
+            //    {
+            //        PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", "OK", "Yes", "No", PopupManager.DialogType.YesNoDialog, () =>
+            //        {
+            //            SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
+            //        });
+            //    }
+            //}
             base.OnTrackingFound();
         }
 
@@ -146,6 +148,22 @@ namespace Firecoals.Space
             {
                 //Execute();
                 NormalLoad();
+            }
+        }
+
+        private void PlayAudioOfObject()
+        {
+            if (_audiosrc != null)
+            {
+                _audiosrc.Play();
+            }
+        }
+
+        private void StopAudioOfObject()
+        {
+            if (_audiosrc != null)
+            {
+                _audiosrc.Stop();
             }
         }
 
@@ -159,17 +177,26 @@ namespace Firecoals.Space
 
             ClearKeyLocalization();
             FirecoalsSoundManager.StopAll();
+            StopAudioOfObject();
             base.OnTrackingLost();
         }
 
         public void NormalLoad()
         {
-            assetloader.LoadGameObjectAsync(path, mTrackableBehaviour.transform);
-            _loadSoundbundle.PlayNameSound(tagSound);
-            PlayAnimIntro();
-            nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
-            nameTargetSpace.ToLower();
-            ChangeKeyLocalization();
+            foreach (var go in AssetLoader.loadedGameObjects)
+            {
+                if (go.name == gameObject.name)
+                {
+                    Instantiate(go, mTrackableBehaviour.transform);
+                }
+                NGUITools.SetActive(objectName, true);
+            }
+
+            //_loadSoundbundle.PlayNameSound(tagSound);
+            //PlayAnimIntro();
+            //nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
+            //nameTargetSpace.ToLower();
+            //ChangeKeyLocalization();
         }
         public void Execute()
         {
@@ -190,8 +217,8 @@ namespace Firecoals.Space
                 Debug.Log("<color=turquoise>In background thread</color>");
                 Task.RunInMainThread(() =>
                 {
-                    assetloader.LoadGameObjectAsync(path, mTrackableBehaviour.transform);
-                    _loadSoundbundle.PlayNameSound(tagSound);
+                    //assetloader.LoadGameObjectAsync(path, mTrackableBehaviour.transform);
+                    //_loadSoundbundle.PlayNameSound(tagSound);
                 });
             })).ContinueInMainThreadWith(task =>
             {
@@ -260,18 +287,18 @@ namespace Firecoals.Space
             }
         }
 
-        void PlayAnimIntro()
+        private void PlayAnimIntro()
         {
-            if (this.gameObject.GetComponentInChildren<Animator>() != null)
+            if (gameObject.GetComponentInChildren<Animator>() != null)
             {
-                anim = this.gameObject.GetComponentInChildren<Animator>();
+                anim = gameObject.GetComponentInChildren<Animator>();
                 anim.SetTrigger("Intro");
             }
         }
 
         private bool _cached = false;
 
-        void CloneModels(GameObject go)
+        private void CloneModels(GameObject go)
         {
             //StartCoroutine(InstantiationAsycnModels(go));
             //InstantiationAsync.InstantiateAsync(go, 100);
@@ -289,7 +316,7 @@ namespace Firecoals.Space
             {
                 Instantiate(go, mTrackableBehaviour.transform);
             }
-            _loadSoundbundle.PlayNameSound(tagSound);
+            //_loadSoundbundle.PlayNameSound(tagSound);
         }
 
         /// <summary>
@@ -302,64 +329,13 @@ namespace Firecoals.Space
         }
 
 
-        /// <summary>
-        /// xem thông tin thành phần của hành tinh
-        /// </summary>
-        void AutoTriggerInforButton()
-        {
-            for (int i = 0; i < inforBtn.Length; i++)
-            {
-                if (inforBtn[i].activeInHierarchy)
-                {
-                    inforBtn[i].GetComponent<UIButton>().onClick.Clear();
-                    EventDelegate del = new EventDelegate(this, "ShowSmallInfo");
-                    EventDelegate.Set(inforBtn[i].GetComponent<UIButton>().onClick, del);
-                }
-            }
-        }
-
-        /// <summary>
-        /// lấy thông tin thành phần con của hành tinh
-        /// </summary>
-        private void ShowComponentInfor()
-        {
-            for (int i = 0; i < inforBtn.Length; i++)
-            {
-                if (inforBtn[i] != null)
-                {
-                    inforBtn[i].GetComponentInChildren<UILabel>().text = Localization.Get(inforBtn[i].GetComponentInChildren<UILocalize>().key);
-                    labelInfo.gameObject.GetComponent<UILabel>().text
-                        = Localization.Get(inforBtn[i].GetComponentInChildren<UILocalize>().key);
-                }
-                else
-                {
-                    labelInfo.gameObject.GetComponent<UILabel>().text = Localization.Get(string.Empty);
-                }
-            }
-        }
-
-        /// <summary>
-        /// hiện bảng thông tin con của hành tinh
-        /// </summary>
-        private void ShowSmallInfo()
-        {
-            if (checkOpen == false)
-            {
-                ShowObjectInfo();
-                ShowComponentInfor();
-            }
-            else
-            {
-                HideObjectInfo();
-            }
-        }
 
         /// <summary>
         /// thông tin thành phần con của hành tinh
         /// </summary>
         [Header("Panel information")]
-        [SerializeField] Animator panelInforAnim;
-        [SerializeField] UILabel labelInfo;
+        [SerializeField] private Animator panelInforAnim;
+        [SerializeField] private UILabel labelInfo;
 
         private void ShowObjectInfo()
         {

@@ -86,7 +86,8 @@ namespace Firecoals.AssetBundles
         public IEnumerator Preload(string[] bundleNames, int priority)
         {
             Dispose();
-            var myResources = GameObject.FindObjectOfType<AssetLoader>().Resources;//= GetResources();
+            var assetLoader = GameObject.FindObjectOfType<AssetLoader>();
+            var myResources = assetLoader.Resources;//= GetResources();
             IProgressResult<float, IBundle[]> result = myResources.LoadBundle(bundleNames, priority);
             
             result.Callbackable().OnProgressCallback(p =>
@@ -99,8 +100,22 @@ namespace Firecoals.AssetBundles
             if (result.IsDone)
             {
                 Debug.Log("<color=red>" + ThemeController.instance.Theme + "</color>");
-
-                SceneManager.LoadScene(ThemeController.instance.Theme, LoadSceneMode.Single);
+                if (ThemeController.instance.Theme == "Space")
+                {
+                    assetLoader.LoadGameObjectsAsync(() =>
+                    {
+                        //when load space asset bundle is done
+                        SceneManager.LoadScene(ThemeController.instance.Theme, LoadSceneMode.Single);
+                        //SceneManager.MergeScenes(SceneManager.GetSceneByName("Loading"), SceneManager.GetSceneByName("Space"));
+                        //SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Loading"));
+                        //GameObject.FindObjectOfType<UIRoot>().gameObject.SetActive(false);
+                    });
+                }
+                else
+                {
+                    //Color or Animal
+                    SceneManager.LoadScene(ThemeController.instance.Theme, LoadSceneMode.Single);
+                }   
             }
             if (result.Exception != null)
             {

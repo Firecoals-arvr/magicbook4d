@@ -14,7 +14,7 @@ public class DownLoadManager : MonoBehaviour
     private void Start()
     {
         var themeName = ThemeController.instance.Theme;
-        NGUITools.SetActive(loadingBar.gameObject, false);
+        //NGUITools.SetActive(loadingBar.gameObject, false);
         _dlAssets = new DownLoadAssetBundles(themeName, themeName + "/bundles");
         InitDownload();
     }
@@ -130,6 +130,7 @@ public class DownLoadManager : MonoBehaviour
     {
         IBundleManifestLoader manifestLoader = new BundleManifestLoader();
         BundleManifest localManifest = manifestLoader.Load(BundleUtil.GetStorableDirectory() + BundleSetting.ManifestFilename);
+
         if (!ActiveManager.cloudBundleVersion.IsNullOrEmpty())
         {
             var localVersion = new Version(localManifest.Version);

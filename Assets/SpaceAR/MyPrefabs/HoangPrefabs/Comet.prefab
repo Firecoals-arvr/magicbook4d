@@ -204,7 +204,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3000
+  startingRenderQueue: 3007
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -255,6 +255,7 @@ GameObject:
   - component: {fileID: 67411209649459000}
   - component: {fileID: 1903538722878003466}
   - component: {fileID: 67411209649459006}
+  - component: {fileID: 1274502157740946493}
   m_Layer: 0
   m_Name: Comet
   m_TagString: Untagged
@@ -289,10 +290,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b212f1a5738f76a4f893cbc3c2891584, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -393,6 +394,28 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1274502157740946493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67411209649459007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c73c1ab94e28d244827af556dca1ed2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoreStartedOverGui: 1
+  IgnoreIsOverGui: 0
+  RequiredFingerCount: 0
+  RequiredSelectable: {fileID: 0}
+  Camera: {fileID: 0}
+  WheelSensitivity: 0
+  Relative: 0
+  ScaleClamp: 0
+  ScaleMin: {x: 0.1, y: 0.1, z: 0.1}
+  ScaleMax: {x: 2, y: 2, z: 2}
 --- !u!1 &276440719357899053
 GameObject:
   m_ObjectHideFlags: 0
@@ -9746,7 +9769,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 276440719895163585}
-  - component: {fileID: 276440719895163584}
   m_Layer: 0
   m_Name: Meteorite
   m_TagString: Untagged
@@ -9770,28 +9792,6 @@ Transform:
   m_Father: {fileID: 67411209649459000}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &276440719895163584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 276440719895163590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c73c1ab94e28d244827af556dca1ed2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IgnoreStartedOverGui: 1
-  IgnoreIsOverGui: 0
-  RequiredFingerCount: 0
-  RequiredSelectable: {fileID: 0}
-  Camera: {fileID: 0}
-  WheelSensitivity: 0
-  Relative: 0
-  ScaleClamp: 0
-  ScaleMin: {x: 0, y: 0, z: 0}
-  ScaleMax: {x: 0, y: 0, z: 0}
 --- !u!1 &276440720772944518
 GameObject:
   m_ObjectHideFlags: 0
@@ -14504,6 +14504,14 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 7114d78d553f6d54fa1b556927ae0db5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 7114d78d553f6d54fa1b556927ae0db5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 7114d78d553f6d54fa1b556927ae0db5, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.1
       objectReference: {fileID: 0}
@@ -14514,14 +14522,6 @@ PrefabInstance:
     - target: {fileID: 400002, guid: 7114d78d553f6d54fa1b556927ae0db5, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400002, guid: 7114d78d553f6d54fa1b556927ae0db5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.94
-      objectReference: {fileID: 0}
-    - target: {fileID: 400002, guid: 7114d78d553f6d54fa1b556927ae0db5, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.7
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 7114d78d553f6d54fa1b556927ae0db5, type: 3}
       propertyPath: m_Materials.Array.data[0]

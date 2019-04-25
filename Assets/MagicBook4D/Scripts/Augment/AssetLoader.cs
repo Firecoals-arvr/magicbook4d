@@ -5,6 +5,7 @@ using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Firecoals.Augmentation
@@ -14,6 +15,10 @@ namespace Firecoals.Augmentation
     /// </summary>
     public class AssetLoader : MonoBehaviour
     {
+        /// <summary>
+        /// Slider for loading
+        /// </summary>
+        public UISlider slider;
         /// <summary>
         /// Bundle name means named assetbundle which built from Unity (Loxodon Bundle Framework or AssetBundle Browser)
         /// </summary>
@@ -123,7 +128,7 @@ namespace Firecoals.Augmentation
                         "color/model/tambien",
                         "color/model/thadieu",
                         "color/model/thanhpho",
-                        "color/model/trangtrai", 
+                        "color/model/trangtrai",
                         "color/sounds/sounds"
                     };
                     break;
@@ -153,8 +158,12 @@ namespace Firecoals.Augmentation
             /*Preload asset bundle*/
             assetBundlesLoader.slider = slider;
             yield return assetBundlesLoader.Preload(bundleNames, 1);
-            
         }
+
+        /// <summary>
+        /// The resource of assetbunlde
+        /// </summary>
+        /// <returns></returns>
         private IResources CreateResources()
         {
             IResources resources = null;
@@ -216,12 +225,13 @@ namespace Firecoals.Augmentation
         public void LoadGameObjectAsync(string bundlePath, Transform parrent)
         {
             IProgressResult<float, GameObject> result = Resources.LoadAssetAsync<GameObject>(bundlePath);
+            
             GameObject tempGameObject = null;
             result.Callbackable().OnProgressCallback(p =>
             {
                 Debug.LogFormat(bundlePath + "is loading with result :{0}%", p * 100);
             });
-            
+
             result.Callbackable().OnCallback((r) =>
             {
                 try
@@ -232,27 +242,37 @@ namespace Firecoals.Augmentation
                     Debug.Log("<color=yellow>Instantiated " + r.Result.name + "</color>");
                     GameObject.Instantiate(r.Result, parrent);
 
-                   
                 }
                 catch (Exception e)
                 {
                     Debug.LogErrorFormat("Load failure.Error:{0}", e);
                 }
             });
-            
-            
+
+
             //return tempGameObject;
         }
 
-        public GameObject[] LoadGameObjectsAsync()
+        public static GameObject[] loadedGameObjects;
+        public void LoadGameObjectsAsync(Action onIsDone)
         {
-            IProgressResult<float, GameObject[]> results = Resources.LoadAssetsAsync<GameObject>(bundleNames);
-            GameObject[] tempGameObjects = null;
+            var downloadManager = FindObjectOfType<DownLoadManager>();
+            IBundleManifestLoader manifestLoader = new BundleManifestLoader();
+            BundleManifest localManifest = manifestLoader.Load(BundleUtil.GetStorableDirectory() + BundleSetting.ManifestFilename);
+            List<string> bundlePaths = new List<string>();
+            foreach (var bundleInfo in localManifest.GetAll())
+            {
+                
+                bundlePaths.Add(bundleInfo.Assets[0].Remove(0, 7));
+            }
+            IProgressResult<float, GameObject[]> results = Resources.LoadAssetsAsync<GameObject>(bundlePaths.ToArray());
+            
             results.Callbackable().OnProgressCallback(p =>
             {
-                Debug.LogFormat("bundles is loading with results :{0}%", p * 100);
+                downloadManager.loadingBar.value = p;
+                Debug.LogFormat("<color=green>Bundles is loading with results :{0}%</color> ", p * 100);
             });
-
+             
             results.Callbackable().OnCallback((r) =>
             {
                 try
@@ -260,15 +280,54 @@ namespace Firecoals.Augmentation
                     if (r.Exception != null)
                         throw r.Exception;
 
-                    tempGameObjects = r.Result;
+                    loadedGameObjects = r.Result;
+                    foreach (var go in loadedGameObjects)
+                    {
+                        Debug.Log("<color=pink>loaded "+go.name+"</color>");
+                    }
+                    if (results.IsDone)
+                    {
+                        onIsDone();
+                    }
                 }
                 catch (Exception e)
                 {
                     Debug.LogErrorFormat("Load failure.Error:{0}", e);
                 }
             });
-            return tempGameObjects;
         }
+        public void LoadGameObjectAsync(string[] bundlePaths, Transform parrent)
+        {
+            IProgressResult<float, GameObject[]> result = Resources.LoadAssetsAsync<GameObject>(bundlePaths);
+
+            GameObject tempGameObject = null;
+            result.Callbackable().OnProgressCallback(p =>
+            {
+                Debug.LogFormat(bundlePaths[0] + "is loading with result :{0}%", p * 100);
+            });
+
+            result.Callbackable().OnCallback((r) =>
+            {
+                try
+                {
+                    if (r.Exception != null)
+                        throw r.Exception;
+                    //tempGameObject = r.Result;
+                    Debug.Log("<color=yellow>Instantiated " + r.Result[0].name + "</color>");
+                    GameObject.Instantiate(r.Result[0], parrent);
+
+
+                }
+                catch (Exception e)
+                {
+                    Debug.LogErrorFormat("Load failure.Error:{0}", e);
+                }
+            });
+
+
+            //return tempGameObject;
+        }
+
 
 
 
