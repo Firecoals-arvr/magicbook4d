@@ -119,10 +119,10 @@ namespace Firecoals.Animal
             //ClearAllOtherTargetContents();
             //gameObjectToload.SetActive(true);
             EnableAllChildOfTheTarget();
-            if (IsTargetEmpty())
-            {
-                LoadModelBundles(gameObjectToload);
-            }
+            //if (IsTargetEmpty())
+            //{
+            //    LoadModelBundles(gameObjectToload);
+            //}
             Debug.Log("<color=orange>mTrackableBehaviour</color>" + mTrackableBehaviour);
             base.OnTrackingFound();
 

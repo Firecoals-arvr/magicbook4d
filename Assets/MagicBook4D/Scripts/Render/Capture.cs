@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.IO;
+using Loxodon.Framework.Execution;
 using UnityEngine;
 
 namespace Firecoals.Render
@@ -58,7 +59,7 @@ namespace Firecoals.Render
 
         public void Snap()
         {
-            Firecoals.Threading.Dispatcher.instance.LaunchCoroutine(TakePhoto());
+            Executors.RunOnCoroutineNoReturn(TakePhoto());
             //StartCoroutine(TakePhoto());
         }
 

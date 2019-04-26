@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 
 namespace Firecoals.AssetBundles
 {
-    public class AssetBundlesLoader : MyBundleResources
+    public class AssetBundlesLoader
     {
 
         public Dictionary<string, IBundle> bundles = new Dictionary<string, IBundle>();
@@ -100,22 +100,9 @@ namespace Firecoals.AssetBundles
             if (result.IsDone)
             {
                 Debug.Log("<color=red>" + ThemeController.instance.Theme + "</color>");
-                if (ThemeController.instance.Theme == "Space")
-                {
-                    assetLoader.LoadGameObjectsAsync(() =>
-                    {
-                        //when load space asset bundle is done
-                        SceneManager.LoadScene(ThemeController.instance.Theme, LoadSceneMode.Single);
-                        //SceneManager.MergeScenes(SceneManager.GetSceneByName("Loading"), SceneManager.GetSceneByName("Space"));
-                        //SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName("Loading"));
-                        //GameObject.FindObjectOfType<UIRoot>().gameObject.SetActive(false);
-                    });
-                }
-                else
-                {
                     //Color or Animal
-                    SceneManager.LoadScene(ThemeController.instance.Theme, LoadSceneMode.Single);
-                }   
+                SceneManager.LoadScene(ThemeController.instance.Theme, LoadSceneMode.Single);
+ 
             }
             if (result.Exception != null)
             {
@@ -129,7 +116,7 @@ namespace Firecoals.AssetBundles
             }
         }
 
-        private void OnDestroy()
+        public void OnDestroy()
         {
             if (bundles == null)
                 return;

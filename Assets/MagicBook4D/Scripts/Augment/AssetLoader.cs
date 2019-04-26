@@ -37,6 +37,11 @@ namespace Firecoals.Augmentation
         //private string iv = "5Hh2390dQlVh0AqC";
         //private string key = "E4YZgiGQ0aqe5LEJ";
 
+        private void OnDestroy()
+        {
+            assetBundlesLoader.OnDestroy();
+        }
+
         #region MONOBEHAVIOUR_METHOD
         private void Awake()
         {

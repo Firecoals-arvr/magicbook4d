@@ -62,7 +62,6 @@ namespace Firecoals.AssetBundles
                 IProgressResult<Progress, BundleManifest> manifestResult = _downloader.DownloadManifest(BundleSetting.ManifestFilename);
 
                 yield return manifestResult.WaitForDone();
-
                 if (manifestResult.Exception != null)
                 {
                     Debug.LogFormat("Downloads BundleManifest failure.Error:{0}", manifestResult.Exception);
@@ -126,7 +125,7 @@ namespace Firecoals.AssetBundles
                         PopupManager.DialogType.YesNoDialog, () =>
                         {
                             var dlManager = GameObject.FindObjectOfType<DownLoadManager>();
-                            dlManager.RetryDownload();
+                            dlManager.ClearCacheAndRetry();
                         }, () => SceneLoader.LoadScene("Menu"));
                     yield break;
                 }
@@ -142,8 +141,7 @@ namespace Firecoals.AssetBundles
                 if (downloadResult.IsCancelled)
                 {
                     
-                    BundleUtil.ClearStorableDirectory();
-                    PlayerPrefs.DeleteKey("Downloaded" + ThemeController.instance.Theme);
+                    //BundleUtil.ClearStorableDirectory();
                     Debug.LogWarning("Cancelled download");
                 }
 

@@ -44,7 +44,7 @@ public class DownLoadManager : MonoBehaviour
             PopupManager.PopUpDialog("", "Có bản cập nhật dữ liệu mới, bạn có muốn tải về không?", default, "Đồng ý", "Hủy bỏ", PopupManager.DialogType.YesNoDialog,
                 () =>
                 {
-                    RetryDownload();
+                    ClearCacheAndRetry();
                 }, () =>
             {
                 PreLoad();
@@ -143,7 +143,6 @@ public class DownLoadManager : MonoBehaviour
 
     /// <summary>
     /// There is NO data in local
-    /// TODO for test: Delete key "Downloaded + ThemeName" when delete data
     /// </summary>
     /// <returns></returns>
     public bool RequiredDownload()
