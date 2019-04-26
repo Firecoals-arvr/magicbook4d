@@ -221,51 +221,6 @@ namespace Firecoals.Augmentation
             return resources;
         }
 
-
-
-        public static GameObject[] loadedGameObjects;
-        public void LoadGameObjectsAsync(Action onIsDone)
-        {
-            var downloadManager = FindObjectOfType<DownLoadManager>();
-            IBundleManifestLoader manifestLoader = new BundleManifestLoader();
-            BundleManifest localManifest = manifestLoader.Load(BundleUtil.GetStorableDirectory() + BundleSetting.ManifestFilename);
-            List<string> bundlePaths = new List<string>();
-            foreach (var bundleInfo in localManifest.GetAll())
-            {
-                
-                bundlePaths.Add(bundleInfo.Assets[0].Remove(0, 7));
-            }
-            IProgressResult<float, GameObject[]> results = Resources.LoadAssetsAsync<GameObject>(bundlePaths.ToArray());
-            
-            results.Callbackable().OnProgressCallback(p =>
-            {
-                downloadManager.loadingBar.value = p;
-                Debug.LogFormat("<color=green>Bundles is loading with results :{0}%</color> ", p * 100);
-            });
-             
-            results.Callbackable().OnCallback((r) =>
-            {
-                try
-                {
-                    if (r.Exception != null)
-                        throw r.Exception;
-
-                    loadedGameObjects = r.Result;
-                    foreach (var go in loadedGameObjects)
-                    {
-                        Debug.Log("<color=pink>loaded "+go.name+"</color>");
-                    }
-                    if (results.IsDone)
-                    {
-                        onIsDone();
-                    }
-                }
-                catch (Exception e)
-                {
-                    Debug.LogErrorFormat("Load failure.Error:{0}", e);
-                }
-            });
-        }
         public void LoadGameObjectAsync(string[] bundlePaths, Transform parrent)
         {
             IProgressResult<float, GameObject[]> result = Resources.LoadAssetsAsync<GameObject>(bundlePaths);

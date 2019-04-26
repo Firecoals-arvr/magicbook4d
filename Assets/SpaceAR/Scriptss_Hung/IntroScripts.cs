@@ -75,6 +75,7 @@ namespace Firecoals.Space
         private bool checkOpen;
 
         private AudioSource _audiosrc;
+        private GameObject gameObjectToLoad;
 
         protected override void Start()
         {
@@ -84,13 +85,20 @@ namespace Firecoals.Space
             _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
             base.Start();
             Dispatcher.Initialize();
+            gameObjectToLoad = assetloader.LoadGameObjectAsync(path, mTrackableBehaviour.transform);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
         }
-
+        private void EnableAllChildOfTheTarget()
+        {
+            foreach (Transform go in mTrackableBehaviour.transform)
+            {
+                go.gameObject.SetActive(true);
+            }
+        }
         protected override void OnTrackingFound()
         {
             //assetloader = GameObject.FindObjectOfType<AssetLoader>();
@@ -99,7 +107,7 @@ namespace Firecoals.Space
             //{
             //    Debug.Log("<color=orange>" + a.name + "</color>");
             //}
-
+            EnableAllChildOfTheTarget();
             _audiosrc = gameObject.GetComponentInChildren<AudioSource>();
 
             //if (IsTargetEmpty())
@@ -169,10 +177,7 @@ namespace Firecoals.Space
 
         protected override void OnTrackingLost()
         {
-            foreach (Transform go in mTrackableBehaviour.transform)
-            {
-                Destroy(go.gameObject);
-            }
+
             NGUITools.SetActive(objectName, false);
 
             ClearKeyLocalization();
@@ -183,20 +188,12 @@ namespace Firecoals.Space
 
         public void NormalLoad()
         {
-            foreach (var go in AssetLoader.loadedGameObjects)
-            {
-                if (go.name == gameObject.name)
-                {
-                    Instantiate(go, mTrackableBehaviour.transform);
-                }
-                NGUITools.SetActive(objectName, true);
-            }
 
-            //_loadSoundbundle.PlayNameSound(tagSound);
-            //PlayAnimIntro();
-            //nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
-            //nameTargetSpace.ToLower();
-            //ChangeKeyLocalization();
+            _loadSoundbundle.PlayNameSound(tagSound);
+            PlayAnimIntro();
+            nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
+            nameTargetSpace.ToLower();
+            ChangeKeyLocalization();
         }
         public void Execute()
         {
