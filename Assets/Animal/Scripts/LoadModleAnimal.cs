@@ -30,8 +30,9 @@ namespace Firecoals.Animal
         public float TimeStartEffect;
         private AssetLoader assetLoader { get; set; }
         private LoadSoundbundles _loadsoundbundles;
-        private AudioSource audio;
         private IResources _resources;
+        private GameObject gameObjectToload;
+        private bool attached = false;
         public string tagInfo;
         public string tagSound;
         public string tagName;
@@ -55,11 +56,11 @@ namespace Firecoals.Animal
         protected override void Start()
         {
             base.Start();
-            audio = gameObject.GetComponent<AudioSource>();
             _loadsoundbundles = GameObject.FindObjectOfType<LoadSoundbundles>();
             //PlayerPrefs.SetString("AnimalLanguage", "EN");
-            Dispatcher.Initialize();
+            //Dispatcher.Initialize();
             assetLoader = GameObject.FindObjectOfType<AssetLoader>();
+            gameObjectToload = assetLoader.LoadGameObjectAsync(bundlePath, mTrackableBehaviour.transform);
         }
         protected override void OnDestroy()
         {
@@ -76,7 +77,9 @@ namespace Firecoals.Animal
             RandomEffect.Instance.Onfound(TimeStartEffect);
             yield return new WaitForSeconds(0.1f);
             //GameObject.Instantiate(go, mTrackableBehaviour.transform);
-            InstantiationAsync.InstantiateAsync(go, mTrackableBehaviour.transform, 300);
+            //InstantiationAsync.InstantiateAsync(go, mTrackableBehaviour.transform, 300);
+            //go.transform.parent = this.transform;
+
             _loadsoundbundles.PlaySound(tagSound);
             _loadsoundbundles.PlayName(tagName);
             StartCoroutine("LoadNameAnimal");
@@ -113,41 +116,25 @@ namespace Firecoals.Animal
         }
         protected override void OnTrackingFound()
         {
-            ClearAllOtherTargetContents();
-            //if (IsTargetEmpty() && !_cached)
-            //{
-            //    CachingArContents();
-            //}
-            //if (IsTargetEmpty() && _cached)
-            //{
-            //    LoadingCache();
-            //}
-            if(IsTargetEmpty())
-                Execute();
-            //if (ActiveManager.IsActiveOfflineOk("A"))
-            //{
-            //    LoadModelBundles(go);
-            //}
-            //else
-            //{
-            //    if (mTrackableBehaviour.TrackableName == "Lion" || mTrackableBehaviour.TrackableName == "Elephant" || mTrackableBehaviour.TrackableName == "Gorilla")
-            //    {
-            //        LoadModelBundles(go);
-            //    }
-            //    else
-            //    {
-            //        PopupManager.PopUpDialog("Thông báo", "Chọn đồng ý để mở khóa trang", PopupManager.DialogType.YesNoDialog, () =>
-            //        {
-            //            SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
-            //        });
-            //    }
-            //}
+            //ClearAllOtherTargetContents();
+            //gameObjectToload.SetActive(true);
+            EnableAllChildOfTheTarget();
+            if (IsTargetEmpty())
+            {
+                LoadModelBundles(gameObjectToload);
+            }
             Debug.Log("<color=orange>mTrackableBehaviour</color>" + mTrackableBehaviour);
-            //LoadModelBundles(go);
             base.OnTrackingFound();
 
         }
-
+        protected override void OnTrackingLost()
+        {
+            FirecoalsSoundManager.StopAll();
+            RandomEffect.Instance.Onlost();
+            // DisActive TextNameAnimal trên scene
+            NGUITools.SetActive(objName.gameObject, false);
+            base.OnTrackingLost();
+        }
         public void LoadModelBundles(GameObject go)
         {
             StartCoroutine(StarEffect(go));
@@ -190,24 +177,7 @@ namespace Firecoals.Animal
                 go.gameObject.SetActive(false);
             }
         }
-        protected override void OnTrackingLost()
-        {
-            FirecoalsSoundManager.StopAll();
-            RandomEffect.Instance.Onlost();
-            //   Debug.Log("Destroy" + mTrackableBehaviour.name);
-            foreach (Transform go in mTrackableBehaviour.transform)
-            {
-                Destroy(go.gameObject);
-            }
-            //if (!IsTargetEmpty())
-            //{
-            //    DesableAllChildOfTheTarget();
-            //}
 
-            // DisActive TextNameAnimal trên scene
-            NGUITools.SetActive(objName.gameObject, false);
-            base.OnTrackingLost();
-        }
         //private void RunAnimationIntro()
         //{
         //    if (this.gameObject.transform.GetChild(0).GetComponent<Animation>() != null)

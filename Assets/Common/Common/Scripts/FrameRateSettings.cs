@@ -23,7 +23,7 @@ public class FrameRateSettings : MonoBehaviour
     private void OnVuforiaStarted()
     {
         // Query Vuforia for recommended frame rate and set it in Unity
-        int targetFps = VuforiaRenderer.Instance.GetRecommendedFps(VuforiaRenderer.FpsHint.POWEREFFICIENCY);
+        int targetFps = VuforiaRenderer.Instance.GetRecommendedFps(VuforiaRenderer.FpsHint.FAST);
 
         // By default, we use Application.targetFrameRate to set the recommended frame rate.
         // Google Cardboard does not use vsync, and OVR explicitly disables it. If developers 

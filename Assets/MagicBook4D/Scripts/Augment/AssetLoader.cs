@@ -216,42 +216,7 @@ namespace Firecoals.Augmentation
             return resources;
         }
 
-        /// <summary>
-        /// Load GameObject Asynchronous
-        /// Return an GameObject
-        /// Return null if fail
-        /// </summary>
-        /// <param name="bundlePath"></param>
-        public void LoadGameObjectAsync(string bundlePath, Transform parrent)
-        {
-            IProgressResult<float, GameObject> result = Resources.LoadAssetAsync<GameObject>(bundlePath);
-            
-            GameObject tempGameObject = null;
-            result.Callbackable().OnProgressCallback(p =>
-            {
-                Debug.LogFormat(bundlePath + "is loading with result :{0}%", p * 100);
-            });
 
-            result.Callbackable().OnCallback((r) =>
-            {
-                try
-                {
-                    if (r.Exception != null)
-                        throw r.Exception;
-                    //tempGameObject = r.Result;
-                    Debug.Log("<color=yellow>Instantiated " + r.Result.name + "</color>");
-                    GameObject.Instantiate(r.Result, parrent);
-
-                }
-                catch (Exception e)
-                {
-                    Debug.LogErrorFormat("Load failure.Error:{0}", e);
-                }
-            });
-
-
-            //return tempGameObject;
-        }
 
         public static GameObject[] loadedGameObjects;
         public void LoadGameObjectsAsync(Action onIsDone)
@@ -328,7 +293,36 @@ namespace Firecoals.Augmentation
             //return tempGameObject;
         }
 
+        public GameObject LoadGameObjectAsync(string bundlePath, Transform parent)
+        {
+            IProgressResult<float, GameObject> result = Resources.LoadAssetAsync<GameObject>(bundlePath);
 
+            GameObject tempGameObject = null;
+            result.Callbackable().OnProgressCallback(p =>
+            {
+                Debug.LogFormat(bundlePath + "is loading with result :{0}%", p * 100);
+            });
+            //yield return result.WaitForDone();
+            result.Callbackable().OnCallback((r) =>
+            {
+                try
+                {
+                    if (r.Exception != null)
+                        throw r.Exception;
+                    //tempGameObject = r.Result;
+                    Debug.Log("<color=yellow>Instantiated " + r.Result.name + "</color>");
+
+                    tempGameObject = Instantiate(r.Result, parent) as GameObject;
+                    tempGameObject.SetActive(false);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogErrorFormat("Load failure.Error:{0}", e);
+                }
+            });
+
+            return tempGameObject;
+        }
 
 
         public GameObject LoadGameObjectSync(string bundleName, string bundlePath)

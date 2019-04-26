@@ -66,6 +66,7 @@ namespace Firecoals.AssetBundles
                 if (manifestResult.Exception != null)
                 {
                     Debug.LogFormat("Downloads BundleManifest failure.Error:{0}", manifestResult.Exception);
+                    BundleUtil.ClearStorableDirectory();
                     PopupManager.PopUpDialog("[[9C0002]Error[-]]", "Downloads data info failure. Error:{0}" +
                         manifestResult.Exception, "Menu",default, default, PopupManager.DialogType.OkDialog,
                         (() => SceneLoader.LoadScene("Menu")));
@@ -120,6 +121,7 @@ namespace Firecoals.AssetBundles
                 if (downloadResult.Exception != null)
                 {
                     Debug.LogFormat("Downloads AssetBundle failure.Error:{0}", downloadResult.Exception);
+                    BundleUtil.ClearStorableDirectory();
                     PopupManager.PopUpDialog("[[9C0002]Error[-]]", "Downloads Data failure. Error"+ downloadResult.Exception, default,"Thử lại","Menu",
                         PopupManager.DialogType.YesNoDialog, () =>
                         {
