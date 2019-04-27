@@ -17,11 +17,11 @@ namespace FireCoals.Space
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
-                    if (hit.transform.tag == "Emu")
+                    if (hit.collider.tag == "Emu")
                     {
                         anima.Play("openemu");
                     }
-                    else if (hit.transform.tag == "Iss")
+                    else if (hit.collider.tag == "Iss")
                     {
                         anima.Play("openiss");
                     }

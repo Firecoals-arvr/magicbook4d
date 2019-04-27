@@ -19,15 +19,6 @@ namespace Firecoals.Space
 
         }
 
-
-        void Update()
-        {
-            
-            
-
-        }
-
-
         public void SelectObject()
         {
             Debug.Log("<color=red>dragable object: " + gameObject.name + transform.position + "</color>");
@@ -51,7 +42,6 @@ namespace Firecoals.Space
         }
         private void OnTriggerEnter(Collider other)
         {
-
             Debug.Log("<color=green>other object: " + other.name + other.transform.position + "</color>");
             if (other.tag == "planetcontainer")
             {
@@ -68,11 +58,10 @@ namespace Firecoals.Space
                     var obj = gameObject.transform.parent.gameObject.transform;
                     temp.transform.parent = obj;
                     temp.transform.localPosition = Vector3.zero;
-                    temp.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                    //temp.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
                     transform.position = other.transform.position;
                     transform.parent = other.gameObject.transform;
                 }
-
             }
         }
     }

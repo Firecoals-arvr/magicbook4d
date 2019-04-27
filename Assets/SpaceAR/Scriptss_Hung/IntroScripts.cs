@@ -3,7 +3,6 @@ using Firecoals.Augmentation;
 using Firecoals.Threading.Tasks;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
-using System.Collections;
 using UnityEngine;
 using Dispatcher = Firecoals.Threading.Dispatcher;
 
@@ -66,6 +65,8 @@ namespace Firecoals.Space
         public string tagInfo;
         private LoadSoundbundles _loadSoundbundle;
 
+        private GameObject _gameobjectLoaded;
+
         /// <summary>
         /// anim để chạy animation intro lúc tracking found models
         /// </summary>
@@ -75,45 +76,32 @@ namespace Firecoals.Space
         private bool checkOpen;
 
         private AudioSource _audiosrc;
-        private GameObject gameObjectToLoad;
 
         protected override void Start()
         {
+            base.Start();
             ApplicationContext context = Context.GetApplicationContext();
             _resources = context.GetService<IResources>();
             assetloader = GameObject.FindObjectOfType<AssetLoader>();
             _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
-            base.Start();
+
+            _gameobjectLoaded = assetloader.LoadGameObjectAsync(path, mTrackableBehaviour.transform);
+
             Dispatcher.Initialize();
-            gameObjectToLoad = assetloader.LoadGameObjectAsync(path, mTrackableBehaviour.transform);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
         }
-        private void EnableAllChildOfTheTarget()
-        {
-            foreach (Transform go in mTrackableBehaviour.transform)
-            {
-                go.gameObject.SetActive(true);
-            }
-        }
+
         protected override void OnTrackingFound()
         {
-            //assetloader = GameObject.FindObjectOfType<AssetLoader>();
-            //inforBtn = GameObject.FindGameObjectsWithTag("infor");
-            //foreach (var a in inforBtn)
-            //{
-            //    Debug.Log("<color=orange>" + a.name + "</color>");
-            //}
-            EnableAllChildOfTheTarget();
             _audiosrc = gameObject.GetComponentInChildren<AudioSource>();
-
-            //if (IsTargetEmpty())
-            //{
-            //    Execute();
-            //}
+            foreach (Transform a in mTrackableBehaviour.transform)
+            {
+                a.gameObject.SetActive(true);
+            }
 
             if (IsTargetEmpty())
             {
@@ -150,15 +138,24 @@ namespace Firecoals.Space
             base.OnTrackingFound();
         }
 
+        /// <summary>
+        /// hiển thị model lên màn hình khi chiếu cam vào tranh
+        /// </summary>
         private void ShowModelsOnScreen()
         {
             if (IsTargetEmpty())
             {
-                //Execute();
-                NormalLoad();
+                _loadSoundbundle.PlayNameSound(tagSound);
+                PlayAnimIntro();
+                nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
+                nameTargetSpace.ToLower();
+                ChangeKeyLocalization();
             }
         }
 
+        /// <summary>
+        /// bật nhạc khi có model
+        /// </summary>
         private void PlayAudioOfObject()
         {
             if (_audiosrc != null)
@@ -167,6 +164,9 @@ namespace Firecoals.Space
             }
         }
 
+        /// <summary>
+        /// tắt nhạc khi model bị tắt đi
+        /// </summary>
         private void StopAudioOfObject()
         {
             if (_audiosrc != null)
@@ -177,6 +177,14 @@ namespace Firecoals.Space
 
         protected override void OnTrackingLost()
         {
+            //foreach (Transform go in mTrackableBehaviour.transform)
+            //{
+            //    Destroy(go.gameObject);
+            //}
+            foreach (Transform a in mTrackableBehaviour.transform)
+            {
+                a.gameObject.SetActive(false);
+            }
 
             NGUITools.SetActive(objectName, false);
 
@@ -186,15 +194,7 @@ namespace Firecoals.Space
             base.OnTrackingLost();
         }
 
-        public void NormalLoad()
-        {
 
-            _loadSoundbundle.PlayNameSound(tagSound);
-            PlayAnimIntro();
-            nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
-            nameTargetSpace.ToLower();
-            ChangeKeyLocalization();
-        }
         public void Execute()
         {
 #if UNITY_WSA && !UNITY_EDITOR
@@ -207,8 +207,7 @@ namespace Firecoals.Space
 
         private void Augment()
         {
-
-            GameObject go = null;
+            //GameObject go = null;
             Task.WhenAll(Task.Run(() =>
             {
                 Debug.Log("<color=turquoise>In background thread</color>");
@@ -224,7 +223,6 @@ namespace Firecoals.Space
                 nameTargetSpace.ToLower();
                 ChangeKeyLocalization();
             });
-
         }
 
         /// <summary>
@@ -243,19 +241,6 @@ namespace Firecoals.Space
                 //ShowComponentInfor();
             }
         }
-
-
-        //private void SpawnModel()
-        //{
-        //    if (IsTargetEmpty() && !_cached)
-        //    {
-        //        CachingArContents();
-        //    }
-        //    if (IsTargetEmpty() && _cached)
-        //    {
-        //        LoadingCache();
-        //    }
-        //}
 
         /// <summary>
         /// Clear all except this
@@ -293,28 +278,28 @@ namespace Firecoals.Space
             }
         }
 
-        private bool _cached = false;
+        //private bool _cached = false;
 
-        private void CloneModels(GameObject go)
-        {
-            //StartCoroutine(InstantiationAsycnModels(go));
-            //InstantiationAsync.InstantiateAsync(go, 100);
-            PlayAnimIntro();
+        //private void CloneModels(GameObject go)
+        //{
+        //    //StartCoroutine(InstantiationAsycnModels(go));
+        //    //InstantiationAsync.InstantiateAsync(go, 100);
+        //    PlayAnimIntro();
 
-            nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
-            nameTargetSpace.ToLower();
-            ChangeKeyLocalization();
-        }
+        //    nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
+        //    nameTargetSpace.ToLower();
+        //    ChangeKeyLocalization();
+        //}
 
-        private IEnumerator InstantiationAsycnModels(GameObject go)
-        {
-            yield return new WaitForSeconds(0.2f);
-            if (go != null)
-            {
-                Instantiate(go, mTrackableBehaviour.transform);
-            }
-            //_loadSoundbundle.PlayNameSound(tagSound);
-        }
+        //private IEnumerator InstantiationAsycnModels(GameObject go)
+        //{
+        //    yield return new WaitForSeconds(0.2f);
+        //    if (go != null)
+        //    {
+        //        Instantiate(go, mTrackableBehaviour.transform);
+        //    }
+        //    //_loadSoundbundle.PlayNameSound(tagSound);
+        //}
 
         /// <summary>
         /// Check if there is no child on the target
@@ -332,7 +317,6 @@ namespace Firecoals.Space
         /// </summary>
         [Header("Panel information")]
         [SerializeField] private Animator panelInforAnim;
-        [SerializeField] private UILabel labelInfo;
 
         private void ShowObjectInfo()
         {

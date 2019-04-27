@@ -7,10 +7,19 @@ public class SatelliteController : MonoBehaviour
     [SerializeField] Animation anim;
     private bool stt = false;
 
-
-    public void ClickToOpen()
+    private void Update()
     {
-        anim.Play("open");
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                if (hit.collider.tag == "vetinh")
+                {
+                    anim.Play("open");
+                }
+            }
+        }
     }
 
     public void Armode()

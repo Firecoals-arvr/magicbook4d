@@ -10,14 +10,18 @@ namespace Firecoals.Space
         public float moveSpeed;
         public GameObject alienChild;
         public Joystick joystick;
-        [SerializeField] Animation anima;
+        private AudioSource audioSrc;
+        Animation anima;
+#pragma warning disable IDE0044 // Add readonly modifier
+        [SerializeField] Animation[] _alienanima;
+#pragma warning restore IDE0044 // Add readonly modifier
         //[SerializeField] AudioSource audioSrc;
         //public AudioClip[] ListAudio;
 
         void Start()
         {
-            //audioSrc = GetComponent<AudioSource>();
-            //anima = alienChild.GetComponent<Animation>();
+            audioSrc = GetComponent<AudioSource>();
+            anima = alienChild.GetComponent<Animation>();
         }
 
         void Update()
@@ -35,39 +39,46 @@ namespace Firecoals.Space
                 if (anima.IsPlaying("Walking"))
                     anima.Stop();
                 if (anima.isPlaying == false)
-                    anima.Play("Idle");
+                    anima.Play("Idle1");
                 if (anima.IsPlaying("Dance"))
                     anima.Stop();
             }
-            if (stt == true)
-            {
-                AlienIntro();
-                stt = false;
-            }
+            //if (stt == true)
+            //{
+            //    AlienIntro();
+            //    stt = false;
+            //}
         }
 
         /// <summary>
         /// check trạng thái xuất hiện
         /// </summary>
-        public bool stt = false;
+        //public bool stt = false;
 
         public void AlienTalk()
         {
             anima.Play("Talking");
-            //audioSrc.Play();
+            foreach (var a in _alienanima)
+            {
+                a.Play("Talking");
+            }
+            audioSrc.Play();
             alienChild.GetComponent<AudioSource>().Stop();
         }
 
         public void AlienDance()
         {
+            //if (!this.transform.parent.gameObject.activeInHierarchy)
+            //{
+            //    this.transform.parent.gameObject.SetActive(true);
+            //}
+            alienChild.GetComponent<Animation>().Play("Dance");
             anima.Play("Dance");
+            foreach (var a in _alienanima)
+            {
+                a.Play("Dance");
+            }
             alienChild.GetComponent<AudioSource>().Play();
-        }
-
-        public void AlienIntro()
-        {
-            anima.Play("Jump");
-            alienChild.GetComponent<AudioSource>().Stop();
         }
     }
 }
