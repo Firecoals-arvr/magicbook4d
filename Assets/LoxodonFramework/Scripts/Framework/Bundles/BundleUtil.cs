@@ -140,7 +140,20 @@ namespace Loxodon.Framework.Bundles
         {
             return ExistsInStorableDirectory(bundleInfo.Filename);
         }
-
+        /// <summary>
+        /// if given bundle infos exists in storable directory
+        /// </summary>
+        /// <param name="bundleInfos"></param>
+        /// <returns></returns>
+        public static bool ExistsInStorableDirectory(BundleInfo[] bundleInfos)
+        {
+            foreach (var bundleInfo in bundleInfos)
+            {
+                if (!ExistsInStorableDirectory(bundleInfo.Filename))
+                    return false;
+            }
+            return true;
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -150,6 +163,7 @@ namespace Loxodon.Framework.Bundles
         {
             string dir = GetStorableDirectory();
             string fullName = System.IO.Path.Combine(dir, relativePath);
+            //Debug.Log("<color=orange>"+fullName+"</color>");
             if (File.Exists(fullName))
                 return true;
             return false;

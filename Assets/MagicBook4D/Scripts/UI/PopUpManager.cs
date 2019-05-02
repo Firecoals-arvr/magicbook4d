@@ -207,6 +207,4 @@ public class PopupManager : MonoBehaviour
         yesNoDialogObject.SetActive(false);
         showingDialog = false;
     }
-
-
 }

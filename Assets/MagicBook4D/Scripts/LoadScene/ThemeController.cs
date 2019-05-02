@@ -35,7 +35,6 @@
             AddThemeEvent();
             //PlayerPrefs.DeleteAll();
             //Debug.LogWarning("Deleted all player preference key");
-            //PlayerPrefs.SetString("DownloadedSpace","DONE");
             if (Application.internetReachability != NetworkReachability.NotReachable)
             {
                 StartCoroutine(ActiveManager.AssetBundleVersion());

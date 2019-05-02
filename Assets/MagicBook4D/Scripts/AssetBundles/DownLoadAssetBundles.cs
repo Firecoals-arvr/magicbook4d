@@ -59,6 +59,7 @@ namespace Firecoals.AssetBundles
             downloading = true;
             try
             {
+                //Download manifest
                 IProgressResult<Progress, BundleManifest> manifestResult = _downloader.DownloadManifest(BundleSetting.ManifestFilename);
 
                 yield return manifestResult.WaitForDone();
@@ -73,13 +74,16 @@ namespace Firecoals.AssetBundles
                 }
 
                 BundleManifest manifest = manifestResult.Result;
-                /*TODO if manifest BundleInfo in the cloud != manifest BundleInfo in the local
-                  Clear Cache and and download again
-                  else if Storable directory if empty download
-                  else preload and load the scene
-                 */
 
-                IProgressResult<float, List<BundleInfo>> bundlesResult = _downloader.GetDownloadList(manifest);
+                IProgressResult<float, List<BundleInfo>> bundlesResult = null;
+                if (ActiveManager.IsActiveOfflineOk(ActiveManager.NameToProjectID(ThemeController.instance.Theme)))
+                {
+                    bundlesResult = _downloader.GetDownloadList(manifest);
+                }
+                else
+                {
+                    bundlesResult = _downloader.GetDownloadList(manifest, GetFreeBundleNames());
+                }
                 yield return bundlesResult.WaitForDone();
 
                 List<BundleInfo> bundles = bundlesResult.Result;
@@ -162,26 +166,46 @@ namespace Firecoals.AssetBundles
                 downloading = false;
             }
         }
+        /// <summary>
+        /// Get bundle names to be downloaded
+        /// In Firecoals policy
+        /// animals free: lion, elephant, gorilla
+        /// space free: solar system, sun, mercury
+        /// color free plane
+        /// </summary>
+        /// <returns></returns>
+        public static string[] GetFreeBundleNames()
+        {
+            string[] bundleNames = null;
+            switch (ThemeController.instance.Theme)
+            {
+                case "Animal":
+                    bundleNames = new[] { "animals/model/lion" , "animals/model/elephant" , "animals/model/gorilla" };
+                    break;
+                case "Space":
+                    bundleNames = new[] { "space/models/solarsystem", "space/models/sun", "space/models/mercury" };
+                    break;
+                case "Color":
+                    bundleNames = new[] { "color/model/maybay" };
+                    break;
+                default:
+                    bundleNames = null;
+                    break;
+            }
+
+            if (bundleNames != null)
+            {
+                return bundleNames;
+            }
+            else
+            {
+                Debug.LogError("Fail to get free bundle names to download");
+                return null;
+            }
+            
+        }
         #endregion
-        //TODO Check if current app version != bundle manifest version
 
-        //public IEnumerator DownloadBundleManifest(Action<bool> needUpdate)
-        //{
-        //    IProgressResult<Progress, BundleManifest> manifestResult = _downloader.DownloadManifest(BundleSetting.ManifestFilename);
-
-        //    yield return manifestResult.WaitForDone();
-
-        //    if (manifestResult.Exception != null)
-        //    {
-        //        Debug.LogFormat("Downloads BundleManifest failure.Error:{0}", manifestResult.Exception);
-        //        PopupManager.PopUpDialog("[[9C0002]Error[-]]", "Downloads BundleManifest failure. Error:{0}" + manifestResult.Exception);
-        //        yield break;
-        //    }
-        //    Debug.LogWarning(manifestResult.Result.ToString());
-        //    bool isNeedUpdate=  manifestResult.Result.GetAll().Any(bundleInfo => !BundleUtil.ExistsInStorableDirectory(bundleInfo));
-        //    needUpdate(isNeedUpdate);
-        //    yield return null;
-        //}
     }
 }
 

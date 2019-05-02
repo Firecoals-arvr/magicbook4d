@@ -3,6 +3,7 @@ using Firecoals.Augmentation;
 using Firecoals.Threading.Tasks;
 using Loxodon.Framework.Bundles;
 using System.Collections;
+using Firecoals.MagicBook;
 using UnityEngine;
 using Dispatcher = Firecoals.Threading.Dispatcher;
 
@@ -60,12 +61,18 @@ namespace Firecoals.Animal
             //PlayerPrefs.SetString("AnimalLanguage", "EN");
             //Dispatcher.Initialize();
             assetLoader = GameObject.FindObjectOfType<AssetLoader>();
-            gameObjectToload = assetLoader.LoadGameObjectAsync(bundlePath, mTrackableBehaviour.transform);
+            if (ActiveManager.IsActiveOfflineOk(ThemeController.instance.Theme) || 
+                mTrackableBehaviour.name == "1_free_lion" 
+                || mTrackableBehaviour.name == "2_free_elephant"
+                || mTrackableBehaviour.name == "3_free_gorilla")
+            {
+                gameObjectToload = assetLoader.LoadGameObjectAsync(bundlePath, mTrackableBehaviour.transform);
+            }            
         }
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            //   Debug.Log("Destroy" + mTrackableBehaviour.name);
+            //Debug.Log("Destroy" + mTrackableBehaviour.name);
             foreach (Transform go in mTrackableBehaviour.transform)
             {
                 Destroy(go.gameObject);
@@ -116,16 +123,8 @@ namespace Firecoals.Animal
         }
         protected override void OnTrackingFound()
         {
-            //ClearAllOtherTargetContents();
-            //gameObjectToload.SetActive(true);
             EnableAllChildOfTheTarget();
-            //if (IsTargetEmpty())
-            //{
-            //    LoadModelBundles(gameObjectToload);
-            //}
-            Debug.Log("<color=orange>mTrackableBehaviour</color>" + mTrackableBehaviour);
             base.OnTrackingFound();
-
         }
         protected override void OnTrackingLost()
         {

@@ -50,92 +50,139 @@ namespace Firecoals.Augmentation
             {
                 case "Animal":
                     bundleRoot = "Animal/bundles";
-                    bundleNames = new[] {"animals/model/bear",
-                        "animals/model/buffalo",
-                        "animals/model/cat",
-                        "animals/model/chameleon",
-                        "animals/model/cow",
-                        "animals/model/crocodile",
-                        "animals/model/dog",
-                        "animals/model/dolphin",
-                        "animals/model/eagle",
-                        "animals/model/elephant",
-                        "animals/model/frog",
-                        "animals/model/giraffe",
-                        "animals/model/gorilla",
-                        "animals/model/horse",
-                        "animals/model/kangaroo",
-                        "animals/model/lion",
-                        "animals/model/oschinh",
-                        "animals/model/owl",
-                        "animals/model/parrot",
-                        "animals/model/peacock",
-                        "animals/model/penguin",
-                        "animals/model/pig",
-                        "animals/model/rabbit",
-                        "animals/model/rhino",
-                        "animals/model/rooster",
-                        "animals/model/sheep",
-                        "animals/model/squirrel",
-                        "animals/model/tiger",
-                        "animals/model/turtle",
-                        "animals/model/wolf",
-                        "animals/info/en",
-                        "animals/info/jp",
-                        "animals/info/vn",
-                        "animals/name/cn",
-                        "animals/name/en",
-                        "animals/name/vn",
-                        "animals/name/jp",
-                        "animals/noise"
-                    };
+                    if (ActiveManager.IsActiveOfflineOk(ActiveManager.NameToProjectID(ThemeController.instance.Theme)))
+                    {
+                        bundleNames = new[] {
+                            "animals/model/bear",
+                            "animals/model/buffalo",
+                            "animals/model/cat",
+                            "animals/model/chameleon",
+                            "animals/model/cow",
+                            "animals/model/crocodile",
+                            "animals/model/dog",
+                            "animals/model/dolphin",
+                            "animals/model/eagle",
+                            "animals/model/elephant",
+                            "animals/model/frog",
+                            "animals/model/giraffe",
+                            "animals/model/gorilla",
+                            "animals/model/horse",
+                            "animals/model/kangaroo",
+                            "animals/model/lion",
+                            "animals/model/oschinh",
+                            "animals/model/owl",
+                            "animals/model/parrot",
+                            "animals/model/peacock",
+                            "animals/model/penguin",
+                            "animals/model/pig",
+                            "animals/model/rabbit",
+                            "animals/model/rhino",
+                            "animals/model/rooster",
+                            "animals/model/sheep",
+                            "animals/model/squirrel",
+                            "animals/model/tiger",
+                            "animals/model/turtle",
+                            "animals/model/wolf",
+                            "animals/info/en",
+                            "animals/info/jp",
+                            "animals/info/vn",
+                            "animals/name/cn",
+                            "animals/name/en",
+                            "animals/name/vn",
+                            "animals/name/jp",
+                            "animals/noise"
+                        };
+                    }
+                    else
+                    {
+                        bundleNames = new[] {
+                            "animals/model/lion",
+                            "animals/model/elephant",
+                            "animals/model/gorilla",
+                            "animals/info/en",
+                            "animals/info/jp",
+                            "animals/info/vn",
+                            "animals/name/cn",
+                            "animals/name/en",
+                            "animals/name/vn",
+                            "animals/name/jp",
+                            "animals/noise"
+                        };
+                    }
                     break;
                 case "Space":
                     bundleRoot = "Space/bundles";
-                    bundleNames = new[] {"space/models/solarsystem",
-                        "space/models/sun",
-                        "space/models/iss",
-                        "space/models/mars",
-                        "space/models/venus",
-                        "space/models/mercury",
-                        "space/models/earth",
-                        "space/models/jupiter",
-                        "space/models/saturn",
-                        "space/models/uranus",
-                        "space/models/neptune",
-                        "space/models/moon",
-                        "space/models/blackhole",
-                        "space/models/boosterandshuttle",
-                        "space/models/alienware",
-                        "space/models/satellite",
-                        "space/models/eclipse",
-                        "space/models/game1",
-                        "space/models/game2",
-                        "space/models/bigbang",
-                        "space/models/comet",
-                        "space/sound/name/en",
-                        "space/sound/name/vn",
-                        "space/sound/info/vn",
-                        "space/sound/info/en"
-                    };
+                    if (ActiveManager.IsActiveOfflineOk(ActiveManager.NameToProjectID(ThemeController.instance.Theme)))
+                    {
+                        bundleNames = new[] {"space/models/solarsystem",
+                            "space/models/sun",
+                            "space/models/iss",
+                            "space/models/mars",
+                            "space/models/venus",
+                            "space/models/mercury",
+                            "space/models/earth",
+                            "space/models/jupiter",
+                            "space/models/saturn",
+                            "space/models/uranus",
+                            "space/models/neptune",
+                            "space/models/moon",
+                            "space/models/blackhole",
+                            "space/models/boosterandshuttle",
+                            "space/models/alienware",
+                            "space/models/satellite",
+                            "space/models/eclipse",
+                            "space/models/game1",
+                            "space/models/game2",
+                            "space/models/bigbang",
+                            "space/models/comet",
+                            "space/sound/name/en",
+                            "space/sound/name/vn",
+                            "space/sound/info/vn",
+                            "space/sound/info/en",
+                            "space/music"
+                        };
+                    }
+                    else
+                    {
+                        bundleNames = new[] {
+                            "space/models/solarsystem",
+                            "space/models/sun",
+                            "space/models/mercury",
+                            "space/sound/name/en",
+                            "space/sound/name/vn",
+                            "space/sound/info/vn",
+                            "space/sound/info/en",
+                            "space/music"
+                        };
+
+                    }
+
                     break;
                 case "Color":
                     bundleRoot = "Color/bundles";
-                    bundleNames = new[] { "color/model/camtrai",
-                        "color/model/chantrau",
-                        "color/model/cloud/maybay",
-                        "color/model/cloud/dabong",
-                        "color/model/cloud/camtrai",
-                        "color/model/dabong",
-                        "color/model/khurung",
-                        "color/model/maybay",
-                        "color/model/samac",
-                        "color/model/tambien",
-                        "color/model/thadieu",
-                        "color/model/thanhpho",
-                        "color/model/trangtrai",
-                        "color/sounds/sounds"
-                    };
+                    if (ActiveManager.IsActiveOfflineOk(ActiveManager.NameToProjectID(ThemeController.instance.Theme)))
+                    {
+                        bundleNames = new[] { "color/model/camtrai",
+                            "color/model/chantrau",
+                            "color/model/cloud/maybay",
+                            "color/model/cloud/dabong",
+                            "color/model/cloud/camtrai",
+                            "color/model/dabong",
+                            "color/model/khurung",
+                            "color/model/maybay",
+                            "color/model/samac",
+                            "color/model/tambien",
+                            "color/model/thadieu",
+                            "color/model/thanhpho",
+                            "color/model/trangtrai",
+                            "color/sounds/sounds"
+                        };
+                    }
+                    else
+                    {
+                        bundleNames = new[] { "color/model/maybay", "color/sounds/sounds" };
+                    }
+
                     break;
 
             }
@@ -291,7 +338,6 @@ namespace Firecoals.Augmentation
             var go = bundle.LoadAsset<GameObject>(bundlePath);
             return go;
         }
-
     }
 
 }

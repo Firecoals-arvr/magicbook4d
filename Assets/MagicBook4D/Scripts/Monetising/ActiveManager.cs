@@ -119,7 +119,11 @@ public class ActiveManager
 
         yield return null;
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="projectId">A = Animal, B = Space, C = Color</param>
+    /// <returns></returns>
     public static string ProjectIdToName(string projectId)
     {
         switch (projectId)
@@ -133,6 +137,25 @@ public class ActiveManager
             default:
                 return string.Empty;
 
+        }
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="projectName">Animal = A, Color = C, Space = B</param>
+    /// <returns></returns>
+    public static string NameToProjectID(string projectName)
+    {
+        switch (projectName)
+        {
+            case "Animal":
+                return "A";
+            case "Space":
+                return "B";
+            case "Color":
+                return "C";
+            default:
+                return string.Empty;
         }
     }
     //register new user
@@ -198,6 +221,7 @@ public class ActiveManager
         string result = www.downloadHandler.text;
         cloudBundleVersion = result;
     }
+
 }
 
 
