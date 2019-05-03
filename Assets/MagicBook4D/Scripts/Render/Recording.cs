@@ -34,6 +34,7 @@ namespace Firecoals.Render
                 recordMicrophone ? (int)AudioSettings.speakerMode : 0,
                 OnReplay
             );
+            
             // Create recording inputs
             cameraInput = new CameraInput(videoRecorder, recordingClock, arCamera);
             

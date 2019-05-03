@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Firecoals.AssetBundles.Sound;
 
 namespace Firecoals.Animal
 {
@@ -11,7 +12,7 @@ namespace Firecoals.Animal
         /// bảng chứa thông tin về hành tinh
         /// </summary>
         public GameObject panelinfo;
-
+        LoadSoundbundles _loadSoundbundles;
         bool checkOpen;
         Animator anim;
 
@@ -19,6 +20,7 @@ namespace Firecoals.Animal
         {
             checkOpen = false;
             anim = panelinfo.GetComponent<Animator>();
+            _loadSoundbundles = FindObjectOfType<LoadSoundbundles>();
         }
 
         /// <summary>
@@ -27,13 +29,18 @@ namespace Firecoals.Animal
         public void ShowObjectInfo()
         {
             checkOpen = true;
-            anim.SetBool("isOpen", true);
+            NGUITools.SetActive(panelinfo, true);
+            anim.SetTrigger("Open");
+            _loadSoundbundles.ReplayInfo();
         }
 
-        public void HideObjectInfo()
+        public IEnumerator HideObjectInfo()
         {
             checkOpen = false;
-            anim.SetBool("isOpen", false);
+            anim.SetTrigger("Close");
+            yield return new WaitForSeconds(1f);
+            NGUITools.SetActive(panelinfo, false);
+            FirecoalsSoundManager.StopAll();
         }
 
         public void ClickToShow()
@@ -44,7 +51,7 @@ namespace Firecoals.Animal
             }
             else
             {
-                HideObjectInfo();
+                StartCoroutine( HideObjectInfo());
             }
         }
     }

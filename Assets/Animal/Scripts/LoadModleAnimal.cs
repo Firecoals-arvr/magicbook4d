@@ -10,6 +10,8 @@ using Dispatcher = Firecoals.Threading.Dispatcher;
 namespace Firecoals.Animal
 {
     /// <summary>
+    /// Author : Quang 
+    /// Edit : Cường
     /// class dùng thay cho DefaultTrackableEventHandler
     /// </summary>
     public class LoadModleAnimal : DefaultTrackableEventHandler
@@ -54,6 +56,11 @@ namespace Firecoals.Animal
         [Header("Name Animal")]
         public string nameAnimal;
         public UILabel objName;
+        //Biến chứa các ImageTarget để lấy vị trí của animal
+        GameObject[] allCreature;
+        public Vector3 itemPos;
+        // biến check để ko bị load sound 2 lần
+        private bool playSound;
         protected override void Start()
         {
             base.Start();
@@ -61,18 +68,20 @@ namespace Firecoals.Animal
             //PlayerPrefs.SetString("AnimalLanguage", "EN");
             //Dispatcher.Initialize();
             assetLoader = GameObject.FindObjectOfType<AssetLoader>();
-            if (ActiveManager.IsActiveOfflineOk(ThemeController.instance.Theme) || 
-                mTrackableBehaviour.name == "1_free_lion" 
-                || mTrackableBehaviour.name == "2_free_elephant"
-                || mTrackableBehaviour.name == "3_free_gorilla")
+            if (ActiveManager.IsActiveOfflineOk(ActiveManager.NameToProjectID(ThemeController.instance.Theme)) 
+                || mTrackableBehaviour.TrackableName.Equals("1_free_lion")
+                || mTrackableBehaviour.TrackableName.Equals("2_free_elephant")
+                ||mTrackableBehaviour.TrackableName.Equals("3_free_gorilla"))
             {
                 gameObjectToload = assetLoader.LoadGameObjectAsync(bundlePath, mTrackableBehaviour.transform);
-            }            
+            }
+            
+            playSound = true;
         }
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            //Debug.Log("Destroy" + mTrackableBehaviour.name);
+            //   Debug.Log("Destroy" + mTrackableBehaviour.name);
             foreach (Transform go in mTrackableBehaviour.transform)
             {
                 Destroy(go.gameObject);
@@ -86,7 +95,7 @@ namespace Firecoals.Animal
             //GameObject.Instantiate(go, mTrackableBehaviour.transform);
             //InstantiationAsync.InstantiateAsync(go, mTrackableBehaviour.transform, 300);
             //go.transform.parent = this.transform;
-
+            //Cho load Effect thì mở comment sound
             _loadsoundbundles.PlaySound(tagSound);
             _loadsoundbundles.PlayName(tagName);
             StartCoroutine("LoadNameAnimal");
@@ -123,7 +132,15 @@ namespace Firecoals.Animal
         }
         protected override void OnTrackingFound()
         {
+            //ClearAllOtherTargetContents();
+            //gameObjectToload.SetActive(true);
             EnableAllChildOfTheTarget();
+            if (IsTargetEmpty() && playSound)
+            {
+                LoadModelBundles(gameObjectToload);
+                playSound = false;
+            }
+            //Debug.Log("<color=orange>mTrackableBehaviour</color>" + mTrackableBehaviour);
             base.OnTrackingFound();
         }
         protected override void OnTrackingLost()
@@ -132,11 +149,14 @@ namespace Firecoals.Animal
             RandomEffect.Instance.Onlost();
             // DisActive TextNameAnimal trên scene
             NGUITools.SetActive(objName.gameObject, false);
+            DesableAllChildOfTheTarget();
+            playSound = true;
             base.OnTrackingLost();
         }
         public void LoadModelBundles(GameObject go)
         {
             StartCoroutine(StarEffect(go));
+            //load text lên bảng thông tin
             _textInfo = GameObject.Find("UI Root/PanelButtons/PanelInfor/Scroll View/Info");
             if (_textInfo != null)
             {
@@ -149,7 +169,7 @@ namespace Firecoals.Animal
         /// <returns></returns>
         private bool IsTargetEmpty()
         {
-            return mTrackableBehaviour.transform.childCount <= 0;
+            return mTrackableBehaviour.transform.childCount >= 0;
         }
         /// <summary>
         /// Clear all except this
@@ -168,6 +188,15 @@ namespace Firecoals.Animal
             {
                 go.gameObject.SetActive(true);
             }
+            ResetPosition();
+            //Đoạn bên dưới để load sound + text trong trường hợp load bundles mà ko load effect lúc xuất hiện
+            //_loadsoundbundles.PlaySound(tagSound);
+            //_loadsoundbundles.PlayName(tagName);
+            //_textInfo = GameObject.Find("UI Root/PanelButtons/PanelInfor/Scroll View/Info");
+            //if (_textInfo != null)
+            //{
+            //    ChangeKeyAnimalLocalization();
+            //}
         }
         private void DesableAllChildOfTheTarget()
         {
@@ -175,6 +204,7 @@ namespace Firecoals.Animal
             {
                 go.gameObject.SetActive(false);
             }
+            
         }
 
         //private void RunAnimationIntro()
@@ -207,6 +237,24 @@ namespace Firecoals.Animal
             NGUITools.SetActive(objName.gameObject, true);
             yield return new WaitForSeconds(2);
             NGUITools.SetActive(objName.gameObject, false);
+        }
+        // reset vị trí của animal khi tracking found
+        void ResetPosition()
+        {
+            allCreature = GameObject.FindGameObjectsWithTag("ImageTarget");
+            foreach (GameObject creature in allCreature)
+            {
+                if (creature.transform.GetChild(0).gameObject.activeSelf)
+                {
+                    GameObject go = GameObject.FindGameObjectWithTag("Creature");
+                    go.transform.localPosition = Vector3.zero;
+                    go.transform.localRotation = new Quaternion(0, 180, 0,0);
+                    GameObject go1 = GameObject.FindGameObjectWithTag("Item");
+                    go1.transform.localPosition = itemPos;
+                    go1.transform.localRotation = new Quaternion(0, 180, 0, 0);
+                }
+            }
+            transform.GetChild(0).localScale = Vector3.one;
         }
     }
 }

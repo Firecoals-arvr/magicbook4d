@@ -85,10 +85,10 @@ namespace Firecoals.Space
             _resources = context.GetService<IResources>();
             assetloader = GameObject.FindObjectOfType<AssetLoader>();
             _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
-            if (ActiveManager.IsActiveOfflineOk(ThemeController.instance.Theme) ||
-                mTrackableBehaviour.name == "Solarsystem_scaled"
-                || mTrackableBehaviour.name == "Sun_scaled"
-                || mTrackableBehaviour.name == "Mercury_scaled")
+            if (ActiveManager.IsActiveOfflineOk(ActiveManager.NameToProjectID(ThemeController.instance.Theme)) 
+                || mTrackableBehaviour.TrackableName == "Solarsystem_scaled"
+                || mTrackableBehaviour.TrackableName == "Sun_scaled"
+                || mTrackableBehaviour.TrackableName == "Mercury_scaled")
             {
                 _gameobjectLoaded = assetloader.LoadGameObjectAsync(path, mTrackableBehaviour.transform);
             }

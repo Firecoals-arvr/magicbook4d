@@ -10,14 +10,14 @@ namespace Firecoals.Render
     {
         private const float MaxRecordingTime = 60f; // seconds
         public UISprite cowntdown;
-        private bool cownting;
+        private bool counting;
         private Recording recording;
         public static bool toBeCreatedMP4;
         private void Start()
         {
             recording = GetComponent<Recording>();
-            EventDelegate mEventDelegate = new EventDelegate(this, "OnPress");
-            EventDelegate.Set(GetComponent<UIButton>().onClick, mEventDelegate);
+            //EventDelegate mEventDelegate = new EventDelegate(this, "OnPress");
+            //EventDelegate.Set(GetComponent<UIButton>().onClick, mEventDelegate);
             Reset();
         }
         /// <summary>
@@ -29,42 +29,85 @@ namespace Firecoals.Render
             cowntdown.fillAmount = 0;
         }
 
-        private float pressTime;
-        private void OnPress(bool pressed)
+        public void StartRecording()
         {
-            StartCoroutine(CowntDown());
-            if (!pressed)
+            StartCoroutine(Count());
+            recording.StartRecording();
+        }
+
+        public void StopRecording()
+        {
+            counting = false;
+            GetComponentInChildren<UILabel>().text = string.Empty;
+            recording.StopRecording();
+        }
+
+        private IEnumerator Count()
+        {
+            counting = true;
+            float startTime = Time.time;
+
+            while (counting && Time.time - startTime < MaxRecordingTime)
             {
-                var deltaTime = Time.realtimeSinceStartup - pressTime;
-                Debug.LogWarning("delta time: " + deltaTime);
-                if (deltaTime < 1f)
-                {
-                    toBeCreatedMP4 = false;
-                    Reset();
-                    Capture.Instance.Snap();
-                    recording.audioInput.Dispose();
-                    recording.cameraInput.Dispose();
-                    //recording.videoRecorder.Dispose();
-                    //TODO Take Screen shot
-                    DeleteAllRedudantMp4File();
-                    Debug.LogWarning("Snap");
-                    //StartCoroutine(GameObject.FindObjectOfType<Capture>().TakePhoto());
-                }
-                else
-                {
-                    toBeCreatedMP4 = true;
-                    Reset();
-                    cownting = false;
-                    recording.StopRecording();
-                }
+                GetComponentInChildren<UILabel>().text = (int)(Time.time - startTime) + "";
+                yield return null;
+            }
+
+            if (Time.time - startTime >= MaxRecordingTime)
+            {
+                StopRecording();
+                yield return null;
+            }
+        }
+
+        private void Update()
+        {
+            if (counting)
+            {
+                EventDelegate mEventDelegate = new EventDelegate(this, "StopRecording");
+                EventDelegate.Set(GetComponent<UIButton>().onClick, mEventDelegate);
             }
             else
             {
-                pressTime = Time.realtimeSinceStartup;
-                recording.StartRecording();
+                EventDelegate mEventDelegate = new EventDelegate(this, "StartRecording");
+                EventDelegate.Set(GetComponent<UIButton>().onClick, mEventDelegate);
             }
-
         }
+        //private float pressTime;
+        //private void OnPress(bool pressed)
+        //{
+        //    StartCoroutine(CowntDown());
+        //    if (!pressed)
+        //    {
+        //        var deltaTime = Time.realtimeSinceStartup - pressTime;
+        //        Debug.LogWarning("delta time: " + deltaTime);
+        //        if (deltaTime < 0.2f)
+        //        {
+        //            toBeCreatedMP4 = false;
+        //            Reset();
+        //            recording.audioInput.Dispose();
+        //            recording.cameraInput.Dispose();
+        //            //recording.videoRecorder.Dispose();
+        //            //TODO Take Screen shot
+        //            DeleteAllRedudantMp4File();
+        //            //StartCoroutine(GameObject.FindObjectOfType<Capture>().TakePhoto());
+        //        }
+        //        else
+        //        {
+        //            toBeCreatedMP4 = true;
+        //            Reset();
+        //            cownting = false;
+        //            recording.StopRecording();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        pressTime = Time.realtimeSinceStartup;
+        //        recording.StartRecording();
+        //    }
+
+        //}
+
 
         private void DeleteAllRedudantMp4File()
         {
@@ -88,7 +131,7 @@ namespace Firecoals.Render
                                 File.Delete(file.FullName);
                                 Debug.Log("<color>deleted " + file.FullName + "</color>");
                             }
-                            catch(Exception ex) { Debug.LogError(ex.Message); }
+                            catch (Exception ex) { Debug.LogError(ex.Message); }
                         break;
                     }
                 case RuntimePlatform.Android:
@@ -108,21 +151,21 @@ namespace Firecoals.Render
                     }
             }
         }
-        private IEnumerator CowntDown()
-        {
-            cownting = true;
-            yield return new WaitForSeconds(.2f);
-            if (!cownting) yield break;
-            float startTime = Time.time;
-            float ratio = 0;
-            while (cownting && (ratio = (Time.time - startTime) / MaxRecordingTime) < 1.0f)
-            {
-                cowntdown.fillAmount = ratio;
-                yield return null;
-            }
-            Reset();
+        //private IEnumerator CowntDown()
+        //{
+        //    cownting = true;
+        //    yield return new WaitForSeconds(.2f);
+        //    if (!cownting) yield break;
+        //    float startTime = Time.time;
+        //    float ratio = 0;
+        //    while (cownting && (ratio = (Time.time - startTime) / MaxRecordingTime) < 1.0f)
+        //    {
+        //        cowntdown.fillAmount = ratio;
+        //        yield return null;
+        //    }
+        //    Reset();
 
-        }
+        //}
     }
 
 }

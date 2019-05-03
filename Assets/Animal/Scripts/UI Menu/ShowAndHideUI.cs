@@ -30,7 +30,7 @@ namespace Firecoals.Animal
             x.PlayForward();
             x.ResetToBeginning();
 
-            var y = TweenPosition.Begin(this.gameObject, .5f, new Vector3(-670f, 0, 0f));
+            var y = TweenPosition.Begin(this.gameObject, .5f, new Vector3(120f, 291f, 0f));
             y.method = UITweener.Method.EaseInOut;
             y.PlayForward();
             y.ResetToBeginning();
@@ -46,7 +46,7 @@ namespace Firecoals.Animal
             x.PlayForward();
             x.ResetToBeginning();
 
-            var y = TweenPosition.Begin(this.gameObject, .5f, new Vector3(-780f, 0, 0f));
+            var y = TweenPosition.Begin(this.gameObject, .5f, new Vector3(0f, 291f, 0f));
             y.method = UITweener.Method.EaseInOut;
             y.PlayForward();
             y.ResetToBeginning();

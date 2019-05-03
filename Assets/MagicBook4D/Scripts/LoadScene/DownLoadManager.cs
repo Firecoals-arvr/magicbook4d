@@ -25,7 +25,6 @@ public class DownLoadManager : MonoBehaviour
         
         LoadLocalManifest();
         InitDownload();
-
     }
 
     private void InitDownload()
@@ -105,6 +104,7 @@ public class DownLoadManager : MonoBehaviour
         var assetLoader = GameObject.FindObjectOfType<AssetLoader>();
         assetLoader.InitResource();
         StartCoroutine(assetLoader.PreLoad(loadingBar));
+        
     }
     //TODO If has Internet connection DONE
     //If has a update version PopUp Do you want to update new version data
@@ -140,10 +140,6 @@ public class DownLoadManager : MonoBehaviour
     /// </summary>
     public void RetryDownload()
     {
-        //Clear persistent data path
-        //BundleUtil.ClearStorableDirectory();
-        PlayerPrefs.DeleteKey("Downloaded" + ThemeController.instance.Theme);
-        //Downloading
         _dlAssets.slider = loadingBar;
         _dlAssets.slider.value = 0;
         NGUITools.SetActive(loadingBar.gameObject, true);

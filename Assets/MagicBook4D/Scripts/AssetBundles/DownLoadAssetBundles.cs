@@ -109,7 +109,7 @@ namespace Firecoals.AssetBundles
                     var percent = p.GetCompletedSize(UNIT.KB) / p.GetTotalSize(UNIT.KB);
                     
                     slider.value = percent;
-                    
+                    slider.transform.GetChild(2).gameObject.GetComponent<UILabel>().text = "Đang tải dữ liệu";
                     //var label =  slider.transform.Find("displaytext").gameObject.GetComponent<UILabel>();
                     //label.text = p.GetCompletedSize(UNIT.KB).ToString()+"/"+ p.GetTotalSize(UNIT.KB).ToString();
 

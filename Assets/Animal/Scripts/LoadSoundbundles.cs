@@ -10,26 +10,21 @@ namespace Firecoals.Animal
     public class LoadSoundbundles : MonoBehaviour
     {
         private ISoundManifestLoader _soundManifest;
-        private IBundle 
-            _bundleAudioClip;
+        private IBundle _bundleAudioClip;
         private AssetLoader _assetLoader;
-        //private IntroScripts _intro;
         GameObject[] imageTarget;
-        //public GameObject target;
-        //bool isTrackable;
         private SoundInfo[] soundNames;
         private SoundInfo[] soundInfos;
         private SoundInfo[] soundNoises;
         private string language;
-        // VN
         private void Start()
         {
             imageTarget = GameObject.FindGameObjectsWithTag("ImageTarget");
-          language = PlayerPrefs.GetString("AnimalLanguage");
+            language = PlayerPrefs.GetString("AnimalLanguage");
         }
         public void PlaySound(string sound)
         {
-            Debug.Log("loading json");
+            //Debug.Log("loading json");
             _assetLoader = GameObject.FindObjectOfType<AssetLoader>();
             _soundManifest = new SoundManifestLoader();
             var soundManifest = _soundManifest.LoadSync(Application.streamingAssetsPath + "/AnimalAudioClip.json");
@@ -56,7 +51,7 @@ namespace Firecoals.Animal
             _assetLoader = GameObject.FindObjectOfType<AssetLoader>();
             _soundManifest = new SoundManifestLoader();
             var soundManifest = _soundManifest.LoadSync(Application.streamingAssetsPath + "/AnimalAudioClip.json");
-            soundNames = soundManifest.soundInfos;        
+            soundNames = soundManifest.soundInfos;
             switch (language)
             {
                 case "VI":
@@ -74,7 +69,7 @@ namespace Firecoals.Animal
             }
         }
 
-        public void SetSoundNameBuilder(string bundlesSound,string tag,string _language)
+        public void SetSoundNameBuilder(string bundlesSound, string tag, string _language)
         {
             _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles[bundlesSound];
             AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetNameBundlePath(_language, tag));
@@ -83,16 +78,16 @@ namespace Firecoals.Animal
         public void SetSoundInfoBuilder(string bundlesSound, string tag, string _language)
         {
             _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles[bundlesSound];
-            Debug.Log("_language" + _language + "tag" + tag);
+            //Debug.Log("_language" + _language + "tag" + tag);
             AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetInfoBundlePath(_language, tag));
-      
+
             FirecoalsSoundManager.PlaySound(audioClip);
         }
         private string GetNameBundlePath(string currentLanguage, string tag)
         {
             foreach (var soundName in soundNames)
             {
-                if (soundName.Language == currentLanguage && soundName.Tag ==tag)
+                if (soundName.Language == currentLanguage && soundName.Tag == tag)
                 {
                     return soundName.PathBundle;
                 }
@@ -107,7 +102,7 @@ namespace Firecoals.Animal
             _soundManifest = new SoundManifestLoader();
             var soundManifest = _soundManifest.LoadSync(Application.streamingAssetsPath + "/AnimalAudioClip.json");
             soundInfos = soundManifest.soundInfos;
-            Debug.LogWarning("language"+language+ "tagInfo"+ tagInfo);         
+            //Debug.LogWarning("language"+language+ "tagInfo"+ tagInfo);         
             switch (language)
             {
                 case "VI":
@@ -126,15 +121,15 @@ namespace Firecoals.Animal
         {
             foreach (var soundInfo in soundInfos)
             {
-                if (soundInfo.Language == currentLanguage && soundInfo.Tag ==tag)
+                if (soundInfo.Language == currentLanguage && soundInfo.Tag == tag)
                 {
-                    Debug.LogWarning("Searching");
+                    //Debug.LogWarning("Searching");
                     return soundInfo.PathBundle;
                 }
             }
             return string.Empty;
         }
-        
+
         public void ReplayName()
         {
             foreach (GameObject go in imageTarget)
@@ -150,9 +145,9 @@ namespace Firecoals.Animal
         {
             foreach (GameObject go in imageTarget)
             {
-                if (go.transform.childCount > 0)
+                if (go.transform.GetChild(0).gameObject.activeSelf)
                 {
-                    Debug.LogWarning("ssssssssssss"+go.transform.GetComponentInParent<LoadModleAnimal>().tagInfo);
+                    //Debug.LogWarning("ssssssssssss"+go.transform.GetComponentInParent<LoadModleAnimal>().tagInfo);
                     PlayInfo(go.transform.GetComponentInParent<LoadModleAnimal>().tagInfo);
                 }
             }

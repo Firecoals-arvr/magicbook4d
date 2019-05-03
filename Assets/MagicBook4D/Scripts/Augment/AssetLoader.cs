@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Firecoals.Augmentation
 {
@@ -15,10 +16,6 @@ namespace Firecoals.Augmentation
     /// </summary>
     public class AssetLoader : MonoBehaviour
     {
-        /// <summary>
-        /// Slider for loading
-        /// </summary>
-        public UISlider slider;
         /// <summary>
         /// Bundle name means named assetbundle which built from Unity (Loxodon Bundle Framework or AssetBundle Browser)
         /// </summary>
@@ -36,16 +33,24 @@ namespace Firecoals.Augmentation
         public IResources Resources { private set; get; }
         //private string iv = "5Hh2390dQlVh0AqC";
         //private string key = "E4YZgiGQ0aqe5LEJ";
+        public static AssetLoader instance;
 
         private void OnDestroy()
         {
             assetBundlesLoader.OnDestroy();
         }
 
-        #region MONOBEHAVIOUR_METHOD
-        private void Awake()
+        private void OnEnable()
         {
-            DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += BundleNameSwitch;
+        }
+
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= BundleNameSwitch;
+        }
+        private void BundleNameSwitch(Scene scene, LoadSceneMode mode)
+        {
             switch (ThemeController.instance.Theme)
             {
                 case "Animal":
@@ -186,6 +191,24 @@ namespace Firecoals.Augmentation
                     break;
 
             }
+        }
+        #region MONOBEHAVIOUR_METHOD
+        private void Awake()
+        {
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(this);
+            }
+            else
+            {
+                if (this != instance)
+                {
+                    Destroy(gameObject);
+                }
+            }
+            
+
         }
 
 

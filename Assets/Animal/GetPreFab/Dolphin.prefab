@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 47217773}
   m_Layer: 0
   m_Name: item
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,7 +70,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1361573352}
   m_LocalRotation: {x: 0.009036944, y: -0.9824739, z: -0.1861734, w: -0.0017124511}
-  m_LocalPosition: {x: 0.006, y: 0.042098816, z: 0.14400001}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.8000019, y: 2.8000004, z: 2.2000017}
   m_Children:
   - {fileID: 2195318125294241100}
@@ -2576,7 +2576,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1361573351
 Transform:
   m_ObjectHideFlags: 0
@@ -2613,9 +2613,9 @@ MonoBehaviour:
   Camera: {fileID: 0}
   WheelSensitivity: 0
   Relative: 0
-  ScaleClamp: 0
-  ScaleMin: {x: 0, y: 0, z: 0}
-  ScaleMax: {x: 0, y: 0, z: 0}
+  ScaleClamp: 1
+  ScaleMin: {x: 0.5, y: 0.5, z: 0.5}
+  ScaleMax: {x: 10, y: 10, z: 10}
 --- !u!1 &8074391269776838095
 GameObject:
   m_ObjectHideFlags: 0
