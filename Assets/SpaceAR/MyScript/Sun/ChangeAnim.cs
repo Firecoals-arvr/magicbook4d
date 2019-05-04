@@ -23,7 +23,7 @@ namespace Firecoals.Space
         }
         void Start()
         {
-            open = GameObject.Find("ChangeAnimOpen");
+            //open = GameObject.Find("ChangeAnimOpen");
             anim.GetComponent<Animator>();
             changAnim = true;
         }

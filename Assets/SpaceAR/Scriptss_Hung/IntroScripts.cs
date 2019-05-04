@@ -1,6 +1,5 @@
 ﻿using Firecoals.AssetBundles.Sound;
 using Firecoals.Augmentation;
-using Firecoals.MagicBook;
 using Firecoals.Threading.Tasks;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
@@ -17,7 +16,7 @@ namespace Firecoals.Space
         /// <summary>
         /// tên bundle của object
         /// </summary>
-        public string bundleName;
+        //public string bundleName;
 
         /// <summary>
         /// đường dẫn của object trong thư mục
@@ -34,12 +33,12 @@ namespace Firecoals.Space
         /// <summary>
         /// bảng hiển thị thông tin về object
         /// </summary>
-        [SerializeField] private GameObject objectInfo;
+        [SerializeField] private GameObject objectInfo = default;
 
         /// <summary>
         /// bảng hiển thị tên của object
         /// </summary>
-        [SerializeField] private GameObject objectName;
+        [SerializeField] private GameObject objectName = default;
 
         /// <summary>
         /// tên của target
@@ -66,6 +65,8 @@ namespace Firecoals.Space
         public string tagInfo;
         private LoadSoundbundles _loadSoundbundle;
 
+        [Header("Music background")]
+        public string _backgroundMusic;
         private GameObject _gameobjectLoaded;
 
         /// <summary>
@@ -73,10 +74,6 @@ namespace Firecoals.Space
         /// </summary>
         private Animator anim;
 
-        //private GameObject[] inforBtn;
-        private bool checkOpen;
-
-        private AudioSource _audiosrc;
 
         protected override void Start()
         {
@@ -85,14 +82,8 @@ namespace Firecoals.Space
             _resources = context.GetService<IResources>();
             assetloader = GameObject.FindObjectOfType<AssetLoader>();
             _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
-            if (ActiveManager.IsActiveOfflineOk(ActiveManager.NameToProjectID(ThemeController.instance.Theme)) 
-                || mTrackableBehaviour.TrackableName == "Solarsystem_scaled"
-                || mTrackableBehaviour.TrackableName == "Sun_scaled"
-                || mTrackableBehaviour.TrackableName == "Mercury_scaled")
-            {
-                _gameobjectLoaded = assetloader.LoadGameObjectAsync(path, mTrackableBehaviour.transform);
-            }
-                
+
+            _gameobjectLoaded = assetloader.LoadGameObjectAsync(path, mTrackableBehaviour.transform);
 
             Dispatcher.Initialize();
         }
@@ -104,7 +95,6 @@ namespace Firecoals.Space
 
         protected override void OnTrackingFound()
         {
-            _audiosrc = gameObject.GetComponentInChildren<AudioSource>();
             foreach (Transform a in mTrackableBehaviour.transform)
             {
                 a.gameObject.SetActive(true);
@@ -113,7 +103,7 @@ namespace Firecoals.Space
             if (IsTargetEmpty())
             {
                 ShowModelsOnScreen();
-                PlayAudioOfObject();
+                NGUITools.SetActive(objectName, true);
             }
 
             //nếu đã purchase thì vào phần này
@@ -121,7 +111,6 @@ namespace Firecoals.Space
             //{
             //    //SpawnModel();
             //    ShowModelsOnScreen();
-            //    AutoTriggerInforButton();
             //}
             //// nếu chưa purchase thì vào phần này
             //else
@@ -131,7 +120,6 @@ namespace Firecoals.Space
             //    {
             //        //SpawnModel();
             //        ShowModelsOnScreen();
-            //        AutoTriggerInforButton();
             //    }
             //    //nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
             //    else
@@ -153,6 +141,10 @@ namespace Firecoals.Space
             if (IsTargetEmpty())
             {
                 _loadSoundbundle.PlayNameSound(tagSound);
+                if (_backgroundMusic != string.Empty)
+                {
+                    _loadSoundbundle.PlayMusicOfObjects(_backgroundMusic);
+                }
                 PlayAnimIntro();
                 nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
                 nameTargetSpace.ToLower();
@@ -160,27 +152,6 @@ namespace Firecoals.Space
             }
         }
 
-        /// <summary>
-        /// bật nhạc khi có model
-        /// </summary>
-        private void PlayAudioOfObject()
-        {
-            if (_audiosrc != null)
-            {
-                _audiosrc.Play();
-            }
-        }
-
-        /// <summary>
-        /// tắt nhạc khi model bị tắt đi
-        /// </summary>
-        private void StopAudioOfObject()
-        {
-            if (_audiosrc != null)
-            {
-                _audiosrc.Stop();
-            }
-        }
 
         protected override void OnTrackingLost()
         {
@@ -197,7 +168,7 @@ namespace Firecoals.Space
 
             ClearKeyLocalization();
             FirecoalsSoundManager.StopAll();
-            StopAudioOfObject();
+
             base.OnTrackingLost();
         }
 
@@ -244,8 +215,6 @@ namespace Firecoals.Space
 
                 objectName.GetComponentInChildren<UILabel>().text = Localization.Get(nameKeySpace);
                 objectInfo.GetComponent<UILabel>().text = Localization.Get(inforKeySpace);
-
-                //ShowComponentInfor();
             }
         }
 
@@ -315,26 +284,6 @@ namespace Firecoals.Space
         private bool IsTargetEmpty()
         {
             return mTrackableBehaviour.transform.childCount <= 0;
-        }
-
-
-
-        /// <summary>
-        /// thông tin thành phần con của hành tinh
-        /// </summary>
-        [Header("Panel information")]
-        [SerializeField] private Animator panelInforAnim;
-
-        private void ShowObjectInfo()
-        {
-            checkOpen = true;
-            panelInforAnim.SetBool("isOpen", true);
-        }
-
-        private void HideObjectInfo()
-        {
-            checkOpen = false;
-            panelInforAnim.SetBool("isOpen", false);
         }
     }
 }

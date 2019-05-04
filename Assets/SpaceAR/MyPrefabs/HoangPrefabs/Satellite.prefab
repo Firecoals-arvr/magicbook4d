@@ -1116,7 +1116,6 @@ GameObject:
   - component: {fileID: 5527301714828793659}
   - component: {fileID: 7140301887315713434}
   - component: {fileID: 2074993990367237433}
-  - component: {fileID: 6488887745098685748}
   m_Layer: 0
   m_Name: Satellite
   m_TagString: Untagged
@@ -1263,102 +1262,6 @@ MonoBehaviour:
     m_Panel: {fileID: 2124304814922143118, guid: 04ba687fba4d6144ebf5ad25bd020568,
       type: 3}
     m_Parents: {fileID: 2073916321579513759}
---- !u!82 &6488887745098685748
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2074993990367237431}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b212f1a5738f76a4f893cbc3c2891584, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 0.4
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!1 &2074996490537503677
 GameObject:
   m_ObjectHideFlags: 0
@@ -1620,9 +1523,9 @@ MonoBehaviour:
   Camera: {fileID: 0}
   WheelSensitivity: 0
   Relative: 0
-  ScaleClamp: 0
-  ScaleMin: {x: 0.1, y: 0.1, z: 0.1}
-  ScaleMax: {x: 2, y: 2, z: 2}
+  ScaleClamp: 1
+  ScaleMin: {x: 0.5, y: 0.5, z: 0.5}
+  ScaleMax: {x: 10, y: 10, z: 10}
 --- !u!1 &2075120630028346507
 GameObject:
   m_ObjectHideFlags: 0
@@ -1788,7 +1691,6 @@ GameObject:
   - component: {fileID: 2073775227164927865}
   - component: {fileID: 2116455645515123113}
   - component: {fileID: 2030983590511965657}
-  - component: {fileID: 2112219564670852261}
   - component: {fileID: 2075268008351324102}
   m_Layer: 0
   m_Name: System 4D
@@ -1840,28 +1742,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 130.07, y: 149.4, z: 85.1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2112219564670852261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2075268008351324103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c73c1ab94e28d244827af556dca1ed2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IgnoreStartedOverGui: 1
-  IgnoreIsOverGui: 0
-  RequiredFingerCount: 0
-  RequiredSelectable: {fileID: 0}
-  Camera: {fileID: 0}
-  WheelSensitivity: 0
-  Relative: 0
-  ScaleClamp: 0
-  ScaleMin: {x: 0, y: 0, z: 0}
-  ScaleMax: {x: 0, y: 0, z: 0}
 --- !u!114 &2075268008351324102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2041,6 +1921,7 @@ GameObject:
   - component: {fileID: 2073790941009285945}
   - component: {fileID: 2073916323483345789}
   - component: {fileID: 2073916323483345790}
+  - component: {fileID: 7160666560513376689}
   m_Layer: 0
   m_Name: Container
   m_TagString: Untagged
@@ -2131,6 +2012,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7160666560513376689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2075380259758422097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c73c1ab94e28d244827af556dca1ed2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoreStartedOverGui: 1
+  IgnoreIsOverGui: 0
+  RequiredFingerCount: 0
+  RequiredSelectable: {fileID: 0}
+  Camera: {fileID: 0}
+  WheelSensitivity: 0
+  Relative: 0
+  ScaleClamp: 1
+  ScaleMin: {x: 0.5, y: 0.5, z: 0.5}
+  ScaleMax: {x: 10, y: 10, z: 10}
 --- !u!1 &2075380755804681915
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,11 +18,9 @@ namespace Firecoals.Space
         {
             for (int i = 0; i < InfoLeft.Length; i++)
             {
-                Debug.Log("size of InfoLeft: "+InfoLeft.Length);
                 GameObject go = Instantiate(InfoLeft[i].m_Panel, InfoLeft[i].m_Transform.position, Quaternion.identity, InfoLeft[i].m_Parents.transform);
                 animator = go.GetComponent<Animator>();
                 go.transform.localRotation = Quaternion.AngleAxis(0, Vector3.zero);
-                //go.transform.localScale = GetComponentInParent<Transform>().localScale;
                 go.GetComponentInChildren<UILocalize>().key = InfoLeft[i].m_Label;
                 go.GetComponentInChildren<UILabel>().text = Localization.Get(InfoLeft[i].m_Label);
                 go.name= InfoLeft[i].m_Label;
@@ -34,14 +32,12 @@ namespace Firecoals.Space
         {
             for (int i = 0; i < InfoRight.Length; i++)
             {
-                Debug.Log("size of InfoRight: " + InfoLeft.Length);
                 GameObject go = Instantiate(InfoRight[i].m_Panel, InfoRight[i].m_Transform.position, Quaternion.identity, InfoRight[i].m_Parents.transform);
                 animator = go.GetComponent<Animator>();
                 go.transform.localRotation = Quaternion.AngleAxis(0, Vector3.zero);
                 go.GetComponentInChildren<UILocalize>().key = InfoRight[i].m_Label;
-                //go.transform.localScale = GetComponentInParent<Transform>().localScale;
                 go.GetComponentInChildren<UILabel>().text = Localization.Get(InfoRight[i].m_Label);
-                go.name = InfoLeft[i].m_Label;
+                go.name = InfoRight[i].m_Label;
                 lst.Add(go);
             }
         }

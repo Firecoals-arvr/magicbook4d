@@ -26,8 +26,8 @@ namespace Firecoals.Space
         void Start()
         {
             CheckPrefabs();
-			// gameO là thằng chứa toàn bộ model
-            
+            // gameO là thằng chứa toàn bộ model
+
             score.transform.GetChild(0).GetComponent<UILabel>().text = "0";
             score.transform.GetChild(2).GetComponent<UILabel>().text = "0";
             numberRightAns = 0;
@@ -50,8 +50,8 @@ namespace Firecoals.Space
         }
         void CheckPrefabs()
         {
-			// là thằng có tên game 2 mà ko fai là image target
-            var a = GameObject.FindGameObjectWithTag("Game2").transform.GetChild(0);
+            // là thằng có tên game 2 mà ko fai là image target
+            var a = GameObject.FindGameObjectWithTag("Game2");
             if (a.transform.GetChild(1).childCount > 0)
             {
                 for (int i = 0; i < a.transform.GetChild(1).childCount; i++)

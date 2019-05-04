@@ -36,16 +36,24 @@ namespace Firecoals.Space
         /// </summary>
         private SelectLanguage select;
         string language;
-        
 
-        
+        /// <summary>
+        /// chứa các giá trị file json, để lấy ra nhạc của 1 số object có nhạc riêng
+        /// </summary>
+        private SoundInfo[] _objectMusic = default;
+
+        private ObjectInformation _objInfor;
+
         private void Start()
         {
             // tìm script ngôn ngữ ở trên scene
             select = GameObject.FindObjectOfType<SelectLanguage>();
             // tìm tất cả các tranh có tag image target
-            imageTarget = GameObject.FindGameObjectsWithTag ("ImageTarget");
-            
+            imageTarget = GameObject.FindGameObjectsWithTag("ImageTarget");
+
+            //tìm object có kiểu là ObjectInformation
+            _objInfor = GameObject.FindObjectOfType<ObjectInformation>();
+
         }
         // hàm để chạy tên của model khi tìm thấy tranh
         public void PlayNameSound(string tagSound)
@@ -69,7 +77,7 @@ namespace Firecoals.Space
                 FirecoalsSoundManager.PlaySound(audioClip);
             }
             // giống vs tiếng anh
-            if(select.vn == true)
+            if (select.vn == true)
             {
                 language = "vietnamese";
                 _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["space/sound/name/vn"];
@@ -78,7 +86,7 @@ namespace Firecoals.Space
             }
         }
         // hàm để lấy dc path của tên bundles
-        private string  GetSoundBundlePath(string currentLanguage, string tag)
+        private string GetSoundBundlePath(string currentLanguage, string tag)
         {
             // chạy từng thằng trong sound bundles
             foreach (var soundName in soundNames)
@@ -112,7 +120,7 @@ namespace Firecoals.Space
                 _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["space/sound/info/vn"];
                 AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetSoundBundlePath(language, tagInfo));
                 FirecoalsSoundManager.PlaySound(audioClip);
-                
+
             }
         }
         private string GetInfoBundlePath(string currentLanguage, string tag)
@@ -133,7 +141,7 @@ namespace Firecoals.Space
             foreach (GameObject go in imageTarget)
             {
                 // nếu thằng nào đang có con tức là đang đc tracking found thì chạy lại hàm play name sound
-                if (go.transform.childCount > 0)
+                if (go.transform.childCount > 0 && go.gameObject.activeInHierarchy)
                 {
                     PlayNameSound(go.transform.GetComponentInParent<IntroScripts>().tagSound);
                 }
@@ -144,12 +152,47 @@ namespace Firecoals.Space
         {
             foreach (GameObject go in imageTarget)
             {
-                if (go.transform.childCount > 0)
+                if (go.transform.childCount > 0 && go.gameObject.activeInHierarchy)
                 {
-                    PlayInfoSound(go.transform.GetComponentInParent<IntroScripts>().tagInfo);
+                    if (_objInfor.checkOpen == true)
+                    {
+                        PlayInfoSound(go.transform.GetComponentInParent<IntroScripts>().tagInfo);
+                    }
                 }
             }
+        }
 
+        /// <summary>
+        /// load file nhạc nền
+        /// </summary>
+        /// <param name="tag"></param>
+        public void PlayMusicOfObjects(string tag)
+        {
+            _assetLoader = GameObject.FindObjectOfType<AssetLoader>();
+            _soundManifest = new SoundManifestLoader();
+            var soundManifest = _soundManifest.LoadSync(Application.streamingAssetsPath + "/SpaceAudio.json");
+            soundInfos = soundManifest.soundInfos;
+
+            _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["space/music"];
+            AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetMusicPath(tag));
+            FirecoalsSoundManager.PlaySound(audioClip);
+        }
+
+        /// <summary>
+        /// lấy đường dẫn của file nhạc nền
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <returns></returns>
+        private string GetMusicPath(string tag)
+        {
+            foreach (var music in _objectMusic)
+            {
+                if (music.Language == "all" && music.Tag == tag)
+                {
+                    return music.PathBundle;
+                }
+            }
+            return string.Empty;
         }
     }
 }

@@ -7,11 +7,13 @@ namespace Firecoals.Space
 {
     public class DragObject : MonoBehaviour
     {
+        private GameObject parentGameObject;
         LeanSelectable leanSelect;
         bool touchObject;
 
         private void Start()
         {
+            parentGameObject = gameObject.transform.parent.gameObject;
             leanSelect = gameObject.GetComponent<LeanSelectable>();
             leanSelect.OnSelect.AddListener((p) => SelectObject());
             leanSelect.OnDeselect.AddListener(() => DeSelectObject());
@@ -63,6 +65,12 @@ namespace Firecoals.Space
                     transform.parent = other.gameObject.transform;
                 }
             }
+        }
+        public void RestartGame()
+        {
+            transform.parent = parentGameObject.transform;
+            transform.position = parentGameObject.transform.position;
+            transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
         }
     }
 

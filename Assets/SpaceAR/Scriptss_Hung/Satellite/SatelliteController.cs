@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SatelliteController : MonoBehaviour
 {
-    [SerializeField] Animation anim;
+    [SerializeField] Animation anim = default;
     private bool stt = false;
 
     private void Update()

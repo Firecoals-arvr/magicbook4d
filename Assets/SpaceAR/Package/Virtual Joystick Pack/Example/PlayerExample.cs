@@ -10,7 +10,7 @@ namespace Firecoals.Space
         public float moveSpeed;
         public GameObject alienChild;
         public Joystick joystick;
-        private AudioSource audioSrc;
+
         Animation anima;
 #pragma warning disable IDE0044 // Add readonly modifier
         [SerializeField] Animation[] _alienanima;
@@ -18,10 +18,18 @@ namespace Firecoals.Space
         //[SerializeField] AudioSource audioSrc;
         //public AudioClip[] ListAudio;
 
+        private LoadSoundbundles _loadSoundbundle;
+
+        /// <summary>
+        /// tag của âm thanh trong assetbundles
+        /// </summary>
+        public string _talkmusic;
+        public string _dancemusic;
+
         void Start()
         {
-            audioSrc = GetComponent<AudioSource>();
             anima = alienChild.GetComponent<Animation>();
+            _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
         }
 
         void Update()
@@ -32,7 +40,6 @@ namespace Firecoals.Space
             {
                 alienChild.transform.rotation = Quaternion.LookRotation(moveVector * moveSpeed * Time.deltaTime);
                 anima.Play("Walking");
-                alienChild.GetComponent<AudioSource>().Stop();
             }
             else
             {
@@ -62,8 +69,7 @@ namespace Firecoals.Space
             {
                 a.Play("Talking");
             }
-            audioSrc.Play();
-            alienChild.GetComponent<AudioSource>().Stop();
+            _loadSoundbundle.PlayMusicOfObjects(_talkmusic);
         }
 
         public void AlienDance()
@@ -78,7 +84,7 @@ namespace Firecoals.Space
             {
                 a.Play("Dance");
             }
-            alienChild.GetComponent<AudioSource>().Play();
+            _loadSoundbundle.PlayMusicOfObjects(_dancemusic);
         }
     }
 }

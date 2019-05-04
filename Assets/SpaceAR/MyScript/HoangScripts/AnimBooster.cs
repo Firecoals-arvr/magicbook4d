@@ -3,35 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Firecoals.Space
 {
-
+    /// <summary>
+    /// chạy các animations của tàu con thoi
+    /// </summary>
     public class AnimBooster : MonoBehaviour
     {
         Animator anim;
-        bool checkStatusIdle;
+
         // Start is called before the first frame update
+
+        private LoadSoundbundles _loadSoundbundle;
+
+        /// <summary>
+        /// tag của âm thanh trong assetbundle
+        /// </summary>
+        public string _boosterMusic;
+
         void Start()
         {
             anim = GetComponent<Animator>();
+            _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
         }
         public void Launch()
         {
-            //if (!checkStatusIdle)
-            //{
-            //    anim.Play("New State");
-            //    GetComponent<AudioSource>().Stop();
-            //}
             anim.Play("Lauch");
-            GetComponent<AudioSource>().Stop();
+            _loadSoundbundle.PlayMusicOfObjects(_boosterMusic);
         }
         public void Open4D()
         {
-            //if (!checkStatusIdle)
-            //{
-            //    anim.Play("New State");
-            //    GetComponent<AudioSource>().Stop();
-            //}
             anim.Play("4D");
-            GetComponent<AudioSource>().Stop();
         }
     }
 }

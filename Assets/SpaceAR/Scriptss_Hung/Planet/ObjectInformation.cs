@@ -20,12 +20,12 @@ namespace Firecoals.Space
         /// <summary>
         /// check bảng thông tin mở/đóng
         /// </summary>
-        bool checkOpen;
+        [HideInInspector] public bool checkOpen;
 
         /// <summary>
         /// animator của bảng thông tin
         /// </summary>
-        [SerializeField] Animator anim;
+        public Animator anim;
 
         List<Transform> go = new List<Transform>();
 
