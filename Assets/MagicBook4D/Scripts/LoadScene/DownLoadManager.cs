@@ -3,8 +3,8 @@ using Firecoals.Augmentation;
 using Firecoals.MagicBook;
 using Firecoals.SceneTransition;
 using Loxodon.Framework.Bundles;
+using System.IO;
 using UnityEngine;
-using UnityEngine.Windows;
 using Version = System.Version;
 
 /// <summary>

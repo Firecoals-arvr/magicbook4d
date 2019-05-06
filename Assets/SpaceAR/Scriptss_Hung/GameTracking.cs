@@ -1,5 +1,4 @@
 ﻿using Firecoals.Augmentation;
-using Firecoals.Threading.Tasks;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
 using UnityEngine;
@@ -82,11 +81,8 @@ namespace Firecoals.Space
                 a.gameObject.SetActive(true);
             }
 
-            if (IsTargetEmpty())
-            {
-                ShowModelsOnScreen();
-                NGUITools.SetActive(objectName, true);
-            }
+            ShowModelsOnScreen();
+            NGUITools.SetActive(objectName, true);
 
             //SpawnModel();
             //nếu đã purchase thì vào phần này
@@ -142,37 +138,6 @@ namespace Firecoals.Space
                 ChangeKeyLocalization();
             }
         }
-
-
-//        public void Execute()
-//        {
-//#if UNITY_WSA && !UNITY_EDITOR
-//        System.Threading.Tasks.Task t = new System.Threading.Tasks.Task(Augment);
-//#else
-//            System.Threading.Thread t = new System.Threading.Thread(new System.Threading.ThreadStart(Augment));
-//#endif
-//            t.Start();
-//        }
-
-//        private void Augment()
-//        {
-
-//            GameObject go = null;
-//            Task.WhenAll(Task.Run(() =>
-//            {
-//                Debug.Log("<color=turquoise>In background thread</color>");
-//                Task.RunInMainThread(() =>
-//                {
-//                    //assetloader.LoadGameObjectAsync(path, mTrackableBehaviour.transform);
-//                    //_loadSoundbundle.PlayNameSound(tagSound);
-//                });
-//            })).ContinueInMainThreadWith(task =>
-//            {
-//                nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
-//                nameTargetSpace.ToLower();
-//                ChangeKeyLocalization();
-//            });
-//        }
 
         private void ClearAllOtherTargetContents()
         {

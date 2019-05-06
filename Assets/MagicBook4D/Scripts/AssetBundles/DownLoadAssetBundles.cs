@@ -180,13 +180,30 @@ namespace Firecoals.AssetBundles
             switch (ThemeController.instance.Theme)
             {
                 case "Animal":
-                    bundleNames = new[] { "animals/model/lion" , "animals/model/elephant" , "animals/model/gorilla" };
+                    bundleNames = new[] { "animals/model/lion",
+                        "animals/model/elephant",
+                        "animals/model/gorilla",
+                        "animals/info/en",
+                        "animals/info/jp",
+                        "animals/info/vn",
+                        "animals/name/cn",
+                        "animals/name/en",
+                        "animals/name/vn",
+                        "animals/name/jp",
+                        "animals/noise" };
                     break;
                 case "Space":
-                    bundleNames = new[] { "space/models/solarsystem", "space/models/sun", "space/models/mercury" };
+                    bundleNames = new[] { "space/models/solarsystem",
+                        "space/models/sun",
+                        "space/models/mercury",
+                        "space/sound/name/en",
+                        "space/sound/name/vn",
+                        "space/sound/info/vn",
+                        "space/sound/info/en",
+                        "space/music" };
                     break;
                 case "Color":
-                    bundleNames = new[] { "color/model/maybay" };
+                    bundleNames = new[] { "color/model/maybay", "color/sounds/sounds" };
                     break;
                 default:
                     bundleNames = null;

@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Firecoals.AssetBundles.Sound;
 using Firecoals.Augmentation;
-using Firecoals.AssetBundles.Sound;
 using Loxodon.Framework.Bundles;
+using UnityEngine;
 
 
 namespace Firecoals.Space
@@ -22,10 +20,11 @@ namespace Firecoals.Space
         /// biến asset loader để preload sound từ bundles
         /// </summary>
         private AssetLoader _assetLoader;
+
         /// <summary>
         /// mảng các image target để lấy tag sound và tag info
         /// </summary>
-        GameObject[] imageTarget;
+        private GameObject[] imageTarget;
         /// <summary>
         /// 2 mảng sound info để lấy được các giá trị trong file json
         /// </summary>
@@ -35,7 +34,7 @@ namespace Firecoals.Space
         ///  biến check ngôn ngữ
         /// </summary>
         private SelectLanguage select;
-        string language;
+        private string language;
 
         /// <summary>
         /// chứa các giá trị file json, để lấy ra nhạc của 1 số object có nhạc riêng
@@ -111,16 +110,15 @@ namespace Firecoals.Space
             {
                 language = "english";
                 _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["space/sound/info/en"];
-                AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetSoundBundlePath(language, tagInfo));
+                AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetInfoBundlePath(language, tagInfo));
                 FirecoalsSoundManager.PlaySound(audioClip);
             }
             if (select.vn == true)
             {
                 language = "vietnamese";
                 _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["space/sound/info/vn"];
-                AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetSoundBundlePath(language, tagInfo));
+                AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetInfoBundlePath(language, tagInfo));
                 FirecoalsSoundManager.PlaySound(audioClip);
-
             }
         }
         private string GetInfoBundlePath(string currentLanguage, string tag)
@@ -141,7 +139,7 @@ namespace Firecoals.Space
             foreach (GameObject go in imageTarget)
             {
                 // nếu thằng nào đang có con tức là đang đc tracking found thì chạy lại hàm play name sound
-                if (go.transform.childCount > 0 && go.gameObject.activeInHierarchy)
+                if (go.transform.childCount > 0 && go.transform.GetChild(0).gameObject.activeSelf)
                 {
                     PlayNameSound(go.transform.GetComponentInParent<IntroScripts>().tagSound);
                 }
@@ -152,7 +150,7 @@ namespace Firecoals.Space
         {
             foreach (GameObject go in imageTarget)
             {
-                if (go.transform.childCount > 0 && go.gameObject.activeInHierarchy)
+                if (go.transform.childCount > 0 && go.transform.GetChild(0).gameObject.activeSelf)
                 {
                     if (_objInfor.checkOpen == true)
                     {
@@ -171,7 +169,7 @@ namespace Firecoals.Space
             _assetLoader = GameObject.FindObjectOfType<AssetLoader>();
             _soundManifest = new SoundManifestLoader();
             var soundManifest = _soundManifest.LoadSync(Application.streamingAssetsPath + "/SpaceAudio.json");
-            soundInfos = soundManifest.soundInfos;
+            _objectMusic = soundManifest.soundInfos;
 
             _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["space/music"];
             AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetMusicPath(tag));

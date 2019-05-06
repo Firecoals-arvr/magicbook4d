@@ -244,7 +244,7 @@ namespace Firecoals.Animal
             allCreature = GameObject.FindGameObjectsWithTag("ImageTarget");
             foreach (GameObject creature in allCreature)
             {
-                if (creature.transform.GetChild(0).gameObject.activeSelf)
+                if (creature.transform.childCount>0 && creature.transform.GetChild(0).gameObject.activeSelf)
                 {
                     GameObject go = GameObject.FindGameObjectWithTag("Creature");
                     go.transform.localPosition = Vector3.zero;

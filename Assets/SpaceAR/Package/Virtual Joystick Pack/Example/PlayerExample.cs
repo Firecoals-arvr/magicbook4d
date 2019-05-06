@@ -12,9 +12,7 @@ namespace Firecoals.Space
         public Joystick joystick;
 
         Animation anima;
-#pragma warning disable IDE0044 // Add readonly modifier
-        [SerializeField] Animation[] _alienanima;
-#pragma warning restore IDE0044 // Add readonly modifier
+        [SerializeField] Animation[] _alienanima = default;
         //[SerializeField] AudioSource audioSrc;
         //public AudioClip[] ListAudio;
 
