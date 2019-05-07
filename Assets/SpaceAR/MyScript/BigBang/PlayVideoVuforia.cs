@@ -14,7 +14,7 @@ namespace Firecoals.Space
         protected override void Start()
         {
             base.Start();
-
+            video = gameObject.transform.GetChild(1).GetComponent<UnityEngine.Video.VideoPlayer>();
         }
         protected override void OnDestroy()
         {
@@ -23,23 +23,20 @@ namespace Firecoals.Space
         protected override void OnTrackingFound()
         {
             base.OnTrackingFound();
-            // nếu chưa lật đến trang bigbang thì ko cho chạy video
-            if (transform.childCount > 0)
-            {
-                video = gameObject.transform.GetChild(1).GetComponent<UnityEngine.Video.VideoPlayer>();
-                video.Play();
-            }
-            else
-            {
-
-            }
-
         }
         protected override void OnTrackingLost()
         {
             base.OnTrackingLost();
             if (video != null)
                 video.Stop();
+        }
+
+        public void ClickToPlayVideo()
+        {
+            if (transform.GetChild(0).gameObject.activeSelf)
+            {
+                video.Play();
+            }
         }
     }
 }

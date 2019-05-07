@@ -203,6 +203,7 @@ namespace Firecoals.Animal
             foreach (Transform go in mTrackableBehaviour.transform)
             {
                 go.gameObject.SetActive(false);
+                go.GetComponentInChildren<Animation>().Stop();
             }
             
         }
@@ -249,6 +250,7 @@ namespace Firecoals.Animal
                     GameObject go = GameObject.FindGameObjectWithTag("Creature");
                     go.transform.localPosition = Vector3.zero;
                     go.transform.localRotation = new Quaternion(0, 180, 0,0);
+                    go.GetComponent<Animation>().Play();
                     GameObject go1 = GameObject.FindGameObjectWithTag("Item");
                     go1.transform.localPosition = itemPos;
                     go1.transform.localRotation = new Quaternion(0, 180, 0, 0);

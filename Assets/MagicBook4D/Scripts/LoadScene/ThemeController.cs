@@ -34,7 +34,7 @@
             DontDestroyOnLoad(this);
             AddThemeEvent();
             //PlayerPrefs.DeleteAll();
-            //Debug.LogWarning("Deleted all player preference key");
+            //Debug.LogWarning("Deleted all player preference key");1`
             if (Application.internetReachability != NetworkReachability.NotReachable)
             {
                 StartCoroutine(ActiveManager.AssetBundleVersion());

@@ -126,7 +126,7 @@ namespace Firecoals.Animal
         {
             IsRotating = false;
             var targetDir = target - this.transform.position;
-            Debug.Log("* ScaleAnimal" + ScaleAnimal);
+            //Debug.Log("* ScaleAnimal" + ScaleAnimal);
             var angle = Quaternion.LookRotation(targetDir);
             if (Item != null)
             {

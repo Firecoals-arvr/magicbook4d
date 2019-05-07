@@ -1,5 +1,6 @@
 ﻿using Firecoals.AssetBundles.Sound;
 using Firecoals.Augmentation;
+using Firecoals.Threading.Tasks;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
 using UnityEngine;
@@ -74,9 +75,11 @@ namespace Firecoals.Space
         private Animator anim;
 
         /// <summary>
-        /// check bật, tắt âm thanh, không cho chạy lặp lại nhiều lần khi OnTrackingFound() được thực thi
+        /// check lúc OnTrackingFound() thì cho chạy âm thanh, OnTrackingLost() thì tắt,
+        /// mục đích để sound không bị chạy lặp lại
         /// </summary>
         private bool _playSound;
+
         protected override void Start()
         {
             base.Start();
@@ -87,6 +90,7 @@ namespace Firecoals.Space
 
             _gameobjectLoaded = assetloader.LoadGameObjectAsync(path, mTrackableBehaviour.transform);
             _playSound = true;
+
             Dispatcher.Initialize();
         }
 
@@ -103,7 +107,6 @@ namespace Firecoals.Space
             }
 
             ShowModelsOnScreen();
-            NGUITools.SetActive(objectName, true);
 
 
             //nếu đã purchase thì vào phần này
@@ -138,11 +141,11 @@ namespace Firecoals.Space
         /// </summary>
         private void ShowModelsOnScreen()
         {
+            NGUITools.SetActive(objectName, true);
             if (_playSound)
             {
                 _loadSoundbundle.PlayNameSound(tagSound);
             }
-
             if (_backgroundMusic != string.Empty && _playSound)
             {
                 _loadSoundbundle.PlayMusicOfObjects(_backgroundMusic);
@@ -170,9 +173,11 @@ namespace Firecoals.Space
 
             ClearKeyLocalization();
             FirecoalsSoundManager.StopAll();
-            _playSound = false;
+            _playSound = true;
+
             base.OnTrackingLost();
         }
+
 
         /// <summary>
         /// đổi key trong localization để lấy đúng tên, thông tin theo object
@@ -223,6 +228,38 @@ namespace Firecoals.Space
                 anim = gameObject.GetComponentInChildren<Animator>();
                 anim.SetTrigger("Intro");
             }
+        }
+
+        //private bool _cached = false;
+
+        //private void CloneModels(GameObject go)
+        //{
+        //    //StartCoroutine(InstantiationAsycnModels(go));
+        //    //InstantiationAsync.InstantiateAsync(go, 100);
+        //    PlayAnimIntro();
+
+        //    nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
+        //    nameTargetSpace.ToLower();
+        //    ChangeKeyLocalization();
+        //}
+
+        //private IEnumerator InstantiationAsycnModels(GameObject go)
+        //{
+        //    yield return new WaitForSeconds(0.2f);
+        //    if (go != null)
+        //    {
+        //        Instantiate(go, mTrackableBehaviour.transform);
+        //    }
+        //    //_loadSoundbundle.PlayNameSound(tagSound);
+        //}
+
+        /// <summary>
+        /// Check if there is no child on the target
+        /// </summary>
+        /// <returns></returns>
+        private bool IsTargetEmpty()
+        {
+            return mTrackableBehaviour.transform.childCount <= 0;
         }
     }
 }

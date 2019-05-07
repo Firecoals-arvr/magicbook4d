@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.PlayerLoop;
+using Vuforia;
 
 namespace Firecoals.Animal
 {
@@ -14,6 +15,14 @@ namespace Firecoals.Animal
         public bool isFrog;
         public bool CanEat { get; set; }
         public float ScaleTemp;
+        private GameObject effectTouch;
+
+        protected void Start()
+        {
+            effectTouch =GameObject.Find("EffectTouch");
+            base.Start();
+        }
+
         protected void FixedUpdate()
         {
                 if (Input.GetMouseButtonDown(0))//TODO && not hover UI
@@ -36,7 +45,12 @@ namespace Firecoals.Animal
                             IsMoving = true;
                             Jump = true;
                             if (Item != null)
+                            {
                                 Item.transform.position = hit.point;
+                                effectTouch.transform.position = Item.transform.position;
+                                effectTouch.transform.GetChild(0).gameObject.SetActive(true);
+                                StartCoroutine(ResetEffect());
+                            }
 
                             //TODO SetActive(touch effect) = true
                         }
@@ -44,6 +58,12 @@ namespace Firecoals.Animal
               
             }
 
+        }
+
+        IEnumerator ResetEffect()
+        {
+            yield return new WaitForSeconds(0.6f);
+            effectTouch.transform.GetChild(0).gameObject.SetActive(false);
         }
 
     }

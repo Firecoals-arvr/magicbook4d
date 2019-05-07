@@ -1,5 +1,4 @@
-﻿using Firecoals.AssetBundles.Sound;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,13 +27,11 @@ namespace Firecoals.Space
         /// </summary>
         public Animator anim;
 
-        private LoadSoundbundles _loadSoundbundles;
         List<Transform> go = new List<Transform>();
 
         private void Start()
         {
             checkOpen = false;
-            _loadSoundbundles = FindObjectOfType<LoadSoundbundles>();
             //anim = panelinfo.GetComponent<Animator>();
         }
 
@@ -45,7 +42,6 @@ namespace Firecoals.Space
         {
             checkOpen = true;
             anim.SetBool("isOpen", true);
-            _loadSoundbundles.ReplayInfoSound();
         }
 
         /// <summary>
@@ -55,7 +51,6 @@ namespace Firecoals.Space
         {
             checkOpen = false;
             anim.SetBool("isOpen", false);
-            FirecoalsSoundManager.StopAll();
         }
 
         /// <summary>

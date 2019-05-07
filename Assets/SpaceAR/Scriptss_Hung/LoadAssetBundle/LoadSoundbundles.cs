@@ -1,7 +1,9 @@
-﻿using Firecoals.AssetBundles.Sound;
-using Firecoals.Augmentation;
-using Loxodon.Framework.Bundles;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using Firecoals.Augmentation;
+using Firecoals.AssetBundles.Sound;
+using Loxodon.Framework.Bundles;
 
 
 namespace Firecoals.Space
@@ -20,11 +22,10 @@ namespace Firecoals.Space
         /// biến asset loader để preload sound từ bundles
         /// </summary>
         private AssetLoader _assetLoader;
-
         /// <summary>
         /// mảng các image target để lấy tag sound và tag info
         /// </summary>
-        private GameObject[] imageTarget;
+        GameObject[] imageTarget;
         /// <summary>
         /// 2 mảng sound info để lấy được các giá trị trong file json
         /// </summary>
@@ -34,12 +35,12 @@ namespace Firecoals.Space
         ///  biến check ngôn ngữ
         /// </summary>
         private SelectLanguage select;
-        private string language;
+        string language;
 
         /// <summary>
         /// chứa các giá trị file json, để lấy ra nhạc của 1 số object có nhạc riêng
         /// </summary>
-        private SoundInfo[] _objectMusic = default;
+        private SoundInfo[] _objectMusic;
 
         private ObjectInformation _objInfor;
 
@@ -73,7 +74,10 @@ namespace Firecoals.Space
                 //load audioclip theo path được tìm bởi tag name là tên của model + ngôn ngữ
                 AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetSoundBundlePath(language, tagSound));
                 // play sound
-                FirecoalsSoundManager.PlaySound(audioClip);
+                if (FirecoalsSoundManager.IgnoreDuplicateSounds == true)
+                {
+                    FirecoalsSoundManager.PlaySound(audioClip);
+                }
             }
             // giống vs tiếng anh
             if (select.vn == true)
@@ -81,7 +85,10 @@ namespace Firecoals.Space
                 language = "vietnamese";
                 _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["space/sound/name/vn"];
                 AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetSoundBundlePath(language, tagSound));
-                FirecoalsSoundManager.PlaySound(audioClip);
+                if (FirecoalsSoundManager.IgnoreDuplicateSounds == true)
+                {
+                    FirecoalsSoundManager.PlaySound(audioClip);
+                }
             }
         }
         // hàm để lấy dc path của tên bundles
@@ -110,15 +117,21 @@ namespace Firecoals.Space
             {
                 language = "english";
                 _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["space/sound/info/en"];
-                AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetInfoBundlePath(language, tagInfo));
-                FirecoalsSoundManager.PlaySound(audioClip);
+                AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetSoundBundlePath(language, tagInfo));
+                if (FirecoalsSoundManager.IgnoreDuplicateSounds == true)
+                {
+                    FirecoalsSoundManager.PlaySound(audioClip);
+                }
             }
             if (select.vn == true)
             {
                 language = "vietnamese";
                 _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["space/sound/info/vn"];
-                AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetInfoBundlePath(language, tagInfo));
-                FirecoalsSoundManager.PlaySound(audioClip);
+                AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetSoundBundlePath(language, tagInfo));
+                if (FirecoalsSoundManager.IgnoreDuplicateSounds == true)
+                {
+                    FirecoalsSoundManager.PlaySound(audioClip);
+                }
             }
         }
         private string GetInfoBundlePath(string currentLanguage, string tag)
