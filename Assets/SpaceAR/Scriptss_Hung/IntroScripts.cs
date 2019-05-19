@@ -84,7 +84,6 @@ namespace Firecoals.Space
         private Animator anim;
 
         /// <summary>
-<<<<<<< HEAD
         /// check lúc OnTrackingFound() thì cho chạy âm thanh, OnTrackingLost() thì tắt
         /// </summary>
         private bool _playSound;
@@ -100,12 +99,6 @@ namespace Firecoals.Space
         /// </summary>
         [Header("Original scale of object")]
         public Vector3 _originalLocalScale;
-=======
-        /// check lúc OnTrackingFound() thì cho chạy âm thanh, OnTrackingLost() thì tắt,
-        /// mục đích để sound không bị chạy lặp lại
-        /// </summary>
-        private bool _playSound;
->>>>>>> 518a457d51d359045dde1809288953a492d17fba
 
         protected override void Start()
         {
@@ -122,10 +115,6 @@ namespace Firecoals.Space
                 _gameobjectLoaded = assetloader.LoadGameObjectAsync(path, mTrackableBehaviour.transform);
             }
 
-<<<<<<< HEAD
-=======
-            _gameobjectLoaded = assetloader.LoadGameObjectAsync(path, mTrackableBehaviour.transform);
->>>>>>> 518a457d51d359045dde1809288953a492d17fba
             _playSound = true;
 
             Dispatcher.Initialize();
@@ -153,7 +142,6 @@ namespace Firecoals.Space
                 }
                 GetOriginalTransform();
             }
-<<<<<<< HEAD
             else
             {
                 Debug.Log("NotPurchase");
@@ -162,11 +150,6 @@ namespace Firecoals.Space
                     SceneManager.LoadScene("Activate", LoadSceneMode.Single);
                 });
             }
-=======
-
-            ShowModelsOnScreen();
-
->>>>>>> 518a457d51d359045dde1809288953a492d17fba
 
             ChangeAnim.checkOpen = false;
             ShowModelsOnScreen();
@@ -216,7 +199,6 @@ namespace Firecoals.Space
             base.OnTrackingLost();
         }
 
-<<<<<<< HEAD
         /// <summary>
         /// Lấy transform ban đầu từ khi instantiate object ra
         /// </summary>
@@ -231,8 +213,6 @@ namespace Firecoals.Space
                 }
             }
         }
-=======
->>>>>>> 518a457d51d359045dde1809288953a492d17fba
 
         /// <summary>
         /// đổi key trong localization để lấy đúng tên, thông tin theo object

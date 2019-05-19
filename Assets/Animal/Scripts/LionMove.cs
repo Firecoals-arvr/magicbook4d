@@ -169,16 +169,10 @@ namespace Firecoals.Animal
         }
         IEnumerator ResetEffect()
         {
-<<<<<<< HEAD
             yield return new WaitForSeconds(.6f);
             effectTouch.transform.GetChild(0).gameObject.SetActive(false);
         }
-=======
-            yield return new WaitForSeconds(0.6f);
-            effectTouch.transform.GetChild(0).gameObject.SetActive(false);
-        }
 
->>>>>>> 518a457d51d359045dde1809288953a492d17fba
 
     }
 }
