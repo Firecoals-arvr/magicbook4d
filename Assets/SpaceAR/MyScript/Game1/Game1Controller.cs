@@ -10,12 +10,11 @@ namespace Firecoals.Space
     public class Game1Controller : MonoBehaviour
     {
         public GameObject game1, playBT, panelFail, panelTotal;
-        float time = 60;
+        public float time = 60;
         public UILabel timeTxt, scoreTxt, panelTotalTimetxt, panelFailScoreTxt;
-        bool isStart;
-        int rightAnswer;
+        public bool isStart;
+        public int rightAnswer;
         public GameObject listPlanet;
-
         //DragObject _drag;
 
         // Start is called before the first frame update

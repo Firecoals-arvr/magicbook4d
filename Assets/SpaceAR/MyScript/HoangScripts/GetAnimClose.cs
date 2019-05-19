@@ -9,7 +9,7 @@ namespace Firecoals.Space
 
         void Start()
         {
-
+           
             anim = GetComponent<Animator>();
         }
 
@@ -17,7 +17,7 @@ namespace Firecoals.Space
         void Update()
         {
 
-            if (ChangeAnim.checkOpen == true)
+            if (ChangeAnim.checkOpen==true)
             {
 
                 CloseCallOut();

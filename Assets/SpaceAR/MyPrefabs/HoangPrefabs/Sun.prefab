@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1244599133625346604
 Transform:
   m_ObjectHideFlags: 0
@@ -163,7 +163,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3012
+  startingRenderQueue: 3009
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -258,7 +258,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3012
+  startingRenderQueue: 3009
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -383,7 +383,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3012
+  startingRenderQueue: 3009
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -478,7 +478,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3012
+  startingRenderQueue: 3009
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -573,7 +573,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3012
+  startingRenderQueue: 3009
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -844,7 +844,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3012
+  startingRenderQueue: 3009
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -979,7 +979,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2413317640008522145
 Transform:
   m_ObjectHideFlags: 0
@@ -1070,7 +1070,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &59950194687265744
 Transform:
   m_ObjectHideFlags: 0
@@ -1262,7 +1262,7 @@ Transform:
   m_GameObject: {fileID: 6411847629785341373}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.368, z: 0}
-  m_LocalScale: {x: 0.10000001, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.099, y: 0.099, z: 0.099}
   m_Children: []
   m_Father: {fileID: 2493231227008183226}
   m_RootOrder: 1
@@ -1609,7 +1609,6 @@ GameObject:
   - component: {fileID: 6411847630618426824}
   - component: {fileID: 6411847630618426827}
   - component: {fileID: 5244421778475101378}
-  - component: {fileID: 6860969000616259610}
   - component: {fileID: 6411847630618426826}
   m_Layer: 0
   m_Name: Sun
@@ -1617,7 +1616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6411847630618426824
 Transform:
   m_ObjectHideFlags: 0
@@ -1666,24 +1665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31387af569896214dac78f8e7c78f53c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  open: {fileID: 6860969002227496749}
   anim: {fileID: 6411847630618426827}
-  checkOpen: 1
---- !u!111 &6860969000616259610
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6411847630618426825}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &6411847630618426826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1886,7 +1868,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3011
+  startingRenderQueue: 3008
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -1925,6 +1907,7 @@ GameObject:
   - component: {fileID: 6860969002227496745}
   - component: {fileID: 6860969002227496744}
   - component: {fileID: 6860969002546160528}
+  - component: {fileID: 2500676765332117999}
   m_Layer: 0
   m_Name: ChangeAnimOpen
   m_TagString: Untagged
@@ -2044,6 +2027,22 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: eacab99beca480c46926c3e8b4656ea5, type: 2}
   mSpriteName: 06-sun-icon
   mFillCenter: 1
+--- !u!114 &2500676765332117999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6860969002227496749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d44bc69c2ca5f943b845318866dc1bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: c4d77a224f3c9a647b6924c2560ffd8a, type: 3}
+  trigger: 0
+  volume: 1
+  pitch: 1
 --- !u!1 &8067890835609422767
 GameObject:
   m_ObjectHideFlags: 0
@@ -2062,7 +2061,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5650781329725226410
 Transform:
   m_ObjectHideFlags: 0
@@ -2153,7 +2152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8351066857884954239
 Transform:
   m_ObjectHideFlags: 0
@@ -2238,7 +2237,7 @@ GameObject:
   - component: {fileID: 4384465071529907995}
   m_Layer: 0
   m_Name: Core
-  m_TagString: Untagged
+  m_TagString: Leanscale
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2299,7 +2298,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1480193404194131070
 Transform:
   m_ObjectHideFlags: 0
@@ -2390,7 +2389,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1740591982122048875
 Transform:
   m_ObjectHideFlags: 0
@@ -2481,7 +2480,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7855570835801967648
 Transform:
   m_ObjectHideFlags: 0

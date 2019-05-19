@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Firecoals.Space
 {
     /// <summary>
-    /// class này để chạy 2 animation là nhật thực và nguyệt thực
+    /// class này d? ch?y 2 animation là nh?t th?c và nguy?t th?c
     /// </summary>
     public class EclipseAndLunar : MonoBehaviour
     {
@@ -13,86 +13,93 @@ namespace Firecoals.Space
         bool isLunar, isEclipse;
         public GameObject moon;
         public GameObject earth;
+        public GameObject Notice;
         private void Start()
         {
-            // tắt animator để earth chạy quanh sun
+            // t?t animator d? earth ch?y quanh sun
             anim.GetComponent<Animator>().enabled = false;
-            // biến để check cho chạy animation
+            // bi?n d? check cho ch?y animation
             isLunar = true;
             isEclipse = true;
         }
         public void Eclipse()
         {
-            //bật animator để chạy animation 
+            //b?t animator d? ch?y animation 
             anim.GetComponent<Animator>().enabled = true;
-            //nếu ấn vào nút nhật thực
+            //n?u ?n vào nút nh?t th?c
             if (isEclipse == true)
             {
-                //cho earth rotate từ vector3(0,0,0)
+                Notice.SetActive(true);
+                ChangeAnim.checkOpen = false;
+                //cho earth rotate t? vector3(0,0,0)
                 earth.transform.localRotation = Quaternion.identity;
-                // tắt các script của earth và moon để chạy anim dc chính xác
-                moon.GetComponent<Autorun>().enabled = false;
-                moon.GetComponent<SelfRotate>().enabled = false;
-                earth.GetComponent<Autorun>().enabled = false;
-                earth.GetComponent<SelfRotate>().enabled = false;
-                // chạy anim
-                anim.SetTrigger("SetEclipse");
-                StartCoroutine(WaitASecond("EclipseOpen", new Quaternion(0, 0, 0, 0), 9f));
+                // t?t các script c?a earth và moon d? ch?y anim dc chính xác
+                Idling();
+                // ch?y anim
+                anim.Play("SetEclipse");
+                StartCoroutine(WaitASecond());
 
             }
-            //nếu ấn lại vào nút nhật thực lần 2
+            //n?u ?n l?i vào nút nh?t th?c l?n 2
             else
             {
-                //chạy anim 
-                anim.SetTrigger("EclipseClose");
-                //đợi cho chạy hết anim rồi cho các script kia chạy bt
+                ChangeAnim.checkOpen = true;
+                //ch?y anim 
+                anim.Play("Idle");
+                //d?i cho ch?y h?t anim r?i cho các script kia ch?y bt
                 StartCoroutine(WaitForEndAnim());
-                moon.GetComponent<Autorun>().enabled = true;
-                moon.GetComponent<SelfRotate>().enabled = true;
-                earth.GetComponent<Autorun>().enabled = true;
-                earth.GetComponent<SelfRotate>().enabled = true;
+                rotating();
             }
 
             isEclipse = !isEclipse;
         }
-        // check nguyệt thực giống vs nhật thực
+        // check nguy?t th?c gi?ng vs nh?t th?c
         public void Lunar()
         {
             anim.GetComponent<Animator>().enabled = true;
             if (isLunar == true)
             {
+                Notice.SetActive(true);
+                ChangeAnim.checkOpen=false;
                 earth.transform.localRotation = Quaternion.identity;
-                moon.GetComponent<Autorun>().enabled = false;
-                moon.GetComponent<SelfRotate>().enabled = false;
-                earth.GetComponent<Autorun>().enabled = false;
-                earth.GetComponent<SelfRotate>().enabled = false;
-                anim.SetTrigger("SetLunar");
-                // đợi chạy hết anim setlunar rồi chạy anim tiếp theo
-                StartCoroutine(WaitASecond("LunarOpen", new Quaternion(0, 180, 0, 0), 9.2f));
+                Idling();
+                anim.Play("SetLunar");
+                // d?i ch?y h?t anim setlunar r?i ch?y anim ti?p theo
+                StartCoroutine(WaitASecond());
 
             }
             else
             {
-                anim.SetTrigger("LunarClose");
+                ChangeAnim.checkOpen = true;
+                anim.Play("Idle");
                 StartCoroutine(WaitForEndAnim());
-                moon.GetComponent<Autorun>().enabled = true;
-                moon.GetComponent<SelfRotate>().enabled = true;
-                earth.GetComponent<Autorun>().enabled = true;
-                earth.GetComponent<SelfRotate>().enabled = true;
+                rotating();
             }
             isLunar = !isLunar;
         }
-        IEnumerator WaitASecond(string name, Quaternion a, float time)
+        IEnumerator WaitASecond()
         {
-            yield return new WaitForSeconds(time);
-            earth.transform.localRotation = a;
-            anim.SetTrigger(name);
+            yield return new WaitForSeconds(9.2f);
+            Notice.SetActive(false);
         }
         IEnumerator WaitForEndAnim()
         {
             yield return new WaitForSeconds(1f);
             anim.GetComponent<Animator>().enabled = false;
         }
-
+        public void rotating()
+        {
+            moon.GetComponent<Autorun>().enabled = true;
+            moon.GetComponent<SelfRotate>().enabled = true;
+            earth.GetComponent<Autorun>().enabled = true;
+            earth.GetComponent<SelfRotate>().enabled = true;
+        }
+        public void Idling()
+        {
+            moon.GetComponent<Autorun>().enabled = false;
+            moon.GetComponent<SelfRotate>().enabled = false;
+            earth.GetComponent<Autorun>().enabled = false;
+            earth.GetComponent<SelfRotate>().enabled = false;
+        }
     }
 }

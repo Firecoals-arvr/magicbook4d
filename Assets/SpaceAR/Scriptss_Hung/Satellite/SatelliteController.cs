@@ -1,45 +1,52 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class SatelliteController : MonoBehaviour
+namespace Firecoals.Space
 {
-    [SerializeField] Animation anim = default;
-    private bool stt = false;
-
-    private void Update()
+    public class SatelliteController : MonoBehaviour
     {
-        if (Input.GetMouseButtonDown(0))
+        [SerializeField] Animation anim = default;
+        private bool stt = false;
+
+        private void Update()
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            if (Input.GetMouseButtonDown(0))
             {
-                if (hit.collider.tag == "vetinh")
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out RaycastHit hit))
                 {
-                    anim.Play("open");
+                    if (hit.collider.tag == "vetinh")
+                    {
+                        Open();
+                    }
                 }
             }
         }
-    }
-
-    public void Armode()
-    {
-        anim.Play("close");
-        stt = false;
-    }
-
-    public void Spilit()
-    {
-        if (stt == false)
+        void Open()
         {
-            anim.Play("spilit");
-            stt = true;
+            anim.Play("open");
         }
-        else
+        public void Armode()
         {
-            anim.Play("closespilit");
+            anim.Play("close");
             stt = false;
         }
 
+        public void Spilit()
+        {
+            if (stt == false)
+            {
+                anim.Play("spilit");
+                stt = true;
+                ChangeAnim.checkOpen = false;
+            }
+            else
+            {
+                ChangeAnim.checkOpen = true;
+                anim.Play("closespilit");
+                stt = false;
+            }
+
+        }
     }
 }

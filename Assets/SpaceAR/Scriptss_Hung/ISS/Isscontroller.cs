@@ -7,8 +7,7 @@ namespace FireCoals.Space
     public class Isscontroller : MonoBehaviour
     {
 
-        [SerializeField] Animation anima = default;
-
+        public Animator anima;
         // Update is called once per frame
         void Update()
         {
@@ -31,7 +30,7 @@ namespace FireCoals.Space
         }
         public void Returnmain()
         {
-            anima.Play("intro");
+            anima.Play("Intro");
         }
     }
 }
