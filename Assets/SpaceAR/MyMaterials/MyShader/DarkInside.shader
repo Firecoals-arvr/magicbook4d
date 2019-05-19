@@ -21,9 +21,9 @@
             #pragma vertex vert
             #pragma fragment frag
             // make fog work
-            #pragma multi_compile_fog
+            #pragma shader_feature_fog
 			#define UNITY_PASS_FORWARDBASE
-			#pragma multi_compile_fwdbase
+			#pragma shader_feature_fwdbase
 			#pragma only_renderers d3d9 d3d11 glcore gles
 			#pragma target 3.0
 			

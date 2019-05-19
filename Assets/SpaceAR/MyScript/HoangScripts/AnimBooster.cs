@@ -8,8 +8,7 @@ namespace Firecoals.Space
     /// </summary>
     public class AnimBooster : MonoBehaviour
     {
-        Animator anim;
-
+        [SerializeField] Animation _boosterAnimation = default;
         // Start is called before the first frame update
 
         private LoadSoundbundles _loadSoundbundle;
@@ -21,17 +20,28 @@ namespace Firecoals.Space
 
         void Start()
         {
-            anim = GetComponent<Animator>();
+            //anim = GetComponent<Animator>();
             _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
         }
         public void Launch()
         {
-            anim.Play("Lauch");
+            if (_boosterAnimation.isPlaying)
+            {
+                _boosterAnimation.Play("Idle");
+            }
+            else
+            {
+                _boosterAnimation.Play("Idle");
+                _boosterAnimation.PlayQueued("Lauch");
+            }
             _loadSoundbundle.PlayMusicOfObjects(_boosterMusic);
         }
         public void Open4D()
         {
-            anim.Play("4D");
+            if (!_boosterAnimation.isPlaying)
+            {
+                _boosterAnimation.Play("4D");
+            }
         }
     }
 }

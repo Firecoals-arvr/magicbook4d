@@ -67,7 +67,7 @@ namespace Firecoals.Space
 
             _gameobjectLoaded = assetloader.LoadGameObjectAsync(path, mTrackableBehaviour.transform);
 
-            Dispatcher.Initialize();
+            Dispatcher.Initialize(); 
         }
 
         protected override void OnDestroy()
@@ -82,11 +82,8 @@ namespace Firecoals.Space
                 a.gameObject.SetActive(true);
             }
 
-            if (IsTargetEmpty())
-            {
-                ShowModelsOnScreen();
-                NGUITools.SetActive(objectName, true);
-            }
+            ShowModelsOnScreen();
+            NGUITools.SetActive(objectName, true);
 
             //SpawnModel();
             //nếu đã purchase thì vào phần này
@@ -135,44 +132,41 @@ namespace Firecoals.Space
 
         private void ShowModelsOnScreen()
         {
-            if (IsTargetEmpty())
-            {
-                nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
-                nameTargetSpace.ToLower();
-                ChangeKeyLocalization();
-            }
+            nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
+            nameTargetSpace.ToLower();
+            ChangeKeyLocalization();
         }
 
 
-//        public void Execute()
-//        {
-//#if UNITY_WSA && !UNITY_EDITOR
-//        System.Threading.Tasks.Task t = new System.Threading.Tasks.Task(Augment);
-//#else
-//            System.Threading.Thread t = new System.Threading.Thread(new System.Threading.ThreadStart(Augment));
-//#endif
-//            t.Start();
-//        }
+        //        public void Execute()
+        //        {
+        //#if UNITY_WSA && !UNITY_EDITOR
+        //        System.Threading.Tasks.Task t = new System.Threading.Tasks.Task(Augment);
+        //#else
+        //            System.Threading.Thread t = new System.Threading.Thread(new System.Threading.ThreadStart(Augment));
+        //#endif
+        //            t.Start();
+        //        }
 
-//        private void Augment()
-//        {
+        //        private void Augment()
+        //        {
 
-//            GameObject go = null;
-//            Task.WhenAll(Task.Run(() =>
-//            {
-//                Debug.Log("<color=turquoise>In background thread</color>");
-//                Task.RunInMainThread(() =>
-//                {
-//                    //assetloader.LoadGameObjectAsync(path, mTrackableBehaviour.transform);
-//                    //_loadSoundbundle.PlayNameSound(tagSound);
-//                });
-//            })).ContinueInMainThreadWith(task =>
-//            {
-//                nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
-//                nameTargetSpace.ToLower();
-//                ChangeKeyLocalization();
-//            });
-//        }
+        //            GameObject go = null;
+        //            Task.WhenAll(Task.Run(() =>
+        //            {
+        //                Debug.Log("<color=turquoise>In background thread</color>");
+        //                Task.RunInMainThread(() =>
+        //                {
+        //                    //assetloader.LoadGameObjectAsync(path, mTrackableBehaviour.transform);
+        //                    //_loadSoundbundle.PlayNameSound(tagSound);
+        //                });
+        //            })).ContinueInMainThreadWith(task =>
+        //            {
+        //                nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
+        //                nameTargetSpace.ToLower();
+        //                ChangeKeyLocalization();
+        //            });
+        //        }
 
         private void ClearAllOtherTargetContents()
         {

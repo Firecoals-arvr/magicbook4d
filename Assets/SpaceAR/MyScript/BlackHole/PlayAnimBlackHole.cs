@@ -9,10 +9,10 @@ namespace Firecoals.Space
     /// </summary>
     public class PlayAnimBlackHole : MonoBehaviour
     {
-        public Animator anim;
+        public Animation anim;
         public void PlayAnim()
         {
-            anim.GetComponent<Animator>().Play("BlackHoleEat");
+            anim.Play("Blackholeeat");
         }
     }
 }

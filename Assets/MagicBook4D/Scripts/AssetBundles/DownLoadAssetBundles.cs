@@ -180,8 +180,13 @@ namespace Firecoals.AssetBundles
             switch (ThemeController.instance.Theme)
             {
                 case "Animal":
+<<<<<<< HEAD
                     bundleNames = new[] { "animals/model/lion" ,
                         "animals/model/elephant" ,
+=======
+                    bundleNames = new[] { "animals/model/lion",
+                        "animals/model/elephant",
+>>>>>>> 518a457d51d359045dde1809288953a492d17fba
                         "animals/model/gorilla",
                         "animals/info/en",
                         "animals/info/jp",
@@ -194,6 +199,7 @@ namespace Firecoals.AssetBundles
                     break;
                 case "Space":
                     bundleNames = new[] { "space/models/solarsystem",
+<<<<<<< HEAD
                             "space/models/sun",
                             "space/models/mercury",
                             "space/sound/name/en",
@@ -201,6 +207,15 @@ namespace Firecoals.AssetBundles
                             "space/sound/info/vn",
                             "space/sound/info/en",
                             "space/music" };
+=======
+                        "space/models/sun",
+                        "space/models/mercury",
+                        "space/sound/name/en",
+                        "space/sound/name/vn",
+                        "space/sound/info/vn",
+                        "space/sound/info/en",
+                        "space/music" };
+>>>>>>> 518a457d51d359045dde1809288953a492d17fba
                     break;
                 case "Color":
                     bundleNames = new[] { "color/model/maybay", "color/sounds/sounds" };
