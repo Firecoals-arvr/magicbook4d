@@ -19,11 +19,15 @@ namespace Firecoals.Color
 
 		}
 
+		List<string> catchDirection = new List<string> { "isRight", "isMiddle", "isLeft"}; 
+
 		public void Catch()
 		{
-			var randomAction = Random.Range(0, 2);
-			//Debug.LogWarning(randomAction);
-			GetComponent<Animator>().SetInteger("Catch", randomAction);
+			//var randomAction = Random.Range(0, 2);
+			//GetComponent<Animator>().SetInteger("Catch", randomAction);
+
+			string result = catchDirection[Random.Range(0, catchDirection.Count)];
+			GetComponent<Animator>().SetTrigger(result);
 		}
 	}
 }

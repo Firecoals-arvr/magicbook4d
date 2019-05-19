@@ -13,7 +13,9 @@ namespace Firecoals.Color
 		public GameObject ball;
 		public FootballerController footballer;
 		public GoalkeeperController goalkeeper;
+		public GameObject pointTrigger;
 		public LeanTouch leanTouch;
+        public UILabel score;
 
 		public float ballSpeed;
 
@@ -25,14 +27,16 @@ namespace Firecoals.Color
 		// Start is called before the first frame update
 		void Start()
 		{
-
+			BallReturn();
+            Goal.score = 0;
+            
 		}
 
 		// Update is called once per frame
 		void Update()
 		{
-
-		}
+            score.text = "Score: " + Goal.score;
+        }
 
 		void BallReturn()
 		{
@@ -86,6 +90,15 @@ namespace Firecoals.Color
 					Invoke("BallReturn", 3);
 					break;
 			}
+		}
+
+		public void EnableTrigger()
+		{
+			pointTrigger.SetActive(true);
+		}
+		public void DisableTrigger()
+		{
+			pointTrigger.SetActive(false);
 		}
 	}
 }

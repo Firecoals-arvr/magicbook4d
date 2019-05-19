@@ -2,62 +2,72 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Firecoals.Augmentation;
+using Firecoals.AssetBundles.Sound;
+using Firecoals.MagicBook;
 
 namespace Firecoals.Color
 {
-	public class PlaneTrackableHandler : DefaultTrackableEventHandler
-	{
-		AssetHandler handler;
-		public GameObject renderCam;
-		protected override void Start()
-		{
-			base.Start();
-			handler = new AssetHandler(mTrackableBehaviour.transform);
-		}
+    public class PlaneTrackableHandler : DefaultTrackableEventHandler
+    {
+        AssetLoader _assetLoader;
+        public GameObject renderCam;
+        private LoadSoundBundlesColor _loadSoundBundles;
+        public string tagSound;
+        bool playSound;
+        protected override void Start()
+        {
+            base.Start();
+            _assetLoader = FindObjectOfType<AssetLoader>();
+            //if (ActiveManager.IsActiveOfflineOk(ActiveManager.NameToProjectID(ThemeController.instance.Theme))
+            //    || mTrackableBehaviour.TrackableName.Equals("06MAYBAY_OK"))
+            //{
+            //    _assetLoader.LoadGameObjectAsync("ColorAR/Prefabs/MayBay/MayBay_Group.prefab", mTrackableBehaviour.transform);
+            //}
+            playSound = true;
+        }
 
-		protected override void OnDestroy()
-		{
-			base.OnDestroy();
-		}
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+        }
 
 
-		protected override void OnTrackingFound()
-		{
-			GameObject go = handler.CreateUnique("color/model/maybay", "Assets/ColorAR/Prefabs/MayBay/MayBay_Group.prefab");
-			if (go)
-			{
-				GameObject maybay = Instantiate(go, mTrackableBehaviour.transform);
-				CreateCloud(maybay.transform);
-				List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
-				maybay.GetComponentsInChildren<RC_Get_Texture>(true, lst);
-				foreach (var child in lst)
-				{
-					child.RenderCamera = renderCam.GetComponent<Camera>();
-				}
-			}
-			base.OnTrackingFound();
-		}
-		protected override void OnTrackingLost()
-		{
-			handler?.ClearAll();
-			handler?.Content.ClearAll();
-			foreach (Transform trans in mTrackableBehaviour.transform)
-			{
-				Destroy(trans.gameObject);
-			}
-			base.OnTrackingLost();
-		}
-
-		public void CreateCloud(Transform parent)
-		{
-			GameObject cloud_1 = handler.CreateUnique("color/model/cloud/maybay", "Assets/ColorAR/Prefabs/Cloud/Maybay/c1.prefab");
-			Instantiate(cloud_1, parent.transform.GetChild(1));
-			GameObject cloud_2 = handler.CreateUnique("color/model/cloud/maybay", "Assets/ColorAR/Prefabs/Cloud/Maybay/c2.prefab");
-			Instantiate(cloud_2, parent.transform.GetChild(1));
-			GameObject cloud_3 = handler.CreateUnique("color/model/cloud/maybay", "Assets/ColorAR/Prefabs/Cloud/Maybay/c3.prefab");
-			Instantiate(cloud_3, parent.transform.GetChild(1));
-			GameObject cloud_4 = handler.CreateUnique("color/model/cloud/maybay", "Assets/ColorAR/Prefabs/Cloud/Maybay/c4.prefab");
-			Instantiate(cloud_4, parent.transform.GetChild(1));
-		}
-	}
+        protected override void OnTrackingFound()
+        {
+            _loadSoundBundles = GameObject.FindObjectOfType<LoadSoundBundlesColor>();
+            EnableObject();
+            if (playSound)
+            {
+                //_loadSoundBundles.PlaySound(tagSound);
+                playSound = false;
+            }
+            base.OnTrackingFound();
+        }
+        protected override void OnTrackingLost()
+        {
+            foreach (Transform trans in mTrackableBehaviour.transform)
+            {
+                trans.gameObject.SetActive(false);
+            }
+            playSound = true;
+            FirecoalsSoundManager.StopAll();
+            base.OnTrackingLost();
+        }
+        void EnableObject()
+        {
+            foreach (Transform trans in mTrackableBehaviour.transform)
+            {
+                trans.gameObject.SetActive(true);
+                trans.GetChild(0).localPosition = new Vector3(0, 0, 0);
+                trans.GetChild(0).localRotation = new Quaternion(0, 0, 0, 0);
+                trans.GetComponentInChildren<Animator>().Play("Idle", 0, 0f);
+                List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
+                trans.GetComponentsInChildren<RC_Get_Texture>(true, lst);
+                foreach (var child in lst)
+                {
+                    child.RenderCamera = renderCam.GetComponent<Camera>();
+                }
+            }
+        }
+    }
 }

@@ -8,13 +8,14 @@ namespace Firecoals.Space
 {
     public class ChangeAnim : MonoBehaviour
     {
-        public GameObject open;
         public Animator anim;
-        bool changAnim;
+        public static bool checkOpen=false; 
+        public static bool changAnim;
         void Start()
         {
             anim.GetComponent<Animator>();
             changAnim = true;
+            checkOpen = false;
         }
 
         public void OpenAnim()
@@ -22,11 +23,20 @@ namespace Firecoals.Space
             if (changAnim == true)
             {
                 anim.Play("Open");
-            }else
+                changAnim = !changAnim;
+                checkOpen = false;
+                Debug.Log("CheckOpen: " + checkOpen);
+            }
+            else
+            {
+                
+                checkOpen = true;
+                Debug.Log("CheckOpen : " + checkOpen);
                 anim.Play("Close");
-            changAnim = !changAnim;
+                changAnim = !changAnim;
+            }
         }
-        
+
 
     }
 }

@@ -145,7 +145,6 @@ namespace Loxodon.Framework.Bundles
                     this.manager.RemoveBundleLoader(this);
                     if (this.assetBundle != null)
                         this.assetBundle.Unload(false);
-                    Debug.LogFormat("aaaaaaaaaaaa {0}",this.Name);
                 }
                 catch (System.Exception)
                 {

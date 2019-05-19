@@ -2,17 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Firecoals.Space
+namespace FireCoals.Space
 {
     public class Isscontroller : MonoBehaviour
     {
-        // Use this for initialization
 
-        void Start()
-        {
-            anima = GetComponent<Animation>();
-        }
-        Animation anima;
+        [SerializeField] Animation anima = default;
 
         // Update is called once per frame
         void Update()
@@ -22,11 +17,11 @@ namespace Firecoals.Space
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
-                    if (hit.transform.tag == "Emu")
+                    if (hit.collider.tag == "Emu")
                     {
                         anima.Play("openemu");
                     }
-                    else if (hit.transform.tag == "Iss")
+                    else if (hit.collider.tag == "Iss")
                     {
                         anima.Play("openiss");
                     }

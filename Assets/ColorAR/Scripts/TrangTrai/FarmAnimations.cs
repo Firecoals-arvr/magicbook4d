@@ -2,26 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FarmAnimations : MonoBehaviour
+namespace Firecoals.Color
 {
-	Animator anim;
-	// Start is called before the first frame update
-	void Start()
-	{
-		anim.GetComponent<Animator>();
-		//anim.SetFloat("Direction", -1.0f);
-		anim.Play("di", -1, float.NegativeInfinity);
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.A))
-		{
-			//Animator anim = gameObject.GetComponent<Animator>();
-			// Reverse animation play
-			anim.SetFloat("Direction", -1);
-			anim.Play("di", -1, float.NegativeInfinity);
-		}
-	}
+    public class FarmAnimations : MonoBehaviour
+    {
+        public GameObject pig, cow, all;
+        public new AudioClip audio;
+        AudioSource audioSource;
+        public void PlayAnimFarm()
+        {
+            all.GetComponent<Animator>().SetTrigger("Move");
+            pig.GetComponent<Animator>().SetTrigger("Move");
+            cow.GetComponent<Animator>().SetTrigger("Move");
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+            PlayMusic();
+            StartCoroutine(StopAnim());
+        }
+        IEnumerator StopAnim()
+        {
+            yield return new WaitForSeconds(40f);
+            pig.GetComponent<Animator>().SetTrigger("Idle");
+            cow.GetComponent<Animator>().SetTrigger("Idle");
+            gameObject.GetComponent<BoxCollider>().enabled = true;
+        }
+        public void PlayMusic()
+        {
+            audioSource = GetComponent<AudioSource>();
+            audioSource.PlayOneShot(audio);
+        }
+    }
 }

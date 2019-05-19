@@ -5,6 +5,8 @@ public class LanguageUI : LanguageController
     public UIButton animalButton, spaceButton, colorButton;
 
     public UIButton[] tableOfLanguages;
+
+    public UILabel titlePickLanguage;
     private LanguageController languageController;
     private static string currentProjectID = "";
     private void Start()
@@ -40,18 +42,36 @@ public class LanguageUI : LanguageController
                 //TODO Set Language for Animal
                 Localization.language = languageId;
                 //TODO Set icon for Animal Button
-                Debug.LogWarning(UIButton.current.name);
-                //animalButton.GetComponentInChildren<UISprite>().spriteName = UIButton.current.name;
                 if (UIButton.current != null)
+                {
                     PlayerPrefs.SetString("AnimalLanguage", UIButton.current.name);
+                    animalButton.GetComponentInChildren<UISprite>().spriteName = UIButton.current.name;
+                }
+                else if(PlayerPrefs.HasKey("AnimalLanguage"))
+                {
+
+                    animalButton.GetComponentInChildren<UISprite>().spriteName = languageId;
+                }
+                    
+                    
                 break;
             case "B":
                 //TODO Set Language for Space
                 Localization.language = languageId;
                 //TODO Set icon for Space Button
-                //spaceButton.GetComponentInChildren<UISprite>().spriteName = UIButton.current.name;
                 if (UIButton.current != null)
+                {
+                    spaceButton.GetComponentInChildren<UISprite>().spriteName = UIButton.current.name;
                     PlayerPrefs.SetString("SpaceLanguage", UIButton.current.name);
+                }
+                else if (PlayerPrefs.HasKey("SpaceLanguage"))
+                {
+
+                    spaceButton.GetComponentInChildren<UISprite>().spriteName = languageId;
+                }
+
+
+
                 break;
                 //TODO no needed set Language for Color
                 //case "C":
@@ -73,6 +93,7 @@ public class LanguageUI : LanguageController
                     NGUITools.SetActive(language.gameObject, language.name != "KR");
                 }
 
+                titlePickLanguage.text = "Animal";
                 break;
             case "B":
                 //Hide CN, JP, KR
@@ -88,7 +109,7 @@ public class LanguageUI : LanguageController
                         NGUITools.SetActive(language.gameObject, false);
                     }
                 }
-
+                titlePickLanguage.text = "Space";
                 break;
             case "C":
                 //No learning language needed
@@ -104,15 +125,4 @@ public class LanguageUI : LanguageController
         }
         base.OnOnShowListLanguage(projectId);
     }
-
-    //public void ShowListLanguage(string projectId)
-    //{
-
-    //}
-
-    //public void PickLanguage(string languageId, string projectId)
-    //{
-    //    //Debug.LogWarning(Camera.current.name);
-
-    //}
 }

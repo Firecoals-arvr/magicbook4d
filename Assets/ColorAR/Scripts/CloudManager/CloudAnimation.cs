@@ -14,7 +14,10 @@ namespace Firecoals.Color
 		private void Start()
 		{
 			beginTrans = this.gameObject.transform;
-			InvokeRepeating("CheckConditionMove", 0.5f, 1f);
+            if (gameObject.transform.parent.transform.parent.gameObject.activeSelf)
+            {
+                InvokeRepeating("CheckConditionMove", 0.5f, 1f);
+            }
 		}
 
 		bool isMoving = false;
@@ -43,8 +46,10 @@ namespace Firecoals.Color
 			Vector3 endPos = center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(-size.y / 2, size.y / 2), Random.Range(-size.z / 2, size.z / 2));
 
 			float duration = Random.Range(3f, 4f);
-
-			StartCoroutine(moveToX(this.gameObject, beginTrans.position, endPos, duration));
+            if (gameObject.activeSelf)
+            {
+                StartCoroutine(moveToX(this.gameObject, beginTrans.position, endPos, duration));
+            }
 		}
 
 		public void CheckConditionMove()

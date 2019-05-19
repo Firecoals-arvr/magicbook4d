@@ -10,7 +10,8 @@ namespace Firecoals.Color
 	public class ActionsController : MonoBehaviour
 	{
 		public GameObject propeller;
-
+        public new AudioClip audio;
+        AudioSource audioSource;
 		// Start is called before the first frame update
 		void Start()
 		{
@@ -22,17 +23,15 @@ namespace Firecoals.Color
 		{
 			//HideObjectInfo();
 			RotatePropeller();
-			if (Input.GetKeyDown(KeyCode.Space))
-			{
-				CreateAnimation();
-			}
 		}
 
 		public void CreateAnimation()
 		{
 			Debug.Log("May bay was clicked!");
-			//groupMayBay.transform.RotateAround(new Vector3(0, 20f, 0), Vector3.left, 90 * Time.deltaTime);
+            gameObject.GetComponent<BoxCollider>().enabled = false;
 			StartCoroutine(RotateAirplane());
+            PlayMusic();
+            this.GetComponent<Animator>().SetTrigger("isWave");
 		}
 
 		public void RotatePropeller()
@@ -40,35 +39,27 @@ namespace Firecoals.Color
 			propeller.transform.Rotate(new Vector3(0, 0, 500) * Time.deltaTime, UnityEngine.Space.Self);
 		}
 
-		//private void HideObjectInfo()
-		//{
-		//	if (Input.GetMouseButtonDown(0))
-		//	{
-		//		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		//		if (Physics.Raycast(ray, out RaycastHit hit))
-		//		{
-		//			if (hit.transform.tag == "Airplane")
-		//			{
-		//				CreateAnimation();
-		//			}
-		//		}
-		//	}
-		//}
-
 		public IEnumerator RotateAirplane()
 		{
 			Debug.Log("May bay was clicked!");
-			float duration = 2f;
+			float duration = 3f;
 
 			float counter = 0f;
 
 			while (counter < duration)
 			{
 				counter += Time.deltaTime;
-				this.transform.RotateAround(new Vector3(0, 0.1f, 0), Vector3.right, 180 * Time.deltaTime);
+				this.transform.RotateAround(new Vector3(0, 0.1f, 0), Vector3.right, 120 * Time.deltaTime);
 				yield return null;
 			}
-		}
+            yield return new WaitForSeconds(3f);
+            gameObject.GetComponent<BoxCollider>().enabled = true;
+        }
+        public void PlayMusic()
+        {
+            audioSource = GetComponent<AudioSource>();
+            audioSource.PlayOneShot(audio);
+        }
 
 	}
 }

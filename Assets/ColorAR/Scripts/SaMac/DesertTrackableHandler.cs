@@ -1,52 +1,65 @@
-﻿using System.Collections;
+﻿using Firecoals.AssetBundles.Sound;
+using Firecoals.Augmentation;
+using Firecoals.MagicBook;
 using System.Collections.Generic;
 using UnityEngine;
-using Firecoals.Augmentation;
 
 namespace Firecoals.Color
 {
-	public class DesertTrackableHandler : DefaultTrackableEventHandler
-	{
-		AssetHandler handler;
-		public GameObject renderCam;
+    public class DesertTrackableHandler : DefaultTrackableEventHandler
+    {
+        private AssetLoader _assetLoader;
+        public GameObject renderCam;
+        private LoadSoundBundlesColor _loadSoundBundles;
+        public string tagSound;
+        // Start is called before the first frame update
+        protected override void Start()
+        {
+            base.Start();
+            _assetLoader = FindObjectOfType<AssetLoader>();
+            if (ActiveManager.IsActiveOfflineOk(ActiveManager.NameToProjectID(ThemeController.instance.Theme))
+                || mTrackableBehaviour.TrackableName.Equals("06MAYBAY_OK"))
+            {
+                _assetLoader.LoadGameObjectAsync("ColorAR/Prefabs/SaMac/SaMac_Group.prefab", mTrackableBehaviour.transform);
+            }
+        }
 
-		// Start is called before the first frame update
-		protected override void Start()
-		{
-			base.Start();
-			handler = new AssetHandler(mTrackableBehaviour.transform);
-		}
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+        }
 
-		protected override void OnDestroy()
-		{
-			base.OnDestroy();
-		}
+        protected override void OnTrackingFound()
+        {
+            _loadSoundBundles = GameObject.FindObjectOfType<LoadSoundBundlesColor>();
+            EnableObject();
+            _loadSoundBundles.PlaySound(tagSound);
+            base.OnTrackingFound();
+        }
 
-		protected override void OnTrackingFound()
-		{
-			GameObject go = handler.CreateUnique("color/model/samac", "Assets/ColorAR/Prefabs/SaMac/SaMac_Group.prefab");
-			if (go)
-			{
-				GameObject desert = Instantiate(go, mTrackableBehaviour.transform);
-				List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
-				desert.GetComponentsInChildren<RC_Get_Texture>(true, lst);
-				foreach (var child in lst)
-				{
-					child.RenderCamera = renderCam.GetComponent<Camera>();
-				}
-			}
-			base.OnTrackingFound();
-		}
-
-		protected override void OnTrackingLost()
-		{
-			handler?.ClearAll();
-			handler?.Content.ClearAll();
-			foreach (Transform trans in mTrackableBehaviour.transform)
-			{
-				Destroy(trans.gameObject);
-			}
-			base.OnTrackingLost();
-		}
-	}
+        protected override void OnTrackingLost()
+        {
+            foreach (Transform trans in mTrackableBehaviour.transform)
+            {
+                trans.gameObject.SetActive(false);
+                trans.GetComponentInChildren<Animation>().Stop();
+            }
+            FirecoalsSoundManager.StopAll();
+            base.OnTrackingLost();
+        }
+        void EnableObject()
+        {
+            foreach (Transform trans in mTrackableBehaviour.transform)
+            {
+                trans.gameObject.SetActive(true);
+                trans.GetComponentInChildren<Animation>().Play();
+                List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
+                trans.GetComponentsInChildren<RC_Get_Texture>(true, lst);
+                foreach (var child in lst)
+                {
+                    child.RenderCamera = renderCam.GetComponent<Camera>();
+                }
+            }
+        }
+    }
 }
