@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Firecoals.AssetBundles.Sound;
-
 namespace Firecoals.Space
 {
     /// <summary>
@@ -10,37 +8,40 @@ namespace Firecoals.Space
     /// </summary>
     public class AnimBooster : MonoBehaviour
     {
+        [SerializeField] Animation _boosterAnimation = default;
+        // Start is called before the first frame update
+
         private LoadSoundbundles _loadSoundbundle;
 
         /// <summary>
-        /// tag cho âm thanh của tàu vũ trụ lúc chạy animation
+        /// tag của âm thanh trong assetbundle
         /// </summary>
-        public string _musicbooster;
-
-        Animator anim;
-        public bool checkAnim;
+        public string _boosterMusic;
 
         void Start()
         {
-            anim = GetComponent<Animator>();
-            checkAnim = false;
+            //anim = GetComponent<Animator>();
+            _loadSoundbundle = GameObject.FindObjectOfType<LoadSoundbundles>();
         }
-
-        private void OnEnable()
-        {
-            _loadSoundbundle = FindObjectOfType<LoadSoundbundles>();
-        }
-
         public void Launch()
         {
-            anim.Play("Lauch");
-            _loadSoundbundle.PlayMusicOfObjects(_musicbooster);
+            if (_boosterAnimation.isPlaying)
+            {
+                _boosterAnimation.Play("Idle");
+            }
+            else
+            {
+                _boosterAnimation.Play("Idle");
+                _boosterAnimation.PlayQueued("Lauch");
+            }
+            _loadSoundbundle.PlayMusicOfObjects(_boosterMusic);
         }
-
         public void Open4D()
         {
-            FirecoalsSoundManager.StopAll();
-            anim.Play("4D");
+            if (!_boosterAnimation.isPlaying)
+            {
+                _boosterAnimation.Play("4D");
+            }
         }
     }
 }

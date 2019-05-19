@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace Firecoals.Space
 {
     /// <summary>
@@ -9,62 +10,32 @@ namespace Firecoals.Space
     /// </summary>
     public class PlayVideoVuforia : DefaultTrackableEventHandler
     {
-        /// <summary>
-        /// nút play video
-        /// </summary>
-        private GameObject playbutton;
-
-        /// <summary>
-        /// component video player
-        /// </summary>
         UnityEngine.Video.VideoPlayer video;
-
         protected override void Start()
         {
             base.Start();
+            video = gameObject.transform.GetChild(1).GetComponent<UnityEngine.Video.VideoPlayer>();
         }
-
-        protected override void OnTrackingFound()
-        {
-            base.OnTrackingFound();
-            playbutton = transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).gameObject;
-            NGUITools.SetActive(playbutton, true);
-            video = transform.GetChild(0).transform.GetChild(1).GetComponent<UnityEngine.Video.VideoPlayer>();
-            EventForPlayButton();
-        }
-
-        protected override void OnTrackingLost()
-        {
-            base.OnTrackingLost();
-        }
-
         protected override void OnDestroy()
         {
             base.OnDestroy();
         }
-
-        private void EventForPlayButton()
+        protected override void OnTrackingFound()
         {
-            EventDelegate _delegate = new EventDelegate(this, "ClickToPlayVideo");
-            EventDelegate.Set(playbutton.GetComponent<UIButton>().onClick, _delegate);
+            base.OnTrackingFound();
+        }
+        protected override void OnTrackingLost()
+        {
+            base.OnTrackingLost();
+            if (video != null)
+                video.Stop();
         }
 
-        private void ClickToPlayVideo()
+        public void ClickToPlayVideo()
         {
-            NGUITools.SetActive(playbutton, false);
-            video.Play();
-            Debug.Log("<color=red> Play Button Clicked! </color>");
-            InvokeRepeating("CheckVideoOVer", 1f, 1f);
-        }
-
-        /// <summary>
-        /// check video chạy xong chưa
-        /// </summary>
-        private void CheckVideoOVer()
-        {
-            if (video.frame == (long)video.frameCount)
+            if (transform.GetChild(0).gameObject.activeSelf)
             {
-                NGUITools.SetActive(playbutton, true);
+                video.Play();
             }
         }
     }

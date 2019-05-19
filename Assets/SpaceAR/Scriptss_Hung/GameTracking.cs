@@ -1,5 +1,5 @@
 ﻿using Firecoals.Augmentation;
-using Firecoals.MagicBook;
+using Firecoals.Threading.Tasks;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
 using UnityEngine;
@@ -58,34 +58,16 @@ namespace Firecoals.Space
 
         private GameObject _gameobjectLoaded;
 
-        /// <summary>
-        /// Các imagetargets
-        /// </summary>
-        private GameObject[] _originalObjectTransform;
-
-        /// <summary>
-        /// scale ban ban đầu của object,
-        /// các object khác nhau scale ban đầu khác nhau
-        /// </summary>
-        [Header("Original scale of object")]
-        public Vector3 _originalLocalScale;
         protected override void Start()
         {
-           
             base.Start();
             ApplicationContext context = Context.GetApplicationContext();
             _resources = context.GetService<IResources>();
             assetloader = GameObject.FindObjectOfType<AssetLoader>();
 
-            //if (ActiveManager.IsActiveOfflineOk(ActiveManager.NameToProjectID(ThemeController.instance.Theme))
-            //     || mTrackableBehaviour.TrackableName == "Solarsystem_scaled"
-            //     || mTrackableBehaviour.TrackableName == "Sun_scaled"
-            //     || mTrackableBehaviour.TrackableName == "Mercury_scaled")
-            //{
-                _gameobjectLoaded = assetloader.LoadGameObjectAsync(path, mTrackableBehaviour.transform);
-            //}
+            _gameobjectLoaded = assetloader.LoadGameObjectAsync(path, mTrackableBehaviour.transform);
 
-            Dispatcher.Initialize();
+            Dispatcher.Initialize(); 
         }
 
         protected override void OnDestroy()
@@ -95,15 +77,13 @@ namespace Firecoals.Space
 
         protected override void OnTrackingFound()
         {
-           
             foreach (Transform a in mTrackableBehaviour.transform)
             {
                 a.gameObject.SetActive(true);
             }
-            NGUITools.SetActive(objectName, true);
+
             ShowModelsOnScreen();
-            ResetTranformGame1();
-            
+            NGUITools.SetActive(objectName, true);
 
             //SpawnModel();
             //nếu đã purchase thì vào phần này
@@ -152,13 +132,41 @@ namespace Firecoals.Space
 
         private void ShowModelsOnScreen()
         {
-            if (IsTargetEmpty())
-            {
-                nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
-                nameTargetSpace.ToLower();
-                ChangeKeyLocalization();
-            }
+            nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
+            nameTargetSpace.ToLower();
+            ChangeKeyLocalization();
         }
+
+
+        //        public void Execute()
+        //        {
+        //#if UNITY_WSA && !UNITY_EDITOR
+        //        System.Threading.Tasks.Task t = new System.Threading.Tasks.Task(Augment);
+        //#else
+        //            System.Threading.Thread t = new System.Threading.Thread(new System.Threading.ThreadStart(Augment));
+        //#endif
+        //            t.Start();
+        //        }
+
+        //        private void Augment()
+        //        {
+
+        //            GameObject go = null;
+        //            Task.WhenAll(Task.Run(() =>
+        //            {
+        //                Debug.Log("<color=turquoise>In background thread</color>");
+        //                Task.RunInMainThread(() =>
+        //                {
+        //                    //assetloader.LoadGameObjectAsync(path, mTrackableBehaviour.transform);
+        //                    //_loadSoundbundle.PlayNameSound(tagSound);
+        //                });
+        //            })).ContinueInMainThreadWith(task =>
+        //            {
+        //                nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
+        //                nameTargetSpace.ToLower();
+        //                ChangeKeyLocalization();
+        //            });
+        //        }
 
         private void ClearAllOtherTargetContents()
         {
@@ -206,34 +214,6 @@ namespace Firecoals.Space
         private bool IsTargetEmpty()
         {
             return mTrackableBehaviour.transform.childCount <= 0;
-        }
-
-        /// <summary>
-        /// nếu là Game1 thì reset lại transform lúc xuất hiện
-        /// </summary>
-        private void ResetTranformGame1()
-        {
-            if (mTrackableBehaviour.name == "Game1_scaled")
-            {
-                GetOriginalTransform();
-            }
-        }
-
-        /// <summary>
-        /// Lấy transform ban đầu từ khi instantiate object ra
-        /// </summary>
-        private void GetOriginalTransform()
-        {
-            _originalObjectTransform = GameObject.FindGameObjectsWithTag("Leanscale");
-            foreach (var a in _originalObjectTransform)
-            {
-                if (a != null && a.activeSelf)
-                {
-                    a.transform.localPosition = Vector3.zero;
-                    a.transform.localRotation = new Quaternion(0, 0, 0, 0);
-                    a.transform.localScale = _originalLocalScale;
-                }
-            }
         }
     }
 }

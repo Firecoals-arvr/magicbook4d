@@ -25,7 +25,7 @@ namespace Firecoals.Space
                         hit.transform.localScale += new Vector3(0.04f, 0.04f, 0.04f);
                         hit.transform.GetChild(0).gameObject.SetActive(true);
                         temp = hit.transform.gameObject;
-                        
+
                     }
                     else
                     {
@@ -38,11 +38,10 @@ namespace Firecoals.Space
                             temp = hit.transform.gameObject;
                         }
                     }
-                    
+
                 }
                 else
                 {
-                   
                     if (temp != null)
                     {
                         temp.transform.localScale -= new Vector3(0.04f, 0.04f, 0.04f);

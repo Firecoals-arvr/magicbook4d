@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using Firecoals.AssetBundles.Sound;
 using Firecoals.Augmentation;
-using Firecoals.AssetBundles.Sound;
 using Loxodon.Framework.Bundles;
+using UnityEngine;
 
 namespace Firecoals.Animal
 {
@@ -12,7 +10,7 @@ namespace Firecoals.Animal
         private ISoundManifestLoader _soundManifest;
         private IBundle _bundleAudioClip;
         private AssetLoader _assetLoader;
-        GameObject[] imageTarget;
+        private GameObject[] imageTarget;
         private SoundInfo[] soundNames;
         private SoundInfo[] soundInfos;
         private SoundInfo[] soundNoises;

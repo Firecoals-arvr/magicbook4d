@@ -1,5 +1,4 @@
-﻿using Firecoals.AssetBundles.Sound;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Firecoals.Space
 {
@@ -13,7 +12,9 @@ namespace Firecoals.Space
         public Joystick joystick;
 
         Animation anima;
-        public Animation[] _alienanima;
+        [SerializeField] Animation[] _alienanima = default;
+        //[SerializeField] AudioSource audioSrc;
+        //public AudioClip[] ListAudio;
 
         private LoadSoundbundles _loadSoundbundle;
 
@@ -44,8 +45,20 @@ namespace Firecoals.Space
                     anima.Stop();
                 if (anima.isPlaying == false)
                     anima.Play("Idle1");
+                if (anima.IsPlaying("Dance"))
+                    anima.Stop();
             }
+            //if (stt == true)
+            //{
+            //    AlienIntro();
+            //    stt = false;
+            //}
         }
+
+        /// <summary>
+        /// check trạng thái xuất hiện
+        /// </summary>
+        //public bool stt = false;
 
         public void AlienTalk()
         {
@@ -54,18 +67,21 @@ namespace Firecoals.Space
             {
                 a.Play("Talking");
             }
-            FirecoalsSoundManager.StopAll();
             _loadSoundbundle.PlayMusicOfObjects(_talkmusic);
         }
 
         public void AlienDance()
         {
+            //if (!this.transform.parent.gameObject.activeInHierarchy)
+            //{
+            //    this.transform.parent.gameObject.SetActive(true);
+            //}
+            alienChild.GetComponent<Animation>().Play("Dance");
             anima.Play("Dance");
             foreach (var a in _alienanima)
             {
                 a.Play("Dance");
             }
-            FirecoalsSoundManager.StopAll();
             _loadSoundbundle.PlayMusicOfObjects(_dancemusic);
         }
     }

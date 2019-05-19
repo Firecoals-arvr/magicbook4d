@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.PlayerLoop;
+using Vuforia;
 
 namespace Firecoals.Animal
 {
@@ -18,9 +19,16 @@ namespace Firecoals.Animal
 
         protected void Start()
         {
+<<<<<<< HEAD
             effectTouch = GameObject.Find("EffectTouch");
             base.Start();
         }
+=======
+            effectTouch =GameObject.Find("EffectTouch");
+            base.Start();
+        }
+
+>>>>>>> 518a457d51d359045dde1809288953a492d17fba
         protected void FixedUpdate()
         {
             if (Input.GetMouseButtonDown(0))//TODO && not hover UI
@@ -44,10 +52,27 @@ namespace Firecoals.Animal
                         Jump = true;
                         if (Item != null)
                         {
+<<<<<<< HEAD
                             Item.transform.position = hit.point;
                             effectTouch.transform.position = Item.transform.position;
                             effectTouch.transform.GetChild(0).gameObject.SetActive(true);
                             StartCoroutine(ResetEffect());
+=======
+                            Debug.LogWarning("hit " + hit.point + " " + hit.collider.gameObject.name);
+                            DestinationPosition = hit.point;
+                            CanMove = true;
+                            IsMoving = true;
+                            Jump = true;
+                            if (Item != null)
+                            {
+                                Item.transform.position = hit.point;
+                                effectTouch.transform.position = Item.transform.position;
+                                effectTouch.transform.GetChild(0).gameObject.SetActive(true);
+                                StartCoroutine(ResetEffect());
+                            }
+
+                            //TODO SetActive(touch effect) = true
+>>>>>>> 518a457d51d359045dde1809288953a492d17fba
                         }
 
                         //TODO SetActive(touch effect) = true
@@ -61,6 +86,12 @@ namespace Firecoals.Animal
         IEnumerator ResetEffect()
         {
             yield return new WaitForSeconds(.6f);
+            effectTouch.transform.GetChild(0).gameObject.SetActive(false);
+        }
+
+        IEnumerator ResetEffect()
+        {
+            yield return new WaitForSeconds(0.6f);
             effectTouch.transform.GetChild(0).gameObject.SetActive(false);
         }
 

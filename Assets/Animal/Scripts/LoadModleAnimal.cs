@@ -220,6 +220,7 @@ namespace Firecoals.Animal
             {
                 go.GetComponentInChildren<Animation>().Stop();
                 go.gameObject.SetActive(false);
+                go.GetComponentInChildren<Animation>().Stop();
             }
         }
 
@@ -262,11 +263,19 @@ namespace Firecoals.Animal
             allCreature = GameObject.FindGameObjectsWithTag("ImageTarget");
             foreach (GameObject creature in allCreature)
             {
+<<<<<<< HEAD
                 if (creature.transform.childCount > 0 && creature.transform.GetChild(0).gameObject.activeSelf)
                 {
                     GameObject go = GameObject.FindGameObjectWithTag("Creature");
                     go.transform.localPosition = Vector3.zero;
                     go.transform.localRotation = new Quaternion(0, 180, 0, 0);
+=======
+                if (creature.transform.childCount>0 && creature.transform.GetChild(0).gameObject.activeSelf)
+                {
+                    GameObject go = GameObject.FindGameObjectWithTag("Creature");
+                    go.transform.localPosition = Vector3.zero;
+                    go.transform.localRotation = new Quaternion(0, 180, 0,0);
+>>>>>>> 518a457d51d359045dde1809288953a492d17fba
                     go.GetComponent<Animation>().Play();
                     GameObject go1 = GameObject.FindGameObjectWithTag("Item");
                     go1.transform.localPosition = itemPos;
