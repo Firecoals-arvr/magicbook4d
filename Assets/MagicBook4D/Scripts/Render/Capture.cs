@@ -15,6 +15,7 @@ namespace Firecoals.Render
         public UI2DSprite unitySprite;
         private Texture2D _screenShot;
         private Sprite _tempSprite;
+        public GameObject recordBT, takePictureBt;
         public static Capture Instance { get; private set; }
         private void Start()
         {
@@ -47,6 +48,8 @@ namespace Firecoals.Render
 
             NGUITools.SetActive(reviewPanel, true);
             NGUITools.SetActive(mainPanel, false);
+            NGUITools.SetActive(recordBT, false);
+            NGUITools.SetActive(takePictureBt, false);
             PopupManager.Instance.HideAll();
             yield return new WaitForEndOfFrame();
             _screenShot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
@@ -67,6 +70,8 @@ namespace Firecoals.Render
         {
             NGUITools.SetActive(reviewPanel, false);
             NGUITools.SetActive(mainPanel, true);
+            NGUITools.SetActive(recordBT, true);
+            NGUITools.SetActive(takePictureBt, true);
             //unitySprite.sprite2D = null;
             unitySprite.gameObject.transform.localScale =Vector3.zero;
 

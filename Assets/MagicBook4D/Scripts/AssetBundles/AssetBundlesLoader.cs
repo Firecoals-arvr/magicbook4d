@@ -94,7 +94,7 @@ namespace Firecoals.AssetBundles
             {
                 Debug.LogFormat("PreLoading {0:F1}%", (p * 100).ToString(CultureInfo.InvariantCulture));
                 slider.value = p;
-                slider.transform.GetChild(2).gameObject.GetComponent<UILabel>().text = "vui lòng chờ";
+                slider.transform.GetChild(2).gameObject.GetComponent<UILabel>().text = "Vui lòng đợi";
             });
             yield return result.WaitForDone();
             if (result.IsDone)

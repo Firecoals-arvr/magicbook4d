@@ -7,7 +7,7 @@ namespace Firecoals.Space
     {
         public InforObject[] InfoLeft;
         public InforObject[] InfoRight;
-        List<GameObject> lst = new List<GameObject>();
+        public static List<GameObject> lst = new List<GameObject>();
         private Animator animator;
         
         private void Start()

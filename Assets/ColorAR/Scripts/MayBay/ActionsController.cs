@@ -10,7 +10,7 @@ namespace Firecoals.Color
 	public class ActionsController : MonoBehaviour
 	{
 		public GameObject propeller;
-        public AudioClip audio;
+        public new AudioClip audio;
         AudioSource audioSource;
 		// Start is called before the first frame update
 		void Start()
@@ -28,6 +28,7 @@ namespace Firecoals.Color
 		public void CreateAnimation()
 		{
 			Debug.Log("May bay was clicked!");
+            gameObject.GetComponent<BoxCollider>().enabled = false;
 			StartCoroutine(RotateAirplane());
             PlayMusic();
             this.GetComponent<Animator>().SetTrigger("isWave");
@@ -51,7 +52,9 @@ namespace Firecoals.Color
 				this.transform.RotateAround(new Vector3(0, 0.1f, 0), Vector3.right, 120 * Time.deltaTime);
 				yield return null;
 			}
-		}
+            yield return new WaitForSeconds(3f);
+            gameObject.GetComponent<BoxCollider>().enabled = true;
+        }
         public void PlayMusic()
         {
             audioSource = GetComponent<AudioSource>();

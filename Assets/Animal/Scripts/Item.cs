@@ -14,7 +14,7 @@ namespace Firecoals.Animal
         {
             if (collider.gameObject.tag == "Player")
             {
-                Debug.Log("Dog eating the bone");
+                Debug.Log("PhongVuBuffalo");
             }
         }
     }

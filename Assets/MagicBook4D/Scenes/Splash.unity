@@ -158,24 +158,24 @@ MonoBehaviour:
   leftAnchor:
     target: {fileID: 236718979}
     relative: 0.5
-    absolute: -187
+    absolute: -162
   rightAnchor:
     target: {fileID: 236718979}
     relative: 0.5
-    absolute: 187
+    absolute: 162
   bottomAnchor:
     target: {fileID: 236718979}
     relative: 0.5
-    absolute: -147
+    absolute: -12
   topAnchor:
     target: {fileID: 236718979}
     relative: 0.5
-    absolute: 147
+    absolute: 12
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 374
-  mHeight: 293
+  mWidth: 324
+  mHeight: 254
   mDepth: 1
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: 0da9dfd7f64ab404a8a4a12727d530e5, type: 3}
+  mTexture: {fileID: 2800000, guid: 8aa5d90ff54397443be72161eac941c0, type: 3}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
   mFixedAspect: 0
@@ -235,6 +235,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 534582}
+  - {fileID: 1462695111}
   m_Father: {fileID: 1675795716}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -269,14 +270,14 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 1}
   mPivot: 4
-  mWidth: 1492
-  mHeight: 1212
+  mWidth: 1500
+  mHeight: 1000
   mDepth: 0
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
-  keepAspectRatio: 1
-  aspectRatio: 1.2310606
+  keepAspectRatio: 0
+  aspectRatio: 1.5
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -296,7 +297,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: 7d69009aac237b043a401e283d2e7635, type: 3}
+  mTexture: {fileID: 2800000, guid: de84a047d4141f34690be0ad41a8a125, type: 3}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
   mFixedAspect: 0
@@ -312,6 +313,99 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b8da0ddf11b6c345be54d3550156dfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1462695110
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1462695111}
+  - component: {fileID: 1462695112}
+  m_Layer: 8
+  m_Name: Logo_Firecoals
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1462695111
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462695110}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5, y: -289, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 236718979}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1462695112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462695110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5c5ca47aa5c01740810b7c66662099f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftAnchor:
+    target: {fileID: 0}
+    relative: 0
+    absolute: -330
+  rightAnchor:
+    target: {fileID: 0}
+    relative: 1
+    absolute: 182
+  bottomAnchor:
+    target: {fileID: 0}
+    relative: 0
+    absolute: -124
+  topAnchor:
+    target: {fileID: 0}
+    relative: 1
+    absolute: -16
+  updateAnchors: 1
+  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mPivot: 4
+  mWidth: 362
+  mHeight: 64
+  mDepth: 3
+  mMat: {fileID: 0}
+  autoResizeBoxCollider: 0
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: 5.65625
+  mType: 0
+  mFillDirection: 4
+  mFillAmount: 1
+  mInvert: 0
+  mFlip: 0
+  mApplyGradient: 0
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  centerType: 1
+  leftType: 1
+  rightType: 1
+  bottomType: 1
+  topType: 1
+  mRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  mTexture: {fileID: 2800000, guid: 8768dad69886b824bbe3f1e03b6df14d, type: 3}
+  mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
+  mBorder: {x: 0, y: 0, z: 0, w: 0}
+  mFixedAspect: 0
 --- !u!1 &1645420205
 GameObject:
   m_ObjectHideFlags: 0

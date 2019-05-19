@@ -50,7 +50,7 @@ namespace Firecoals.Animal
         public GameObject Item { get; set; }
         public float ScaleAnimal { get; set; }
         protected virtual void Start()
-        {
+        { 
             SetUpAnimation();
             Item = transform.parent.GetComponentInChildren<Item>().gameObject;
         }
@@ -126,7 +126,7 @@ namespace Firecoals.Animal
         {
             IsRotating = false;
             var targetDir = target - this.transform.position;
-            Debug.Log("* ScaleAnimal" + ScaleAnimal);
+            //Debug.Log("* ScaleAnimal" + ScaleAnimal);
             var angle = Quaternion.LookRotation(targetDir);
             if (Item != null)
             {

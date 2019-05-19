@@ -28,10 +28,12 @@ namespace Firecoals.Animal
         protected RaycastHit hit;
         public float ScaleAnimal { get; set; }
         public GameObject Item { get; set; }
+        private GameObject effectTouch;
         protected virtual void Start()
         {
             Item = transform.parent.GetComponentInChildren<Item>().gameObject;
             animator = GetComponent<Animator>();
+            effectTouch = GameObject.Find("EffectTouch");
         }
         protected void FixedUpdate()
         {
@@ -61,6 +63,9 @@ namespace Firecoals.Animal
                         CanMove = true;
                         IsMoving = true;
                         Item.transform.position = DestinationPosition;
+                        effectTouch.transform.position = Item.transform.position;
+                        effectTouch.transform.GetChild(0).gameObject.SetActive(true);
+                        StartCoroutine(ResetEffect());
                     }
                 }
             }
@@ -157,6 +162,11 @@ namespace Firecoals.Animal
             animator.SetBool("IsJump", false);
             animator.SetBool("IsWalk", false);
             CanjumpWolf = true;
+        }
+        IEnumerator ResetEffect()
+        {
+            yield return new WaitForSeconds(.6f);
+            effectTouch.transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 }

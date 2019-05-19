@@ -68,7 +68,7 @@ namespace Firecoals.AssetBundles
                     Debug.LogFormat("Downloads BundleManifest failure.Error:{0}", manifestResult.Exception);
                     BundleUtil.ClearStorableDirectory();
                     PopupManager.PopUpDialog("[[9C0002]Error[-]]", "Downloads data info failure. Error:{0}" +
-                        manifestResult.Exception, "Menu",default, default, PopupManager.DialogType.OkDialog,
+                        manifestResult.Exception, "Menu", default, default, PopupManager.DialogType.OkDialog,
                         (() => SceneLoader.LoadScene("Menu")));
                     yield break;
                 }
@@ -91,7 +91,7 @@ namespace Firecoals.AssetBundles
                 if (bundles == null || bundles.Count <= 0)
                 {
                     Debug.LogFormat("Please clear cache and remove StreamingAssets,try again.");
-                    PopupManager.PopUpDialog("[[9C0002]Error[-]]", "You need to clear cache to download the data, press OK to continue",default,"OK","Hủy bỏ",
+                    PopupManager.PopUpDialog("[[9C0002]Error[-]]", "You need to clear cache to download the data, press OK to continue", default, "OK", "Hủy bỏ",
                         PopupManager.DialogType.YesNoDialog, () =>
                         {
                             var dlManager = GameObject.FindObjectOfType<DownLoadManager>();
@@ -101,15 +101,15 @@ namespace Firecoals.AssetBundles
                 }
 
                 IProgressResult<Progress, bool> downloadResult = _downloader.DownloadBundles(bundles);
-                
+
                 downloadResult.Callbackable().OnProgressCallback(p =>
                 {
-                    
+
                     Debug.LogFormat("Downloading {0:F2}KB/{1:F2}KB {2:F3}KB/S", p.GetCompletedSize(UNIT.KB), p.GetTotalSize(UNIT.KB), p.GetSpeed(UNIT.KB));
                     var percent = p.GetCompletedSize(UNIT.KB) / p.GetTotalSize(UNIT.KB);
-                    
+
                     slider.value = percent;
-                    slider.transform.GetChild(2).gameObject.GetComponent<UILabel>().text = "Đang tải dữ liệu";
+                    slider.transform.GetChild(2).gameObject.GetComponent<UILabel>().text = "Các bé dưới 5 tuổi khi sử dụng ứng dụng cần có sự giám sát của phụ huynh";
                     //var label =  slider.transform.Find("displaytext").gameObject.GetComponent<UILabel>();
                     //label.text = p.GetCompletedSize(UNIT.KB).ToString()+"/"+ p.GetTotalSize(UNIT.KB).ToString();
 
@@ -125,7 +125,7 @@ namespace Firecoals.AssetBundles
                 {
                     Debug.LogFormat("Downloads AssetBundle failure.Error:{0}", downloadResult.Exception);
                     BundleUtil.ClearStorableDirectory();
-                    PopupManager.PopUpDialog("[[9C0002]Error[-]]", "Downloads Data failure. Error"+ downloadResult.Exception, default,"Thử lại","Menu",
+                    PopupManager.PopUpDialog("[[9C0002]Error[-]]", "Downloads Data failure. Error" + downloadResult.Exception, default, "Thử lại", "Menu",
                         PopupManager.DialogType.YesNoDialog, () =>
                         {
                             var dlManager = GameObject.FindObjectOfType<DownLoadManager>();
@@ -144,7 +144,7 @@ namespace Firecoals.AssetBundles
 
                 if (downloadResult.IsCancelled)
                 {
-                    
+
                     //BundleUtil.ClearStorableDirectory();
                     Debug.LogWarning("Cancelled download");
                 }
@@ -180,13 +180,30 @@ namespace Firecoals.AssetBundles
             switch (ThemeController.instance.Theme)
             {
                 case "Animal":
-                    bundleNames = new[] { "animals/model/lion" , "animals/model/elephant" , "animals/model/gorilla" };
+                    bundleNames = new[] { "animals/model/lion" ,
+                        "animals/model/elephant" ,
+                        "animals/model/gorilla",
+                        "animals/info/en",
+                        "animals/info/jp",
+                        "animals/info/vn",
+                        "animals/name/cn",
+                        "animals/name/en",
+                        "animals/name/vn",
+                        "animals/name/jp",
+                        "animals/noise" };
                     break;
                 case "Space":
-                    bundleNames = new[] { "space/models/solarsystem", "space/models/sun", "space/models/mercury" };
+                    bundleNames = new[] { "space/models/solarsystem",
+                            "space/models/sun",
+                            "space/models/mercury",
+                            "space/sound/name/en",
+                            "space/sound/name/vn",
+                            "space/sound/info/vn",
+                            "space/sound/info/en",
+                            "space/music" };
                     break;
                 case "Color":
-                    bundleNames = new[] { "color/model/maybay" };
+                    bundleNames = new[] { "color/model/maybay", "color/sounds/sounds" };
                     break;
                 default:
                     bundleNames = null;
@@ -202,7 +219,7 @@ namespace Firecoals.AssetBundles
                 Debug.LogError("Fail to get free bundle names to download");
                 return null;
             }
-            
+
         }
         #endregion
 

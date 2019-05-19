@@ -5,19 +5,21 @@ namespace Firecoals.Space
 {
     public class GetAnimClose : MonoBehaviour
     {
-        public static GetAnimClose instance;
         Animator anim;
 
         void Start()
         {
+
             anim = GetComponent<Animator>();
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (!ChangeAnim.Instance.checkOpen)
+
+            if (ChangeAnim.checkOpen == true)
             {
+
                 CloseCallOut();
             }
         }

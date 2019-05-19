@@ -6,6 +6,7 @@ using System.Collections;
 using Firecoals.MagicBook;
 using UnityEngine;
 using Dispatcher = Firecoals.Threading.Dispatcher;
+using UnityEngine.SceneManagement;
 
 namespace Firecoals.Animal
 {
@@ -68,14 +69,14 @@ namespace Firecoals.Animal
             //PlayerPrefs.SetString("AnimalLanguage", "EN");
             //Dispatcher.Initialize();
             assetLoader = GameObject.FindObjectOfType<AssetLoader>();
-            if (ActiveManager.IsActiveOfflineOk(ActiveManager.NameToProjectID(ThemeController.instance.Theme)) 
+            if (ActiveManager.IsActiveOfflineOk(ActiveManager.NameToProjectID(ThemeController.instance.Theme))
                 || mTrackableBehaviour.TrackableName.Equals("1_free_lion")
                 || mTrackableBehaviour.TrackableName.Equals("2_free_elephant")
-                ||mTrackableBehaviour.TrackableName.Equals("3_free_gorilla"))
+                || mTrackableBehaviour.TrackableName.Equals("3_free_gorilla"))
             {
                 gameObjectToload = assetLoader.LoadGameObjectAsync(bundlePath, mTrackableBehaviour.transform);
             }
-            
+
             playSound = true;
         }
         protected override void OnDestroy()
@@ -114,13 +115,13 @@ namespace Firecoals.Animal
         private void Augment()
         {
             GameObject go = null;
-            Task loadTask= Dispatcher.instance.TaskToMainThread(() =>
-            {                                                                              
-                go = assetLoader.LoadGameObjectSync(bundleName, bundlePath);
-                //_cached = true;
-                Debug.Log("<color=red> GameObject created in background thread: " + go.name + "<color>");
+            Task loadTask = Dispatcher.instance.TaskToMainThread(() =>
+             {
+                 go = assetLoader.LoadGameObjectSync(bundleName, bundlePath);
+                 //_cached = true;
+                 Debug.Log("<color=red> GameObject created in background thread: " + go.name + "<color>");
 
-            });
+             });
             loadTask.ContinueInMainThreadWith((task) =>
             {
                 if (task.IsCompleted)
@@ -156,6 +157,7 @@ namespace Firecoals.Animal
         public void LoadModelBundles(GameObject go)
         {
             StartCoroutine(StarEffect(go));
+
             //load text lên bảng thông tin
             _textInfo = GameObject.Find("UI Root/PanelButtons/PanelInfor/Scroll View/Info");
             if (_textInfo != null)
@@ -184,11 +186,25 @@ namespace Firecoals.Animal
         }
         private void EnableAllChildOfTheTarget()
         {
-            foreach (Transform go in mTrackableBehaviour.transform)
+            if (ActiveManager.IsActiveOfflineOk(ActiveManager.NameToProjectID(ThemeController.instance.Theme))
+                || mTrackableBehaviour.TrackableName.Equals("1_free_lion")
+                || mTrackableBehaviour.TrackableName.Equals("2_free_elephant")
+                || mTrackableBehaviour.TrackableName.Equals("3_free_gorilla"))
             {
-                go.gameObject.SetActive(true);
+                foreach (Transform go in mTrackableBehaviour.transform)
+                {
+                    go.gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", "OK", "Yes", "No", PopupManager.DialogType.YesNoDialog, () =>
+                {
+                    SceneManager.LoadScene("Activate", LoadSceneMode.Single);
+                });
             }
             ResetPosition();
+            ResetMove();
             //Đoạn bên dưới để load sound + text trong trường hợp load bundles mà ko load effect lúc xuất hiện
             //_loadsoundbundles.PlaySound(tagSound);
             //_loadsoundbundles.PlayName(tagName);
@@ -202,9 +218,9 @@ namespace Firecoals.Animal
         {
             foreach (Transform go in mTrackableBehaviour.transform)
             {
+                go.GetComponentInChildren<Animation>().Stop();
                 go.gameObject.SetActive(false);
             }
-            
         }
 
         //private void RunAnimationIntro()
@@ -220,20 +236,22 @@ namespace Firecoals.Animal
         //}
         private void ChangeKeyAnimalLocalization()
         {
+            objName.gameObject.GetComponent<UILocalize>().key = nameAnimal;
+            objName.text = Localization.Get(nameAnimal);
             _textInfo.GetComponent<UILocalize>().key = TextInfoName;
             _textInfo.GetComponent<UILabel>().text = Localization.Get(TextInfoName);
         }
         private void ClearKeyLocalization()
         {
-            if (_textInfo != null)
+            if (_textInfo != null && objName != null)
             {
                 _textInfo.GetComponent<UILocalize>().key = string.Empty;
+                objName.GetComponent<UILocalize>().key = string.Empty;
             }
         }
         // hiển thị text trên scene khi load sound name
         public IEnumerator LoadNameAnimal()
         {
-            objName.text = nameAnimal;
             NGUITools.SetActive(objName.gameObject, true);
             yield return new WaitForSeconds(2);
             NGUITools.SetActive(objName.gameObject, false);
@@ -244,17 +262,51 @@ namespace Firecoals.Animal
             allCreature = GameObject.FindGameObjectsWithTag("ImageTarget");
             foreach (GameObject creature in allCreature)
             {
-                if (creature.transform.GetChild(0).gameObject.activeSelf)
+                if (creature.transform.childCount > 0 && creature.transform.GetChild(0).gameObject.activeSelf)
                 {
                     GameObject go = GameObject.FindGameObjectWithTag("Creature");
                     go.transform.localPosition = Vector3.zero;
-                    go.transform.localRotation = new Quaternion(0, 180, 0,0);
+                    go.transform.localRotation = new Quaternion(0, 180, 0, 0);
+                    go.GetComponent<Animation>().Play();
                     GameObject go1 = GameObject.FindGameObjectWithTag("Item");
                     go1.transform.localPosition = itemPos;
                     go1.transform.localRotation = new Quaternion(0, 180, 0, 0);
                 }
             }
             transform.GetChild(0).localScale = Vector3.one;
+        }
+        //reset animal ko cho move khi tracking found lại
+        void ResetMove()
+        {
+            allCreature = GameObject.FindGameObjectsWithTag("ImageTarget");
+            foreach (GameObject creature in allCreature)
+            {
+                Debug.LogWarning("creature");
+                if (creature.transform.childCount > 0 && creature.transform.GetChild(0).gameObject.activeSelf)
+                {
+                    switch (mTrackableBehaviour.TrackableName)
+                    {
+                        case "1_free_lion":
+                            creature.GetComponentInChildren<LionMove>().CanMove = false;
+                            break;
+                        case "17_eagle":
+                            creature.GetComponentInChildren<EagleMove>().CanMove = false;
+                            break;
+                        case "20_wolf":
+                            creature.GetComponentInChildren<WolfMove>().CanMove = false;
+                            break;
+                        case "12_dolphin":
+                            creature.GetComponentInChildren<LionController>().CanMove = false;
+                            break;
+                        case "13_kangaru":
+                            creature.GetComponentInChildren<LionController>().CanMove = false;
+                            break;
+                        default:
+                            creature.GetComponentInChildren<DefaultController>().CanMove = false;
+                            break;
+                    }
+                }
+            }
         }
     }
 }

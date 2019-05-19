@@ -169,9 +169,6 @@ namespace Firecoals.Augmentation
                     {
                         bundleNames = new[] { "color/model/camtrai",
                             "color/model/chantrau",
-                            "color/model/cloud/maybay",
-                            "color/model/cloud/dabong",
-                            "color/model/cloud/camtrai",
                             "color/model/dabong",
                             "color/model/khurung",
                             "color/model/maybay",
@@ -187,12 +184,11 @@ namespace Firecoals.Augmentation
                     {
                         bundleNames = new[] { "color/model/maybay", "color/sounds/sounds" };
                     }
-
                     break;
 
             }
         }
-        #region MONOBEHAVIOUR_METHOD
+#region MONOBEHAVIOUR_METHOD
         private void Awake()
         {
             if (instance == null)
@@ -212,7 +208,7 @@ namespace Firecoals.Augmentation
         }
 
 
-        #endregion
+#endregion
 
         public void InitResource()
         {

@@ -49,7 +49,7 @@ namespace Firecoals.Render
         {
 #if !UNITY_WEBGL || UNITY_EDITOR // No `Microphone` API on WebGL :(
             // Create a microphone clip
-            microphoneSource.clip = Microphone.Start(null, true, 60, 48000);
+            microphoneSource.clip = Microphone.Start(null, true, 60, 44100);
             while (Microphone.GetPosition(null) <= 0) ;
             // Play through audio source
             microphoneSource.timeSamples = Microphone.GetPosition(null);

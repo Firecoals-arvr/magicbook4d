@@ -24,10 +24,12 @@ namespace Firecoals.Animal
         protected RaycastHit hit;
         public float ScaleAnimal { get; set; }
         public GameObject Item { get; set; }
+        private GameObject effectTouch;
         protected void Start()
         {
             Item = transform.parent.GetComponentInChildren<Item>().gameObject;
             animator = GetComponent<Animator>();
+            effectTouch = GameObject.Find("EffectTouch");
         }
         protected void FixedUpdate()
         {
@@ -67,6 +69,9 @@ namespace Firecoals.Animal
             if (Item != null)
             {
                 Item.transform.position = hit.point;
+                effectTouch.transform.position = Item.transform.position;
+                effectTouch.transform.GetChild(0).gameObject.SetActive(true);
+                StartCoroutine(ResetEffect());
             }
 
         }
@@ -161,6 +166,11 @@ namespace Firecoals.Animal
             speed = 0;
             animator.SetBool("IsJump", false);
             animator.SetBool("IsWalk", false);
+        }
+        IEnumerator ResetEffect()
+        {
+            yield return new WaitForSeconds(.6f);
+            effectTouch.transform.GetChild(0).gameObject.SetActive(false);
         }
 
     }

@@ -57,7 +57,7 @@ namespace Firecoals.Purchasing
 
         private void OnPlayerServerActived(string projectId)
         {
-            notifyPhonePage.text = "Khôi phục thành công " + ActiveManager.ProjectIdToName(projectId);
+            //notifyPhonePage.text = "Khôi phục thành công " + ActiveManager.ProjectIdToName(projectId);
             PopupManager.PopUpDialog("Chúc mừng", "Khôi phục thành công " + ActiveManager.ProjectIdToName(projectId));
             NGUITools.SetActive(spinning.gameObject, false);
         }
@@ -65,9 +65,11 @@ namespace Firecoals.Purchasing
         private void OnPlayerServerNotActived()
         {
             NGUITools.SetActive(spinning.gameObject, false);
-            notifyCodePage.text = "Khôi phục thất bại vui lòng kiểm tra lại số điện thoại";
+            //notifyCodePage.text = "Khôi phục thất bại vui lòng kiểm tra lại số điện thoại";
             //DialogManager.instance.HideLoadingBar();
             //DialogManager.PopUpDialog(Localization.Get("FailDialogTitle"), Localization.Get("RestoreFail"), DialogManager.DialogType.OkDialog, null, null);
+            PopupManager.PopUpDialog(string.Empty,
+                    "Khôi phục thất bại vui lòng kiểm tra lại số điện thoại", "OK");
         }
 
         private void OnRegisterLicenseFailure(string msg)
@@ -130,10 +132,12 @@ namespace Firecoals.Purchasing
         {
             if (!ActivationManager.instance.IsValidPhone())
             {
+                Debug.LogError("Hien Popup");
                 PopupManager.PopUpDialog("Lỗi", "Số điện thoại bạn nhập không đúng, vui lòng thử lại", "OK");
             }
             else
             {
+                Debug.LogError("Hien Spin");
                 //DialogManager.PopUpDialog(string.Empty, string.Empty, DialogManager.DialogType.LoadingBar);
                 NGUITools.SetActive(spinning.gameObject, true);
                 CM_JobQueue.Make().Enqueue(ActiveManager.CheckRestore(ActivationManager.instance.GetPhoneNumber(), "A"))

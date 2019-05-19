@@ -3,6 +3,8 @@ using System.Collections;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using Vuforia;
+using UnityEngine.Android;
 
 namespace Firecoals.Render
 {
@@ -13,12 +15,58 @@ namespace Firecoals.Render
         private bool counting;
         private Recording recording;
         public static bool toBeCreatedMP4;
+        bool isPause = false;
         private void Start()
         {
+#if PLATFORM_ANDROID
+            if (!Permission.HasUserAuthorizedPermission(Permission.Microphone))
+            {
+                Permission.RequestUserPermission(Permission.Microphone);
+                //dialog = new GameObject();
+            }
+            if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
+            {
+                Permission.RequestUserPermission(Permission.Camera);
+                //dialog = new GameObject();
+            }
+#endif
+
+
             recording = GetComponent<Recording>();
             //EventDelegate mEventDelegate = new EventDelegate(this, "OnPress");
             //EventDelegate.Set(GetComponent<UIButton>().onClick, mEventDelegate);
             Reset();
+        }
+
+        void OnGUI()
+        {
+#if PLATFORM_ANDROID
+            if (!Permission.HasUserAuthorizedPermission(Permission.Microphone))
+            {
+                // The user denied permission to use the microphone.
+                // Display a message explaining why you need it with Yes/No buttons.
+                // If the user says yes then present the request again
+                // Display a dialog here.
+                // dialog.AddComponent<PermissionsRationaleDialog>();
+                PopupManager.PopUpDialog("", "Bạn cần cấp quyền ghi âm để sử dụng tính năng này!", "OK", "Yes", "No", PopupManager.DialogType.YesNoDialog, () =>
+                {
+                    Permission.RequestUserPermission(Permission.Microphone);
+                });
+            }
+            if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
+            {
+                PopupManager.PopUpDialog("", "Bạn cần cấp quyền cho Camera để sử dụng tính năng này!", "OK", "Yes", "No", PopupManager.DialogType.YesNoDialog, () =>
+                {
+                    Permission.RequestUserPermission(Permission.Camera);
+                });
+            }
+            //else if (dialog != null)
+            //{
+            //    Destroy(dialog);
+            //}
+#endif
+
+            // Now you can do things with the microphone
         }
         /// <summary>
         /// Set countdown fill = 0
@@ -72,6 +120,24 @@ namespace Firecoals.Render
                 EventDelegate mEventDelegate = new EventDelegate(this, "StartRecording");
                 EventDelegate.Set(GetComponent<UIButton>().onClick, mEventDelegate);
             }
+            //AppPause();
+        }
+        
+        private void OnApplicationPause(bool pause)
+        {
+            isPause = pause;
+        }
+        private void OnApplicationFocus(bool focus)
+        {
+            isPause = !focus;
+        }
+        void AppPause()
+        {
+            if (isPause)
+            {
+                VuforiaRenderer.Instance.Pause(true);
+            }else
+                VuforiaRenderer.Instance.Pause(false);
         }
         //private float pressTime;
         //private void OnPress(bool pressed)

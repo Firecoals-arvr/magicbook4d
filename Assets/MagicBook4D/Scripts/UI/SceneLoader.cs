@@ -123,8 +123,8 @@ namespace Firecoals.SceneTransition
             // Fade out
             //BeginFadeOut();
             //TODO Begin Open
-            leftCloud.transform.localPosition = new Vector3(-1200f, 0f, 0f);
-            rightCloud.transform.localPosition = new Vector3(1200f, 0f, 0f);
+            leftCloud.transform.localPosition = new Vector3(-1208f, 0f, 0f);
+            rightCloud.transform.localPosition = new Vector3(1205f, 0f, 0f);
             CloseCloud();
             while (!closed)
             {
@@ -193,12 +193,12 @@ namespace Firecoals.SceneTransition
             openned = false;
             TweenScale.Begin(sun, 0.25f, Vector3.zero);
             //NGUITools.SetActive(sun, false);
-            TweenPosition.Begin(leftCloud, time, new Vector3(-1200f, 0f, 0f)).SetOnFinished(() =>
+            TweenPosition.Begin(leftCloud, time, new Vector3(-1208f, 0f, 0f)).SetOnFinished(() =>
             {
                 openned = true;
                 closed = false;
             });
-            TweenPosition.Begin(rightCloud, time, new Vector3(1200f, 0f, 0f));
+            TweenPosition.Begin(rightCloud, time, new Vector3(1205f, 0f, 0f));
         }
     }
 

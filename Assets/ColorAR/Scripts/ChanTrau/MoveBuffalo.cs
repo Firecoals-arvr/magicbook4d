@@ -53,6 +53,7 @@ namespace Firecoals.Color
 			this.gameObject.GetComponent<Animator>().SetTrigger("isWalk");
 
 			realCharacter.GetComponent<Animator>().SetTrigger("isMove");
+            gameObject.GetComponent<BoxCollider>().enabled = false;
             PlayMusic();
 			StartCoroutine(EndMove());
 
@@ -61,7 +62,8 @@ namespace Firecoals.Color
 		{
 			yield return new WaitForSeconds(28.5f);
 			realCharacter.GetComponent<Animator>().SetTrigger("isStay");
-		}
+            gameObject.GetComponent<BoxCollider>().enabled = true;
+        }
         public void PlayMusic()
         {
             audioSource = GetComponent<AudioSource>();

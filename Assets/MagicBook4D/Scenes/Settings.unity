@@ -240,6 +240,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Anchor - Center Tooltip
       objectReference: {fileID: 0}
+    - target: {fileID: 7, guid: fadab555cb31c9645bf12274eaa63c4e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10, guid: fadab555cb31c9645bf12274eaa63c4e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 81, guid: fadab555cb31c9645bf12274eaa63c4e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -284,6 +292,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 180, guid: fadab555cb31c9645bf12274eaa63c4e, type: 3}
+      propertyPath: uiCamera
+      value: 
+      objectReference: {fileID: 946703466}
     - target: {fileID: 195, guid: fadab555cb31c9645bf12274eaa63c4e, type: 3}
       propertyPath: mWidth
       value: 236
@@ -305,10 +317,6 @@ PrefabInstance:
       propertyPath: aspectRatio
       value: 1.4681818
       objectReference: {fileID: 0}
-    - target: {fileID: 180, guid: fadab555cb31c9645bf12274eaa63c4e, type: 3}
-      propertyPath: uiCamera
-      value: 
-      objectReference: {fileID: 946703466}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fadab555cb31c9645bf12274eaa63c4e, type: 3}
 --- !u!4 &72723103 stripped
@@ -379,18 +387,18 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 268
+  mWidth: 378
   mHeight: 40
   mDepth: 1
   mMat: {fileID: 0}
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 6.7
+  aspectRatio: 9.45
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: f18f4e2f965087f4fb69d7bfc4fae1f2, type: 2}
-  mText: "H\u1ECDc ng\xF4n ng\u1EEF"
+  mText: "Ch\u1ECDn ng\xF4n ng\u1EEF h\u1ECDc"
   mFontSize: 40
   mFontStyle: 0
   mAlignment: 0
@@ -519,6 +527,18 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
+--- !u!114 &251251343 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2222228703452621050, guid: de9a39d25e2e9a54095d743d6c7fca90,
+    type: 3}
+  m_PrefabInstance: {fileID: 617596330}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb88ada43743e7a4481987303f35cc64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &298750420
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,13 +1292,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: What is this- Sys Language
       objectReference: {fileID: 0}
+    - target: {fileID: 346435795, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 336217393, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
+      propertyPath: onClick.Array.data[0].mTarget
+      value: 
+      objectReference: {fileID: 251251343}
+    - target: {fileID: 336217393, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
+      propertyPath: onClick.Array.data[0].mMethodName
+      value: PhoneTextField
+      objectReference: {fileID: 0}
+    - target: {fileID: 336217397, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
+      propertyPath: mHeight
+      value: 38
+      objectReference: {fileID: 0}
+    - target: {fileID: 336217397, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
+      propertyPath: keepAspectRatio
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 336217397, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
+      propertyPath: mWidth
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 336217397, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
+      propertyPath: aspectRatio
+      value: 1.0526316
+      objectReference: {fileID: 0}
     - target: {fileID: 346139891, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
       propertyPath: m_LocalPosition.x
       value: 210
       objectReference: {fileID: 0}
     - target: {fileID: 346139891, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 42
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 346139891, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1315,6 +1363,23 @@ PrefabInstance:
     - target: {fileID: 346139891, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 346435793, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 348428497, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
+      propertyPath: m_Size.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 348428497, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
+      propertyPath: m_Size.y
+      value: 38
+      objectReference: {fileID: 0}
+    - target: {fileID: 2222228703452621050, guid: de9a39d25e2e9a54095d743d6c7fca90,
+        type: 3}
+      propertyPath: text
+      value: "Ng\xF4n ng\u1EEF m\u1EB7c \u0111\u1ECBnh c\u1EE7a h\u1EC7 th\u1ED1ng"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
@@ -1582,13 +1647,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: What is this
       objectReference: {fileID: 0}
+    - target: {fileID: 346435795, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 336217393, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
+      propertyPath: onClick.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 336217393, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
+      propertyPath: onClick.Array.data[0].mTarget
+      value: 
+      objectReference: {fileID: 2138047214}
+    - target: {fileID: 336217393, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
+      propertyPath: onClick.Array.data[0].mMethodName
+      value: PhoneTextField
+      objectReference: {fileID: 0}
+    - target: {fileID: 336217397, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
+      propertyPath: keepAspectRatio
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 336217397, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
+      propertyPath: aspectRatio
+      value: 1.0526316
+      objectReference: {fileID: 0}
+    - target: {fileID: 336217397, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
+      propertyPath: mHeight
+      value: 38
+      objectReference: {fileID: 0}
     - target: {fileID: 346139891, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -160
+      value: -217
       objectReference: {fileID: 0}
     - target: {fileID: 346139891, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -148
+      value: -144
       objectReference: {fileID: 0}
     - target: {fileID: 346139891, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1625,6 +1718,10 @@ PrefabInstance:
     - target: {fileID: 346139891, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 348428497, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
+      propertyPath: m_Size.y
+      value: 38
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de9a39d25e2e9a54095d743d6c7fca90, type: 3}
@@ -4907,7 +5004,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mTexture: {fileID: 2800000, guid: 16da4082b6be7474bbaf284e23b9e3bb, type: 3}
+  mTexture: {fileID: 2800000, guid: b8d427558b0f3734da2b494f7a7dc709, type: 3}
   mShader: {fileID: 4800000, guid: e75727d9555d9d14ca51d91908c681bc, type: 3}
   mBorder: {x: 0, y: 0, z: 0, w: 0}
   mFixedAspect: 0
@@ -5154,3 +5251,15 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 9a476318b418fb3449cb80e458ec6c7e, type: 2}
   mSpriteName: button_bg orange light
   mFillCenter: 1
+--- !u!114 &2138047214 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2222228703452621050, guid: de9a39d25e2e9a54095d743d6c7fca90,
+    type: 3}
+  m_PrefabInstance: {fileID: 781030171}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb88ada43743e7a4481987303f35cc64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

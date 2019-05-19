@@ -7,12 +7,13 @@ namespace Firecoals.Color
     public class PlayAnimKitting : MonoBehaviour
     {
         public GameObject character;
-        public AudioClip audio;
+        public new AudioClip audio;
         AudioSource audioSource;
         public void PlayAnimBoy()
         {
             this.gameObject.GetComponent<Animator>().SetTrigger("Move");
             character.GetComponent<Animator>().SetTrigger("Move");
+            gameObject.GetComponent<BoxCollider>().enabled = false;
             PlayMusic();
             StartCoroutine(StopAnim("Idle"));
         }
@@ -21,6 +22,7 @@ namespace Firecoals.Color
         {
             yield return new WaitForSeconds(10f);
             character.GetComponent<Animator>().SetTrigger(nameAnim);
+            gameObject.GetComponent<BoxCollider>().enabled = true;
         }
         public void PlayMusic()
         {

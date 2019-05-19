@@ -3,8 +3,8 @@ using Firecoals.Augmentation;
 using Firecoals.MagicBook;
 using Firecoals.SceneTransition;
 using Loxodon.Framework.Bundles;
+using System.IO;
 using UnityEngine;
-using UnityEngine.Windows;
 using Version = System.Version;
 
 /// <summary>
@@ -22,14 +22,14 @@ public class DownLoadManager : MonoBehaviour
         var themeName = ThemeController.instance.Theme;
         //NGUITools.SetActive(loadingBar.gameObject, false);
         _dlAssets = new DownLoadAssetBundles(themeName, themeName + "/bundles");
-        
+
         LoadLocalManifest();
         InitDownload();
     }
 
     private void InitDownload()
     {
-        Debug.Log("<color=green>required download is "+ RequiredDownload() + "</color>");
+        Debug.Log("<color=green>required download is " + RequiredDownload() + "</color>");
         // if don't have connection and not required download
         if (Application.internetReachability == NetworkReachability.NotReachable && !RequiredDownload())
         {
@@ -81,7 +81,7 @@ public class DownLoadManager : MonoBehaviour
             else
             {
                 PopupManager.PopUpDialog("Xin chào!", "Bạn đang ở chế độ dùng thử, kích hoạt để sử dụng hết tính năng của sản phẩm",
-                    "OK", "Kích hoạt", "Tiếp tục", PopupManager.DialogType.YesNoDialog, () =>
+                    "OK", "Kích hoạt", "Dùng thử", PopupManager.DialogType.YesNoDialog, () =>
                             SceneLoader.LoadScene("Activate"), Download);
             }
 
@@ -89,11 +89,13 @@ public class DownLoadManager : MonoBehaviour
         else if (Application.internetReachability != NetworkReachability.NotReachable && !RequiredDownload())
         {
             if (ActiveManager.IsActiveOfflineOk(ActiveManager.NameToProjectID(ThemeController.instance.Theme)))
+            {
                 PreLoad();
+            }
             else
             {
                 PopupManager.PopUpDialog("Xin chào!", "Bạn đang ở chế độ dùng thử, kích hoạt để sử dụng hết tính năng của sản phẩm",
-                    "OK", "Kích hoạt", "Tiếp tục", PopupManager.DialogType.YesNoDialog, () =>
+                    "OK", "Kích hoạt", "Dùng thử", PopupManager.DialogType.YesNoDialog, () =>
                         SceneLoader.LoadScene("Activate"), PreLoad);
             }
         }

@@ -6,14 +6,14 @@
     /// </summary>
     public class ThemeController : MonoBehaviour
     {
-        public UIGrid menuGrid;
+        private GameObject menuGrid;
 
         public string Theme { get; private set; }
         public static ThemeController instance;
 
         private ThemeController(string themeName)
         {
-           instance.Theme = themeName;
+            instance.Theme = themeName;
         }
 
         public static ThemeController Animal => new ThemeController("Animal");
@@ -30,7 +30,6 @@
             {
                 Destroy(gameObject);
             }
-
             DontDestroyOnLoad(this);
             AddThemeEvent();
             //PlayerPrefs.DeleteAll();
@@ -48,21 +47,39 @@
         private void SetTheme(string themeName)
         {
             instance.Theme = themeName;
+//#if UNITY_EDITOR && UNITY_IOS
             LoadingScreen.Run();
+//#elif UNITY_ANDROID
+//            if (themeName == "Color")
+//            {
+//                Debug.Log("ClickColor");
+//                Application.OpenURL("https://play.google.com/store/apps/details?id=com.firecoals.magiccolor&hl=vi");
+//            }
+//            else
+//                LoadingScreen.Run();
             Debug.Log("<color=blue>Current Theme Name = " + themeName + "</color>");
+//#endif
         }
         /// <summary>
         /// Add event to all button under grid
         /// </summary>
         private void AddThemeEvent()
         {
-            var buttons = menuGrid.gameObject.GetComponentsInChildren<UIButton>();
+            var buttons = menuGrid.GetComponentsInChildren<UIButton>();
             foreach (var button in buttons)
             {
                 EventDelegate eventDelegate = new EventDelegate(this, "SetTheme");
                 eventDelegate.parameters[0].value = button.name;
                 EventDelegate.Set(button.onClick, eventDelegate);
 
+            }
+        }
+        private void OnEnable()
+        {
+            menuGrid = GameObject.FindGameObjectWithTag("Menu_Grid");
+            if (menuGrid)
+            {
+                AddThemeEvent();
             }
         }
 

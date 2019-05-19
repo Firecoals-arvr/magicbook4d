@@ -145,7 +145,7 @@ namespace Firecoals.Animal
         {
             foreach (GameObject go in imageTarget)
             {
-                if (go.transform.GetChild(0).gameObject.activeSelf)
+                if (go.transform.childCount > 0 && go.transform.GetChild(0).gameObject.activeSelf)
                 {
                     //Debug.LogWarning("ssssssssssss"+go.transform.GetComponentInParent<LoadModleAnimal>().tagInfo);
                     PlayInfo(go.transform.GetComponentInParent<LoadModleAnimal>().tagInfo);
