@@ -7,26 +7,19 @@ namespace Firecoals.Space
 {
     public class DragObject : MonoBehaviour
     {
+        private GameObject parentGameObject;
         LeanSelectable leanSelect;
         bool touchObject;
 
         private void Start()
         {
+            parentGameObject = gameObject.transform.parent.gameObject;
             leanSelect = gameObject.GetComponent<LeanSelectable>();
             leanSelect.OnSelect.AddListener((p) => SelectObject());
             leanSelect.OnDeselect.AddListener(() => DeSelectObject());
             leanSelect.OnSelectUp.AddListener((a) => SelectUp());
 
         }
-
-
-        void Update()
-        {
-            
-            
-
-        }
-
 
         public void SelectObject()
         {
@@ -51,7 +44,6 @@ namespace Firecoals.Space
         }
         private void OnTriggerEnter(Collider other)
         {
-
             Debug.Log("<color=green>other object: " + other.name + other.transform.position + "</color>");
             if (other.tag == "planetcontainer")
             {
@@ -68,12 +60,17 @@ namespace Firecoals.Space
                     var obj = gameObject.transform.parent.gameObject.transform;
                     temp.transform.parent = obj;
                     temp.transform.localPosition = Vector3.zero;
-                    temp.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                    //temp.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
                     transform.position = other.transform.position;
                     transform.parent = other.gameObject.transform;
                 }
-
             }
+        }
+        public void RestartGame()
+        {
+            transform.parent = parentGameObject.transform;
+            transform.position = parentGameObject.transform.position;
+            transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
         }
     }
 

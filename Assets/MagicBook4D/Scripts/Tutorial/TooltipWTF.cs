@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// Show tooltip UI
@@ -9,5 +11,11 @@ public class TooltipWTF : MonoBehaviour
     public void PhoneTextField()
     {
         UITooltip.Show(text);
+        StartCoroutine(HideTooltip());
+    }
+    IEnumerator HideTooltip()
+    {
+        yield return new WaitForSeconds(3f);
+        UITooltip.Hide();
     }
 }

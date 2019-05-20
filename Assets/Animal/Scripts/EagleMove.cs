@@ -2,160 +2,171 @@
 using System.Collections.Generic;
 using Firecoals.Animal;
 using UnityEngine;
-
-public class EagleMove : MonoBehaviour
+namespace Firecoals.Animal
 {
-    public bool CanEat { get; set; }
-    public float Jumpdistiance;
-    public string movingAnimName;
-    public string stopAnimName;
-    public bool Eat { get; set; }
-    public string IdleAnimName;
-    public bool IsJump;
-    public bool CanjumpWolf;
-    public float timedelay = 1;
-    public float SpeedJump = 2;
-    protected Animator animator;
-    public float MoveSpeed;
-    public Vector3 DestinationPosition { get; set; }
-    public bool IsMoving { get; set; }
-    public bool CanMove { get; set; }
-    protected bool IsRotating;
-    public float StopDistance;
-    public bool IsWolf;
-    public bool IsEgale;
-    protected RaycastHit hit;
-    public float ScaleAnimal { get; set; }
-    public GameObject Item { get; set; }
-    protected void Start()
+    public class EagleMove : MonoBehaviour
     {
-       Item = transform.parent.GetComponentInChildren<Item>().gameObject;
-        animator = GetComponent<Animator>();
-    }
-    protected void FixedUpdate()
-    {
-        if (Input.GetMouseButtonDown(0))//TODO && not hover UI
+        public bool CanEat { get; set; }
+        public float Jumpdistiance;
+        public string movingAnimName;
+        public string stopAnimName;
+        public bool Eat { get; set; }
+        public string IdleAnimName;
+        public bool IsJump;
+        public bool CanjumpWolf;
+        public float timedelay = 1;
+        public float SpeedJump = 2;
+        protected Animator animator;
+        public float MoveSpeed;
+        public Vector3 DestinationPosition { get; set; }
+        public bool IsMoving { get; set; }
+        public bool CanMove { get; set; }
+        protected bool IsRotating;
+        public float StopDistance;
+        public bool IsWolf;
+        public bool IsEgale;
+        protected RaycastHit hit;
+        public float ScaleAnimal { get; set; }
+        public GameObject Item { get; set; }
+        private GameObject effectTouch;
+        protected virtual void Start()
         {
-            CanEat = false;
-            Eat = false;
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit))
+            Item = transform.parent.GetComponentInChildren<Item>().gameObject;
+            animator = GetComponent<Animator>();
+            effectTouch = GameObject.Find("EffectTouch");
+        }
+        protected void FixedUpdate()
+        {
+            if (Input.GetMouseButtonDown(0))//TODO && not hover UI
             {
-                if (Vector3.Distance(transform.position, hit.point) > Jumpdistiance)
+                CanEat = false;
+                Eat = false;
+                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out hit))
                 {
-                    IsJump = true;
-                }
-                else
-                {
-                    IsJump = false;
-                }
-                if (hit.collider.gameObject)
-                {
-                    Debug.LogWarning("hit " + hit.collider.gameObject.name);
-                }
-                if (hit.collider.gameObject.layer == 9)
-                {
-                    DestinationPosition = hit.point;
-                    CanMove = true;
-                    IsMoving = true;
-                    Item.transform.position = DestinationPosition;
+                    if (Vector3.Distance(transform.position, hit.point) > Jumpdistiance)
+                    {
+                        IsJump = true;
+                    }
+                    else
+                    {
+                        IsJump = false;
+                    }
+                    if (hit.collider.gameObject)
+                    {
+                        Debug.LogWarning("hit " + hit.collider.gameObject.name);
+                    }
+                    if (hit.collider.gameObject.layer == 9)
+                    {
+                        DestinationPosition = hit.point;
+                        CanMove = true;
+                        IsMoving = true;
+                        Item.transform.position = DestinationPosition;
+                        effectTouch.transform.position = Item.transform.position;
+                        effectTouch.transform.GetChild(0).gameObject.SetActive(true);
+                        StartCoroutine(ResetEffect());
+                    }
                 }
             }
         }
-    }
-    protected void SmoothMove(Vector3 target, string moveAnimClipName, string stopAnimClipName, string idleAnimClipName)
-    {
-        IsRotating = false;
-        var targetDir = target - this.transform.position;
-        var angle = Quaternion.LookRotation(targetDir);
-        if (Item != null)
+        protected void SmoothMove(Vector3 target, string moveAnimClipName, string stopAnimClipName, string idleAnimClipName)
         {
-            Item.transform.rotation = angle;
-        }
-
-        if (IsRotating == false)
-        {
-            transform.rotation = Quaternion.Lerp(transform.rotation, angle, Time.deltaTime * 100.0f);
-        }
-        if (Quaternion.Angle(angle, transform.rotation) < 5)
-        {
-            if (Vector3.Distance(transform.position, target) > Jumpdistiance * ScaleAnimal && IsJump == true)
+            IsRotating = false;
+            var targetDir = target - this.transform.position;
+            var angle = Quaternion.LookRotation(targetDir);
+            if (Item != null)
             {
-                transform.position = Vector3.MoveTowards(transform.position, target, MoveSpeed * Time.deltaTime * ScaleAnimal);
-                animator.SetBool("IsWalk", true);
-                CanjumpWolf = false;
-                IsRotating = false;
+                Item.transform.rotation = angle;
+            }
+
+            if (IsRotating == false)
+            {
+                transform.rotation = Quaternion.Lerp(transform.rotation, angle, Time.deltaTime * 100.0f);
+            }
+            if (Quaternion.Angle(angle, transform.rotation) < 5)
+            {
+                if (Vector3.Distance(transform.position, target) > Jumpdistiance * ScaleAnimal && IsJump == true)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, target, MoveSpeed * Time.deltaTime * ScaleAnimal);
+                    animator.SetBool("IsWalk", true);
+                    CanjumpWolf = false;
+                    IsRotating = false;
+                }
+                else
+                {
+                    if (IsJump)
+                    {
+
+                        StartCoroutine(delayjump(target));
+                    }
+                    else
+                    {
+                        if (Vector3.Distance(transform.position, target) > StopDistance * ScaleAnimal && IsJump == false)
+                        {
+                            transform.position = Vector3.MoveTowards(transform.position, target, MoveSpeed * Time.deltaTime * ScaleAnimal);
+                            animator.SetBool("IsWalk", true);
+                            CanjumpWolf = false;
+                            IsRotating = false;
+                        }
+                    }
+
+
+                }
+
+
             }
             else
             {
-                if (IsJump)
-                {
-
-                    StartCoroutine(delayjump(target));
-                }
-                else
-                {
-                    if (Vector3.Distance(transform.position, target) > StopDistance * ScaleAnimal && IsJump == false)
-                    {
-                        transform.position = Vector3.MoveTowards(transform.position, target, MoveSpeed * Time.deltaTime * ScaleAnimal);
-                        animator.SetBool("IsWalk", true);
-                        CanjumpWolf = false;
-                        IsRotating = false;
-                    }
-                }
-
-
+                IsRotating = true;
             }
 
-
-        }
-        else
-        {
-            IsRotating = true;
-        }
-
-        if (Vector3.Distance(transform.position, target) < StopDistance * ScaleAnimal)
-        {
-            if (IsMoving)
+            if (Vector3.Distance(transform.position, target) < StopDistance * ScaleAnimal)
             {
+                if (IsMoving)
+                {
 
-                animator.SetBool("IsWalk", false);
-                IsMoving = false;
-                CanMove = false;
+                    animator.SetBool("IsWalk", false);
+                    IsMoving = false;
+                    CanMove = false;
+                }
+            }
+            else
+            {
+                IsMoving = true;
+                CanMove = true;
+            }
+
+        }
+
+        protected void Update()
+        {
+            if (CanMove)
+            {
+                ScaleAnimal = (float)this.transform.parent.transform.localScale.x;
+                SmoothMove(DestinationPosition, movingAnimName, stopAnimName, IdleAnimName);
             }
         }
-        else
+
+        IEnumerator delayjump(Vector3 target)
         {
-            IsMoving = true;
-            CanMove = true;
+
+
+            animator.SetBool("IsJump", true);
+            float speed = 0;
+            yield return new WaitForSeconds(timedelay);
+            speed = SpeedJump;
+            IsJump = false;
+            transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * speed * ScaleAnimal);
+            speed = 0;
+            animator.SetBool("IsJump", false);
+            animator.SetBool("IsWalk", false);
+            CanjumpWolf = true;
         }
-
-    }
-
-    protected void Update()
-    {
-        if (CanMove)
+        IEnumerator ResetEffect()
         {
-            ScaleAnimal = (float)this.transform.parent.transform.localScale.x;
-            SmoothMove(DestinationPosition, movingAnimName, stopAnimName, IdleAnimName);
+            yield return new WaitForSeconds(.6f);
+            effectTouch.transform.GetChild(0).gameObject.SetActive(false);
         }
     }
-
-    IEnumerator delayjump(Vector3 target)
-    {
-
-
-        animator.SetBool("IsJump", true);
-        float speed = 0;
-        yield return new WaitForSeconds(timedelay);
-        speed = SpeedJump;
-        IsJump = false;
-        transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * speed * ScaleAnimal);
-        speed = 0;
-        animator.SetBool("IsJump", false);
-        animator.SetBool("IsWalk", false);
-        CanjumpWolf = true;
-    }
-
 }

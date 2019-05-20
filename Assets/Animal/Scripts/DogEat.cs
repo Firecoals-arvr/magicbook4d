@@ -15,7 +15,7 @@ public class DogEat : DefaultController
     public bool caught = false;
     public Transform targetitemtransform;
     bool change;
-    void Update()
+    protected new void Update()
     {
         if (CanEat==false)
         {

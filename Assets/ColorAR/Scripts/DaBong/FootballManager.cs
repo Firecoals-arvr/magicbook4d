@@ -15,6 +15,7 @@ namespace Firecoals.Color
 		public GoalkeeperController goalkeeper;
 		public GameObject pointTrigger;
 		public LeanTouch leanTouch;
+        public UILabel score;
 
 		public float ballSpeed;
 
@@ -27,13 +28,15 @@ namespace Firecoals.Color
 		void Start()
 		{
 			BallReturn();
+            Goal.score = 0;
+            
 		}
 
 		// Update is called once per frame
 		void Update()
 		{
-
-		}
+            score.text = "Score: " + Goal.score;
+        }
 
 		void BallReturn()
 		{

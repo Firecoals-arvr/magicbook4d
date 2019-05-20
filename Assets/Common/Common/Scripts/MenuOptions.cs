@@ -17,9 +17,9 @@ public class MenuOptions : MonoBehaviour
     #region PRIVATE_MEMBERS
     CameraSettings m_CameraSettings;
     TrackableSettings m_TrackableSettings;
-    Toggle m_DeviceTrackerToggle, m_AutofocusToggle, m_FlashToggle;
-    Canvas m_OptionsMenuCanvas;
-    OptionsConfig m_OptionsConfig;
+    //Toggle m_DeviceTrackerToggle, m_AutofocusToggle, m_FlashToggle;
+    //Canvas m_OptionsMenuCanvas;
+    //OptionsConfig m_OptionsConfig;
     #endregion //PRIVATE_MEMBERS
 
     public bool IsDisplayed { get; private set; }
@@ -29,11 +29,11 @@ public class MenuOptions : MonoBehaviour
     {
         m_CameraSettings = FindObjectOfType<CameraSettings>();
         m_TrackableSettings = FindObjectOfType<TrackableSettings>();
-        m_OptionsConfig = FindObjectOfType<OptionsConfig>();
-        m_OptionsMenuCanvas = GetComponentInChildren<Canvas>(true);
-        m_DeviceTrackerToggle = FindUISelectableWithText<Toggle>("Tracker");
-        m_AutofocusToggle = FindUISelectableWithText<Toggle>("Autofocus");
-        m_FlashToggle = FindUISelectableWithText<Toggle>("Flash");
+        //m_OptionsConfig = FindObjectOfType<OptionsConfig>();
+        //m_OptionsMenuCanvas = GetComponentInChildren<Canvas>(true);
+        //m_DeviceTrackerToggle = FindUISelectableWithText<Toggle>("Tracker");
+        //m_AutofocusToggle = FindUISelectableWithText<Toggle>("Autofocus");
+        //m_FlashToggle = FindUISelectableWithText<Toggle>("Flash");
 
         var vuforia = VuforiaARController.Instance;
         vuforia.RegisterOnPauseCallback(OnPaused);
@@ -49,16 +49,16 @@ public class MenuOptions : MonoBehaviour
             m_CameraSettings.SwitchAutofocus(enable);
     }
 
-    public void ToggleTorch(bool enable)
-    {
-        if (m_FlashToggle && m_CameraSettings)
-        {
-            m_CameraSettings.SwitchFlashTorch(enable);
+    //public void ToggleTorch(bool enable)
+    //{
+    //    if (m_FlashToggle && m_CameraSettings)
+    //    {
+    //        m_CameraSettings.SwitchFlashTorch(enable);
 
-            // Update UI toggle status (ON/OFF) in case the flash switch failed
-            m_FlashToggle.isOn = m_CameraSettings.IsFlashTorchEnabled();
-        }
-    }
+    //        // Update UI toggle status (ON/OFF) in case the flash switch failed
+    //        m_FlashToggle.isOn = m_CameraSettings.IsFlashTorchEnabled();
+    //    }
+    //}
 
 
     public void ToggleExtendedTracking(bool enable)
@@ -73,17 +73,17 @@ public class MenuOptions : MonoBehaviour
             m_TrackableSettings.ActivateDataSet(datasetName);
     }
 
-    public void UpdateUI()
-    {
-        if (m_DeviceTrackerToggle && m_TrackableSettings)
-            m_DeviceTrackerToggle.isOn = m_TrackableSettings.IsDeviceTrackingEnabled();
+    //public void UpdateUI()
+    //{
+    //    if (m_DeviceTrackerToggle && m_TrackableSettings)
+    //        m_DeviceTrackerToggle.isOn = m_TrackableSettings.IsDeviceTrackingEnabled();
 
-        if (m_FlashToggle && m_CameraSettings)
-            m_FlashToggle.isOn = m_CameraSettings.IsFlashTorchEnabled();
+    //    if (m_FlashToggle && m_CameraSettings)
+    //        m_FlashToggle.isOn = m_CameraSettings.IsFlashTorchEnabled();
 
-        if (m_AutofocusToggle && m_CameraSettings)
-            m_AutofocusToggle.isOn = m_CameraSettings.IsAutofocusEnabled();
-    }
+    //    if (m_AutofocusToggle && m_CameraSettings)
+    //        m_AutofocusToggle.isOn = m_CameraSettings.IsAutofocusEnabled();
+    //}
 
     public void ResetDeviceTracker()
     {
@@ -128,25 +128,25 @@ public class MenuOptions : MonoBehaviour
     }
 
 
-    public void ShowOptionsMenu(bool show)
-    {
-        if (m_OptionsConfig && m_OptionsConfig.AnyOptionsEnabled())
-        {
-            if (show)
-            {
-                UpdateUI();
-                m_OptionsMenuCanvas.gameObject.SetActive(true);
-                m_OptionsMenuCanvas.enabled = true;
-                IsDisplayed = true;
-            }
-            else
-            {
-                m_OptionsMenuCanvas.gameObject.SetActive(false);
-                m_OptionsMenuCanvas.enabled = false;
-                IsDisplayed = false;
-            }
-        }
-    }
+    //public void ShowOptionsMenu(bool show)
+    //{
+    //    if (m_OptionsConfig && m_OptionsConfig.AnyOptionsEnabled())
+    //    {
+    //        if (show)
+    //        {
+    //            UpdateUI();
+    //            m_OptionsMenuCanvas.gameObject.SetActive(true);
+    //            m_OptionsMenuCanvas.enabled = true;
+    //            IsDisplayed = true;
+    //        }
+    //        else
+    //        {
+    //            m_OptionsMenuCanvas.gameObject.SetActive(false);
+    //            m_OptionsMenuCanvas.enabled = false;
+    //            IsDisplayed = false;
+    //        }
+    //    }
+    //}
 
     public void CycleGuideView()
     {
@@ -187,7 +187,7 @@ public class MenuOptions : MonoBehaviour
 
             // The flash torch is switched off by the OS automatically when app is paused.
             // On resume, update torch UI toggle to match torch status.
-            UpdateUI();
+            //UpdateUI();
         }
     }
     #endregion //PRIVATE_METHODS

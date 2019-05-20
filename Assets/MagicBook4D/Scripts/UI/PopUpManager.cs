@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
 public class PopupManager : MonoBehaviour
@@ -101,6 +102,11 @@ public class PopupManager : MonoBehaviour
         }
     }
 
+    internal static void PopUpDialog(string v1, string v2, DialogType yesNoDialog, Func<object> p)
+    {
+        throw new NotImplementedException();
+    }
+
     /// <summary>
     /// This is the method we'll call to show the dialog. It takes a string for title, one for text,
     /// a dialog type (Ok only or Yes/No) and 2 callbacks, one for OK/Yes and the other one for NO
@@ -201,6 +207,4 @@ public class PopupManager : MonoBehaviour
         yesNoDialogObject.SetActive(false);
         showingDialog = false;
     }
-
-
 }

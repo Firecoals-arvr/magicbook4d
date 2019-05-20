@@ -451,7 +451,7 @@ namespace Lean.Touch
 			}
 			else
 			{
-				//Debug.LogError("Failed to RaycastGui because your scene doesn't have an event system! To add one, go to: GameObject/UI/EventSystem");
+				Debug.LogError("Failed to RaycastGui because your scene doesn't have an event system! To add one, go to: GameObject/UI/EventSystem");
 			}
 
 			return tempRaycastResults;

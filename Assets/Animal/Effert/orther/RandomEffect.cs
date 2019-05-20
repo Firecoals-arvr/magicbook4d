@@ -9,7 +9,6 @@ public class RandomEffect : SingletonTien<RandomEffect>
     public IEnumerator RandomizeEffect(float time)
     {
         int a = Random.Range(0, effect.Length);
-        Debug.LogWarning(a.ToString());
         effect[a].SetActive(true);
         yield return new WaitForSeconds(time);
         effect[a].SetActive(false);

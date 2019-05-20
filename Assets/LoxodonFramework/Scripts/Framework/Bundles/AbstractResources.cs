@@ -503,6 +503,7 @@ namespace Loxodon.Framework.Bundles
                 var asset = this.GetCache<T>(path);
                 if (asset != null)
                 {
+                    Debug.Log("<color=orange>load from cache " + asset.name + "</color>");
                     results.Add(asset);
                     continue;
                 }

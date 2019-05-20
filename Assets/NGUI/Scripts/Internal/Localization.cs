@@ -5,8 +5,8 @@
 
 using UnityEngine;
 using System.Collections.Generic;
-using Firecoals.MagicBook;
 using UnityEngine.SceneManagement;
+using Firecoals.MagicBook;
 
 /// <summary>
 /// Localization manager is able to parse localization information from text assets.
@@ -203,7 +203,6 @@ static public class Localization
     //    {
     //        return "Color";
     //    }
-
     //    return null;
     //}
 

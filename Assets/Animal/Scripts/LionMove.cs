@@ -24,23 +24,26 @@ namespace Firecoals.Animal
         protected RaycastHit hit;
         public float ScaleAnimal { get; set; }
         public GameObject Item { get; set; }
+        private GameObject effectTouch;
         protected void Start()
         {
             Item = transform.parent.GetComponentInChildren<Item>().gameObject;
             animator = GetComponent<Animator>();
+            effectTouch = GameObject.Find("EffectTouch");
         }
         protected void FixedUpdate()
         {
+
             if (Input.GetMouseButtonDown(0))//TODO && not hover UI
             {
-                CanEat = false;
+                CanEat = false; 
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                if (Physics.Raycast(ray, out hit))
+                if (Physics.Raycast(ray, out var hit) && !UICamera.isOverUI)
                 {
                     if (Vector3.Distance(transform.position, hit.point) > Jumpdistiance* ScaleAnimal)
                     {
                         IsJump = true;
+                        
                     }
                     else
                     {
@@ -66,6 +69,9 @@ namespace Firecoals.Animal
             if (Item != null)
             {
                 Item.transform.position = hit.point;
+                effectTouch.transform.position = Item.transform.position;
+                effectTouch.transform.GetChild(0).gameObject.SetActive(true);
+                StartCoroutine(ResetEffect());
             }
 
         }
@@ -83,7 +89,7 @@ namespace Firecoals.Animal
             {
                 transform.rotation = Quaternion.Lerp(transform.rotation, angle, Time.deltaTime * 100.0f);
             }
-            Debug.Log("IsJump" + IsJump);
+           // Debug.Log("IsJump" + IsJump);
             //Debug.DrawLine(transform.position, target, Color.red, 30, false);
             if (Quaternion.Angle(angle, transform.rotation) < 5)
             {
@@ -160,6 +166,11 @@ namespace Firecoals.Animal
             speed = 0;
             animator.SetBool("IsJump", false);
             animator.SetBool("IsWalk", false);
+        }
+        IEnumerator ResetEffect()
+        {
+            yield return new WaitForSeconds(.6f);
+            effectTouch.transform.GetChild(0).gameObject.SetActive(false);
         }
 
     }

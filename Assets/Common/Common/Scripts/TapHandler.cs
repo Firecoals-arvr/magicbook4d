@@ -105,7 +105,7 @@ public class TapHandler : MonoBehaviour
     {
         if (m_MenuOptions && !m_MenuOptions.IsDisplayed)
         {
-            m_MenuOptions.ShowOptionsMenu(true);
+            //m_MenuOptions.ShowOptionsMenu(true);
         }
     }
     #endregion // PROTECTED_METHODS

@@ -7,11 +7,6 @@ namespace Firecoals.Space
     public class Showinfoshuttle : MonoBehaviour
     {
 
-        // Use this for initialization
-        void Start()
-        {
-
-        }
         public GameObject infor1;
         public GameObject infor2;
         public GameObject infor3;

@@ -15,6 +15,7 @@ namespace Firecoals.Purchasing
             //PlayerPrefs.DeleteKey("Project_A");
             //PlayerPrefs.DeleteKey("Project_B");
             //PlayerPrefs.DeleteKey("Project_C");
+            //StartCoroutine(ActiveManager.AssetBundleVersion());
         }
 
         private void Initial()
@@ -56,16 +57,19 @@ namespace Firecoals.Purchasing
 
         private void OnPlayerServerActived(string projectId)
         {
-            notifyPhonePage.text = "Khôi phục thành công " + ActiveManager.ProjectIdToName(projectId);
+            //notifyPhonePage.text = "Khôi phục thành công " + ActiveManager.ProjectIdToName(projectId);
+            PopupManager.PopUpDialog("Chúc mừng", "Khôi phục thành công " + ActiveManager.ProjectIdToName(projectId));
             NGUITools.SetActive(spinning.gameObject, false);
         }
 
         private void OnPlayerServerNotActived()
         {
             NGUITools.SetActive(spinning.gameObject, false);
-            notifyCodePage.text = "Khôi phục thất bại vui lòng kiểm tra lại số điện thoại";
+            //notifyCodePage.text = "Khôi phục thất bại vui lòng kiểm tra lại số điện thoại";
             //DialogManager.instance.HideLoadingBar();
             //DialogManager.PopUpDialog(Localization.Get("FailDialogTitle"), Localization.Get("RestoreFail"), DialogManager.DialogType.OkDialog, null, null);
+            PopupManager.PopUpDialog(string.Empty,
+                    "Khôi phục thất bại vui lòng kiểm tra lại số điện thoại", "OK");
         }
 
         private void OnRegisterLicenseFailure(string msg)
@@ -84,7 +88,7 @@ namespace Firecoals.Purchasing
                 NGUITools.SetActive(spinning.gameObject, false);
                 //Ma da duoc su dung
                 PopupManager.PopUpDialog(string.Empty,
-                    "Mã này  đã được kích hoạt, nếu bạn đã kích hoạt vui lòng khôi phục lại");
+                    "Mã này  đã được kích hoạt, nếu bạn đã kích hoạt vui lòng khôi phục lại", "OK");
             }
             else
             {
@@ -101,7 +105,7 @@ namespace Firecoals.Purchasing
             //ActiveManager.SaveActiveState();
             NGUITools.SetActive(spinning.gameObject, false);
             notifyCodePage.text = "";
-            PopupManager.PopUpDialog("Thành công", "Kích hoạt thành công " + ActiveManager.ProjectIdToName(projectId));
+            PopupManager.PopUpDialog("Thành công", "Kích hoạt thành công " + ActiveManager.ProjectIdToName(projectId), "OK");
         }
 
 
@@ -110,7 +114,7 @@ namespace Firecoals.Purchasing
         {
             //DialogManager.instance.HideLoadingBar();
             NGUITools.SetActive(spinning.gameObject, false);
-            PopupManager.PopUpDialog("Lỗi", "Không có kết nối mạng, vui lòng thử lại");
+            PopupManager.PopUpDialog("Lỗi", "Không có kết nối mạng, vui lòng thử lại", "OK");
             //DialogManager.PopUpDialog(Localization.Get("FailDialogTitle"), Localization.Get("NetworkError"), DialogManager.DialogType.OkDialog, null, null);
 
         }
@@ -128,13 +132,16 @@ namespace Firecoals.Purchasing
         {
             if (!ActivationManager.instance.IsValidPhone())
             {
-                PopupManager.PopUpDialog("Lỗi", "Số điện thoại bạn nhập không đúng, vui lòng thử lại");
+                Debug.LogError("Hien Popup");
+                PopupManager.PopUpDialog("Lỗi", "Số điện thoại bạn nhập không đúng, vui lòng thử lại", "OK");
             }
             else
             {
+                Debug.LogError("Hien Spin");
                 //DialogManager.PopUpDialog(string.Empty, string.Empty, DialogManager.DialogType.LoadingBar);
                 NGUITools.SetActive(spinning.gameObject, true);
                 CM_JobQueue.Make().Enqueue(ActiveManager.CheckRestore(ActivationManager.instance.GetPhoneNumber(), "A"))
+
                     .Enqueue(ActiveManager.CheckRestore(ActivationManager.instance.GetPhoneNumber(), "B"))
                     .Enqueue(ActiveManager.CheckRestore(ActivationManager.instance.GetPhoneNumber(), "C")).Start()
                     .NotifyOnQueueStarted(
@@ -153,7 +160,7 @@ namespace Firecoals.Purchasing
             else
             {
                 //DialogManager.PopUpDialog(Localization.Get("FailDialogTitle"), Localization.Get("NetworkError"), DialogManager.DialogType.OkDialog, null, null);
-                PopupManager.PopUpDialog("Lỗi", "Không có kết nối mạng, vui lòng thử lại");
+                PopupManager.PopUpDialog("Lỗi", "Không có kết nối mạng, vui lòng thử lại", "OK");
             }
         }
 
@@ -176,13 +183,13 @@ namespace Firecoals.Purchasing
                 else
                 {
                     //DialogManager.PopUpDialog(Localization.Get("FailDialogTitle"), Localization.Get("Invalid"), DialogManager.DialogType.OkDialog, null, null);
-                    PopupManager.PopUpDialog("Lỗi", "Mã code bạn vừa nhập không hợp lệ");
+                    PopupManager.PopUpDialog("Lỗi", "Mã code bạn vừa nhập không hợp lệ", "OK");
                 }
             }
             else
             {
                 //DialogManager.PopUpDialog(Localization.Get("FailDialogTitle"), Localization.Get("NetworkError"), DialogManager.DialogType.OkDialog, null, null);
-                PopupManager.PopUpDialog("Lỗi", "Không có kết nối mạng, vui lòng thử lại");
+                PopupManager.PopUpDialog("Lỗi", "Không có kết nối mạng, vui lòng thử lại", "OK");
             }
         }
 

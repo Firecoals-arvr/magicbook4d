@@ -16,8 +16,9 @@ namespace Firecoals.Space
         // Update is called once per frame
         void Update()
         {
-            transform.localRotation = Camera.main.transform.localRotation * qua;
-            //transform.LookAt(Camera.main.transform);
+
+            Vector3 vt = new Vector3((2 * transform.position.x - Camera.main.transform.position.x), 0.0f, (2 * transform.position.z - Camera.main.transform.position.z));
+            transform.LookAt(vt);
         }
     }
 }

@@ -9,11 +9,6 @@ namespace Firecoals.Space
         public GameObject center;
         public float speed;
         public static Vector3 defaultvt3;
-        // Use this for initialization
-        void Start()
-        {
-            
-        }
 
         // Update is called once per frame
         void Update()

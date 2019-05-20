@@ -2,20 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Firecoals.Augmentation;
+using Firecoals.AssetBundles.Sound;
+using Firecoals.MagicBook;
 
 namespace Firecoals.Color
 {
 	public class CityTrackableHandler : DefaultTrackableEventHandler
 	{
-		AssetHandler handler;
+		AssetLoader _assetLoader;
 		public GameObject renderCam;
-
-		// Start is called before the first frame update
-		protected override void Start()
+        private LoadSoundBundlesColor _loadSoundBundles;
+        public string tagSound;
+        bool playSound;
+        // Start is called before the first frame update
+        protected override void Start()
 		{
 			base.Start();
-			handler = new AssetHandler(mTrackableBehaviour.transform);
-		}
+            _assetLoader = FindObjectOfType<AssetLoader>();
+            if (ActiveManager.IsActiveOfflineOk(ActiveManager.NameToProjectID(ThemeController.instance.Theme))
+                || mTrackableBehaviour.TrackableName.Equals("06MAYBAY_OK"))
+            {
+                _assetLoader.LoadGameObjectAsync("ColorAR/Prefabs/ThanhPho/ThanhPho_Group.prefab", mTrackableBehaviour.transform);
+            }
+            playSound = true;
+        }
 
 		protected override void OnDestroy()
 		{
@@ -24,30 +34,41 @@ namespace Firecoals.Color
 
 		protected override void OnTrackingFound()
 		{
-			GameObject go = handler.CreateUnique("color/model/thanhpho", "Assets/ColorAR/Prefabs/ThanhPho/ThanhPho_Group.prefab");
-			if (go)
-			{
-				GameObject city = Instantiate(go, mTrackableBehaviour.transform);
-				List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
-				city.GetComponentsInChildren<RC_Get_Texture>(true, lst);
-				foreach (var child in lst)
-				{
-					child.RenderCamera = renderCam.GetComponent<Camera>();
-				}
-			}
-			base.OnTrackingFound();
+            _loadSoundBundles = GameObject.FindObjectOfType<LoadSoundBundlesColor>();
+            EnableObject();
+            if (playSound)
+            {
+                _loadSoundBundles.PlaySound(tagSound);
+                playSound = false;
+            }
+            base.OnTrackingFound();
 		}
 
 		protected override void OnTrackingLost()
 		{
-			handler?.ClearAll();
-			handler?.Content.ClearAll();
 			foreach (Transform trans in mTrackableBehaviour.transform)
 			{
-				Destroy(trans.gameObject);
-			}
-			base.OnTrackingLost();
+                trans.gameObject.SetActive(false);
+                trans.GetComponentInChildren<Animation>().Stop();
+            }
+            playSound = true;
+            FirecoalsSoundManager.StopAll();
+            base.OnTrackingLost();
 		}
-	}
+        void EnableObject()
+        {
+            foreach (Transform trans in mTrackableBehaviour.transform)
+            {
+                trans.gameObject.SetActive(true);
+                trans.GetComponentInChildren<Animation>().Play();
+                List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
+                trans.GetComponentsInChildren<RC_Get_Texture>(true, lst);
+                foreach (var child in lst)
+                {
+                    child.RenderCamera = renderCam.GetComponent<Camera>();
+                }
+            }
+        }
+    }
 }
 

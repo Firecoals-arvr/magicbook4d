@@ -37,7 +37,7 @@ namespace Firecoals.Space
                 earth.GetComponent<SelfRotate>().enabled = false;
                 // chạy anim
                 anim.SetTrigger("SetEclipse");
-                StartCoroutine(WaitASecond("EclipseOpen", new Quaternion(0, 0, 0,0),9f));
+                StartCoroutine(WaitASecond("EclipseOpen", new Quaternion(0, 0, 0, 0), 9f));
 
             }
             //nếu ấn lại vào nút nhật thực lần 2
@@ -52,7 +52,7 @@ namespace Firecoals.Space
                 earth.GetComponent<Autorun>().enabled = true;
                 earth.GetComponent<SelfRotate>().enabled = true;
             }
-            
+
             isEclipse = !isEclipse;
         }
         // check nguyệt thực giống vs nhật thực
@@ -68,7 +68,7 @@ namespace Firecoals.Space
                 earth.GetComponent<SelfRotate>().enabled = false;
                 anim.SetTrigger("SetLunar");
                 // đợi chạy hết anim setlunar rồi chạy anim tiếp theo
-                StartCoroutine(WaitASecond("LunarOpen", new Quaternion(0, 180, 0,0),9.2f));
+                StartCoroutine(WaitASecond("LunarOpen", new Quaternion(0, 180, 0, 0), 9.2f));
 
             }
             else
@@ -82,7 +82,7 @@ namespace Firecoals.Space
             }
             isLunar = !isLunar;
         }
-        IEnumerator WaitASecond(string name, Quaternion a,float time)
+        IEnumerator WaitASecond(string name, Quaternion a, float time)
         {
             yield return new WaitForSeconds(time);
             earth.transform.localRotation = a;

@@ -6,10 +6,19 @@ namespace Firecoals.Color
 {
 	public class GirlActionController : MonoBehaviour
 	{
-		public void PlayBall()
+        public AudioClip audio;
+        AudioSource audioSource;
+        public void PlayBall()
 		{
 			this.GetComponent<Animator>().SetTrigger("isPlay");
-		}
-	}
+            PlayMusic();
+
+        }
+        public void PlayMusic()
+        {
+            audioSource = GetComponent<AudioSource>();
+            audioSource.PlayOneShot(audio);
+        }
+    }
 }
 

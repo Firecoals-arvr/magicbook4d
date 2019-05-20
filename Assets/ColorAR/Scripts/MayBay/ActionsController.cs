@@ -10,7 +10,8 @@ namespace Firecoals.Color
 	public class ActionsController : MonoBehaviour
 	{
 		public GameObject propeller;
-
+        public new AudioClip audio;
+        AudioSource audioSource;
 		// Start is called before the first frame update
 		void Start()
 		{
@@ -27,8 +28,10 @@ namespace Firecoals.Color
 		public void CreateAnimation()
 		{
 			Debug.Log("May bay was clicked!");
+            gameObject.GetComponent<BoxCollider>().enabled = false;
 			StartCoroutine(RotateAirplane());
-			this.GetComponent<Animator>().SetTrigger("isWave");
+            PlayMusic();
+            this.GetComponent<Animator>().SetTrigger("isWave");
 		}
 
 		public void RotatePropeller()
@@ -36,24 +39,8 @@ namespace Firecoals.Color
 			propeller.transform.Rotate(new Vector3(0, 0, 500) * Time.deltaTime, UnityEngine.Space.Self);
 		}
 
-		//private void HideObjectInfo()
-		//{
-		//	if (Input.GetMouseButtonDown(0))
-		//	{
-		//		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		//		if (Physics.Raycast(ray, out RaycastHit hit))
-		//		{
-		//			if (hit.transform.tag == "Airplane")
-		//			{
-		//				CreateAnimation();
-		//			}
-		//		}
-		//	}
-		//}
-
 		public IEnumerator RotateAirplane()
 		{
-			//this.gameObject.GetComponent<BoxCollider>().enabled = false;
 			Debug.Log("May bay was clicked!");
 			float duration = 3f;
 
@@ -65,9 +52,14 @@ namespace Firecoals.Color
 				this.transform.RotateAround(new Vector3(0, 0.1f, 0), Vector3.right, 120 * Time.deltaTime);
 				yield return null;
 			}
-			//this.gameObject.GetComponent<BoxCollider>().enabled = true;
-
-		}
+            yield return new WaitForSeconds(3f);
+            gameObject.GetComponent<BoxCollider>().enabled = true;
+        }
+        public void PlayMusic()
+        {
+            audioSource = GetComponent<AudioSource>();
+            audioSource.PlayOneShot(audio);
+        }
 
 	}
 }

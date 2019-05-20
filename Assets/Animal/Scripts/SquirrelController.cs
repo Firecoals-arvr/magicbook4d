@@ -7,7 +7,7 @@ public class SquirrelController : AnimalController
 {
 
     public bool Jump { get; set; }
-    public int DemJump { get; set; }
+  //  public int DemJump { get; set; }
     public GameObject Item1;
     public GameObject Item2;
     public string movingAnimName;
@@ -24,7 +24,7 @@ public class SquirrelController : AnimalController
     {
         if (Input.GetMouseButtonDown(0))//TODO && not hover UI
         {
-            DemJump = 0;
+        //    DemJump = 0;
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out var hit))
             {

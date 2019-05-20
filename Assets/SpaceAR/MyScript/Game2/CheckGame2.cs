@@ -17,7 +17,6 @@ namespace Firecoals.Space
         }
         protected override void OnTrackingFound()
         {
-
             base.OnTrackingFound();
             NGUITools.SetActive(panelGameObject2, true);
         }

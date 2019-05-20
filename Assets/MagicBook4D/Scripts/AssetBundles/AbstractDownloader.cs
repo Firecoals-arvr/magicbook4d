@@ -181,7 +181,11 @@ namespace Firecoals.AssetBundles
                 promise.SetException(e);
             }
         }
-
+        /// <summary>
+        /// Get all download list in manifest
+        /// </summary>
+        /// <param name="manifest"></param>
+        /// <returns></returns>
         public IProgressResult<float, List<BundleInfo>> GetDownloadList(BundleManifest manifest)
         {
             ProgressResult<float, List<BundleInfo>> result = new ProgressResult<float, List<BundleInfo>>();
@@ -211,6 +215,42 @@ namespace Firecoals.AssetBundles
                 downloads.Add(info);
             }
             promise.SetResult(downloads);
+        }
+        /// <summary>
+        /// Get custom download
+        /// </summary>
+        /// <param name="manifest"></param>
+        /// <param name="bundleNames"></param>
+        /// <returns></returns>
+        public IProgressResult<float, List<BundleInfo>> GetDownloadList(BundleManifest manifest, string[] bundleNames)
+        {
+            ProgressResult<float, List<BundleInfo>> result = new ProgressResult<float, List<BundleInfo>>();
+            Executors.RunOnCoroutine(ChooseDownloadList(result, manifest, bundleNames));
+            return result;
+        }
+        protected virtual IEnumerator ChooseDownloadList(IProgressPromise<float, List<BundleInfo>> promise,
+            BundleManifest manifest, string[] bundleNames)
+        {
+            List<BundleInfo> downloadInfos = new List<BundleInfo>();
+            BundleInfo[] bundleInfos = manifest.GetBundleInfos(bundleNames);
+            float last = Time.realtimeSinceStartup;
+            int length = bundleInfos.Length;
+
+            for (int i = 0; i < bundleInfos.Length; i++)
+            {
+                BundleInfo info = bundleInfos[i];
+                if (Time.realtimeSinceStartup - last > 0.15f)
+                {
+                    yield return null;
+                    last = Time.realtimeSinceStartup;
+                }
+                promise.UpdateProgress(i + 1 / (float)length);
+                if (BundleUtil.Exists(info))
+                    continue;
+
+                downloadInfos.Add(info);
+            }
+            promise.SetResult(downloadInfos);
         }
 
         public IProgressResult<Progress, bool> DownloadBundles(List<BundleInfo> bundles)

@@ -17,9 +17,16 @@ namespace Firecoals.Animal
         public Vector3 inpos;
         public Transform feet;
         public bool caught = false;
+
+        public float ScaleAnimal { get; set; }
+        protected override void Start()
+        {
+            ScaleAnimal = (float)this.transform.parent.transform.localScale.x*5;
+            base.Start();
+        }
         protected new void Update()
         {
-             Debug.Log("CanEat:" +CanEat);
+            Debug.Log("CanEat:" + CanEat);
 
             if (CanEat == false)
             {
@@ -27,7 +34,6 @@ namespace Firecoals.Animal
                 {
                     ItemRender.active = true;
                 }
-
                 transform.parent = Item.transform;
                 if (CanMove == false)
                 {
@@ -43,7 +49,7 @@ namespace Firecoals.Animal
 
             if (!Eat)
             {
-                transform.localPosition = new Vector3(-8, 0, -100);
+                transform.localPosition = new Vector3(-8, 0, -100) * ScaleAnimal;
                 transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             }
             else
@@ -63,8 +69,8 @@ namespace Firecoals.Animal
 
             if (coll.gameObject.tag == "Player")
             {
-              Eat = true;
-              CanEat = true;
+                Eat = true;
+                CanEat = true;
                 Debug.Log("catched");
                 transform.parent = coll.gameObject.transform;
                 caught = true;
@@ -84,7 +90,7 @@ namespace Firecoals.Animal
             yield return new WaitForSeconds(0.5f);
             if (ItemRender != null)
             {
-              //  ItemRender.active = false;
+                //  ItemRender.active = false;
             }
 
         }

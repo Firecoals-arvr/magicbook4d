@@ -2,20 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Firecoals.Augmentation;
+using Firecoals.MagicBook;
 
 namespace Firecoals.Color
 {
 	public class BeachTrackableHandler : DefaultTrackableEventHandler
 	{
-		AssetHandler handler;
+		AssetLoader _assetLoader;
 		public GameObject renderCam;
 
 		// Start is called before the first frame update
 		protected override void Start()
 		{
 			base.Start();
-			handler = new AssetHandler(mTrackableBehaviour.transform);
-		}
+            _assetLoader = FindObjectOfType<AssetLoader>();
+            if (ActiveManager.IsActiveOfflineOk(ActiveManager.NameToProjectID(ThemeController.instance.Theme))
+                || mTrackableBehaviour.TrackableName.Equals("06MAYBAY_OK"))
+            {
+                _assetLoader.LoadGameObjectAsync("ColorAR/Prefabs/TamBien/TamBien_Group.prefab", mTrackableBehaviour.transform);
+            }
+        }
 
 		protected override void OnDestroy()
 		{
@@ -24,30 +30,33 @@ namespace Firecoals.Color
 
 		protected override void OnTrackingFound()
 		{
-			//GameObject go = handler.CreateUnique("color/model/tambien", "Assets/ColorAR/Prefabs/TamBien/TamBien_Group.prefab");
-			//if (go)
-			//{
-			//	GameObject beach = Instantiate(go, mTrackableBehaviour.transform);
-			//	List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
-			//	beach.GetComponentsInChildren<RC_Get_Texture>(true, lst);
-			//	foreach (var child in lst)
-			//	{
-			//		child.RenderCamera = renderCam.GetComponent<Camera>();
-			//	}
-			//}
-			base.OnTrackingFound();
+            EnableObject();
+            base.OnTrackingFound();
 		}
 
 		protected override void OnTrackingLost()
 		{
-			//handler?.ClearAll();
-			//handler?.Content.ClearAll();
-			//foreach (Transform trans in mTrackableBehaviour.transform)
-			//{
-			//	Destroy(trans.gameObject);
-			//}
-			base.OnTrackingLost();
+            foreach (Transform trans in mTrackableBehaviour.transform)
+            {
+                trans.gameObject.SetActive(false);
+                trans.GetComponentInChildren<Animation>().Stop();
+            }
+            base.OnTrackingLost();
 		}
-	}
+        void EnableObject()
+        {
+            foreach (Transform trans in mTrackableBehaviour.transform)
+            {
+                trans.gameObject.SetActive(true);
+                trans.GetComponentInChildren<Animation>().Play();
+                List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
+                trans.GetComponentsInChildren<RC_Get_Texture>(true, lst);
+                foreach (var child in lst)
+                {
+                    child.RenderCamera = renderCam.GetComponent<Camera>();
+                }
+            }
+        }
+    }
 }
 

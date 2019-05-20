@@ -402,7 +402,7 @@ public class EventDelegate
 
 				if (mMethod == null)
 				{
-					//Debug.LogError("Could not find method '" + mMethodName + "' on " + mTarget.GetType(), mTarget);
+					Debug.LogError("Could not find method '" + mMethodName + "' on " + mTarget.GetType(), mTarget);
 					return;
 				}
 

@@ -4,6 +4,7 @@ using Loxodon.Framework.Bundles;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Firecoals.SceneTransition;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -58,27 +59,31 @@ namespace Firecoals.AssetBundles
             downloading = true;
             try
             {
+                //Download manifest
                 IProgressResult<Progress, BundleManifest> manifestResult = _downloader.DownloadManifest(BundleSetting.ManifestFilename);
 
                 yield return manifestResult.WaitForDone();
-
                 if (manifestResult.Exception != null)
                 {
                     Debug.LogFormat("Downloads BundleManifest failure.Error:{0}", manifestResult.Exception);
+                    BundleUtil.ClearStorableDirectory();
                     PopupManager.PopUpDialog("[[9C0002]Error[-]]", "Downloads data info failure. Error:{0}" +
-                        manifestResult.Exception, default,default, default, PopupManager.DialogType.OkDialog,
-                        (() => SceneManager.LoadScene("Menu")));
+                        manifestResult.Exception, "Menu", default, default, PopupManager.DialogType.OkDialog,
+                        (() => SceneLoader.LoadScene("Menu")));
                     yield break;
                 }
 
                 BundleManifest manifest = manifestResult.Result;
-                /*TODO if manifest BundleInfo in the cloud != manifest BundleInfo in the local
-                  Clear Cache and and download again
-                  else if Storable directory if empty download
-                  else preload and load the scene
-                 */
 
-                IProgressResult<float, List<BundleInfo>> bundlesResult = _downloader.GetDownloadList(manifest);
+                IProgressResult<float, List<BundleInfo>> bundlesResult = null;
+                if (ActiveManager.IsActiveOfflineOk(ActiveManager.NameToProjectID(ThemeController.instance.Theme)))
+                {
+                    bundlesResult = _downloader.GetDownloadList(manifest);
+                }
+                else
+                {
+                    bundlesResult = _downloader.GetDownloadList(manifest, GetFreeBundleNames());
+                }
                 yield return bundlesResult.WaitForDone();
 
                 List<BundleInfo> bundles = bundlesResult.Result;
@@ -86,21 +91,25 @@ namespace Firecoals.AssetBundles
                 if (bundles == null || bundles.Count <= 0)
                 {
                     Debug.LogFormat("Please clear cache and remove StreamingAssets,try again.");
-                    PopupManager.PopUpDialog("[[9C0002]Error[-]]", "You need to clear cache to download the data, press OK to continue",default,default,default,
+                    PopupManager.PopUpDialog("[[9C0002]Error[-]]", "You need to clear cache to download the data, press OK to continue", default, "OK", "Hủy bỏ",
                         PopupManager.DialogType.YesNoDialog, () =>
                         {
                             var dlManager = GameObject.FindObjectOfType<DownLoadManager>();
-                            dlManager.RetryDownload();
-                        }, () => SceneManager.LoadScene("Menu"));
+                            dlManager.ClearCacheAndRetry();
+                        }, () => SceneLoader.LoadScene("Menu"));
                     yield break;
                 }
 
                 IProgressResult<Progress, bool> downloadResult = _downloader.DownloadBundles(bundles);
+
                 downloadResult.Callbackable().OnProgressCallback(p =>
                 {
+
                     Debug.LogFormat("Downloading {0:F2}KB/{1:F2}KB {2:F3}KB/S", p.GetCompletedSize(UNIT.KB), p.GetTotalSize(UNIT.KB), p.GetSpeed(UNIT.KB));
                     var percent = p.GetCompletedSize(UNIT.KB) / p.GetTotalSize(UNIT.KB);
+
                     slider.value = percent;
+                    slider.transform.GetChild(2).gameObject.GetComponent<UILabel>().text = "Các bé dưới 5 tuổi khi sử dụng ứng dụng cần có sự giám sát của phụ huynh";
                     //var label =  slider.transform.Find("displaytext").gameObject.GetComponent<UILabel>();
                     //label.text = p.GetCompletedSize(UNIT.KB).ToString()+"/"+ p.GetTotalSize(UNIT.KB).ToString();
 
@@ -115,28 +124,28 @@ namespace Firecoals.AssetBundles
                 if (downloadResult.Exception != null)
                 {
                     Debug.LogFormat("Downloads AssetBundle failure.Error:{0}", downloadResult.Exception);
-                    PopupManager.PopUpDialog("[[9C0002]Error[-]]", "Downloads Data failure. Error",default,default,default,
+                    BundleUtil.ClearStorableDirectory();
+                    PopupManager.PopUpDialog("[[9C0002]Error[-]]", "Downloads Data failure. Error" + downloadResult.Exception, default, "Thử lại", "Menu",
                         PopupManager.DialogType.YesNoDialog, () =>
                         {
                             var dlManager = GameObject.FindObjectOfType<DownLoadManager>();
-                            dlManager.RetryDownload();
-                        }, () => SceneManager.LoadScene("Menu"));
+                            dlManager.ClearCacheAndRetry();
+                        }, () => SceneLoader.LoadScene("Menu"));
                     yield break;
                 }
 
                 if (downloadResult.IsDone)
                 {
-                    PlayerPrefs.SetString("Downloaded" + ThemeController.instance.Theme, "DONE");
-                    Debug.LogWarning("DONE download");
+                    //PlayerPrefs.SetString("Downloaded" + ThemeController.instance.Theme, "DONE");
+                    //Debug.LogWarning("DONE download");
                     var dlManager = GameObject.FindObjectOfType<DownLoadManager>();
                     dlManager.PreLoad();
                 }
 
                 if (downloadResult.IsCancelled)
                 {
-                    
-                    BundleUtil.ClearStorableDirectory();
-                    PlayerPrefs.DeleteKey("Downloaded" + ThemeController.instance.Theme);
+
+                    //BundleUtil.ClearStorableDirectory();
                     Debug.LogWarning("Cancelled download");
                 }
 
@@ -157,26 +166,63 @@ namespace Firecoals.AssetBundles
                 downloading = false;
             }
         }
+        /// <summary>
+        /// Get bundle names to be downloaded
+        /// In Firecoals policy
+        /// animals free: lion, elephant, gorilla
+        /// space free: solar system, sun, mercury
+        /// color free plane
+        /// </summary>
+        /// <returns></returns>
+        public static string[] GetFreeBundleNames()
+        {
+            string[] bundleNames = null;
+            switch (ThemeController.instance.Theme)
+            {
+                case "Animal":
+                    bundleNames = new[] { "animals/model/lion" ,
+                        "animals/model/elephant" ,
+                        "animals/model/gorilla",
+                        "animals/info/en",
+                        "animals/info/jp",
+                        "animals/info/vn",
+                        "animals/name/cn",
+                        "animals/name/en",
+                        "animals/name/vn",
+                        "animals/name/jp",
+                        "animals/noise" };
+                    break;
+                case "Space":
+                    bundleNames = new[] { "space/models/solarsystem",
+                            "space/models/sun",
+                            "space/models/mercury",
+                            "space/sound/name/en",
+                            "space/sound/name/vn",
+                            "space/sound/info/vn",
+                            "space/sound/info/en",
+                            "space/music" };
+                    break;
+                case "Color":
+                    bundleNames = new[] { "color/model/maybay", "color/sounds/sounds" };
+                    break;
+                default:
+                    bundleNames = null;
+                    break;
+            }
+
+            if (bundleNames != null)
+            {
+                return bundleNames;
+            }
+            else
+            {
+                Debug.LogError("Fail to get free bundle names to download");
+                return null;
+            }
+
+        }
         #endregion
-        //TODO Check if current app version != bundle manifest version
 
-        //public IEnumerator DownloadBundleManifest(Action<bool> needUpdate)
-        //{
-        //    IProgressResult<Progress, BundleManifest> manifestResult = _downloader.DownloadManifest(BundleSetting.ManifestFilename);
-
-        //    yield return manifestResult.WaitForDone();
-
-        //    if (manifestResult.Exception != null)
-        //    {
-        //        Debug.LogFormat("Downloads BundleManifest failure.Error:{0}", manifestResult.Exception);
-        //        PopupManager.PopUpDialog("[[9C0002]Error[-]]", "Downloads BundleManifest failure. Error:{0}" + manifestResult.Exception);
-        //        yield break;
-        //    }
-        //    Debug.LogWarning(manifestResult.Result.ToString());
-        //    bool isNeedUpdate=  manifestResult.Result.GetAll().Any(bundleInfo => !BundleUtil.ExistsInStorableDirectory(bundleInfo));
-        //    needUpdate(isNeedUpdate);
-        //    yield return null;
-        //}
     }
 }
 

@@ -8,48 +8,48 @@ using NativeGalleryNamespace;
 
 public static class NativeGallery
 {
-    public struct ImageProperties
-    {
-        public readonly int width;
-        public readonly int height;
-        public readonly string mimeType;
-        public readonly ImageOrientation orientation;
+	public struct ImageProperties
+	{
+		public readonly int width;
+		public readonly int height;
+		public readonly string mimeType;
+		public readonly ImageOrientation orientation;
 
-        public ImageProperties(int width, int height, string mimeType, ImageOrientation orientation)
-        {
-            this.width = width;
-            this.height = height;
-            this.mimeType = mimeType;
-            this.orientation = orientation;
-        }
-    }
+		public ImageProperties( int width, int height, string mimeType, ImageOrientation orientation )
+		{
+			this.width = width;
+			this.height = height;
+			this.mimeType = mimeType;
+			this.orientation = orientation;
+		}
+	}
 
-    public struct VideoProperties
-    {
-        public readonly int width;
-        public readonly int height;
-        public readonly long duration;
-        public readonly float rotation;
+	public struct VideoProperties
+	{
+		public readonly int width;
+		public readonly int height;
+		public readonly long duration;
+		public readonly float rotation;
 
-        public VideoProperties(int width, int height, long duration, float rotation)
-        {
-            this.width = width;
-            this.height = height;
-            this.duration = duration;
-            this.rotation = rotation;
-        }
-    }
+		public VideoProperties( int width, int height, long duration, float rotation )
+		{
+			this.width = width;
+			this.height = height;
+			this.duration = duration;
+			this.rotation = rotation;
+		}
+	}
 
-    public enum Permission { Denied = 0, Granted = 1, ShouldAsk = 2 };
+	public enum Permission { Denied = 0, Granted = 1, ShouldAsk = 2 };
 
-    // EXIF orientation: http://sylvana.net/jpegcrop/exif_orientation.html (indices are reordered)
-    public enum ImageOrientation { Unknown = -1, Normal = 0, Rotate90 = 1, Rotate180 = 2, Rotate270 = 3, FlipHorizontal = 4, Transpose = 5, FlipVertical = 6, Transverse = 7 };
+	// EXIF orientation: http://sylvana.net/jpegcrop/exif_orientation.html (indices are reordered)
+	public enum ImageOrientation { Unknown = -1, Normal = 0, Rotate90 = 1, Rotate180 = 2, Rotate270 = 3, FlipHorizontal = 4, Transpose = 5, FlipVertical = 6, Transverse = 7 };
 
-    public delegate void MediaSaveCallback(string error);
-    public delegate void MediaPickCallback(string path);
-    public delegate void MediaPickMultipleCallback(string[] paths);
+	public delegate void MediaSaveCallback( string error );
+	public delegate void MediaPickCallback( string path );
+	public delegate void MediaPickMultipleCallback( string[] paths );
 
-    #region Platform Specific Elements
+	#region Platform Specific Elements
 #if !UNITY_EDITOR && UNITY_ANDROID
 	private static AndroidJavaClass m_ajc = null;
 	private static AndroidJavaClass AJC
@@ -114,7 +114,7 @@ public static class NativeGallery
 	private static extern string _NativeGallery_LoadImageAtPath( string path, string temporaryFilePath, int maxSize );
 #endif
 
-#if !UNITY_EDITOR && (UNITY_ANDROID || UNITY_IOS)
+#if !UNITY_EDITOR && ( UNITY_ANDROID || UNITY_IOS )
 	private static string m_temporaryImagePath = null;
 	private static string TemporaryImagePath
 	{
@@ -147,11 +147,11 @@ public static class NativeGallery
 		}
 	}
 #endif
-    #endregion
+	#endregion
 
-    #region Runtime Permissions
-    public static Permission CheckPermission(bool readPermissionOnly = false)
-    {
+	#region Runtime Permissions
+	public static Permission CheckPermission( bool readPermissionOnly = false )
+	{
 #if !UNITY_EDITOR && UNITY_ANDROID
 		Permission result = (Permission) AJC.CallStatic<int>( "CheckPermission", Context, readPermissionOnly );
 		if( result == Permission.Denied && (Permission) PlayerPrefs.GetInt( "NativeGalleryPermission", (int) Permission.ShouldAsk ) == Permission.ShouldAsk )
@@ -161,12 +161,12 @@ public static class NativeGallery
 #elif !UNITY_EDITOR && UNITY_IOS
 		return (Permission) _NativeGallery_CheckPermission();
 #else
-        return Permission.Granted;
+		return Permission.Granted;
 #endif
-    }
+	}
 
-    public static Permission RequestPermission(bool readPermissionOnly = false)
-    {
+	public static Permission RequestPermission( bool readPermissionOnly = false )
+	{
 #if !UNITY_EDITOR && UNITY_ANDROID
 		object threadLock = new object();
 		lock( threadLock )
@@ -189,155 +189,155 @@ public static class NativeGallery
 #elif !UNITY_EDITOR && UNITY_IOS
 		return (Permission) _NativeGallery_RequestPermission();
 #else
-        return Permission.Granted;
+		return Permission.Granted;
 #endif
-    }
+	}
 
-    public static bool CanOpenSettings()
-    {
+	public static bool CanOpenSettings()
+	{
 #if !UNITY_EDITOR && UNITY_IOS
 		return _NativeGallery_CanOpenSettings() == 1;
 #else
-        return true;
+		return true;
 #endif
-    }
+	}
 
-    public static void OpenSettings()
-    {
+	public static void OpenSettings()
+	{
 #if !UNITY_EDITOR && UNITY_ANDROID
 		AJC.CallStatic( "OpenSettings", Context );
 #elif !UNITY_EDITOR && UNITY_IOS
 		_NativeGallery_OpenSettings();
 #endif
-    }
-    #endregion
+	}
+	#endregion
 
-    #region Save Functions
-    public static Permission SaveImageToGallery(byte[] mediaBytes, string album, string filenameFormatted, MediaSaveCallback callback = null)
-    {
-        return SaveToGallery(mediaBytes, album, filenameFormatted, true, callback);
-    }
+	#region Save Functions
+	public static Permission SaveImageToGallery( byte[] mediaBytes, string album, string filenameFormatted, MediaSaveCallback callback = null )
+	{
+		return SaveToGallery( mediaBytes, album, filenameFormatted, true, callback );
+	}
 
-    public static Permission SaveImageToGallery(string existingMediaPath, string album, string filenameFormatted, MediaSaveCallback callback = null)
-    {
-        return SaveToGallery(existingMediaPath, album, filenameFormatted, true, callback);
-    }
+	public static Permission SaveImageToGallery( string existingMediaPath, string album, string filenameFormatted, MediaSaveCallback callback = null )
+	{
+		return SaveToGallery( existingMediaPath, album, filenameFormatted, true, callback );
+	}
 
-    public static Permission SaveImageToGallery(Texture2D image, string album, string filenameFormatted, MediaSaveCallback callback = null)
-    {
-        if (image == null)
-            throw new ArgumentException("Parameter 'image' is null!");
+	public static Permission SaveImageToGallery( Texture2D image, string album, string filenameFormatted, MediaSaveCallback callback = null )
+	{
+		if( image == null )
+			throw new ArgumentException( "Parameter 'image' is null!" );
 
-        if (filenameFormatted.EndsWith(".jpeg") || filenameFormatted.EndsWith(".jpg"))
-            return SaveToGallery(GetTextureBytes(image, true), album, filenameFormatted, true, callback);
-        else if (filenameFormatted.EndsWith(".png"))
-            return SaveToGallery(GetTextureBytes(image, false), album, filenameFormatted, true, callback);
-        else
-            return SaveToGallery(GetTextureBytes(image, false), album, filenameFormatted + ".png", true, callback);
-    }
+		if( filenameFormatted.EndsWith( ".jpeg" ) || filenameFormatted.EndsWith( ".jpg" ) )
+			return SaveToGallery( GetTextureBytes( image, true ), album, filenameFormatted, true, callback );
+		else if( filenameFormatted.EndsWith( ".png" ) )
+			return SaveToGallery( GetTextureBytes( image, false ), album, filenameFormatted, true, callback );
+		else
+			return SaveToGallery( GetTextureBytes( image, false ), album, filenameFormatted + ".png", true, callback );
+	}
 
-    public static Permission SaveVideoToGallery(byte[] mediaBytes, string album, string filenameFormatted, MediaSaveCallback callback = null)
-    {
-        return SaveToGallery(mediaBytes, album, filenameFormatted, false, callback);
-    }
+	public static Permission SaveVideoToGallery( byte[] mediaBytes, string album, string filenameFormatted, MediaSaveCallback callback = null )
+	{
+		return SaveToGallery( mediaBytes, album, filenameFormatted, false, callback );
+	}
 
-    public static Permission SaveVideoToGallery(string existingMediaPath, string album, string filenameFormatted, MediaSaveCallback callback = null)
-    {
-        return SaveToGallery(existingMediaPath, album, filenameFormatted, false, callback);
-    }
-    #endregion
+	public static Permission SaveVideoToGallery( string existingMediaPath, string album, string filenameFormatted, MediaSaveCallback callback = null )
+	{
+		return SaveToGallery( existingMediaPath, album, filenameFormatted, false, callback );
+	}
+	#endregion
 
-    #region Load Functions
-    public static bool CanSelectMultipleFilesFromGallery()
-    {
+	#region Load Functions
+	public static bool CanSelectMultipleFilesFromGallery()
+	{
 #if !UNITY_EDITOR && UNITY_ANDROID
 		return AJC.CallStatic<bool>( "CanSelectMultipleMedia" );
 #else
-        return false;
+		return false;
 #endif
-    }
+	}
 
-    public static Permission GetImageFromGallery(MediaPickCallback callback, string title = "", string mime = "image/*", int maxSize = -1)
-    {
-        return GetMediaFromGallery(callback, true, mime, title, maxSize);
-    }
+	public static Permission GetImageFromGallery( MediaPickCallback callback, string title = "", string mime = "image/*", int maxSize = -1 )
+	{
+		return GetMediaFromGallery( callback, true, mime, title, maxSize );
+	}
 
-    public static Permission GetVideoFromGallery(MediaPickCallback callback, string title = "", string mime = "video/*")
-    {
-        return GetMediaFromGallery(callback, false, mime, title, -1);
-    }
+	public static Permission GetVideoFromGallery( MediaPickCallback callback, string title = "", string mime = "video/*" )
+	{
+		return GetMediaFromGallery( callback, false, mime, title, -1 );
+	}
 
-    public static Permission GetImagesFromGallery(MediaPickMultipleCallback callback, string title = "", string mime = "image/*", int maxSize = -1)
-    {
-        return GetMultipleMediaFromGallery(callback, true, mime, title, maxSize);
-    }
+	public static Permission GetImagesFromGallery( MediaPickMultipleCallback callback, string title = "", string mime = "image/*", int maxSize = -1 )
+	{
+		return GetMultipleMediaFromGallery( callback, true, mime, title, maxSize );
+	}
 
-    public static Permission GetVideosFromGallery(MediaPickMultipleCallback callback, string title = "", string mime = "video/*")
-    {
-        return GetMultipleMediaFromGallery(callback, false, mime, title, -1);
-    }
+	public static Permission GetVideosFromGallery( MediaPickMultipleCallback callback, string title = "", string mime = "video/*" )
+	{
+		return GetMultipleMediaFromGallery( callback, false, mime, title, -1 );
+	}
 
-    public static bool IsMediaPickerBusy()
-    {
+	public static bool IsMediaPickerBusy()
+	{
 #if !UNITY_EDITOR && UNITY_IOS
 		return NGMediaReceiveCallbackiOS.IsBusy;
 #else
-        return false;
+		return false;
 #endif
-    }
-    #endregion
+	}
+	#endregion
 
-    #region Internal Functions
-    private static Permission SaveToGallery(byte[] mediaBytes, string album, string filenameFormatted, bool isImage, MediaSaveCallback callback)
-    {
-        Permission result = RequestPermission(false);
-        if (result == Permission.Granted)
-        {
-            if (mediaBytes == null || mediaBytes.Length == 0)
-                throw new ArgumentException("Parameter 'mediaBytes' is null or empty!");
+	#region Internal Functions
+	private static Permission SaveToGallery( byte[] mediaBytes, string album, string filenameFormatted, bool isImage, MediaSaveCallback callback )
+	{
+		Permission result = RequestPermission( false );
+		if( result == Permission.Granted )
+		{
+			if( mediaBytes == null || mediaBytes.Length == 0 )
+				throw new ArgumentException( "Parameter 'mediaBytes' is null or empty!" );
 
-            if (album == null || album.Length == 0)
-                throw new ArgumentException("Parameter 'album' is null or empty!");
+			if( album == null || album.Length == 0 )
+				throw new ArgumentException( "Parameter 'album' is null or empty!" );
 
-            if (filenameFormatted == null || filenameFormatted.Length == 0)
-                throw new ArgumentException("Parameter 'filenameFormatted' is null or empty!");
+			if( filenameFormatted == null || filenameFormatted.Length == 0 )
+				throw new ArgumentException( "Parameter 'filenameFormatted' is null or empty!" );
 
-            string path = GetSavePath(album, filenameFormatted);
+			string path = GetSavePath( album, filenameFormatted );
 
-            File.WriteAllBytes(path, mediaBytes);
+			File.WriteAllBytes( path, mediaBytes );
 
-            SaveToGalleryInternal(path, album, isImage, callback);
-        }
+			SaveToGalleryInternal( path, album, isImage, callback );
+		}
 
-        return result;
-    }
+		return result;
+	}
 
-    private static Permission SaveToGallery(string existingMediaPath, string album, string filenameFormatted, bool isImage, MediaSaveCallback callback)
-    {
-        Permission result = RequestPermission(false);
-        if (result == Permission.Granted)
-        {
-            if (!File.Exists(existingMediaPath))
-                throw new FileNotFoundException("File not found at " + existingMediaPath);
+	private static Permission SaveToGallery( string existingMediaPath, string album, string filenameFormatted, bool isImage, MediaSaveCallback callback )
+	{
+		Permission result = RequestPermission( false );
+		if( result == Permission.Granted )
+		{
+			if( !File.Exists( existingMediaPath ) )
+				throw new FileNotFoundException( "File not found at " + existingMediaPath );
 
-            if (album == null || album.Length == 0)
-                throw new ArgumentException("Parameter 'album' is null or empty!");
+			if( album == null || album.Length == 0 )
+				throw new ArgumentException( "Parameter 'album' is null or empty!" );
 
-            if (filenameFormatted == null || filenameFormatted.Length == 0)
-                throw new ArgumentException("Parameter 'filenameFormatted' is null or empty!");
+			if( filenameFormatted == null || filenameFormatted.Length == 0 )
+				throw new ArgumentException( "Parameter 'filenameFormatted' is null or empty!" );
 
-            string path = GetSavePath(album, filenameFormatted);
+			string path = GetSavePath( album, filenameFormatted );
 
-            File.Copy(existingMediaPath, path, true);
+			File.Copy( existingMediaPath, path, true );
 
-            SaveToGalleryInternal(path, album, isImage, callback);
-        }
+			SaveToGalleryInternal( path, album, isImage, callback );
+		}
 
-        return result;
-    }
+		return result;
+	}
 
-    private static void SaveToGalleryInternal(string path, string album, bool isImage, MediaSaveCallback callback)
-    {
+	private static void SaveToGalleryInternal( string path, string album, bool isImage, MediaSaveCallback callback )
+	{
 #if !UNITY_EDITOR && UNITY_ANDROID
 		AJC.CallStatic( "MediaScanFile", Context, path );
 
@@ -354,33 +354,33 @@ public static class NativeGallery
 
 		Debug.Log( "Saving to Pictures: " + Path.GetFileName( path ) );
 #else
-        if (callback != null)
-            callback(null);
+		if( callback != null )
+			callback( null );
 #endif
-    }
+	}
 
-    private static string GetSavePath(string album, string filenameFormatted)
-    {
-        string saveDir;
+	private static string GetSavePath( string album, string filenameFormatted )
+	{
+		string saveDir;
 #if !UNITY_EDITOR && UNITY_ANDROID
 		saveDir = AJC.CallStatic<string>( "GetMediaPath", album );
 #else
-        saveDir = Application.persistentDataPath;
+		saveDir = Application.persistentDataPath;
 #endif
 
-        if (filenameFormatted.Contains("{0}"))
-        {
-            int fileIndex = 0;
-            string path;
-            do
-            {
-                path = Path.Combine(saveDir, string.Format(filenameFormatted, ++fileIndex));
-            } while (File.Exists(path));
+		if( filenameFormatted.Contains( "{0}" ) )
+		{
+			int fileIndex = 0;
+			string path;
+			do
+			{
+				path = Path.Combine( saveDir, string.Format( filenameFormatted, ++fileIndex ) );
+			} while( File.Exists( path ) );
 
-            return path;
-        }
+			return path;
+		}
 
-        saveDir = Path.Combine(saveDir, filenameFormatted);
+		saveDir = Path.Combine( saveDir, filenameFormatted );
 
 #if !UNITY_EDITOR && UNITY_IOS
 		// iOS internally copies images/videos to Photos directory of the system,
@@ -394,14 +394,14 @@ public static class NativeGallery
 		}
 #endif
 
-        return saveDir;
-    }
+		return saveDir;
+	}
 
-    private static Permission GetMediaFromGallery(MediaPickCallback callback, bool imageMode, string mime, string title, int maxSize)
-    {
-        Permission result = RequestPermission(true);
-        if (result == Permission.Granted && !IsMediaPickerBusy())
-        {
+	private static Permission GetMediaFromGallery( MediaPickCallback callback, bool imageMode, string mime, string title, int maxSize )
+	{
+		Permission result = RequestPermission( true );
+		if( result == Permission.Granted && !IsMediaPickerBusy() )
+		{
 #if !UNITY_EDITOR && UNITY_ANDROID
 			AJC.CallStatic( "PickMedia", Context, new NGMediaReceiveCallbackAndroid( callback, null ), imageMode, false, mime, title );
 #elif !UNITY_EDITOR && UNITY_IOS
@@ -416,262 +416,250 @@ public static class NativeGallery
 			else
 				_NativeGallery_PickVideo();
 #else
-            if (callback != null)
-                callback(null);
+			if( callback != null )
+				callback( null );
 #endif
-        }
+		}
 
-        return result;
-    }
+		return result;
+	}
 
-    private static Permission GetMultipleMediaFromGallery(MediaPickMultipleCallback callback, bool imageMode, string mime, string title, int maxSize)
-    {
-        Permission result = RequestPermission(true);
-        if (result == Permission.Granted && !IsMediaPickerBusy())
-        {
-            if (CanSelectMultipleFilesFromGallery())
-            {
+	private static Permission GetMultipleMediaFromGallery( MediaPickMultipleCallback callback, bool imageMode, string mime, string title, int maxSize )
+	{
+		Permission result = RequestPermission( true );
+		if( result == Permission.Granted && !IsMediaPickerBusy() )
+		{
+			if( CanSelectMultipleFilesFromGallery() )
+			{
 #if !UNITY_EDITOR && UNITY_ANDROID
 				AJC.CallStatic( "PickMedia", Context, new NGMediaReceiveCallbackAndroid( null, callback ), imageMode, true, mime, title );
 #else
-                if (callback != null)
-                    callback(null);
+				if( callback != null )
+					callback( null );
 #endif
-            }
-            else if (callback != null)
-                callback(null);
-        }
+			}
+			else if( callback != null )
+				callback( null );
+		}
 
-        return result;
-    }
+		return result;
+	}
 
-    private static byte[] GetTextureBytes(Texture2D texture, bool isJpeg)
-    {
-        try
-        {
-            return isJpeg ? texture.EncodeToJPG(100) : texture.EncodeToPNG();
-        }
-        catch (UnityException)
-        {
-            return GetTextureBytesFromCopy(texture, isJpeg);
-        }
-        catch (ArgumentException)
-        {
-            return GetTextureBytesFromCopy(texture, isJpeg);
-        }
+	private static byte[] GetTextureBytes( Texture2D texture, bool isJpeg )
+	{
+		try
+		{
+			return isJpeg ? texture.EncodeToJPG( 100 ) : texture.EncodeToPNG();
+		}
+		catch( UnityException )
+		{
+			return GetTextureBytesFromCopy( texture, isJpeg );
+		}
+		catch( ArgumentException )
+		{
+			return GetTextureBytesFromCopy( texture, isJpeg );
+		}
 
 #pragma warning disable 0162
-        return null;
+		return null;
 #pragma warning restore 0162
-    }
+	}
 
-    private static byte[] GetTextureBytesFromCopy(Texture2D texture, bool isJpeg)
-    {
-        // Texture is marked as non-readable, create a readable copy and save it instead
-        Debug.LogWarning("Saving non-readable textures is slower than saving readable textures");
+	private static byte[] GetTextureBytesFromCopy( Texture2D texture, bool isJpeg )
+	{
+		// Texture is marked as non-readable, create a readable copy and save it instead
+		Debug.LogWarning( "Saving non-readable textures is slower than saving readable textures" );
 
-        Texture2D sourceTexReadable = null;
-        RenderTexture rt = RenderTexture.GetTemporary(texture.width, texture.height);
-        RenderTexture activeRT = RenderTexture.active;
+		Texture2D sourceTexReadable = null;
+		RenderTexture rt = RenderTexture.GetTemporary( texture.width, texture.height );
+		RenderTexture activeRT = RenderTexture.active;
 
-        try
-        {
-            Graphics.Blit(texture, rt);
-            RenderTexture.active = rt;
+		try
+		{
+			Graphics.Blit( texture, rt );
+			RenderTexture.active = rt;
 
-            sourceTexReadable = new Texture2D(texture.width, texture.height, texture.format, false);
-            sourceTexReadable.ReadPixels(new Rect(0, 0, texture.width, texture.height), 0, 0, false);
-            sourceTexReadable.Apply(false, false);
-        }
-        catch (Exception e)
-        {
-            Debug.LogException(e);
+			sourceTexReadable = new Texture2D( texture.width, texture.height, texture.format, false );
+			sourceTexReadable.ReadPixels( new Rect( 0, 0, texture.width, texture.height ), 0, 0, false );
+			sourceTexReadable.Apply( false, false );
+		}
+		catch( Exception e )
+		{
+			Debug.LogException( e );
 
-            Object.DestroyImmediate(sourceTexReadable);
-            return null;
-        }
-        finally
-        {
-            RenderTexture.active = activeRT;
-            RenderTexture.ReleaseTemporary(rt);
-        }
+			Object.DestroyImmediate( sourceTexReadable );
+			return null;
+		}
+		finally
+		{
+			RenderTexture.active = activeRT;
+			RenderTexture.ReleaseTemporary( rt );
+		}
 
-        try
-        {
-            return isJpeg ? sourceTexReadable.EncodeToJPG(100) : sourceTexReadable.EncodeToPNG();
-        }
-        catch (Exception e)
-        {
-            Debug.LogException(e);
-            return null;
-        }
-        finally
-        {
-            Object.DestroyImmediate(sourceTexReadable);
-        }
-    }
-    #endregion
+		try
+		{
+			return isJpeg ? sourceTexReadable.EncodeToJPG( 100 ) : sourceTexReadable.EncodeToPNG();
+		}
+		catch( Exception e )
+		{
+			Debug.LogException( e );
+			return null;
+		}
+		finally
+		{
+			Object.DestroyImmediate( sourceTexReadable );
+		}
+	}
+	#endregion
 
-    #region Utility Functions
-    public static Texture2D LoadImageAtPath(string imagePath, int maxSize = -1, bool markTextureNonReadable = true,
-        bool generateMipmaps = true, bool linearColorSpace = false)
-    {
-        if (string.IsNullOrEmpty(imagePath))
-            throw new ArgumentException("Parameter 'imagePath' is null or empty!");
+	#region Utility Functions
+	public static Texture2D LoadImageAtPath( string imagePath, int maxSize = -1, bool markTextureNonReadable = true,
+		bool generateMipmaps = true, bool linearColorSpace = false )
+	{
+		if( string.IsNullOrEmpty( imagePath ) )
+			throw new ArgumentException( "Parameter 'imagePath' is null or empty!" );
 
-        if (!File.Exists(imagePath))
-            throw new FileNotFoundException("File not found at " + imagePath);
+		if( !File.Exists( imagePath ) )
+			throw new FileNotFoundException( "File not found at " + imagePath );
 
-        if (maxSize <= 0)
-            maxSize = SystemInfo.maxTextureSize;
+		if( maxSize <= 0 )
+			maxSize = SystemInfo.maxTextureSize;
 
 #if !UNITY_EDITOR && UNITY_ANDROID
 		string loadPath = AJC.CallStatic<string>( "LoadImageAtPath", Context, imagePath, TemporaryImagePath, maxSize );
 #elif !UNITY_EDITOR && UNITY_IOS
 		string loadPath = _NativeGallery_LoadImageAtPath( imagePath, TemporaryImagePath, maxSize );
 #else
-        string loadPath = imagePath;
+		string loadPath = imagePath;
 #endif
 
-        String extension = Path.GetExtension(imagePath).ToLowerInvariant();
-        TextureFormat format = (extension == ".jpg" || extension == ".jpeg") ? TextureFormat.RGB24 : TextureFormat.RGBA32;
+		String extension = Path.GetExtension( imagePath ).ToLowerInvariant();
+		TextureFormat format = ( extension == ".jpg" || extension == ".jpeg" ) ? TextureFormat.RGB24 : TextureFormat.RGBA32;
 
-        Texture2D result = new Texture2D(2, 2, format, generateMipmaps, linearColorSpace);
+		Texture2D result = new Texture2D( 2, 2, format, generateMipmaps, linearColorSpace );
 
-        try
-        {
-            if (!result.LoadImage(File.ReadAllBytes(loadPath), markTextureNonReadable))
-            {
-                Object.DestroyImmediate(result);
-                return null;
-            }
-        }
-        catch (Exception e)
-        {
-            Debug.LogException(e);
+		try
+		{
+			if( !result.LoadImage( File.ReadAllBytes( loadPath ), markTextureNonReadable ) )
+			{
+				Object.DestroyImmediate( result );
+				return null;
+			}
+		}
+		catch( Exception e )
+		{
+			Debug.LogException( e );
 
-            Object.DestroyImmediate(result);
-            return null;
-        }
-        finally
-        {
-            if (loadPath != imagePath)
-            {
-                try
-                {
-                    File.Delete(loadPath);
-                }
-                catch { }
-            }
-        }
+			Object.DestroyImmediate( result );
+			return null;
+		}
+		finally
+		{
+			if( loadPath != imagePath )
+			{
+				try
+				{
+					File.Delete( loadPath );
+				}
+				catch { }
+			}
+		}
 
-        return result;
-    }
+		return result;
+	}
 
-    public static ImageProperties GetImageProperties(string imagePath)
-    {
-        if (!File.Exists(imagePath))
-            throw new FileNotFoundException("File not found at " + imagePath);
+	public static ImageProperties GetImageProperties( string imagePath )
+	{
+		if( !File.Exists( imagePath ) )
+			throw new FileNotFoundException( "File not found at " + imagePath );
 
 #if !UNITY_EDITOR && UNITY_ANDROID
 		string value = AJC.CallStatic<string>( "GetImageProperties", Context, imagePath );
 #elif !UNITY_EDITOR && UNITY_IOS
 		string value = _NativeGallery_GetImageProperties( imagePath );
 #else
-        string value = null;
+		string value = null;
 #endif
 
-        int width = 0, height = 0;
-        string mimeType = null;
-        ImageOrientation orientation = ImageOrientation.Unknown;
-        if (!string.IsNullOrEmpty(value))
-        {
-            string[] properties = value.Split('>');
-            if (properties != null && properties.Length >= 4)
-            {
-                if (!int.TryParse(properties[0].Trim(), out width))
-                    width = 0;
-                if (!int.TryParse(properties[1].Trim(), out height))
-                    height = 0;
+		int width = 0, height = 0;
+		string mimeType = null;
+		ImageOrientation orientation = ImageOrientation.Unknown;
+		if( !string.IsNullOrEmpty( value ) )
+		{
+			string[] properties = value.Split( '>' );
+			if( properties != null && properties.Length >= 4 )
+			{
+				if( !int.TryParse( properties[0].Trim(), out width ) )
+					width = 0;
+				if( !int.TryParse( properties[1].Trim(), out height ) )
+					height = 0;
 
-                mimeType = properties[2].Trim();
-                if (mimeType.Length == 0)
-                {
-                    String extension = Path.GetExtension(imagePath).ToLowerInvariant();
-                    if (extension == ".png")
-                        mimeType = "image/png";
-                    else if (extension == ".jpg" || extension == ".jpeg")
-                        mimeType = "image/jpeg";
-                    else if (extension == ".gif")
-                        mimeType = "image/gif";
-                    else if (extension == ".bmp")
-                        mimeType = "image/bmp";
-                    else
-                        mimeType = null;
-                }
+				mimeType = properties[2].Trim();
+				if( mimeType.Length == 0 )
+				{
+					String extension = Path.GetExtension( imagePath ).ToLowerInvariant();
+					if( extension == ".png" )
+						mimeType = "image/png";
+					else if( extension == ".jpg" || extension == ".jpeg" )
+						mimeType = "image/jpeg";
+					else if( extension == ".gif" )
+						mimeType = "image/gif";
+					else if( extension == ".bmp" )
+						mimeType = "image/bmp";
+					else
+						mimeType = null;
+				}
 
-                int orientationInt;
-                if (int.TryParse(properties[3].Trim(), out orientationInt))
-                    orientation = (ImageOrientation)orientationInt;
+				int orientationInt;
+				if( int.TryParse( properties[3].Trim(), out orientationInt ) )
+					orientation = (ImageOrientation) orientationInt;
 
 #if !UNITY_EDITOR && UNITY_IOS
 				if( orientation == ImageOrientation.Unknown ) // selected media is saved in correct orientation on iOS
 					orientation = ImageOrientation.Normal;
 #endif
-            }
-        }
+			}
+		}
 
-        return new ImageProperties(width, height, mimeType, orientation);
-    }
+		return new ImageProperties( width, height, mimeType, orientation );
+	}
 
-    public static VideoProperties GetVideoProperties(string videoPath)
-    {
-        if (!File.Exists(videoPath))
-            throw new FileNotFoundException("File not found at " + videoPath);
+	public static VideoProperties GetVideoProperties( string videoPath )
+	{
+		if( !File.Exists( videoPath ) )
+			throw new FileNotFoundException( "File not found at " + videoPath );
 
 #if !UNITY_EDITOR && UNITY_ANDROID
 		string value = AJC.CallStatic<string>( "GetVideoProperties", Context, videoPath );
 #elif !UNITY_EDITOR && UNITY_IOS
 		string value = _NativeGallery_GetVideoProperties( videoPath );
 #else
-        string value = null;
+		string value = null;
 #endif
 
-        int width = 0, height = 0;
-        long duration = 0L;
-        float rotation = 0f;
-        if (!string.IsNullOrEmpty(value))
-        {
-            string[] properties = value.Split('>');
-            if (properties != null && properties.Length >= 4)
-            {
-                if (!int.TryParse(properties[0].Trim(), out width))
-                    width = 0;
-                if (!int.TryParse(properties[1].Trim(), out height))
-                    height = 0;
-                if (!long.TryParse(properties[2].Trim(), out duration))
-                    duration = 0L;
-                if (!float.TryParse(properties[3].Trim(), out rotation))
-                    rotation = 0f;
-            }
-        }
+		int width = 0, height = 0;
+		long duration = 0L;
+		float rotation = 0f;
+		if( !string.IsNullOrEmpty( value ) )
+		{
+			string[] properties = value.Split( '>' );
+			if( properties != null && properties.Length >= 4 )
+			{
+				if( !int.TryParse( properties[0].Trim(), out width ) )
+					width = 0;
+				if( !int.TryParse( properties[1].Trim(), out height ) )
+					height = 0;
+				if( !long.TryParse( properties[2].Trim(), out duration ) )
+					duration = 0L;
+				if( !float.TryParse( properties[3].Trim(), out rotation ) )
+					rotation = 0f;
+			}
+		}
 
-        if (rotation == -90f)
-            rotation = 270f;
+		if( rotation == -90f )
+			rotation = 270f;
 
-        return new VideoProperties(width, height, duration, rotation);
-    }
-
-    public static string GetGellaryPath()
-    {
-        string saveDir = "";
-#if !UNITY_EDITOR && UNITY_ANDROID
-		saveDir = AJC.CallStatic<string>( "GetMediaPath", "MagicBook 4D" );
-#else
-        saveDir = Application.persistentDataPath;
-#endif
-
-        return saveDir;
-    }
-    #endregion
+		return new VideoProperties( width, height, duration, rotation );
+	}
+	#endregion
 }
