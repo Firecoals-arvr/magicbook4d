@@ -15,7 +15,7 @@ public class SpawnMeteor : MonoBehaviour
     {
         if (check)
         {
-            anim.Play("Intro");
+            anim.Play("Fly");
             check = !check;
         }
             anim.Play("Idle");

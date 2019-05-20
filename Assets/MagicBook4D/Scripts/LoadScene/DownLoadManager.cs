@@ -132,7 +132,7 @@ public class DownLoadManager : MonoBehaviour
         //PopupManager.PopUpDialog("Xin chào!", "Bạn cần tải dữ liệu để tiếp tục, bấm Đồng ý", default, "Đồng ý", "Hủy bỏ", PopupManager.DialogType.YesNoDialog,
         //(() =>
         //{
-            _dlAssets.slider = loadingBar;
+           // _dlAssets.slider = loadingBar;
             NGUITools.SetActive(loadingBar.gameObject, true);
             StartCoroutine(_dlAssets.Download());
         //}), () => SceneLoader.LoadScene("Menu"));
@@ -142,8 +142,8 @@ public class DownLoadManager : MonoBehaviour
     /// </summary>
     public void RetryDownload()
     {
-        _dlAssets.slider = loadingBar;
-        _dlAssets.slider.value = 0;
+     //   _dlAssets.slider = loadingBar;
+     //   _dlAssets.slider.value = 0;
         NGUITools.SetActive(loadingBar.gameObject, true);
         StartCoroutine(_dlAssets.Download());
     }
@@ -154,8 +154,8 @@ public class DownLoadManager : MonoBehaviour
         BundleUtil.ClearStorableDirectory();
         PlayerPrefs.DeleteKey("Downloaded" + ThemeController.instance.Theme);
         //Downloading
-        _dlAssets.slider = loadingBar;
-        _dlAssets.slider.value = 0;
+    //    _dlAssets.slider = loadingBar;
+     //   _dlAssets.slider.value = 0;
         NGUITools.SetActive(loadingBar.gameObject, true);
         StartCoroutine(_dlAssets.Download());
     }

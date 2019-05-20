@@ -271,7 +271,6 @@ namespace Firecoals.Animal
                     GameObject go1 = GameObject.FindGameObjectWithTag("Item");
                     go1.transform.localPosition = itemPos;
                     go1.transform.localRotation = new Quaternion(0, 180, 0, 0);
-
                 }
             }
             transform.GetChild(0).localScale = Vector3.one;

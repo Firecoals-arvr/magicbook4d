@@ -72,7 +72,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3012
+  startingRenderQueue: 3008
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -227,7 +227,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3012
+  startingRenderQueue: 3008
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -352,7 +352,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3012
+  startingRenderQueue: 3008
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -534,7 +534,6 @@ GameObject:
   - component: {fileID: 4710681212341421988}
   - component: {fileID: 4695192603800752306}
   - component: {fileID: 4684436546682586418}
-  - component: {fileID: 4707116071613322462}
   m_Layer: 0
   m_Name: ISSComplete1
   m_TagString: Untagged
@@ -606,19 +605,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &4707116071613322462
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4707116071613322460}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 37.772373, y: 23.53923, z: 22.670933}
-  m_Center: {x: -0.0016453268, y: 2.1958148, z: -5.7204294}
 --- !u!1 &4707244460695602714
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,7 +914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9836b462c9b547c4b86349ebbc90f230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 2
 --- !u!114 &4707532639526320238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1037,14 +1023,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4702106273570460878}
-  - component: {fileID: 4673270731214595754}
   - component: {fileID: 6858934616818769053}
   - component: {fileID: 4667419991889472132}
   - component: {fileID: 9196716033190593981}
-  - component: {fileID: 4707618085794967053}
   m_Layer: 0
   m_Name: System
-  m_TagString: Untagged
+  m_TagString: Leanscale
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1065,24 +1049,6 @@ Transform:
   m_Father: {fileID: 4701851791854112398}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &4673270731214595754
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4707618085794967050}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 94b5e05220fb9e14c913bf732a194e14, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 94b5e05220fb9e14c913bf732a194e14, type: 2}
-  - {fileID: 7400000, guid: 830f0641c652aa947a76ee1c89527c36, type: 2}
-  - {fileID: 7400000, guid: 256156c41911b674eb1d8121dbbf772c, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &6858934616818769053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1095,7 +1061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b175013da0cb9d54abbff89437ee62c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anima: {fileID: 4673270731214595754}
+  anima: {fileID: 125828626}
 --- !u!114 &4667419991889472132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1115,7 +1081,7 @@ MonoBehaviour:
   Camera: {fileID: 0}
   WheelSensitivity: 0
   Relative: 0
-  ScaleClamp: 0
+  ScaleClamp: 1
   ScaleMin: {x: 0.1, y: 0.1, z: 0.2}
   ScaleMax: {x: 1.5, y: 1.5, z: 1.5}
 --- !u!114 &9196716033190593981
@@ -1130,35 +1096,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba712070062f96d48a66efc8530661f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4707618085794967053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4707618085794967050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bdb6bc5d8c87ef4baaa923318cf2e58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InfoLeft:
-  - m_Label: ISSShell3Name
-    m_Transform: {fileID: 505086890609317463}
-    m_Panel: {fileID: 1609087488791544646, guid: 02f06d251d2eedf48becf6a1f6acb8ba,
-      type: 3}
-    m_Parents: {fileID: 505086890140374726}
-  InfoRight:
-  - m_Label: ISSShell1Name
-    m_Transform: {fileID: 505086889937026784}
-    m_Panel: {fileID: 2124304814922143118, guid: 04ba687fba4d6144ebf5ad25bd020568,
-      type: 3}
-    m_Parents: {fileID: 505086889889631326}
-  - m_Label: ISSShell2Name
-    m_Transform: {fileID: 505086890043693687}
-    m_Panel: {fileID: 2124304814922143118, guid: 04ba687fba4d6144ebf5ad25bd020568,
-      type: 3}
-    m_Parents: {fileID: 505086890791046102}
 --- !u!1 &4707649209699652262
 GameObject:
   m_ObjectHideFlags: 0
@@ -1365,6 +1302,8 @@ GameObject:
   - component: {fileID: 4701851791854112398}
   - component: {fileID: 6266592615403889125}
   - component: {fileID: 8238996398061858607}
+  - component: {fileID: 125828626}
+  - component: {fileID: 125828627}
   m_Layer: 0
   m_Name: ISS
   m_TagString: Planet
@@ -1454,6 +1393,54 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &125828626
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4707886159772515528}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 03e621aea6e092449aaa91400f09eeed, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &125828627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4707886159772515528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bdb6bc5d8c87ef4baaa923318cf2e58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InfoLeft:
+  - m_Label: ISSShell3Name
+    m_Transform: {fileID: 505086890609317463}
+    m_Panel: {fileID: 1609087488791544646, guid: 02f06d251d2eedf48becf6a1f6acb8ba,
+      type: 3}
+    m_Parents: {fileID: 505086890140374726}
+  InfoRight:
+  - m_Label: ISSShell1Name
+    m_Transform: {fileID: 505086889937026784}
+    m_Panel: {fileID: 2124304814922143118, guid: 04ba687fba4d6144ebf5ad25bd020568,
+      type: 3}
+    m_Parents: {fileID: 505086889889631326}
+  - m_Label: ISSShell2Name
+    m_Transform: {fileID: 505086890043693687}
+    m_Panel: {fileID: 2124304814922143118, guid: 04ba687fba4d6144ebf5ad25bd020568,
+      type: 3}
+    m_Parents: {fileID: 505086890791046102}
 --- !u!1 &4707906864894819742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1537,8 +1524,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d2b8a626db15ae4fb08e26e0061b7ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  center: {fileID: 0}
-  speed: 0
+  center: {fileID: 4707532639526320236}
+  speed: 3
 --- !u!114 &4707906864894819736
 MonoBehaviour:
   m_ObjectHideFlags: 0

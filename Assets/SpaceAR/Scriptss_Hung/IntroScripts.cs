@@ -140,6 +140,7 @@ namespace Firecoals.Space
                 {
                     go.gameObject.SetActive(true);
                 }
+                GetOriginalTransform();
             }
             else
             {
@@ -151,7 +152,6 @@ namespace Firecoals.Space
             }
 
             ChangeAnim.checkOpen = false;
-            GetOriginalTransform();
             ShowModelsOnScreen();
 
             base.OnTrackingFound();
@@ -209,8 +209,6 @@ namespace Firecoals.Space
             {
                 if (a != null && a.activeSelf)
                 {
-                    a.transform.localPosition = Vector3.zero;
-                    a.transform.localRotation = new Quaternion(0, 0, 0, 0);
                     a.transform.localScale = _originalLocalScale;
                 }
             }
@@ -226,7 +224,7 @@ namespace Firecoals.Space
                 objectName.GetComponentInChildren<UILocalize>().key = nameKeySpace;
                 objectInfo.GetComponent<UILocalize>().key = inforKeySpace;
 
-                objectName.GetComponentInChildren<UILabel>().text = Localization.Get(nameKeySpace);
+                objectName.GetComponentInChildren<UILabel>().text = "[b]" + Localization.Get(nameKeySpace) + "[/b]";
                 objectInfo.GetComponent<UILabel>().text = Localization.Get(inforKeySpace);
             }
         }

@@ -72,7 +72,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3012
+  startingRenderQueue: 3008
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3012
+  startingRenderQueue: 3008
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -262,7 +262,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3012
+  startingRenderQueue: 3008
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -357,7 +357,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3012
+  startingRenderQueue: 3008
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -452,6 +452,7 @@ GameObject:
   - component: {fileID: 2877947832065901413}
   - component: {fileID: 2877947832065901414}
   - component: {fileID: 2877947832065901415}
+  - component: {fileID: 7960686400460646171}
   m_Layer: 0
   m_Name: ChangeAnimOpen
   m_TagString: Untagged
@@ -571,6 +572,22 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: eacab99beca480c46926c3e8b4656ea5, type: 2}
   mSpriteName: 06-sun-icon
   mFillCenter: 1
+--- !u!114 &7960686400460646171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2877947832065901417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d44bc69c2ca5f943b845318866dc1bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: c4d77a224f3c9a647b6924c2560ffd8a, type: 3}
+  trigger: 0
+  volume: 1
+  pitch: 1
 --- !u!1 &2877947832494024877
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,7 +663,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3012
+  startingRenderQueue: 3007
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -703,9 +720,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.15, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
+  - {fileID: 2165565849132579272}
   - {fileID: 2877947833202138259}
   - {fileID: 6704462010022212867}
-  - {fileID: 2165565849132579272}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -721,9 +738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31387af569896214dac78f8e7c78f53c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  open: {fileID: 2877947832065901417}
   anim: {fileID: 2877947833118591779}
-  checkOpen: 1
 --- !u!114 &2877947833118591807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -808,7 +823,7 @@ Transform:
   m_Children:
   - {fileID: 2877947832065901416}
   m_Father: {fileID: 2877947833118591777}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2877947833202138257
 MonoBehaviour:
@@ -849,7 +864,7 @@ MonoBehaviour:
   anchorOffset: 0
   softBorderPadding: 1
   renderQueue: 0
-  startingRenderQueue: 3011
+  startingRenderQueue: 3007
   mClipTexture: {fileID: 0}
   mAlpha: 1
   mClipping: 0
@@ -932,7 +947,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3051832076028627327}
   m_LocalRotation: {x: 0.000000022476454, y: -0.70710677, z: 0.7071068, w: -0.000000084293696}
-  m_LocalPosition: {x: -0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3051832077489445873}
@@ -1617,7 +1632,7 @@ GameObject:
   - component: {fileID: 6103275183181863933}
   m_Layer: 0
   m_Name: Core
-  m_TagString: Untagged
+  m_TagString: Leanscale
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1636,7 +1651,7 @@ Transform:
   - {fileID: 3051832077489445873}
   - {fileID: 2877947832494024876}
   m_Father: {fileID: 2877947833118591777}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6103275183181863933
 MonoBehaviour:
@@ -1715,7 +1730,7 @@ PrefabInstance:
     - target: {fileID: 8861833799499303269, guid: f2464b3b4b9f0f84c901dcbd0d72c120,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8861833799499303269, guid: f2464b3b4b9f0f84c901dcbd0d72c120,
         type: 3}
