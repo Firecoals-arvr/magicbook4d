@@ -14,6 +14,12 @@ namespace Firecoals.Color
         private AssetLoader _assetLoader;
         public string tagSound;
         private bool playSound;
+        /// <summary>
+        /// scale ban ban đầu của object,
+        /// các object khác nhau scale ban đầu khác nhau
+        /// </summary>
+        [Header("Original scale of object")]
+        public Vector3 _originalLocalScale;
         // Start is called before the first frame update
         protected override void Start()
 		{
@@ -35,7 +41,9 @@ namespace Firecoals.Color
 		protected override void OnTrackingFound()
 		{
             _loadSoundBundles = GameObject.FindObjectOfType<LoadSoundBundlesColor>();
+            GetOriginalTransform();
             EnableObject();
+             
             if (playSound)
             {
                 _loadSoundBundles.PlaySound(tagSound);
@@ -49,7 +57,7 @@ namespace Firecoals.Color
             foreach (Transform trans in mTrackableBehaviour.transform)
             {
                 trans.gameObject.SetActive(false);
-                trans.GetComponentInChildren<Animation>().Stop();
+                //trans.GetComponentInChildren<Animation>().Stop();
             }
             playSound = true;
             FirecoalsSoundManager.StopAll();
@@ -60,7 +68,9 @@ namespace Firecoals.Color
             foreach (Transform trans in mTrackableBehaviour.transform)
             {
                 trans.gameObject.SetActive(true);
-                trans.GetComponentInChildren<Animation>().Play();
+                //trans.GetComponentInChildren<Animation>().Play();
+                trans.GetComponentInChildren<Animator>().Play("Idle", 0, 0f);
+
                 List<RC_Get_Texture> lst = new List<RC_Get_Texture>();
                 trans.GetComponentsInChildren<RC_Get_Texture>(true, lst);
                 foreach (var child in lst)
@@ -68,6 +78,13 @@ namespace Firecoals.Color
                     child.RenderCamera = renderCam.GetComponent<Camera>();
                 }
             }
+        }
+        private void GetOriginalTransform()
+        {
+            GameObject go = mTrackableBehaviour.transform.gameObject.transform.GetChild(0).gameObject;
+            go.transform.localScale = _originalLocalScale;
+            go.transform.localPosition = Vector3.zero;
+            go.transform.localRotation = new Quaternion(0, 180, 0,0);
         }
     }
 

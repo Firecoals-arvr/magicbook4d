@@ -13,7 +13,7 @@ namespace Firecoals.Color
         {
             all.GetComponent<Animator>().SetTrigger("Move");
             deer.GetComponent<Animator>().SetTrigger("Move");
-            gameObject.GetComponent<BoxCollider>().enabled = false;
+            //gameObject.GetComponent<BoxCollider>().enabled = false;
             PlayMusic();
             StartCoroutine(StopAnim());
         }

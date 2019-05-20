@@ -14,6 +14,12 @@ namespace Firecoals.Color
         public string tagSound;
         private LoadSoundBundlesColor _loadSoundBundles;
         bool playSound;
+        /// <summary>
+        /// scale ban ban đầu của object,
+        /// các object khác nhau scale ban đầu khác nhau
+        /// </summary>
+        [Header("Original scale of object")]
+        public Vector3 _originalLocalScale;
         // Start is called before the first frame update
         protected override void Start()
         {
@@ -34,6 +40,7 @@ namespace Firecoals.Color
         {
             _loadSoundBundles = GameObject.FindObjectOfType<LoadSoundBundlesColor>();
             EnableObject();
+            GetOriginalTransform();
             if (playSound)
             {
                 //_loadSoundBundles.PlaySound(tagSound);
@@ -67,6 +74,11 @@ namespace Firecoals.Color
                     child.RenderCamera = renderCam.GetComponent<Camera>();
                 }
             }
+        }
+        private void GetOriginalTransform()
+        {
+            GameObject go = mTrackableBehaviour.transform.gameObject.transform.GetChild(0).gameObject;
+            go.transform.localScale = _originalLocalScale;
         }
     }
 }

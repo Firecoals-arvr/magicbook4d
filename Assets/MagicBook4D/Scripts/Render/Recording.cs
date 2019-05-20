@@ -88,35 +88,12 @@ namespace Firecoals.Render
         }
         private void OnReplay(string path)
         {
-            //  NGUITools.SetActive(objPanelThongBaoSave, true);
-            Debug.Log("Saved recording to: " + path);
+          NGUITools.SetActive(objPanelThongBaoSave, true);
+          Debug.Log("Saved recording to: " + path);
             //PopupManager.PopUpDialog("", "Saved recording to: " + path);
 
             // Playback the video
-#if UNITY_EDITOR
-            // EditorUtility.OpenWithDefaultApp(path);
-#elif UNITY_IOS
-          //  Handheld.PlayFullScreenMovie("file://" + path);
-           NatShare.SaveToCameraRoll(path, "MagicBook 4D", false);
-#elif UNITY_ANDROID
-         //   Handheld.PlayFullScreenMovie(path);
-            if (NativeGallery.CheckPermission() == NativeGallery.Permission.Granted)
-            {
-                          NatShare.SaveToCameraRoll(path, "MagicBook 4D", false);
-            }
-            else if (NativeGallery.CheckPermission() == NativeGallery.Permission.Denied)
-            {
-                 PopupManager.PopUpDialog("Cảnh báo", "Bạn cần cho phép app truy cập vào bộ sưu tập để lưu video",
-                    default, "Cài đặt", "Không",
-                    PopupManager.DialogType.YesNoDialog, NativeGallery.OpenSettings);
-            }
-            else
-            {
-                PopupManager.PopUpDialog("Cảnh báo", "Bạn cần cho phép app truy cập vào bộ sưu tập để lưu video",
-                    default, "Cho phép", "Hủy", PopupManager.DialogType.YesNoDialog,
-                    (() => NativeGallery.RequestPermission()));
-            }
-#endif
+          NatShare.SaveToCameraRoll(path, "MagicBook 4D", false);
         }
     }
 
