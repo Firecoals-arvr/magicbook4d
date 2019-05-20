@@ -13,7 +13,7 @@ namespace Firecoals.Animal
         // Start is called before the first frame update
         void Start()
         {
-            isOpening = true;
+            isOpening = false;
             HideMenu();
         }
 
