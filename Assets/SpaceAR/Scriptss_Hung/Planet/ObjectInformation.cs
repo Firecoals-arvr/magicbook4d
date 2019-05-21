@@ -26,7 +26,11 @@ namespace Firecoals.Space
         /// <summary>
         /// animator của bảng thông tin
         /// </summary>
+<<<<<<< HEAD
         public Animator anim;
+=======
+        [SerializeField] Animator anim;
+>>>>>>> origin/space
 
         private LoadSoundbundles _loadSoundbundles;
         List<Transform> go = new List<Transform>();
@@ -34,7 +38,10 @@ namespace Firecoals.Space
         private void Start()
         {
             checkOpen = false;
+<<<<<<< HEAD
             _loadSoundbundles = FindObjectOfType<LoadSoundbundles>();
+=======
+>>>>>>> origin/space
             //anim = panelinfo.GetComponent<Animator>();
         }
 
