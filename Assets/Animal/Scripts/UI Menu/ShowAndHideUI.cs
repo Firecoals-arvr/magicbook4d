@@ -14,6 +14,7 @@ namespace Firecoals.Animal
         void Start()
         {
             isOpening = true;
+            HideMenu();
         }
 
         // Update is called once per frame

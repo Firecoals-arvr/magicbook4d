@@ -17,7 +17,7 @@ namespace Firecoals.AssetBundles
         private static string _platformName;
         private Dictionary<string, IBundle> bundles = new Dictionary<string, IBundle>();
 
- 
+        public UISlider slider { get; set; }
         //private string bundleUrl;
         //private void Start()
         //{
@@ -108,8 +108,8 @@ namespace Firecoals.AssetBundles
                     Debug.LogFormat("Downloading {0:F2}KB/{1:F2}KB {2:F3}KB/S", p.GetCompletedSize(UNIT.KB), p.GetTotalSize(UNIT.KB), p.GetSpeed(UNIT.KB));
                     var percent = p.GetCompletedSize(UNIT.KB) / p.GetTotalSize(UNIT.KB);
 
-                    //slider.value = percent;
-                    //slider.transform.GetChild(2).gameObject.GetComponent<UILabel>().text = "Các bé dưới 5 tuổi khi sử dụng ứng dụng cần có sự giám sát của phụ huynh";
+                    slider.value = percent;
+                    slider.transform.GetChild(2).gameObject.GetComponent<UILabel>().text = "Các bé dưới 5 tuổi khi sử dụng ứng dụng cần có sự giám sát của phụ huynh";
                     //var label =  slider.transform.Find("displaytext").gameObject.GetComponent<UILabel>();
                     //label.text = p.GetCompletedSize(UNIT.KB).ToString()+"/"+ p.GetTotalSize(UNIT.KB).ToString();
 

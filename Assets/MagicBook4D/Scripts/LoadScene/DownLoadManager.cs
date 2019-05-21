@@ -68,9 +68,9 @@ public class DownLoadManager : MonoBehaviour
                 {
                     ClearCacheAndRetry();
                 }, () =>
-            {
-                PreLoad();
-            });
+                {
+                    PreLoad();
+                });
         }
         else if (Application.internetReachability != NetworkReachability.NotReachable && RequiredDownload())
         {
@@ -106,7 +106,7 @@ public class DownLoadManager : MonoBehaviour
         var assetLoader = GameObject.FindObjectOfType<AssetLoader>();
         assetLoader.InitResource();
         StartCoroutine(assetLoader.PreLoad(loadingBar));
-        
+
     }
     //TODO If has Internet connection DONE
     //If has a update version PopUp Do you want to update new version data
@@ -132,9 +132,9 @@ public class DownLoadManager : MonoBehaviour
         //PopupManager.PopUpDialog("Xin chào!", "Bạn cần tải dữ liệu để tiếp tục, bấm Đồng ý", default, "Đồng ý", "Hủy bỏ", PopupManager.DialogType.YesNoDialog,
         //(() =>
         //{
-           // _dlAssets.slider = loadingBar;
-            NGUITools.SetActive(loadingBar.gameObject, true);
-            StartCoroutine(_dlAssets.Download());
+        _dlAssets.slider = loadingBar;
+        NGUITools.SetActive(loadingBar.gameObject, true);
+        StartCoroutine(_dlAssets.Download());
         //}), () => SceneLoader.LoadScene("Menu"));
     }
     /// <summary>
@@ -142,8 +142,8 @@ public class DownLoadManager : MonoBehaviour
     /// </summary>
     public void RetryDownload()
     {
-     //   _dlAssets.slider = loadingBar;
-     //   _dlAssets.slider.value = 0;
+        _dlAssets.slider = loadingBar;
+        _dlAssets.slider.value = 0;
         NGUITools.SetActive(loadingBar.gameObject, true);
         StartCoroutine(_dlAssets.Download());
     }
@@ -154,8 +154,8 @@ public class DownLoadManager : MonoBehaviour
         BundleUtil.ClearStorableDirectory();
         PlayerPrefs.DeleteKey("Downloaded" + ThemeController.instance.Theme);
         //Downloading
-    //    _dlAssets.slider = loadingBar;
-     //   _dlAssets.slider.value = 0;
+        _dlAssets.slider = loadingBar;
+        _dlAssets.slider.value = 0;
         NGUITools.SetActive(loadingBar.gameObject, true);
         StartCoroutine(_dlAssets.Download());
     }
@@ -217,7 +217,7 @@ public class DownLoadManager : MonoBehaviour
     public void LoadLocalManifest()
     {
         IBundleManifestLoader manifestLoader = new BundleManifestLoader();
-        if(File.Exists(BundleUtil.GetStorableDirectory() + BundleSetting.ManifestFilename))
+        if (File.Exists(BundleUtil.GetStorableDirectory() + BundleSetting.ManifestFilename))
             _localManifest = manifestLoader.Load(BundleUtil.GetStorableDirectory() + BundleSetting.ManifestFilename);
     }
 
