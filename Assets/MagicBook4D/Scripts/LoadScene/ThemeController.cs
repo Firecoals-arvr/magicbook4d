@@ -33,7 +33,7 @@
             DontDestroyOnLoad(this);
             AddThemeEvent();
             //PlayerPrefs.DeleteAll();
-            //Debug.LogWarning("Deleted all player preference key");1`
+            //Debug.LogWarning("Deleted all player preference key");
             if (Application.internetReachability != NetworkReachability.NotReachable)
             {
                 StartCoroutine(ActiveManager.AssetBundleVersion());
@@ -47,18 +47,18 @@
         private void SetTheme(string themeName)
         {
             instance.Theme = themeName;
-//#if UNITY_EDITOR && UNITY_IOS
+#if UNITY_EDITOR && UNITY_IOS
             LoadingScreen.Run();
-//#elif UNITY_ANDROID
-//            if (themeName == "Color")
-//            {
-//                Debug.Log("ClickColor");
-//                Application.OpenURL("https://play.google.com/store/apps/details?id=com.firecoals.magiccolor&hl=vi");
-//            }
-//            else
-//                LoadingScreen.Run();
+#elif UNITY_ANDROID
+            if (themeName == "Color")
+            {
+                Debug.Log("ClickColor");
+                Application.OpenURL("https://play.google.com/store/apps/details?id=com.firecoals.magiccolor&hl=vi");
+            }
+            else
+                LoadingScreen.Run();
             Debug.Log("<color=blue>Current Theme Name = " + themeName + "</color>");
-//#endif
+#endif
         }
         /// <summary>
         /// Add event to all button under grid

@@ -1,14 +1,8 @@
 ﻿using Firecoals.Augmentation;
-using Firecoals.Threading.Tasks;
+using Firecoals.MagicBook;
 using Loxodon.Framework.Bundles;
 using Loxodon.Framework.Contexts;
-<<<<<<< HEAD
 using UnityEngine;
-=======
-using UnityEngine.SceneManagement;
-using Vuforia;
-using Firecoals.Threading.Tasks;
->>>>>>> origin/space
 using Dispatcher = Firecoals.Threading.Dispatcher;
 
 namespace Firecoals.Space
@@ -21,11 +15,7 @@ namespace Firecoals.Space
         /// <summary>
         /// tên bundle của object
         /// </summary>
-<<<<<<< HEAD
         //public string bundleName;
-=======
-        public string bundleName;
->>>>>>> origin/space
 
         /// <summary>
         /// đường dẫn của object trong thư mục
@@ -66,32 +56,36 @@ namespace Firecoals.Space
         [Header("Information key")]
         public string inforKeySpace;
 
-<<<<<<< HEAD
         private GameObject _gameobjectLoaded;
-=======
+
         /// <summary>
-        /// anim để chạy animation intro lúc tracking found models
+        /// Các imagetargets
         /// </summary>
-        Animator anim;
+        private GameObject[] _originalObjectTransform;
 
-        private GameObject[] inforBtn;
-        bool checkOpen;
-
->>>>>>> origin/space
-
+        /// <summary>
+        /// scale ban ban đầu của object,
+        /// các object khác nhau scale ban đầu khác nhau
+        /// </summary>
+        [Header("Original scale of object")]
+        public Vector3 _originalLocalScale;
         protected override void Start()
         {
-            ApplicationContext context = Context.GetApplicationContext();
-            this._resources = context.GetService<IResources>();
-            assetloader = GameObject.FindObjectOfType<AssetLoader>();
+           
             base.Start();
             ApplicationContext context = Context.GetApplicationContext();
             _resources = context.GetService<IResources>();
             assetloader = GameObject.FindObjectOfType<AssetLoader>();
 
-            _gameobjectLoaded = assetloader.LoadGameObjectAsync(path, mTrackableBehaviour.transform);
+            //if (ActiveManager.IsActiveOfflineOk(ActiveManager.NameToProjectID(ThemeController.instance.Theme))
+            //     || mTrackableBehaviour.TrackableName == "Solarsystem_scaled"
+            //     || mTrackableBehaviour.TrackableName == "Sun_scaled"
+            //     || mTrackableBehaviour.TrackableName == "Mercury_scaled")
+            //{
+                _gameobjectLoaded = assetloader.LoadGameObjectAsync(path, mTrackableBehaviour.transform);
+            //}
 
-            Dispatcher.Initialize(); 
+            Dispatcher.Initialize();
         }
 
         protected override void OnDestroy()
@@ -101,44 +95,15 @@ namespace Firecoals.Space
 
         protected override void OnTrackingFound()
         {
-<<<<<<< HEAD
+           
             foreach (Transform a in mTrackableBehaviour.transform)
             {
                 a.gameObject.SetActive(true);
-=======
-
-            inforBtn = GameObject.FindGameObjectsWithTag("infor");
+            }
             NGUITools.SetActive(objectName, true);
-
-            //SpawnModel();
-            //nếu đã purchase thì vào phần này
-            if (ActiveManager.IsActiveOfflineOk("B"))
-            {
-                //SpawnModel();
-                ShowModelsOnScreen();
-            }
-            // nếu chưa purchase thì vào phần này
-            else
-            {
-                //nếu là 3 trang đầu thì cho xem model
-                if (mTrackableBehaviour.TrackableName == "Solarsystem_scaled" || mTrackableBehaviour.TrackableName == "Sun_scaled" || mTrackableBehaviour.TrackableName == "Mercury_scaled")
-                {
-                    //SpawnModel();
-                    ShowModelsOnScreen();
-                }
-                //nếu ko fai là 3 trang đầu thì cho hiện popup trả phí để xem tiếp
-                else
-                {
-                    PopupManager.PopUpDialog("", "Bạn cần kích hoạt để sử dụng hết các tranh", "OK", "Yes", "No", PopupManager.DialogType.YesNoDialog, () =>
-                    {
-                        SceneManager.LoadScene("Activate", LoadSceneMode.Additive);
-                    });
-                }
->>>>>>> origin/space
-            }
-
             ShowModelsOnScreen();
-            NGUITools.SetActive(objectName, true);
+            ResetTranformGame1();
+            
 
             //SpawnModel();
             //nếu đã purchase thì vào phần này
@@ -170,16 +135,12 @@ namespace Firecoals.Space
 
         protected override void OnTrackingLost()
         {
-<<<<<<< HEAD
             //foreach (Transform go in mTrackableBehaviour.transform)
             //{
             //    Destroy(go.gameObject);
             //}
 
             foreach (Transform a in mTrackableBehaviour.transform)
-=======
-            foreach (Transform go in mTrackableBehaviour.transform)
->>>>>>> origin/space
             {
                 a.gameObject.SetActive(false);
             }
@@ -191,79 +152,13 @@ namespace Firecoals.Space
 
         private void ShowModelsOnScreen()
         {
-<<<<<<< HEAD
-            nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
-            nameTargetSpace.ToLower();
-            ChangeKeyLocalization();
-        }
-
-
-        //        public void Execute()
-        //        {
-        //#if UNITY_WSA && !UNITY_EDITOR
-        //        System.Threading.Tasks.Task t = new System.Threading.Tasks.Task(Augment);
-        //#else
-        //            System.Threading.Thread t = new System.Threading.Thread(new System.Threading.ThreadStart(Augment));
-        //#endif
-        //            t.Start();
-        //        }
-
-        //        private void Augment()
-        //        {
-
-        //            GameObject go = null;
-        //            Task.WhenAll(Task.Run(() =>
-        //            {
-        //                Debug.Log("<color=turquoise>In background thread</color>");
-        //                Task.RunInMainThread(() =>
-        //                {
-        //                    //assetloader.LoadGameObjectAsync(path, mTrackableBehaviour.transform);
-        //                    //_loadSoundbundle.PlayNameSound(tagSound);
-        //                });
-        //            })).ContinueInMainThreadWith(task =>
-        //            {
-        //                nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
-        //                nameTargetSpace.ToLower();
-        //                ChangeKeyLocalization();
-        //            });
-        //        }
-=======
             if (IsTargetEmpty())
             {
-                Execute();
+                nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
+                nameTargetSpace.ToLower();
+                ChangeKeyLocalization();
             }
         }
-
-        public void Execute()
-        {
-#if UNITY_WSA && !UNITY_EDITOR
-        System.Threading.Tasks.Task t = new System.Threading.Tasks.Task(Augment);
-#else
-            System.Threading.Thread t = new System.Threading.Thread(new System.Threading.ThreadStart(Augment));
-#endif
-            t.Start();
-        }
-
-        private void Augment()
-        {
-            GameObject go = null;
-            Task loadTask = Dispatcher.instance.TaskToMainThread(() =>
-            {
-                go = assetloader.LoadGameObjectSync(bundleName, path);
-                //_cached = true;
-                //Debug.Log("<color=red> GameObject created in background thread: " + go.name + "<color>");
-
-            });
-            loadTask.ContinueInMainThreadWith((task) =>
-            {
-                if (task.IsCompleted)
-                {
-                    if (go != null)
-                        CloneModels(go);
-                }
-            });
-        }
->>>>>>> origin/space
 
         private void ClearAllOtherTargetContents()
         {
@@ -283,27 +178,9 @@ namespace Firecoals.Space
             {
                 objectName.GetComponentInChildren<UILocalize>().key = nameKeySpace;
                 objectInfo.GetComponent<UILocalize>().key = inforKeySpace;
-<<<<<<< HEAD
-=======
 
                 objectName.GetComponentInChildren<UILabel>().text = Localization.Get(nameKeySpace);
                 objectInfo.GetComponent<UILabel>().text = Localization.Get(inforKeySpace);
->>>>>>> origin/space
-
-                objectName.GetComponentInChildren<UILabel>().text = Localization.Get(nameKeySpace);
-                objectInfo.GetComponent<UILabel>().text = Localization.Get(inforKeySpace);
-            }
-        }
-
-        private void SpawnModel()
-        {
-            if (IsTargetEmpty() && !_cached)
-            {
-                CachingArContents();
-            }
-            if (IsTargetEmpty() && _cached)
-            {
-                LoadingCache();
             }
         }
 
@@ -322,7 +199,6 @@ namespace Firecoals.Space
             }
         }
 
-<<<<<<< HEAD
         /// <summary>
         /// Check if there is no child on the target
         /// </summary>
@@ -330,78 +206,34 @@ namespace Firecoals.Space
         private bool IsTargetEmpty()
         {
             return mTrackableBehaviour.transform.childCount <= 0;
-=======
-        void PlayAnimIntro()
+        }
+
+        /// <summary>
+        /// nếu là Game1 thì reset lại transform lúc xuất hiện
+        /// </summary>
+        private void ResetTranformGame1()
         {
-            if (this.gameObject.GetComponentInChildren<Animator>() != null)
+            if (mTrackableBehaviour.name == "Game1_scaled")
             {
-                anim = this.gameObject.GetComponentInChildren<Animator>();
-                anim.SetTrigger("Intro");
+                GetOriginalTransform();
             }
         }
 
-        private bool _cached = false;
-
-        void CloneModels(GameObject go)
-        {
-            StartCoroutine(InstantiationAsycnModels(go));
-            PlayAnimIntro();
-
-            //var statTime = DateTime.Now;
-            //Debug.Log("load in: " + (DateTime.Now - statTime).Milliseconds);
-            //if (this.transform.childCount == 0)
-            //{
-            //    var startTime = DateTime.Now;
-            //    //Instantiate(go1, mTrackableBehaviour.transform);
-            //    PlayAnimIntro();
-            //    Debug.Log("instantiate in: " + (DateTime.Now - startTime).Milliseconds);
-            //}
-
-            nameTargetSpace = mTrackableBehaviour.TrackableName.Substring(0, mTrackableBehaviour.TrackableName.Length - 7);
-            nameTargetSpace.ToLower();
-            ChangeKeyLocalization();
->>>>>>> origin/space
-        }
-
-        private IEnumerator InstantiationAsycnModels(GameObject go)
-        {
-            yield return new WaitForSeconds(0.2f);
-            Instantiate(go, mTrackableBehaviour.transform);
-            //assetloader = GameObject.FindObjectOfType<AssetLoader>();
-            //InstantiationAsync.InstantiateAsync(go, mTrackableBehaviour.transform, 300);
-        }
-
         /// <summary>
-        /// Check if there is no child on the target
+        /// Lấy transform ban đầu từ khi instantiate object ra
         /// </summary>
-        /// <returns></returns>
-        private bool IsTargetEmpty()
+        private void GetOriginalTransform()
         {
-            return mTrackableBehaviour.transform.childCount <= 0;
-        }
-
-        private void CachingArContents()
-        {
-            GameObject go = null;
-
-            InstantiationAsync.Asynchronous(() =>
+            _originalObjectTransform = GameObject.FindGameObjectsWithTag("Leanscale");
+            foreach (var a in _originalObjectTransform)
             {
-                if (IsTargetEmpty())
+                if (a != null && a.activeSelf)
                 {
-                    go = assetloader.LoadGameObjectAsync(path);
-                    _cached = true;
-                    if (go != null)
-                        CloneModels(go);
+                    a.transform.localPosition = Vector3.zero;
+                    a.transform.localRotation = new Quaternion(0, 0, 0, 0);
+                    a.transform.localScale = _originalLocalScale;
                 }
-
-            }, 100);
-        }
-
-        private void LoadingCache()
-        {
-            GameObject go = assetloader.LoadGameObjectAsync(path);
-            if (go != null)
-                CloneModels(go);
+            }
         }
     }
 }

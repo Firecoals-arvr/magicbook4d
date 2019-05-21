@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.PlayerLoop;
-using Vuforia;
 
 namespace Firecoals.Animal
 {
@@ -19,11 +18,9 @@ namespace Firecoals.Animal
 
         protected void Start()
         {
-
             effectTouch = GameObject.Find("EffectTouch");
             base.Start();
         }
-
         protected void FixedUpdate()
         {
             if (Input.GetMouseButtonDown(0))//TODO && not hover UI
@@ -47,12 +44,10 @@ namespace Firecoals.Animal
                         Jump = true;
                         if (Item != null)
                         {
-
                             Item.transform.position = hit.point;
                             effectTouch.transform.position = Item.transform.position;
                             effectTouch.transform.GetChild(0).gameObject.SetActive(true);
                             StartCoroutine(ResetEffect());
-
                         }
 
                         //TODO SetActive(touch effect) = true
@@ -68,8 +63,6 @@ namespace Firecoals.Animal
             yield return new WaitForSeconds(.6f);
             effectTouch.transform.GetChild(0).gameObject.SetActive(false);
         }
-
-
 
     }
 

@@ -180,9 +180,8 @@ namespace Firecoals.AssetBundles
             switch (ThemeController.instance.Theme)
             {
                 case "Animal":
-
-                    bundleNames = new[] { "animals/model/lion",
-                        "animals/model/elephant",
+                    bundleNames = new[] { "animals/model/lion" ,
+                        "animals/model/elephant" ,
                         "animals/model/gorilla",
                         "animals/info/en",
                         "animals/info/jp",
@@ -202,7 +201,6 @@ namespace Firecoals.AssetBundles
                             "space/sound/info/vn",
                             "space/sound/info/en",
                             "space/music" };
-
                     break;
                 case "Color":
                     bundleNames = new[] { "color/model/maybay", "color/sounds/sounds" };

@@ -24,48 +24,23 @@ namespace Firecoals.Render
                 Permission.RequestUserPermission(Permission.Microphone);
                 //dialog = new GameObject();
             }
-            if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
-            {
-                Permission.RequestUserPermission(Permission.Camera);
-                //dialog = new GameObject();
-            }
 #endif
-
-
             recording = GetComponent<Recording>();
             //EventDelegate mEventDelegate = new EventDelegate(this, "OnPress");
             //EventDelegate.Set(GetComponent<UIButton>().onClick, mEventDelegate);
             Reset();
         }
-
         void OnGUI()
         {
 #if PLATFORM_ANDROID
             if (!Permission.HasUserAuthorizedPermission(Permission.Microphone))
             {
-                // The user denied permission to use the microphone.
-                // Display a message explaining why you need it with Yes/No buttons.
-                // If the user says yes then present the request again
-                // Display a dialog here.
-                // dialog.AddComponent<PermissionsRationaleDialog>();
                 PopupManager.PopUpDialog("", "Bạn cần cấp quyền ghi âm để sử dụng tính năng này!", "OK", "Yes", "No", PopupManager.DialogType.YesNoDialog, () =>
                 {
                     Permission.RequestUserPermission(Permission.Microphone);
                 });
             }
-            if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
-            {
-                PopupManager.PopUpDialog("", "Bạn cần cấp quyền cho Camera để sử dụng tính năng này!", "OK", "Yes", "No", PopupManager.DialogType.YesNoDialog, () =>
-                {
-                    Permission.RequestUserPermission(Permission.Camera);
-                });
-            }
-            //else if (dialog != null)
-            //{
-            //    Destroy(dialog);
-            //}
 #endif
-
             // Now you can do things with the microphone
         }
         /// <summary>

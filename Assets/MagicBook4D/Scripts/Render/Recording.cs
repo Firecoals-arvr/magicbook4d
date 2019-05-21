@@ -21,11 +21,12 @@ namespace Firecoals.Render
         public CameraInput cameraInput { get; private set; }
         public AudioInput audioInput { get; private set; }
 
+        public GameObject objPanelThongBaoSave;
         public void StartRecording()
         {
             // Start recording
             recordingClock = new RealtimeClock();
-            
+
             videoRecorder = new MP4Recorder(
                 videoWidth,
                 videoHeight,
@@ -34,10 +35,10 @@ namespace Firecoals.Render
                 recordMicrophone ? (int)AudioSettings.speakerMode : 0,
                 OnReplay
             );
-            
+
             // Create recording inputs
             cameraInput = new CameraInput(videoRecorder, recordingClock, arCamera);
-            
+
             if (recordMicrophone)
             {
                 StartMicrophone();
@@ -68,7 +69,7 @@ namespace Firecoals.Render
             }
 
             cameraInput.Dispose();
-            
+
             // Stop recording
             videoRecorder.Dispose();
         }
@@ -81,21 +82,18 @@ namespace Firecoals.Render
 #endif
         }
 
+        public void DisableThongBao()
+        {
+            NGUITools.SetActive(objPanelThongBaoSave, false);
+        }
         private void OnReplay(string path)
         {
-            Debug.Log("Saved recording to: " + path);
+          NGUITools.SetActive(objPanelThongBaoSave, true);
+          Debug.Log("Saved recording to: " + path);
             //PopupManager.PopUpDialog("", "Saved recording to: " + path);
-            
+
             // Playback the video
-#if UNITY_EDITOR
-            EditorUtility.OpenWithDefaultApp(path);
-#elif UNITY_IOS
-            Handheld.PlayFullScreenMovie("file://" + path);
-            NatShare.SaveToCameraRoll(path, "MagicBook 4D", false);
-#elif UNITY_ANDROID
-            Handheld.PlayFullScreenMovie(path);
-            NatShare.SaveToCameraRoll(path, "MagicBook 4D", false);
-#endif
+          NatShare.SaveToCameraRoll(path, "MagicBook 4D", false);
         }
     }
 

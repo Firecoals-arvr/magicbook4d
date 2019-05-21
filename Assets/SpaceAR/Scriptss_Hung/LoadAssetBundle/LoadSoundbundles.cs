@@ -44,6 +44,7 @@ namespace Firecoals.Space
 
         private ObjectInformation _objInfor;
 
+        private Audio _clip;
         private void Start()
         {
             // tìm script ngôn ngữ ở trên scene
@@ -53,7 +54,6 @@ namespace Firecoals.Space
 
             //tìm object có kiểu là ObjectInformation
             _objInfor = GameObject.FindObjectOfType<ObjectInformation>();
-
         }
         // hàm để chạy tên của model khi tìm thấy tranh
         public void PlayNameSound(string tagSound)
@@ -74,10 +74,7 @@ namespace Firecoals.Space
                 //load audioclip theo path được tìm bởi tag name là tên của model + ngôn ngữ
                 AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetSoundBundlePath(language, tagSound));
                 // play sound
-                if (FirecoalsSoundManager.IgnoreDuplicateSounds == true)
-                {
-                    FirecoalsSoundManager.PlaySound(audioClip);
-                }
+                FirecoalsSoundManager.PlaySound(audioClip);
             }
             // giống vs tiếng anh
             if (select.vn == true)
@@ -85,10 +82,7 @@ namespace Firecoals.Space
                 language = "vietnamese";
                 _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["space/sound/name/vn"];
                 AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetSoundBundlePath(language, tagSound));
-                if (FirecoalsSoundManager.IgnoreDuplicateSounds == true)
-                {
-                    FirecoalsSoundManager.PlaySound(audioClip);
-                }
+                FirecoalsSoundManager.PlaySound(audioClip);
             }
         }
         // hàm để lấy dc path của tên bundles
@@ -118,20 +112,19 @@ namespace Firecoals.Space
                 language = "english";
                 _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["space/sound/info/en"];
                 AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetSoundBundlePath(language, tagInfo));
-                if (FirecoalsSoundManager.IgnoreDuplicateSounds == true)
-                {
-                    FirecoalsSoundManager.PlaySound(audioClip);
-                }
+
+                FirecoalsSoundManager.PlaySound(audioClip);
+                _clip = FirecoalsSoundManager.GetAudio(audioClip);
+
             }
             if (select.vn == true)
             {
                 language = "vietnamese";
                 _bundleAudioClip = _assetLoader.assetBundlesLoader.bundles["space/sound/info/vn"];
                 AudioClip audioClip = _bundleAudioClip.LoadAsset<AudioClip>(GetSoundBundlePath(language, tagInfo));
-                if (FirecoalsSoundManager.IgnoreDuplicateSounds == true)
-                {
-                    FirecoalsSoundManager.PlaySound(audioClip);
-                }
+
+                FirecoalsSoundManager.PlaySound(audioClip);
+                _clip = FirecoalsSoundManager.GetAudio(audioClip);
             }
         }
         private string GetInfoBundlePath(string currentLanguage, string tag)
@@ -168,6 +161,10 @@ namespace Firecoals.Space
                     if (_objInfor.checkOpen == true)
                     {
                         PlayInfoSound(go.transform.GetComponentInParent<IntroScripts>().tagInfo);
+                    }
+                    if (_objInfor.checkOpen == false)
+                    {
+                        _clip.Stop();
                     }
                 }
             }

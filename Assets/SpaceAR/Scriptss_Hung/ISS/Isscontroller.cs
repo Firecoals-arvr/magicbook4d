@@ -6,11 +6,6 @@ namespace FireCoals.Space
 {
     public class Isscontroller : MonoBehaviour
     {
-<<<<<<< HEAD
-=======
-
-        [SerializeField] Animation anima;
->>>>>>> origin/space
 
         public Animator anima;
         // Update is called once per frame

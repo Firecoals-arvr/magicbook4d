@@ -14,6 +14,7 @@ namespace Firecoals.Animal
         void Start()
         {
             isOpening = true;
+            HideMenu();
         }
 
         // Update is called once per frame
@@ -25,12 +26,12 @@ namespace Firecoals.Animal
         public void ShowMenu()
         {
             var offset = hideMenu.transform.localPosition.x;
-            var x = TweenPosition.Begin(hideMenu, .5f, new Vector3(offset + 122f, 14f, 0f));
+            var x = TweenPosition.Begin(hideMenu, .5f, new Vector3(offset + 120f, 14f, 0f));
             x.method = UITweener.Method.EaseInOut;
             x.PlayForward();
             x.ResetToBeginning();
 
-            var y = TweenPosition.Begin(this.gameObject, .5f, new Vector3(122f, 291f, 0f));
+            var y = TweenPosition.Begin(this.gameObject, .5f, new Vector3(120f, 291f, 0f));
             y.method = UITweener.Method.EaseInOut;
             y.PlayForward();
             y.ResetToBeginning();
@@ -41,7 +42,7 @@ namespace Firecoals.Animal
         public void HideMenu()
         {
             var offset = hideMenu.transform.localPosition.x;
-            var x = TweenPosition.Begin(hideMenu, .5f, new Vector3(offset - 122f, 14f, 0f));
+            var x = TweenPosition.Begin(hideMenu, .5f, new Vector3(offset - 120f, 14f, 0f));
             x.method = UITweener.Method.EaseInOut;
             x.PlayForward();
             x.ResetToBeginning();

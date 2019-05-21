@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Firecoals.Space
 {
-<<<<<<< HEAD
     public class SatelliteController : MonoBehaviour
     {
         [SerializeField] Animation anim = default;
@@ -24,26 +23,6 @@ namespace Firecoals.Space
             }
         }
         void Open()
-=======
-    [SerializeField] Animation anim;
-    private bool stt = false;
-
-
-    public void ClickToOpen()
-    {
-        anim.Play("open");
-    }
-
-    public void Armode()
-    {
-        anim.Play("close");
-        stt = false;
-    }
-
-    public void Spilit()
-    {
-        if (stt == false)
->>>>>>> origin/space
         {
             anim.Play("open");
         }
